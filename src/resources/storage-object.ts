@@ -11,6 +11,13 @@ export class StorageObject extends APIResource {
   /**
    * List all objects in a SmartBucket or regular bucket. The bucket parameter (ID)
    * is used to identify the bucket to list objects from.
+   *
+   * @example
+   * ```ts
+   * const storageObjects = await client.storageObject.list(
+   *   '01jtgtrd37acrqf7k24dggg31s',
+   * );
+   * ```
    */
   list(bucket: string, options?: RequestOptions): APIPromise<StorageObjectListResponse> {
     return this._client.get(path`/v1/object/${bucket}`, options);
@@ -20,6 +27,14 @@ export class StorageObject extends APIResource {
    * Delete a file from a SmartBucket or regular bucket. The bucket parameter (ID) is
    * used to identify the bucket to delete from. The key is the path to the object in
    * the bucket.
+   *
+   * @example
+   * ```ts
+   * const storageObject = await client.storageObject.delete(
+   *   'my-key',
+   *   { bucket: '01jtgtrd37acrqf7k24dggg31s' },
+   * );
+   * ```
    */
   delete(
     key: string,
@@ -34,6 +49,17 @@ export class StorageObject extends APIResource {
    * Download a file from a SmartBucket or regular bucket. The bucket parameter (ID)
    * is used to identify the bucket to download from. The key is the path to the
    * object in the bucket.
+   *
+   * @example
+   * ```ts
+   * const response = await client.storageObject.download(
+   *   'my-key',
+   *   { bucket: '01jtgtrd37acrqf7k24dggg31s' },
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
    */
   download(key: string, params: StorageObjectDownloadParams, options?: RequestOptions): APIPromise<Response> {
     const { bucket } = params;
@@ -48,6 +74,17 @@ export class StorageObject extends APIResource {
    * Upload a file to a SmartBucket or regular bucket. The bucket parameter (ID) is
    * used to identify the bucket to upload to. The key is the path to the object in
    * the bucket.
+   *
+   * @example
+   * ```ts
+   * const response = await client.storageObject.upload(
+   *   'my-key',
+   *   {
+   *     bucket: '01jtgtrd37acrqf7k24dggg31s',
+   *     body: fs.createReadStream('path/to/file'),
+   *   },
+   * );
+   * ```
    */
   upload(
     key: string,

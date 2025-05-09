@@ -27,10 +27,10 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const searchResponse = await client.search.create({
-    bucket_ids: ['string'],
-    input: 'REPLACE_ME',
-    request_id: 'REPLACE_ME',
+  const searchResponse = await client.search.find({
+    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    input: 'all my pdfs with images of cats that do not talk about dogs',
+    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   });
 
   console.log(searchResponse.pagination);
@@ -52,12 +52,12 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const params: Raindrop.SearchCreateParams = {
-    bucket_ids: ['string'],
-    input: 'REPLACE_ME',
-    request_id: 'REPLACE_ME',
+  const params: Raindrop.SearchFindParams = {
+    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    input: 'all my pdfs with images of cats that do not talk about dogs',
+    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   };
-  const searchResponse: Raindrop.SearchResponse = await client.search.create(params);
+  const searchResponse: Raindrop.SearchResponse = await client.search.find(params);
 }
 
 main();
@@ -75,7 +75,11 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const searchResponse = await client.search
-    .create({ bucket_ids: ['string'], input: 'REPLACE_ME', request_id: 'REPLACE_ME' })
+    .find({
+      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+      input: 'all my pdfs with images of cats that do not talk about dogs',
+      request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+    })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
         console.log(err.status); // 400
@@ -119,7 +123,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.create({ bucket_ids: ['string'], input: 'REPLACE_ME', request_id: 'REPLACE_ME' }, {
+await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   maxRetries: 5,
 });
 ```
@@ -136,7 +140,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.create({ bucket_ids: ['string'], input: 'REPLACE_ME', request_id: 'REPLACE_ME' }, {
+await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -160,13 +164,21 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Raindrop();
 
 const response = await client.search
-  .create({ bucket_ids: ['string'], input: 'REPLACE_ME', request_id: 'REPLACE_ME' })
+  .find({
+    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    input: 'all my pdfs with images of cats that do not talk about dogs',
+    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: searchResponse, response: raw } = await client.search
-  .create({ bucket_ids: ['string'], input: 'REPLACE_ME', request_id: 'REPLACE_ME' })
+  .find({
+    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    input: 'all my pdfs with images of cats that do not talk about dogs',
+    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(searchResponse.pagination);

@@ -9,12 +9,12 @@ const client = new Raindrop({
 
 describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.documentQuery.create({
-      bucket: 'bucket',
-      input: 'input',
+  test.skip('ask: only required params', async () => {
+    const responsePromise = client.documentQuery.ask({
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
+      input: 'What is the key points in this document?',
       object_id: 'object_id',
-      request_id: 'request_id',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,12 +26,12 @@ describe('resource documentQuery', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.documentQuery.create({
-      bucket: 'bucket',
-      input: 'input',
+  test.skip('ask: required and optional params', async () => {
+    const response = await client.documentQuery.ask({
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
+      input: 'What is the key points in this document?',
       object_id: 'object_id',
-      request_id: 'request_id',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
   });
 });

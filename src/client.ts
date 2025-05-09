@@ -20,15 +20,11 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { ChunkSearch, ChunkSearchExecuteParams, ChunkSearchExecuteResponse } from './resources/chunk-search';
-import {
-  DocumentQuery,
-  DocumentQueryCreateParams,
-  DocumentQueryCreateResponse,
-} from './resources/document-query';
+import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
+import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
 import {
   Search,
-  SearchCreateParams,
+  SearchFindParams,
   SearchResponse,
   SearchRetrieveParams,
   TextResult,
@@ -735,20 +731,20 @@ export declare namespace Raindrop {
     Search as Search,
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
-    type SearchCreateParams as SearchCreateParams,
     type SearchRetrieveParams as SearchRetrieveParams,
+    type SearchFindParams as SearchFindParams,
   };
 
   export {
     DocumentQuery as DocumentQuery,
-    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
-    type DocumentQueryCreateParams as DocumentQueryCreateParams,
+    type DocumentQueryAskResponse as DocumentQueryAskResponse,
+    type DocumentQueryAskParams as DocumentQueryAskParams,
   };
 
   export {
     ChunkSearch as ChunkSearch,
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+    type ChunkSearchFindResponse as ChunkSearchFindResponse,
+    type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 
   export {

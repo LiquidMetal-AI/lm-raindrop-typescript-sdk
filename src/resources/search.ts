@@ -6,6 +6,23 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
   /**
+   * Retrieve additional pages from a previous search. This endpoint enables
+   * navigation through large result sets while maintaining search context and result
+   * relevance. Retrieving paginated results requires a valid `request_id` from a
+   * previously completed search.
+   *
+   * @example
+   * ```ts
+   * const searchResponse = await client.search.retrieve({
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
+   */
+  retrieve(query: SearchRetrieveParams, options?: RequestOptions): APIPromise<SearchResponse> {
+    return this._client.get('/v1/search', { query, ...options });
+  }
+
+  /**
    * Primary search endpoint that provides advanced search capabilities across all
    * document types stored in SmartBuckets.
    *
@@ -28,19 +45,22 @@ export class Search extends APIResource {
    * - Content-based search across text, images, and audio
    * - Automatic PII detection
    * - Multi-modal search (text, images, audio)
+   *
+   * @example
+   * ```ts
+   * const searchResponse = await client.search.find({
+   *   bucket_ids: [
+   *     '01jtgtrd37acrqf7k24dggg31s',
+   *     '01jtgtrd37acrqf7k24dggg31v',
+   *   ],
+   *   input:
+   *     'Find me all documents with pictures of a cat that do not talk about dogs',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
    */
-  create(body: SearchCreateParams, options?: RequestOptions): APIPromise<SearchResponse> {
+  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchResponse> {
     return this._client.post('/v1/search', { body, ...options });
-  }
-
-  /**
-   * Retrieve additional pages from a previous search. This endpoint enables
-   * navigation through large result sets while maintaining search context and result
-   * relevance. Retrieving paginated results requires a valid `request_id` from a
-   * previously completed search.
-   */
-  retrieve(query: SearchRetrieveParams, options?: RequestOptions): APIPromise<SearchResponse> {
-    return this._client.get('/v1/search', { query, ...options });
   }
 }
 
@@ -114,7 +134,24 @@ export interface TextResult {
   type?: 'text/plain' | 'application/pdf' | 'image/jpeg' | 'image/png';
 }
 
-export interface SearchCreateParams {
+export interface SearchRetrieveParams {
+  /**
+   * Client-provided search session identifier from the initial search
+   */
+  request_id: string;
+
+  /**
+   * Requested page number
+   */
+  page?: number;
+
+  /**
+   * Results per page
+   */
+  page_size?: number;
+}
+
+export interface SearchFindParams {
   /**
    * Optional list of specific bucket IDs to search in. If not provided, searches the
    * latest version of all buckets
@@ -133,28 +170,11 @@ export interface SearchCreateParams {
   request_id: string;
 }
 
-export interface SearchRetrieveParams {
-  /**
-   * Client-provided search session identifier from the initial search
-   */
-  request_id: string;
-
-  /**
-   * Requested page number
-   */
-  page?: number;
-
-  /**
-   * Results per page
-   */
-  page_size?: number;
-}
-
 export declare namespace Search {
   export {
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
-    type SearchCreateParams as SearchCreateParams,
     type SearchRetrieveParams as SearchRetrieveParams,
+    type SearchFindParams as SearchFindParams,
   };
 }

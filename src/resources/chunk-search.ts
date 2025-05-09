@@ -14,20 +14,32 @@ export class ChunkSearch extends APIResource {
    * Each input query is processed by our AI agent to determine the best way to
    * search the data. The system will then return the most relevant results from the
    * data ranked by relevance on the input query.
+   *
+   * @example
+   * ```ts
+   * const response = await client.chunkSearch.find({
+   *   bucket_ids: [
+   *     '01jtgtrd37acrqf7k24dggg31s',
+   *     '01jtgtrd37acrqf7k24dggg31v',
+   *   ],
+   *   input: 'Information on how to raise a dog',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
    */
-  execute(body: ChunkSearchExecuteParams, options?: RequestOptions): APIPromise<ChunkSearchExecuteResponse> {
+  find(body: ChunkSearchFindParams, options?: RequestOptions): APIPromise<ChunkSearchFindResponse> {
     return this._client.post('/v1/chunk_search', { body, ...options });
   }
 }
 
-export interface ChunkSearchExecuteResponse {
+export interface ChunkSearchFindResponse {
   /**
    * Semantically relevant results with metadata and relevance scoring
    */
   results: Array<SearchAPI.TextResult>;
 }
 
-export interface ChunkSearchExecuteParams {
+export interface ChunkSearchFindParams {
   /**
    * Optional list of specific bucket IDs to search in. If not provided, searches the
    * latest version of all accessible buckets
@@ -49,7 +61,7 @@ export interface ChunkSearchExecuteParams {
 
 export declare namespace ChunkSearch {
   export {
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+    type ChunkSearchFindResponse as ChunkSearchFindResponse,
+    type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 }

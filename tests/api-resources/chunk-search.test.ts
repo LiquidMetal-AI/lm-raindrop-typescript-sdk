@@ -9,11 +9,11 @@ const client = new Raindrop({
 
 describe('resource chunkSearch', () => {
   // skipped: tests are disabled for the time being
-  test.skip('execute: only required params', async () => {
-    const responsePromise = client.chunkSearch.execute({
-      bucket_ids: ['string'],
-      input: 'input',
-      request_id: 'request_id',
+  test.skip('find: only required params', async () => {
+    const responsePromise = client.chunkSearch.find({
+      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s', '01jtgtrd37acrqf7k24dggg31v'],
+      input: 'Information on how to raise a dog',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,11 +25,11 @@ describe('resource chunkSearch', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('execute: required and optional params', async () => {
-    const response = await client.chunkSearch.execute({
-      bucket_ids: ['string'],
-      input: 'input',
-      request_id: 'request_id',
+  test.skip('find: required and optional params', async () => {
+    const response = await client.chunkSearch.find({
+      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s', '01jtgtrd37acrqf7k24dggg31v'],
+      input: 'Information on how to raise a dog',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
   });
 });
