@@ -2,7 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
-import { PagePromise, SearchPage, type SearchPageParams } from '../core/pagination';
+import { PagePromise, SearchPageQuery, type SearchPageQueryParams } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
@@ -25,8 +25,8 @@ export class Search extends APIResource {
   retrieve(
     query: SearchRetrieveParams,
     options?: RequestOptions,
-  ): PagePromise<TextResultsSearchPage, TextResult> {
-    return this._client.getAPIList('/v1/search', SearchPage<TextResult>, { query, ...options });
+  ): PagePromise<TextResultsSearchPageQuery, TextResult> {
+    return this._client.getAPIList('/v1/search', SearchPageQuery<TextResult>, { query, ...options });
   }
 
   /**
@@ -71,7 +71,7 @@ export class Search extends APIResource {
   }
 }
 
-export type TextResultsSearchPage = SearchPage<TextResult>;
+export type TextResultsSearchPageQuery = SearchPageQuery<TextResult>;
 
 export interface SearchResponse {
   pagination: SearchResponse.Pagination;
@@ -143,7 +143,7 @@ export interface TextResult {
   type?: 'text/plain' | 'application/pdf' | 'image/jpeg' | 'image/png';
 }
 
-export interface SearchRetrieveParams extends SearchPageParams {
+export interface SearchRetrieveParams extends SearchPageQueryParams {
   /**
    * Client-provided search session identifier from the initial search
    */
@@ -178,7 +178,7 @@ export declare namespace Search {
   export {
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
-    type TextResultsSearchPage as TextResultsSearchPage,
+    type TextResultsSearchPageQuery as TextResultsSearchPageQuery,
     type SearchRetrieveParams as SearchRetrieveParams,
     type SearchFindParams as SearchFindParams,
   };
