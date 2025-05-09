@@ -3,7 +3,7 @@ import {
   buildHeaders,
   type HeadersLike,
   type NullableHeaders,
-} from '@liquidmetal/lm-raindrop/internal/headers';
+} from '@liquidmetal-ai/lm-raindrop/internal/headers';
 
 function inspectNullableHeaders(headers: NullableHeaders) {
   return `NullableHeaders {${[
