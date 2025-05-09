@@ -117,6 +117,10 @@ export namespace SearchPageResponse {
   export interface Pagination {
     has_more?: boolean;
 
+    page?: number;
+
+    page_size?: number;
+
     total?: number;
 
     total_pages?: number;
@@ -151,8 +155,11 @@ export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageRe
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const query = this.options.query as SearchPageParams;
-    const currentPage = query?.page ?? 1;
+    const currentPage = this.pagination?.page;
+
+    if (currentPage >= this.pagination?.total_pages) {
+      return null;
+    }
 
     return {
       ...this.options,
