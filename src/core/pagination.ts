@@ -107,26 +107,41 @@ export class PagePromise<
   }
 }
 
-export interface SearchPageQueryResponse<Item> {
+export interface SearchPageResponse<Item> {
   results: Array<Item>;
+
+  pagination: SearchPageResponse.Pagination;
 }
 
-export interface SearchPageQueryParams {
+export namespace SearchPageResponse {
+  export interface Pagination {
+    has_more?: boolean;
+
+    total?: number;
+
+    total_pages?: number;
+  }
+}
+
+export interface SearchPageParams {
   page?: number;
 }
 
-export class SearchPageQuery<Item> extends AbstractPage<Item> implements SearchPageQueryResponse<Item> {
+export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageResponse<Item> {
   results: Array<Item>;
+
+  pagination: SearchPageResponse.Pagination;
 
   constructor(
     client: Raindrop,
     response: Response,
-    body: SearchPageQueryResponse<Item>,
+    body: SearchPageResponse<Item>,
     options: FinalRequestOptions,
   ) {
     super(client, response, body, options);
 
     this.results = body.results || [];
+    this.pagination = body.pagination || {};
   }
 
   getPaginatedItems(): Item[] {
@@ -134,7 +149,7 @@ export class SearchPageQuery<Item> extends AbstractPage<Item> implements SearchP
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const query = this.options.query as SearchPageQueryParams;
+    const query = this.options.query as SearchPageParams;
     const currentPage = query?.page ?? 1;
 
     return {
