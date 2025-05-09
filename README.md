@@ -28,9 +28,9 @@ const client = new Raindrop({
 
 async function main() {
   const searchResponse = await client.search.find({
-    bucket_ids: ['string'],
-    input: 'REPLACE_ME',
-    request_id: 'REPLACE_ME',
+    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    input: 'all my pdfs with images of cats that do not talk about dogs',
+    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   });
 
   console.log(searchResponse.pagination);
