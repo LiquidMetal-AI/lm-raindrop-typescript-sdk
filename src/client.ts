@@ -15,7 +15,13 @@ import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import { AbstractPage, type SearchPageParams, SearchPageResponse } from './core/pagination';
+import {
+  AbstractPage,
+  type ChunkSearchResultsParams,
+  ChunkSearchResultsResponse,
+  type SearchPageParams,
+  SearchPageResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -751,6 +757,12 @@ export declare namespace Raindrop {
 
   export import SearchPage = Pagination.SearchPage;
   export { type SearchPageParams as SearchPageParams, type SearchPageResponse as SearchPageResponse };
+
+  export import ChunkSearchResults = Pagination.ChunkSearchResults;
+  export {
+    type ChunkSearchResultsParams as ChunkSearchResultsParams,
+    type ChunkSearchResultsResponse as ChunkSearchResultsResponse,
+  };
 
   export {
     Search as Search,

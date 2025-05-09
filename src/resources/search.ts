@@ -148,6 +148,11 @@ export interface SearchRetrieveParams extends SearchPageParams {
    * Client-provided search session identifier from the initial search
    */
   request_id: string;
+
+  /**
+   * Results per page
+   */
+  page_size?: number;
 }
 
 export interface SearchFindParams {

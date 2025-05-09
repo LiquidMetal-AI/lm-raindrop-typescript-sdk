@@ -125,8 +125,6 @@ export namespace SearchPageResponse {
 
 export interface SearchPageParams {
   page?: number;
-
-  page_size?: number;
 }
 
 export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageResponse<Item> {
@@ -159,6 +157,46 @@ export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageRe
       query: {
         ...maybeObj(this.options.query),
         page: currentPage + 1,
+      },
+    };
+  }
+}
+
+export interface ChunkSearchResultsResponse<Item> {
+  results: Array<Item>;
+}
+
+export interface ChunkSearchResultsParams {
+  dummy_page?: number;
+}
+
+export class ChunkSearchResults<Item> extends AbstractPage<Item> implements ChunkSearchResultsResponse<Item> {
+  results: Array<Item>;
+
+  constructor(
+    client: Raindrop,
+    response: Response,
+    body: ChunkSearchResultsResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.results = body.results || [];
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.results ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const query = this.options.query as ChunkSearchResultsParams;
+    const currentPage = query?.dummy_page ?? 1;
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        dummy_page: currentPage + 1,
       },
     };
   }

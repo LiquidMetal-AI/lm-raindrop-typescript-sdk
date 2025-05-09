@@ -161,7 +161,6 @@ async function fetchAllSearches(params) {
   for await (const textResult of client.search.retrieve({
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
     page: 1,
-    page_size: 15,
   })) {
     allSearches.push(textResult);
   }
@@ -172,11 +171,7 @@ async function fetchAllSearches(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.search.retrieve({
-  request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
-  page: 1,
-  page_size: 15,
-});
+let page = await client.search.retrieve({ request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57', page: 1 });
 for (const textResult of page.results) {
   console.log(textResult);
 }
