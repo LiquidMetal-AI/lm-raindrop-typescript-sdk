@@ -9,31 +9,6 @@ const client = new Raindrop({
 
 describe('resource search', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.search.create({
-      bucket_ids: ['string'],
-      input: 'input',
-      request_id: 'request_id',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.search.create({
-      bucket_ids: ['string'],
-      input: 'input',
-      request_id: 'request_id',
-    });
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.search.retrieve({ request_id: 'request_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -48,5 +23,30 @@ describe('resource search', () => {
   // skipped: tests are disabled for the time being
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.search.retrieve({ request_id: 'request_id', page: 0, page_size: 0 });
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('find: only required params', async () => {
+    const responsePromise = client.search.find({
+      bucket_ids: ['string'],
+      input: 'input',
+      request_id: 'request_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('find: required and optional params', async () => {
+    const response = await client.search.find({
+      bucket_ids: ['string'],
+      input: 'input',
+      request_id: 'request_id',
+    });
   });
 });

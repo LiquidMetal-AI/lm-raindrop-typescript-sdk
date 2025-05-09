@@ -26,12 +26,12 @@ export class DocumentQuery extends APIResource {
    * Document query is supported for all file types, including PDFs, images, and
    * audio files.
    */
-  create(body: DocumentQueryCreateParams, options?: RequestOptions): APIPromise<DocumentQueryCreateResponse> {
+  ask(body: DocumentQueryAskParams, options?: RequestOptions): APIPromise<DocumentQueryAskResponse> {
     return this._client.post('/v1/document_query', { body, ...options });
   }
 }
 
-export interface DocumentQueryCreateResponse {
+export interface DocumentQueryAskResponse {
   /**
    * AI-generated response that may include direct document quotes, content
    * summaries, contextual explanations, references to specific sections, and related
@@ -40,7 +40,7 @@ export interface DocumentQueryCreateResponse {
   answer: string;
 }
 
-export interface DocumentQueryCreateParams {
+export interface DocumentQueryAskParams {
   /**
    * The storage bucket ID containing the target document. Must be an accessible
    * Smart Bucket
@@ -68,7 +68,7 @@ export interface DocumentQueryCreateParams {
 
 export declare namespace DocumentQuery {
   export {
-    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
-    type DocumentQueryCreateParams as DocumentQueryCreateParams,
+    type DocumentQueryAskResponse as DocumentQueryAskResponse,
+    type DocumentQueryAskParams as DocumentQueryAskParams,
   };
 }
