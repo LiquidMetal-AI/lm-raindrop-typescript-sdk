@@ -12,12 +12,8 @@ export {
 } from './search';
 export {
   StorageObject,
-  type StorageObjectListResponse,
   type StorageObjectDeleteResponse,
-  type StorageObjectUploadResponse,
   type StorageObjectDeleteParams,
-  type StorageObjectDownloadParams,
-  type StorageObjectUploadParams,
 } from './storage-object';
 export {
   SummarizePage,

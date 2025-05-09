@@ -15,13 +15,7 @@ import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import {
-  AbstractPage,
-  type ChunkSearchResultsParams,
-  ChunkSearchResultsResponse,
-  type SearchPageParams,
-  SearchPageResponse,
-} from './core/pagination';
+import { AbstractPage, type SearchPageParams, SearchPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -42,10 +36,6 @@ import {
   StorageObject,
   StorageObjectDeleteParams,
   StorageObjectDeleteResponse,
-  StorageObjectDownloadParams,
-  StorageObjectListResponse,
-  StorageObjectUploadParams,
-  StorageObjectUploadResponse,
 } from './resources/storage-object';
 import {
   SummarizePage,
@@ -58,7 +48,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * API key with format `Bearer lm_apikey_...` that grants access to a specific resources or a group of resources. You can create new API keys in the raindrop dashboard (raindrop.run) under settings->API Keys
+   * API key with format `Bearer lm_apikey_...`. You can create new keys in the Raindrop dashboard (raindrop.run → Settings → API Keys).
+   *
    */
   apiKey?: string | undefined;
 
@@ -758,12 +749,6 @@ export declare namespace Raindrop {
   export import SearchPage = Pagination.SearchPage;
   export { type SearchPageParams as SearchPageParams, type SearchPageResponse as SearchPageResponse };
 
-  export import ChunkSearchResults = Pagination.ChunkSearchResults;
-  export {
-    type ChunkSearchResultsParams as ChunkSearchResultsParams,
-    type ChunkSearchResultsResponse as ChunkSearchResultsResponse,
-  };
-
   export {
     Search as Search,
     type SearchResponse as SearchResponse,
@@ -793,11 +778,7 @@ export declare namespace Raindrop {
 
   export {
     StorageObject as StorageObject,
-    type StorageObjectListResponse as StorageObjectListResponse,
     type StorageObjectDeleteResponse as StorageObjectDeleteResponse,
-    type StorageObjectUploadResponse as StorageObjectUploadResponse,
     type StorageObjectDeleteParams as StorageObjectDeleteParams,
-    type StorageObjectDownloadParams as StorageObjectDownloadParams,
-    type StorageObjectUploadParams as StorageObjectUploadParams,
   };
 }
