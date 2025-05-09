@@ -15,7 +15,7 @@ import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import { AbstractPage, type SearchPageQueryParams, SearchPageQueryResponse } from './core/pagination';
+import { AbstractPage, type SearchPageParams, SearchPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -30,12 +30,16 @@ import {
   SearchResponse,
   SearchRetrieveParams,
   TextResult,
-  TextResultsSearchPageQuery,
+  TextResultsSearchPage,
 } from './resources/search';
 import {
   StorageObject,
   StorageObjectDeleteParams,
   StorageObjectDeleteResponse,
+  StorageObjectDownloadParams,
+  StorageObjectListResponse,
+  StorageObjectUploadParams,
+  StorageObjectUploadResponse,
 } from './resources/storage-object';
 import {
   SummarizePage,
@@ -48,7 +52,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['RAINDROP_API_KEY'].
+   * API key with format `Bearer lm_apikey_...`. You can create new keys in the Raindrop dashboard (raindrop.run → Settings → API Keys).
+   *
    */
   apiKey?: string | undefined;
 
@@ -745,17 +750,14 @@ Raindrop.StorageObject = StorageObject;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
-  export import SearchPageQuery = Pagination.SearchPageQuery;
-  export {
-    type SearchPageQueryParams as SearchPageQueryParams,
-    type SearchPageQueryResponse as SearchPageQueryResponse,
-  };
+  export import SearchPage = Pagination.SearchPage;
+  export { type SearchPageParams as SearchPageParams, type SearchPageResponse as SearchPageResponse };
 
   export {
     Search as Search,
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
-    type TextResultsSearchPageQuery as TextResultsSearchPageQuery,
+    type TextResultsSearchPage as TextResultsSearchPage,
     type SearchRetrieveParams as SearchRetrieveParams,
     type SearchFindParams as SearchFindParams,
   };
@@ -780,7 +782,11 @@ export declare namespace Raindrop {
 
   export {
     StorageObject as StorageObject,
+    type StorageObjectListResponse as StorageObjectListResponse,
     type StorageObjectDeleteResponse as StorageObjectDeleteResponse,
+    type StorageObjectUploadResponse as StorageObjectUploadResponse,
     type StorageObjectDeleteParams as StorageObjectDeleteParams,
+    type StorageObjectDownloadParams as StorageObjectDownloadParams,
+    type StorageObjectUploadParams as StorageObjectUploadParams,
   };
 }
