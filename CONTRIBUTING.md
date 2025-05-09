@@ -55,12 +55,12 @@ $ cd lm-raindrop-typescript-sdk
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link @liquidmetal/lm-raindrop
+$ yarn link @liquidmetal-ai/lm-raindrop
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @liquidmetal/lm-raindrop
+$ pnpm link -—global @liquidmetal-ai/lm-raindrop
 ```
 
 ## Running tests

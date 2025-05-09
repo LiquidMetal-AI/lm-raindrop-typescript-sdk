@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Raindrop, { toFile } from '@liquidmetal/lm-raindrop';
+import Raindrop, { toFile } from '@liquidmetal-ai/lm-raindrop';
 
 const client = new Raindrop({
   apiKey: 'My API Key',
