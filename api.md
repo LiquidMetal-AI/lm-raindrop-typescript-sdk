@@ -44,13 +44,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/storage-object.ts">StorageObjectListResponse</a></code>
 - <code><a href="./src/resources/storage-object.ts">StorageObjectDeleteResponse</a></code>
-- <code><a href="./src/resources/storage-object.ts">StorageObjectUploadResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/object/{bucket}">client.storageObject.<a href="./src/resources/storage-object.ts">list</a>(bucket) -> StorageObjectListResponse</code>
 - <code title="delete /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">delete</a>(key, { ...params }) -> StorageObjectDeleteResponse</code>
-- <code title="get /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">download</a>(key, { ...params }) -> Response</code>
-- <code title="put /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">upload</a>(key, { ...params }) -> StorageObjectUploadResponse</code>
