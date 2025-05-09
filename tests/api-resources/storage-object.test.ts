@@ -10,7 +10,7 @@ const client = new Raindrop({
 describe('resource storageObject', () => {
   // skipped: tests are disabled for the time being
   test.skip('list', async () => {
-    const responsePromise = client.storageObject.list('bucket');
+    const responsePromise = client.storageObject.list('01jtgtrd37acrqf7k24dggg31s');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource storageObject', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.storageObject.delete('key', { bucket: 'bucket' });
+    const responsePromise = client.storageObject.delete('my-key', { bucket: '01jtgtrd37acrqf7k24dggg31s' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -34,18 +34,18 @@ describe('resource storageObject', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('delete: required and optional params', async () => {
-    const response = await client.storageObject.delete('key', { bucket: 'bucket' });
+    const response = await client.storageObject.delete('my-key', { bucket: '01jtgtrd37acrqf7k24dggg31s' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('download: required and optional params', async () => {
-    const response = await client.storageObject.download('key', { bucket: 'bucket' });
+    const response = await client.storageObject.download('my-key', { bucket: '01jtgtrd37acrqf7k24dggg31s' });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('upload: only required params', async () => {
-    const responsePromise = client.storageObject.upload('key', {
-      bucket: 'bucket',
+    const responsePromise = client.storageObject.upload('my-key', {
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
       body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
@@ -59,8 +59,8 @@ describe('resource storageObject', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('upload: required and optional params', async () => {
-    const response = await client.storageObject.upload('key', {
-      bucket: 'bucket',
+    const response = await client.storageObject.upload('my-key', {
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
       body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
