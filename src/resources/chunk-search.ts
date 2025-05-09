@@ -15,19 +15,19 @@ export class ChunkSearch extends APIResource {
    * search the data. The system will then return the most relevant results from the
    * data ranked by relevance on the input query.
    */
-  execute(body: ChunkSearchExecuteParams, options?: RequestOptions): APIPromise<ChunkSearchExecuteResponse> {
+  find(body: ChunkSearchFindParams, options?: RequestOptions): APIPromise<ChunkSearchFindResponse> {
     return this._client.post('/v1/chunk_search', { body, ...options });
   }
 }
 
-export interface ChunkSearchExecuteResponse {
+export interface ChunkSearchFindResponse {
   /**
    * Semantically relevant results with metadata and relevance scoring
    */
   results: Array<SearchAPI.TextResult>;
 }
 
-export interface ChunkSearchExecuteParams {
+export interface ChunkSearchFindParams {
   /**
    * Optional list of specific bucket IDs to search in. If not provided, searches the
    * latest version of all accessible buckets
@@ -49,7 +49,7 @@ export interface ChunkSearchExecuteParams {
 
 export declare namespace ChunkSearch {
   export {
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+    type ChunkSearchFindResponse as ChunkSearchFindResponse,
+    type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 }

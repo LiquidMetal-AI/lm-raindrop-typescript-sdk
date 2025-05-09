@@ -9,8 +9,8 @@ const client = new Raindrop({
 
 describe('resource chunkSearch', () => {
   // skipped: tests are disabled for the time being
-  test.skip('execute: only required params', async () => {
-    const responsePromise = client.chunkSearch.execute({
+  test.skip('find: only required params', async () => {
+    const responsePromise = client.chunkSearch.find({
       bucket_ids: ['string'],
       input: 'input',
       request_id: 'request_id',
@@ -25,8 +25,8 @@ describe('resource chunkSearch', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('execute: required and optional params', async () => {
-    const response = await client.chunkSearch.execute({
+  test.skip('find: required and optional params', async () => {
+    const response = await client.chunkSearch.find({
       bucket_ids: ['string'],
       input: 'input',
       request_id: 'request_id',
