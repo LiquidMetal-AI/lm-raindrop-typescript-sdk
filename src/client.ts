@@ -36,6 +36,10 @@ import {
   StorageObject,
   StorageObjectDeleteParams,
   StorageObjectDeleteResponse,
+  StorageObjectDownloadParams,
+  StorageObjectListResponse,
+  StorageObjectUploadParams,
+  StorageObjectUploadResponse,
 } from './resources/storage-object';
 import {
   SummarizePage,
@@ -778,7 +782,11 @@ export declare namespace Raindrop {
 
   export {
     StorageObject as StorageObject,
+    type StorageObjectListResponse as StorageObjectListResponse,
     type StorageObjectDeleteResponse as StorageObjectDeleteResponse,
+    type StorageObjectUploadResponse as StorageObjectUploadResponse,
     type StorageObjectDeleteParams as StorageObjectDeleteParams,
+    type StorageObjectDownloadParams as StorageObjectDownloadParams,
+    type StorageObjectUploadParams as StorageObjectUploadParams,
   };
 }
