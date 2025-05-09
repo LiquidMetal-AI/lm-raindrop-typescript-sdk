@@ -30,6 +30,7 @@ import {
   SearchResponse,
   SearchRetrieveParams,
   TextResult,
+  TextResultsSearchPage,
 } from './resources/search';
 import {
   StorageObject,
@@ -755,6 +756,7 @@ export declare namespace Raindrop {
     Search as Search,
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
+    type TextResultsSearchPage as TextResultsSearchPage,
     type SearchRetrieveParams as SearchRetrieveParams,
     type SearchFindParams as SearchFindParams,
   };
