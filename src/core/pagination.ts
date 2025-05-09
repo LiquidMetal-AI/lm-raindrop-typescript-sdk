@@ -108,16 +108,14 @@ export class PagePromise<
 }
 
 export interface SearchPageResponse<Item> {
+  results: Array<Item>;
+
   pagination: SearchPageResponse.Pagination;
 }
 
 export namespace SearchPageResponse {
   export interface Pagination {
     has_more?: boolean;
-
-    page?: number;
-
-    page_size?: number;
 
     total?: number;
 
@@ -132,6 +130,8 @@ export interface SearchPageParams {
 }
 
 export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageResponse<Item> {
+  results: Array<Item>;
+
   pagination: SearchPageResponse.Pagination;
 
   constructor(
@@ -142,11 +142,12 @@ export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageRe
   ) {
     super(client, response, body, options);
 
+    this.results = body.results || [];
     this.pagination = body.pagination || {};
   }
 
   getPaginatedItems(): Item[] {
-    return this.data;
+    return this.results ?? [];
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {

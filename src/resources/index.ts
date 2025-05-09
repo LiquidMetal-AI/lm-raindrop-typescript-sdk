@@ -8,6 +8,7 @@ export {
   type TextResult,
   type SearchRetrieveParams,
   type SearchFindParams,
+  type TextResultsSearchPage,
 } from './search';
 export {
   StorageObject,
