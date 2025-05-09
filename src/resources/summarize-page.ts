@@ -17,6 +17,13 @@ export class SummarizePage extends APIResource {
    * - Extracts important findings
    * - Highlights document relationships
    * - Provides content type distribution
+   *
+   * @example
+   * ```ts
+   * const summarizePage = await client.summarizePage.create({
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
    */
   create(body: SummarizePageCreateParams, options?: RequestOptions): APIPromise<SummarizePageCreateResponse> {
     return this._client.post('/v1/summarize_page', { body, ...options });

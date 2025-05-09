@@ -10,6 +10,13 @@ export class Search extends APIResource {
    * navigation through large result sets while maintaining search context and result
    * relevance. Retrieving paginated results requires a valid `request_id` from a
    * previously completed search.
+   *
+   * @example
+   * ```ts
+   * const searchResponse = await client.search.retrieve({
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
    */
   retrieve(query: SearchRetrieveParams, options?: RequestOptions): APIPromise<SearchResponse> {
     return this._client.get('/v1/search', { query, ...options });
@@ -38,6 +45,19 @@ export class Search extends APIResource {
    * - Content-based search across text, images, and audio
    * - Automatic PII detection
    * - Multi-modal search (text, images, audio)
+   *
+   * @example
+   * ```ts
+   * const searchResponse = await client.search.find({
+   *   bucket_ids: [
+   *     '01jtgtrd37acrqf7k24dggg31s',
+   *     '01jtgtrd37acrqf7k24dggg31v',
+   *   ],
+   *   input:
+   *     'Find me all documents with pictures of a cat that do not talk about dogs',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
    */
   find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchResponse> {
     return this._client.post('/v1/search', { body, ...options });
