@@ -125,6 +125,8 @@ export namespace SearchPageResponse {
 
 export interface SearchPageParams {
   page?: number;
+
+  page_size?: number;
 }
 
 export class SearchPage<Item> extends AbstractPage<Item> implements SearchPageResponse<Item> {
