@@ -7,7 +7,7 @@ Types:
 
 Methods:
 
-- <code title="get /v1/search">client.search.<a href="./src/resources/search.ts">retrieve</a>({ ...params }) -> SearchResponse</code>
+- <code title="get /v1/search">client.search.<a href="./src/resources/search.ts">retrieve</a>({ ...params }) -> TextResultsSearchPage</code>
 - <code title="post /v1/search">client.search.<a href="./src/resources/search.ts">find</a>({ ...params }) -> SearchResponse</code>
 
 # DocumentQuery

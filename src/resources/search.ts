@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { PagePromise, SearchPage, type SearchPageParams } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
@@ -13,13 +14,19 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const searchResponse = await client.search.retrieve({
+   * // Automatically fetches more pages as needed.
+   * for await (const textResult of client.search.retrieve({
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
+   * })) {
+   *   // ...
+   * }
    * ```
    */
-  retrieve(query: SearchRetrieveParams, options?: RequestOptions): APIPromise<SearchResponse> {
-    return this._client.get('/v1/search', { query, ...options });
+  retrieve(
+    query: SearchRetrieveParams,
+    options?: RequestOptions,
+  ): PagePromise<TextResultsSearchPage, TextResult> {
+    return this._client.getAPIList('/v1/search', SearchPage<TextResult>, { query, ...options });
   }
 
   /**
@@ -63,6 +70,8 @@ export class Search extends APIResource {
     return this._client.post('/v1/search', { body, ...options });
   }
 }
+
+export type TextResultsSearchPage = SearchPage<TextResult>;
 
 export interface SearchResponse {
   pagination: SearchResponse.Pagination;
@@ -134,21 +143,11 @@ export interface TextResult {
   type?: 'text/plain' | 'application/pdf' | 'image/jpeg' | 'image/png';
 }
 
-export interface SearchRetrieveParams {
+export interface SearchRetrieveParams extends SearchPageParams {
   /**
    * Client-provided search session identifier from the initial search
    */
   request_id: string;
-
-  /**
-   * Requested page number
-   */
-  page?: number;
-
-  /**
-   * Results per page
-   */
-  page_size?: number;
 }
 
 export interface SearchFindParams {
@@ -174,6 +173,7 @@ export declare namespace Search {
   export {
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
+    type TextResultsSearchPage as TextResultsSearchPage,
     type SearchRetrieveParams as SearchRetrieveParams,
     type SearchFindParams as SearchFindParams,
   };

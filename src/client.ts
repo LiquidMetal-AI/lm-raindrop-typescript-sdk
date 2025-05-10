@@ -14,6 +14,8 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type SearchPageParams, SearchPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -28,6 +30,7 @@ import {
   SearchResponse,
   SearchRetrieveParams,
   TextResult,
+  TextResultsSearchPage,
 } from './resources/search';
 import {
   StorageObject,
@@ -49,7 +52,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * API key with format `Bearer lm_apikey_...` that grants access to a specific resources or a group of resources. You can create new API keys in the raindrop dashboard (raindrop.run) under settings->API Keys
+   * API key with format `Bearer lm_apikey_...`. You can create new keys in the Raindrop dashboard (raindrop.run → Settings → API Keys).
+   *
    */
   apiKey?: string | undefined;
 
@@ -481,6 +485,25 @@ export class Raindrop {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Raindrop, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -727,10 +750,14 @@ Raindrop.StorageObject = StorageObject;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import SearchPage = Pagination.SearchPage;
+  export { type SearchPageParams as SearchPageParams, type SearchPageResponse as SearchPageResponse };
+
   export {
     Search as Search,
     type SearchResponse as SearchResponse,
     type TextResult as TextResult,
+    type TextResultsSearchPage as TextResultsSearchPage,
     type SearchRetrieveParams as SearchRetrieveParams,
     type SearchFindParams as SearchFindParams,
   };
