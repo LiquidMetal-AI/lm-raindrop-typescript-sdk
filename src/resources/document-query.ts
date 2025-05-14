@@ -30,9 +30,9 @@ export class DocumentQuery extends APIResource {
    * ```ts
    * const response = await client.documentQuery.ask({
    *   bucket_location: {
-   *     smartbucket_id: '01jtgtrd37acrqf7k24dggg31s',
+   *     module_id: '01jtgtrd37acrqf7k24dggg31s',
    *   },
-   *   input: 'What is the key points in this document?',
+   *   input: 'What are the key points in this document?',
    *   object_id: 'object_id',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
@@ -54,10 +54,10 @@ export interface DocumentQueryAskResponse {
 
 export interface DocumentQueryAskParams {
   /**
-   * The storage bucket location containing the target document. Must be an
-   * accessible Smart Bucket
+   * The storage bucket location containing the target document. Can specify either
+   * module_id (version-agnostic) or specific bucket details
    */
-  bucket_location: DocumentQueryAskParams.BucketLocation;
+  bucket_location: DocumentQueryAskParams.ModuleID | DocumentQueryAskParams.Bucket;
 
   /**
    * User's input or question about the document. Can be natural language questions,
@@ -79,15 +79,34 @@ export interface DocumentQueryAskParams {
 }
 
 export namespace DocumentQueryAskParams {
-  /**
-   * The storage bucket location containing the target document. Must be an
-   * accessible Smart Bucket
-   */
-  export interface BucketLocation {
+  export interface ModuleID {
     /**
-     * Identifier for the smartbucket (moduleId)
+     * Version-agnostic identifier for a module
      */
-    smartbucket_id: string;
+    module_id: string;
+  }
+
+  export interface Bucket {
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    export interface Bucket {
+      /**
+       * Name of the application
+       */
+      application_name: string;
+
+      /**
+       * Name of the bucket
+       */
+      name: string;
+
+      /**
+       * Version of the bucket
+       */
+      version: string;
+    }
   }
 }
 
