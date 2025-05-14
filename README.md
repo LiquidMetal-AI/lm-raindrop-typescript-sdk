@@ -28,7 +28,7 @@ const client = new Raindrop({
 
 async function main() {
   const searchResponse = await client.search.find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    bucket_locations: [{}],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   });
@@ -53,7 +53,7 @@ const client = new Raindrop({
 
 async function main() {
   const params: Raindrop.SearchFindParams = {
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    bucket_locations: [{}],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   };
@@ -76,7 +76,7 @@ a subclass of `APIError` will be thrown:
 async function main() {
   const searchResponse = await client.search
     .find({
-      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+      bucket_locations: [{}],
       input: 'all my pdfs with images of cats that do not talk about dogs',
       request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
     })
@@ -123,7 +123,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{}], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   maxRetries: 5,
 });
 ```
@@ -140,7 +140,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{}], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -159,6 +159,7 @@ async function fetchAllSearches(params) {
   const allSearches = [];
   // Automatically fetches more pages as needed.
   for await (const textResult of client.search.retrieve({
+    bucket_locations: [{}],
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
     page: 1,
   })) {
@@ -171,7 +172,11 @@ async function fetchAllSearches(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.search.retrieve({ request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57', page: 1 });
+let page = await client.search.retrieve({
+  bucket_locations: [{}],
+  request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  page: 1,
+});
 for (const textResult of page.results) {
   console.log(textResult);
 }
@@ -199,7 +204,7 @@ const client = new Raindrop();
 
 const response = await client.search
   .find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    bucket_locations: [{}],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })
@@ -209,7 +214,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: searchResponse, response: raw } = await client.search
   .find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
+    bucket_locations: [{}],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })
