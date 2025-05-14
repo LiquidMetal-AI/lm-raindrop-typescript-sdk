@@ -57,8 +57,14 @@ export class Search extends APIResource {
    * ```ts
    * const searchResponse = await client.search.find({
    *   bucket_locations: [
-   *     { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-   *     { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+   *     { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+   *     {
+   *       bucket: {
+   *         application_name: 'my-app',
+   *         name: 'my-bucket',
+   *         version: '01jtgtraw3b5qbahrhvrj3ygbb',
+   *       },
+   *     },
    *   ],
    *   input:
    *     'Find me all documents with pictures of a cat that do not talk about dogs',
@@ -152,10 +158,10 @@ export interface SearchRetrieveParams extends SearchPageParams {
 
 export interface SearchFindParams {
   /**
-   * Optional list of specific bucket locations to search in. If not provided,
-   * searches the latest version of all buckets
+   * List of bucket locations to search in. Can specify either module_id
+   * (version-agnostic) or specific bucket details
    */
-  bucket_locations: Array<SearchFindParams.BucketLocation>;
+  bucket_locations: Array<SearchFindParams.ModuleID | SearchFindParams.Bucket>;
 
   /**
    * Natural language search query that can include complex criteria
@@ -170,11 +176,34 @@ export interface SearchFindParams {
 }
 
 export namespace SearchFindParams {
-  export interface BucketLocation {
+  export interface ModuleID {
     /**
-     * Identifier for the smartbucket (moduleId)
+     * Version-agnostic identifier for a module
      */
-    smartbucket_id: string;
+    module_id: string;
+  }
+
+  export interface Bucket {
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    export interface Bucket {
+      /**
+       * Name of the application
+       */
+      application_name: string;
+
+      /**
+       * Name of the bucket
+       */
+      name: string;
+
+      /**
+       * Version of the bucket
+       */
+      version: string;
+    }
   }
 }
 

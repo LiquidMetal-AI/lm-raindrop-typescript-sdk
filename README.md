@@ -29,8 +29,8 @@ const client = new Raindrop({
 async function main() {
   const searchResponse = await client.search.find({
     bucket_locations: [
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+      { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+      { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
     ],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
@@ -57,8 +57,8 @@ const client = new Raindrop({
 async function main() {
   const params: Raindrop.SearchFindParams = {
     bucket_locations: [
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+      { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+      { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
     ],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
@@ -83,8 +83,8 @@ async function main() {
   const searchResponse = await client.search
     .find({
       bucket_locations: [
-        { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-        { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+        { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+        { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
       ],
       input: 'all my pdfs with images of cats that do not talk about dogs',
       request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
@@ -132,7 +132,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.find({ bucket_locations: [{ smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' }, { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }, { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   maxRetries: 5,
 });
 ```
@@ -149,7 +149,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.find({ bucket_locations: [{ smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' }, { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }, { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -209,8 +209,8 @@ const client = new Raindrop();
 const response = await client.search
   .find({
     bucket_locations: [
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+      { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+      { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
     ],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
@@ -222,8 +222,8 @@ console.log(response.statusText); // access the underlying Response object
 const { data: searchResponse, response: raw } = await client.search
   .find({
     bucket_locations: [
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
-      { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
+      { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+      { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
     ],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',

@@ -18,6 +18,16 @@ export class ChunkSearch extends APIResource {
    * @example
    * ```ts
    * const response = await client.chunkSearch.find({
+   *   bucket_locations: [
+   *     { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+   *     {
+   *       bucket: {
+   *         application_name: 'my-app',
+   *         name: 'my-bucket',
+   *         version: '01jtgtraw3b5qbahrhvrj3ygbb',
+   *       },
+   *     },
+   *   ],
    *   input: 'Information on how to raise a dog',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
@@ -37,6 +47,12 @@ export interface ChunkSearchFindResponse {
 
 export interface ChunkSearchFindParams {
   /**
+   * List of bucket locations to search in. Can specify either module_id
+   * (version-agnostic) or specific bucket details
+   */
+  bucket_locations: Array<ChunkSearchFindParams.ModuleID | ChunkSearchFindParams.Bucket>;
+
+  /**
    * Natural language query or question. Can include complex criteria and
    * relationships
    */
@@ -47,20 +63,37 @@ export interface ChunkSearchFindParams {
    * this value.
    */
   request_id: string;
-
-  /**
-   * Optional list of specific bucket locations to search in. If not provided,
-   * searches the latest version of all accessible buckets
-   */
-  bucket_locations?: Array<ChunkSearchFindParams.BucketLocation>;
 }
 
 export namespace ChunkSearchFindParams {
-  export interface BucketLocation {
+  export interface ModuleID {
     /**
-     * Identifier for the smartbucket (moduleId)
+     * Version-agnostic identifier for a module
      */
-    smartbucket_id: string;
+    module_id: string;
+  }
+
+  export interface Bucket {
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    export interface Bucket {
+      /**
+       * Name of the application
+       */
+      application_name: string;
+
+      /**
+       * Name of the bucket
+       */
+      name: string;
+
+      /**
+       * Version of the bucket
+       */
+      version: string;
+    }
   }
 }
 
