@@ -16,6 +16,7 @@ export class Search extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const textResult of client.search.retrieve({
+   *   bucket_locations: [{}],
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * })) {
    *   // ...
@@ -56,10 +57,7 @@ export class Search extends APIResource {
    * @example
    * ```ts
    * const searchResponse = await client.search.find({
-   *   bucket_ids: [
-   *     '01jtgtrd37acrqf7k24dggg31s',
-   *     '01jtgtrd37acrqf7k24dggg31v',
-   *   ],
+   *   bucket_locations: [{}],
    *   input:
    *     'Find me all documents with pictures of a cat that do not talk about dogs',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -144,6 +142,8 @@ export interface TextResult {
 }
 
 export interface SearchRetrieveParams extends SearchPageParams {
+  bucket_locations: Array<unknown>;
+
   /**
    * Client-provided search session identifier from the initial search
    */
@@ -151,11 +151,7 @@ export interface SearchRetrieveParams extends SearchPageParams {
 }
 
 export interface SearchFindParams {
-  /**
-   * Optional list of specific bucket IDs to search in. If not provided, searches the
-   * latest version of all buckets
-   */
-  bucket_ids: Array<string>;
+  bucket_locations: Array<unknown>;
 
   /**
    * Natural language search query that can include complex criteria

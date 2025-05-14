@@ -18,10 +18,7 @@ export class ChunkSearch extends APIResource {
    * @example
    * ```ts
    * const response = await client.chunkSearch.find({
-   *   bucket_ids: [
-   *     '01jtgtrd37acrqf7k24dggg31s',
-   *     '01jtgtrd37acrqf7k24dggg31v',
-   *   ],
+   *   bucket_locations: [{}],
    *   input: 'Information on how to raise a dog',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
@@ -40,11 +37,7 @@ export interface ChunkSearchFindResponse {
 }
 
 export interface ChunkSearchFindParams {
-  /**
-   * Optional list of specific bucket IDs to search in. If not provided, searches the
-   * latest version of all accessible buckets
-   */
-  bucket_ids: Array<string>;
+  bucket_locations: Array<unknown>;
 
   /**
    * Natural language query or question. Can include complex criteria and
