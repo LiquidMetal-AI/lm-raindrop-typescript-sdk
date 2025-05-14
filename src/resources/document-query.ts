@@ -29,7 +29,9 @@ export class DocumentQuery extends APIResource {
    * @example
    * ```ts
    * const response = await client.documentQuery.ask({
-   *   bucket: '01jtgtrd37acrqf7k24dggg31s',
+   *   bucket_location: {
+   *     smartbucket_id: '01jtgtrd37acrqf7k24dggg31s',
+   *   },
    *   input: 'What is the key points in this document?',
    *   object_id: 'object_id',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -52,10 +54,10 @@ export interface DocumentQueryAskResponse {
 
 export interface DocumentQueryAskParams {
   /**
-   * The storage bucket ID containing the target document. Must be an accessible
-   * Smart Bucket
+   * The storage bucket location containing the target document. Must be an
+   * accessible Smart Bucket
    */
-  bucket: string;
+  bucket_location: DocumentQueryAskParams.BucketLocation;
 
   /**
    * User's input or question about the document. Can be natural language questions,
@@ -74,6 +76,19 @@ export interface DocumentQueryAskParams {
    * value.
    */
   request_id: string;
+}
+
+export namespace DocumentQueryAskParams {
+  /**
+   * The storage bucket location containing the target document. Must be an
+   * accessible Smart Bucket
+   */
+  export interface BucketLocation {
+    /**
+     * Identifier for the smartbucket (moduleId)
+     */
+    smartbucket_id: string;
+  }
 }
 
 export declare namespace DocumentQuery {
