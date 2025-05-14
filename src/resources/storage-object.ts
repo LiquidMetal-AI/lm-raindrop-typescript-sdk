@@ -9,8 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class StorageObject extends APIResource {
   /**
-   * List all objects in a SmartBucket or regular bucket. The bucket parameter
-   * (module ID) is used to identify the bucket to list objects from.
+   * List all objects in a SmartBucket or regular bucket. The bucket parameter (ID)
+   * is used to identify the bucket to list objects from.
    *
    * @example
    * ```ts
@@ -24,9 +24,9 @@ export class StorageObject extends APIResource {
   }
 
   /**
-   * Delete a file from a SmartBucket or regular bucket. The bucket parameter (module
-   * ID) is used to identify the bucket to delete from. The key is the path to the
-   * object in the bucket.
+   * Delete a file from a SmartBucket or regular bucket. The bucket parameter (ID) is
+   * used to identify the bucket to delete from. The key is the path to the object in
+   * the bucket.
    *
    * @example
    * ```ts
@@ -46,9 +46,9 @@ export class StorageObject extends APIResource {
   }
 
   /**
-   * Download a file from a SmartBucket or regular bucket. The bucket parameter
-   * (module ID) is used to identify the bucket to download from. The key is the path
-   * to the object in the bucket.
+   * Download a file from a SmartBucket or regular bucket. The bucket parameter (ID)
+   * is used to identify the bucket to download from. The key is the path to the
+   * object in the bucket.
    *
    * @example
    * ```ts
@@ -71,9 +71,9 @@ export class StorageObject extends APIResource {
   }
 
   /**
-   * Upload a file to a SmartBucket or regular bucket. The bucket parameter (module
-   * ID) is used to identify the bucket to upload to. The key is the path to the
-   * object in the bucket.
+   * Upload a file to a SmartBucket or regular bucket. The bucket parameter (ID) is
+   * used to identify the bucket to upload to. The key is the path to the object in
+   * the bucket.
    *
    * @example
    * ```ts
@@ -146,21 +146,21 @@ export interface StorageObjectUploadResponse {
 
 export interface StorageObjectDeleteParams {
   /**
-   * The module ID.
+   * The bucket identifier
    */
   bucket: string;
 }
 
 export interface StorageObjectDownloadParams {
   /**
-   * The module ID.
+   * The bucket identifier
    */
   bucket: string;
 }
 
 export interface StorageObjectUploadParams {
   /**
-   * Path param: The module ID.
+   * Path param: The bucket identifier
    */
   bucket: string;
 
