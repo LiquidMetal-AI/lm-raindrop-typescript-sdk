@@ -11,8 +11,8 @@ describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
   test.skip('ask: only required params', async () => {
     const responsePromise = client.documentQuery.ask({
-      bucket_location: { module_id: '01jtgtrd37acrqf7k24dggg31s' },
-      input: 'What are the key points in this document?',
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
+      input: 'What is the key points in this document?',
       object_id: 'object_id',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
@@ -28,8 +28,8 @@ describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
   test.skip('ask: required and optional params', async () => {
     const response = await client.documentQuery.ask({
-      bucket_location: { module_id: '01jtgtrd37acrqf7k24dggg31s' },
-      input: 'What are the key points in this document?',
+      bucket: '01jtgtrd37acrqf7k24dggg31s',
+      input: 'What is the key points in this document?',
       object_id: 'object_id',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
