@@ -56,9 +56,9 @@ export class Search extends APIResource {
    * @example
    * ```ts
    * const searchResponse = await client.search.find({
-   *   bucket_ids: [
-   *     '01jtgtrd37acrqf7k24dggg31s',
-   *     '01jtgtrd37acrqf7k24dggg31v',
+   *   bucket_locations: [
+   *     { smartbucket_id: '01jtgtrd37acrqf7k24dggg31s' },
+   *     { smartbucket_id: '01jtgtrd37acrqf7k24dggg31v' },
    *   ],
    *   input:
    *     'Find me all documents with pictures of a cat that do not talk about dogs',
@@ -152,10 +152,10 @@ export interface SearchRetrieveParams extends SearchPageParams {
 
 export interface SearchFindParams {
   /**
-   * Optional list of specific bucket IDs to search in. If not provided, searches the
-   * latest version of all buckets
+   * Optional list of specific bucket locations to search in. If not provided,
+   * searches the latest version of all buckets
    */
-  bucket_ids: Array<string>;
+  bucket_locations: Array<SearchFindParams.BucketLocation>;
 
   /**
    * Natural language search query that can include complex criteria
@@ -167,6 +167,15 @@ export interface SearchFindParams {
    * tracking. We recommend using a UUID or ULID for this value.
    */
   request_id: string;
+}
+
+export namespace SearchFindParams {
+  export interface BucketLocation {
+    /**
+     * Identifier for the smartbucket (moduleId)
+     */
+    smartbucket_id: string;
+  }
 }
 
 export declare namespace Search {

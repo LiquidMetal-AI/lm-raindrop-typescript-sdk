@@ -133,34 +133,30 @@ export interface StorageObjectDeleteResponse {
 }
 
 export interface StorageObjectUploadResponse {
-  /**
-   * ID of the bucket where the object was uploaded
-   */
-  bucket_id?: string;
+  bucket: string;
 
-  /**
-   * Key/path of the uploaded object
-   */
-  key?: string;
+  key: string;
+
+  success: boolean;
 }
 
 export interface StorageObjectDeleteParams {
   /**
-   * The bucket identifier
+   * The bucket identifier (moduleId)
    */
   bucket: string;
 }
 
 export interface StorageObjectDownloadParams {
   /**
-   * The bucket identifier
+   * The bucket identifier (moduleId)
    */
   bucket: string;
 }
 
 export interface StorageObjectUploadParams {
   /**
-   * Path param: The bucket identifier
+   * Path param: The bucket identifier (moduleId)
    */
   bucket: string;
 
