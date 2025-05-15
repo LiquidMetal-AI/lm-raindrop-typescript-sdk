@@ -16,7 +16,6 @@ export class Search extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const textResult of client.search.retrieve({
-   *   bucket_locations: [{}],
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * })) {
    *   // ...
@@ -57,7 +56,9 @@ export class Search extends APIResource {
    * @example
    * ```ts
    * const searchResponse = await client.search.find({
-   *   bucket_locations: [{}],
+   *   bucket_locations: [
+   *     { module_id: '01jtgtrd37acrqf7k24dggg31s' },
+   *   ],
    *   input:
    *     'Find me all documents with pictures of a cat that do not talk about dogs',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -142,8 +143,6 @@ export interface TextResult {
 }
 
 export interface SearchRetrieveParams extends SearchPageParams {
-  bucket_locations: Array<unknown>;
-
   /**
    * Client-provided search session identifier from the initial search
    */
@@ -151,7 +150,7 @@ export interface SearchRetrieveParams extends SearchPageParams {
 }
 
 export interface SearchFindParams {
-  bucket_locations: Array<unknown>;
+  bucket_locations: Array<SearchFindParams.ModuleID | SearchFindParams.Bucket>;
 
   /**
    * Natural language search query that can include complex criteria
@@ -163,6 +162,38 @@ export interface SearchFindParams {
    * tracking. We recommend using a UUID or ULID for this value.
    */
   request_id: string;
+}
+
+export namespace SearchFindParams {
+  export interface ModuleID {
+    /**
+     * Version-agnostic identifier for a module
+     */
+    module_id: string;
+  }
+
+  export interface Bucket {
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    export interface Bucket {
+      /**
+       * Name of the application
+       */
+      application_name: string;
+
+      /**
+       * Name of the bucket
+       */
+      name: string;
+
+      /**
+       * Version of the bucket
+       */
+      version: string;
+    }
+  }
 }
 
 export declare namespace Search {
