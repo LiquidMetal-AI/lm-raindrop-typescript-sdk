@@ -31,7 +31,12 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.search.find();
+   * const response = await client.search.find({
+   *   bucket_locations: [{ bucket: {} }],
+   *   input:
+   *     'Show me documents containing credit card numbers or social security numbers',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
    * ```
    */
   find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchFindResponse> {
@@ -159,20 +164,20 @@ export interface SearchFindParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations?: Array<SearchFindParams.Bucket | SearchFindParams.ModuleID>;
+  bucket_locations: Array<SearchFindParams.Bucket | SearchFindParams.ModuleID>;
 
   /**
    * Natural language search query that can include complex criteria. Supports
    * queries like finding documents with specific content types, PII, or semantic
    * meaning
    */
-  input?: string;
+  input: string;
 
   /**
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id?: string;
+  request_id: string;
 }
 
 export namespace SearchFindParams {

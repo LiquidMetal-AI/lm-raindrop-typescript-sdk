@@ -34,7 +34,10 @@ describe('resource object', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('putObject: only required params', async () => {
-    const responsePromise = client.object.putObject('object_key', { bucket_name: 'bucket_name' });
+    const responsePromise = client.object.putObject('object_key', {
+      bucket_name: 'bucket_name',
+      content: 'U3RhaW5sZXNzIHJvY2tz',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

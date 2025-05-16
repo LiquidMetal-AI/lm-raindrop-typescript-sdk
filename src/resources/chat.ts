@@ -28,7 +28,12 @@ export class Chat extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.chat.interact();
+   * const response = await client.chat.interact({
+   *   bucket_location: { bucket: {} },
+   *   input: 'What are the key points in this document?',
+   *   object_id: 'document.pdf',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
    * ```
    */
   interact(body: ChatInteractParams, options?: RequestOptions): APIPromise<ChatInteractResponse> {
@@ -50,25 +55,25 @@ export interface ChatInteractParams {
    * The storage bucket containing the target document. Must be a valid, registered
    * Smart Bucket. Used to identify which bucket to query against
    */
-  bucket_location?: ChatInteractParams.Bucket | ChatInteractParams.ModuleID;
+  bucket_location: ChatInteractParams.Bucket | ChatInteractParams.ModuleID;
 
   /**
    * User's input or question about the document. Can be natural language questions,
    * commands, or requests. The system will process this against the document content
    */
-  input?: string;
+  input: string;
 
   /**
    * Document identifier within the bucket. Typically matches the storage path or
    * key. Used to identify which document to chat with
    */
-  object_id?: string;
+  object_id: string;
 
   /**
    * Client-provided conversation session identifier. Required for maintaining
    * context in follow-up questions. We recommend using a UUID or ULID for this value
    */
-  request_id?: string;
+  request_id: string;
 }
 
 export namespace ChatInteractParams {

@@ -34,7 +34,10 @@ export class Object extends APIResource {
    * ```ts
    * const response = await client.object.putObject(
    *   'object_key',
-   *   { bucket_name: 'bucket_name' },
+   *   {
+   *     bucket_name: 'bucket_name',
+   *     content: 'U3RhaW5sZXNzIHJvY2tz',
+   *   },
    * );
    * ```
    */
@@ -194,7 +197,7 @@ export interface ObjectPutObjectParams {
   /**
    * Body param: Binary content of the object
    */
-  content?: string;
+  content: string;
 
   /**
    * Body param: MIME type of the object

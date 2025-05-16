@@ -9,8 +9,13 @@ const client = new Raindrop({
 
 describe('resource chat', () => {
   // skipped: tests are disabled for the time being
-  test.skip('interact', async () => {
-    const responsePromise = client.chat.interact({});
+  test.skip('interact: only required params', async () => {
+    const responsePromise = client.chat.interact({
+      bucket_location: { bucket: {} },
+      input: 'What are the key points in this document?',
+      object_id: 'document.pdf',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,5 +23,17 @@ describe('resource chat', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('interact: required and optional params', async () => {
+    const response = await client.chat.interact({
+      bucket_location: {
+        bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
+      },
+      input: 'What are the key points in this document?',
+      object_id: 'document.pdf',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
+    });
   });
 });
