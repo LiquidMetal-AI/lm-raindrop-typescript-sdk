@@ -44,6 +44,77 @@ export class Search extends APIResource {
   }
 }
 
+export interface TextResult {
+  /**
+   * Unique identifier for this text segment. Used for deduplication and result
+   * tracking
+   */
+  chunk_signature?: string | null;
+
+  /**
+   * Vector representation for similarity matching. Used in semantic search
+   * operations
+   */
+  embed?: string | null;
+
+  /**
+   * Parent document identifier. Links related content chunks together
+   */
+  payload_signature?: string | null;
+
+  /**
+   * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+   */
+  score?: number | null;
+
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  source?: TextResult.Source;
+
+  /**
+   * The actual content of the result. May be a document excerpt or full content
+   */
+  text?: string | null;
+
+  /**
+   * Content MIME type. Helps with proper result rendering
+   */
+  type?: string | null;
+}
+
+export namespace TextResult {
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  export interface Source {
+    /**
+     * The bucket information containing this result
+     */
+    bucket?: Source.Bucket;
+
+    /**
+     * The object key within the bucket
+     */
+    object?: string;
+  }
+
+  export namespace Source {
+    /**
+     * The bucket information containing this result
+     */
+    export interface Bucket {
+      application_name?: string;
+
+      application_version_id?: string;
+
+      bucket_name?: string;
+
+      module_id?: string;
+    }
+  }
+}
+
 export interface SearchFindResponse {
   /**
    * Pagination details for result navigation
@@ -53,7 +124,7 @@ export interface SearchFindResponse {
   /**
    * Matched results with metadata
    */
-  results?: Array<SearchFindResponse.Result>;
+  results?: Array<TextResult>;
 }
 
 export namespace SearchFindResponse {
@@ -85,77 +156,6 @@ export namespace SearchFindResponse {
      * Total available pages. Calculated as ceil(total/page_size)
      */
     total_pages?: number;
-  }
-
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        application_name?: string;
-
-        application_version_id?: string;
-
-        bucket_name?: string;
-
-        module_id?: string;
-      }
-    }
   }
 }
 
@@ -216,5 +216,9 @@ export namespace SearchFindParams {
 }
 
 export declare namespace Search {
-  export { type SearchFindResponse as SearchFindResponse, type SearchFindParams as SearchFindParams };
+  export {
+    type TextResult as TextResult,
+    type SearchFindResponse as SearchFindResponse,
+    type SearchFindParams as SearchFindParams,
+  };
 }

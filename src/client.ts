@@ -24,7 +24,7 @@ import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
 import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
-import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
+import { Search, SearchFindParams, SearchFindResponse, TextResult } from './resources/search';
 import {
   StorageObject,
   StorageObjectListObjectsParams,
@@ -743,6 +743,7 @@ export declare namespace Raindrop {
 
   export {
     Search as Search,
+    type TextResult as TextResult,
     type SearchFindResponse as SearchFindResponse,
     type SearchFindParams as SearchFindParams,
   };
