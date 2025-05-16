@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as SearchAPI from './search';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -33,80 +34,7 @@ export interface ChunkSearchFindResponse {
    * Ordered list of relevant text segments. Each result includes full context and
    * metadata
    */
-  results?: Array<ChunkSearchFindResponse.Result>;
-}
-
-export namespace ChunkSearchFindResponse {
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        application_name?: string;
-
-        application_version_id?: string;
-
-        bucket_name?: string;
-
-        module_id?: string;
-      }
-    }
-  }
+  results?: Array<SearchAPI.TextResult>;
 }
 
 export interface ChunkSearchFindParams {

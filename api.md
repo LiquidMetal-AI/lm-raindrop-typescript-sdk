@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/search.ts">TextResult</a></code>
 - <code><a href="./src/resources/search.ts">SearchFindResponse</a></code>
 
 Methods:

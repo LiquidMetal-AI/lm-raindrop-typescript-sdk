@@ -2,7 +2,7 @@
 
 export { ChunkSearch, type ChunkSearchFindResponse, type ChunkSearchFindParams } from './chunk-search';
 export { DocumentQuery, type DocumentQueryAskResponse, type DocumentQueryAskParams } from './document-query';
-export { Search, type SearchFindResponse, type SearchFindParams } from './search';
+export { Search, type TextResult, type SearchFindResponse, type SearchFindParams } from './search';
 export {
   StorageObject,
   type StorageObjectListObjectsResponse,
