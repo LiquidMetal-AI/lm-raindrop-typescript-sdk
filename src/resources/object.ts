@@ -7,8 +7,8 @@ import { path } from '../internal/utils/path';
 
 export class Object extends APIResource {
   /**
-   * **DESCRIPTION** Delete a file from a SmartBucket or regular bucket. The bucket
-   * parameter (ID) is used to identify the bucket to delete from. The key is the
+   * **DESCRIPTION** Download a file from a SmartBucket or regular bucket. The bucket
+   * parameter (ID) is used to identify the bucket to download from. The key is the
    * path to the object in the bucket.
    */
   retrieve(
@@ -26,7 +26,7 @@ export class Object extends APIResource {
    */
   list(
     bucketName: string,
-    query: ObjectListParams | null | undefined = {},
+    query: ObjectListParams,
     options?: RequestOptions,
   ): APIPromise<ObjectListResponse> {
     return this._client.get(path`/v1/object/${bucketName}`, { query, ...options });
@@ -42,8 +42,17 @@ export class Object extends APIResource {
     params: ObjectUploadParams,
     options?: RequestOptions,
   ): APIPromise<ObjectUploadResponse> {
-    const { bucket_name, ...body } = params;
-    return this._client.post(path`/v1/object/${bucket_name}/${objectKey}`, { body, ...options });
+    const { bucket_name, query_key, query_module_id, query_organization_id, query_user_id, ...body } = params;
+    return this._client.post(path`/v1/object/${bucket_name}/${objectKey}`, {
+      query: {
+        key: query_key,
+        module_id: query_module_id,
+        organization_id: query_organization_id,
+        user_id: query_user_id,
+      },
+      body,
+      ...options,
+    });
   }
 }
 
@@ -163,27 +172,27 @@ export interface ObjectRetrieveParams {
   bucket_name: string;
 
   /**
-   * Query param: **DESCRIPTION** Object key/path to delete **REQUIRED** true
+   * Query param: **DESCRIPTION** Object key/path to download **REQUIRED** true
    * **EXAMPLE** "my-key"
    */
-  key?: string;
+  key: string;
 
   /**
    * Query param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
    * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
    */
-  module_id?: string;
+  module_id: string;
 
   /**
    * Query param: **DESCRIPTION** Organization ID for access control **REQUIRED**
    * true
    */
-  organization_id?: string;
+  organization_id: string;
 
   /**
    * Query param: **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  user_id?: string;
+  user_id: string;
 }
 
 export interface ObjectListParams {
@@ -191,17 +200,17 @@ export interface ObjectListParams {
    * **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true **EXAMPLE**
    * "01jtgtrd37acrqf7k24dggg31s"
    */
-  module_id?: string;
+  module_id: string;
 
   /**
    * **DESCRIPTION** Organization ID for access control **REQUIRED** true
    */
-  organization_id?: string;
+  organization_id: string;
 
   /**
    * **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  user_id?: string;
+  user_id: string;
 }
 
 export interface ObjectUploadParams {
@@ -209,6 +218,29 @@ export interface ObjectUploadParams {
    * Path param:
    */
   bucket_name: string;
+
+  /**
+   * Query param: **DESCRIPTION** Object key/path in the bucket **REQUIRED** true
+   * **EXAMPLE** "my-key"
+   */
+  query_key: string;
+
+  /**
+   * Query param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
+   * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
+   */
+  query_module_id: string;
+
+  /**
+   * Query param: **DESCRIPTION** Organization ID for access control **REQUIRED**
+   * true
+   */
+  query_organization_id: string;
+
+  /**
+   * Query param: **DESCRIPTION** User ID for access control **REQUIRED** true
+   */
+  query_user_id: string;
 
   /**
    * Body param: **DESCRIPTION** Binary content of the object **REQUIRED** true
@@ -225,23 +257,23 @@ export interface ObjectUploadParams {
    * Body param: **DESCRIPTION** Object key/path in the bucket **REQUIRED** true
    * **EXAMPLE** "my-key"
    */
-  key?: string;
+  body_key?: string;
 
   /**
    * Body param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
    * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
    */
-  module_id?: string;
+  body_module_id?: string;
 
   /**
    * Body param: **DESCRIPTION** Organization ID for access control **REQUIRED** true
    */
-  organization_id?: string;
+  body_organization_id?: string;
 
   /**
    * Body param: **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  user_id?: string;
+  body_user_id?: string;
 }
 
 export declare namespace Object {

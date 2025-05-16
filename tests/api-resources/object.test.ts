@@ -10,7 +10,13 @@ const client = new Raindrop({
 describe('resource object', () => {
   // skipped: tests are disabled for the time being
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.object.retrieve('object_key', { bucket_name: 'bucket_name' });
+    const responsePromise = client.object.retrieve('object_key', {
+      bucket_name: 'bucket_name',
+      key: 'key',
+      module_id: 'module_id',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,8 +38,12 @@ describe('resource object', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = client.object.list('bucket_name');
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.object.list('bucket_name', {
+      module_id: 'module_id',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,20 +54,23 @@ describe('resource object', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.object.list(
-        'bucket_name',
-        { module_id: 'module_id', organization_id: 'organization_id', user_id: 'user_id' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Raindrop.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.object.list('bucket_name', {
+      module_id: 'module_id',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
+    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('upload: only required params', async () => {
-    const responsePromise = client.object.upload('object_key', { bucket_name: 'bucket_name' });
+    const responsePromise = client.object.upload('object_key', {
+      bucket_name: 'bucket_name',
+      query_key: 'key',
+      query_module_id: 'module_id',
+      query_organization_id: 'organization_id',
+      query_user_id: 'user_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -71,12 +84,16 @@ describe('resource object', () => {
   test.skip('upload: required and optional params', async () => {
     const response = await client.object.upload('object_key', {
       bucket_name: 'bucket_name',
+      query_key: 'key',
+      query_module_id: 'module_id',
+      query_organization_id: 'organization_id',
+      query_user_id: 'user_id',
       content: 'U3RhaW5sZXNzIHJvY2tz',
       content_type: 'content_type',
-      key: 'key',
-      module_id: 'module_id',
-      organization_id: 'organization_id',
-      user_id: 'user_id',
+      body_key: 'key',
+      body_module_id: 'module_id',
+      body_organization_id: 'organization_id',
+      body_user_id: 'user_id',
     });
   });
 });
