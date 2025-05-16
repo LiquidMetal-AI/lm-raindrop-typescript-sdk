@@ -30,7 +30,13 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const object = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' });
+  const object = await client.object.retrieve('object_key', {
+    bucket_name: 'bucket_name',
+    key: 'key',
+    module_id: 'module_id',
+    organization_id: 'organization_id',
+    user_id: 'user_id',
+  });
 
   console.log(object.bucket);
 }
@@ -51,7 +57,13 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const params: Raindrop.ObjectRetrieveParams = { bucket_name: 'bucket_name' };
+  const params: Raindrop.ObjectRetrieveParams = {
+    bucket_name: 'bucket_name',
+    key: 'key',
+    module_id: 'module_id',
+    organization_id: 'organization_id',
+    user_id: 'user_id',
+  };
   const object: Raindrop.ObjectRetrieveResponse = await client.object.retrieve('object_key', params);
 }
 
@@ -70,7 +82,13 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const object = await client.object
-    .retrieve('object_key', { bucket_name: 'bucket_name' })
+    .retrieve('object_key', {
+      bucket_name: 'bucket_name',
+      key: 'key',
+      module_id: 'module_id',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
+    })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
         console.log(err.status); // 400
@@ -114,7 +132,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
+await client.object.retrieve('object_key', { bucket_name: 'bucket_name', key: 'key', module_id: 'module_id', organization_id: 'organization_id', user_id: 'user_id' }, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +149,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
+await client.object.retrieve('object_key', { bucket_name: 'bucket_name', key: 'key', module_id: 'module_id', organization_id: 'organization_id', user_id: 'user_id' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -154,12 +172,26 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }).asResponse();
+const response = await client.object
+  .retrieve('object_key', {
+    bucket_name: 'bucket_name',
+    key: 'key',
+    module_id: 'module_id',
+    organization_id: 'organization_id',
+    user_id: 'user_id',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: object, response: raw } = await client.object
-  .retrieve('object_key', { bucket_name: 'bucket_name' })
+  .retrieve('object_key', {
+    bucket_name: 'bucket_name',
+    key: 'key',
+    module_id: 'module_id',
+    organization_id: 'organization_id',
+    user_id: 'user_id',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(object.bucket);
