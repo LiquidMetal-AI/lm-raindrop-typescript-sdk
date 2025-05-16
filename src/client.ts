@@ -32,8 +32,12 @@ import {
   DocumentQueryCreateParams,
   DocumentQueryCreateResponse,
 } from './resources/document-query';
-import { BucketResponse, Object } from './resources/object';
-import { Search, SearchRunParams, SearchRunResponse } from './resources/search';
+import {
+  LiquidmetalV1alpha1SearchAgentService,
+  LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams,
+  LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse,
+} from './resources/liquidmetal-v1alpha1-search-agent-service';
+import { PaginationInfo, Search, SearchRunParams, SearchRunResponse } from './resources/search';
 import {
   SummarizePage,
   SummarizePageCreateSummaryParams,
@@ -47,7 +51,7 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['RAINDROP_API_KEY'].
    */
-  apiKey?: string | undefined;
+  apiKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -120,7 +124,7 @@ export interface ClientOptions {
  * API Client for interfacing with the Raindrop API.
  */
 export class Raindrop {
-  apiKey: string;
+  apiKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -137,7 +141,7 @@ export class Raindrop {
   /**
    * API Client for interfacing with the Raindrop API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -148,15 +152,9 @@ export class Raindrop {
    */
   constructor({
     baseURL = readEnv('RAINDROP_BASE_URL'),
-    apiKey = readEnv('RAINDROP_API_KEY'),
+    apiKey = readEnv('RAINDROP_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.RaindropError(
-        "The RAINDROP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Raindrop client with an apiKey option, like new Raindrop({ apiKey: 'My API Key' }).",
-      );
-    }
-
     const options: ClientOptions = {
       apiKey,
       ...opts,
@@ -205,7 +203,23 @@ export class Raindrop {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.apiKey && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
+    );
+  }
+
+  protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
+    if (this.apiKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
   /**
@@ -638,6 +652,7 @@ export class Raindrop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
+      this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -708,13 +723,14 @@ export class Raindrop {
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
   search: API.Search = new API.Search(this);
-  object: API.Object = new API.Object(this);
+  liquidmetalV1alpha1SearchAgentService: API.LiquidmetalV1alpha1SearchAgentService =
+    new API.LiquidmetalV1alpha1SearchAgentService(this);
 }
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
 Raindrop.Search = Search;
-Raindrop.Object = Object;
+Raindrop.LiquidmetalV1alpha1SearchAgentService = LiquidmetalV1alpha1SearchAgentService;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -740,9 +756,14 @@ export declare namespace Raindrop {
 
   export {
     Search as Search,
+    type PaginationInfo as PaginationInfo,
     type SearchRunResponse as SearchRunResponse,
     type SearchRunParams as SearchRunParams,
   };
 
-  export { Object as Object, type BucketResponse as BucketResponse };
+  export {
+    LiquidmetalV1alpha1SearchAgentService as LiquidmetalV1alpha1SearchAgentService,
+    type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse as LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse,
+    type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams as LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams,
+  };
 }
