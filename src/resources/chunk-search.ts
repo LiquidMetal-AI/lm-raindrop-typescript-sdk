@@ -2,7 +2,6 @@
 
 import { APIResource } from '../core/resource';
 import * as DocumentQueryAPI from './document-query';
-import * as ObjectAPI from './object';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -79,12 +78,28 @@ export namespace TextResult {
      * **DESCRIPTION** The bucket information containing this result **EXAMPLE**
      * {"moduleId": "01jt3vs2nyt2xwk2f54x2bkn84", "bucketName": "mr-bucket"}
      */
-    bucket?: ObjectAPI.BucketResponse;
+    bucket?: Source.Bucket;
 
     /**
      * **DESCRIPTION** The object key within the bucket **EXAMPLE** "document.pdf"
      */
     object?: string;
+  }
+
+  export namespace Source {
+    /**
+     * **DESCRIPTION** The bucket information containing this result **EXAMPLE**
+     * {"moduleId": "01jt3vs2nyt2xwk2f54x2bkn84", "bucketName": "mr-bucket"}
+     */
+    export interface Bucket {
+      application_name?: string;
+
+      application_version_id?: string;
+
+      bucket_name?: string;
+
+      module_id?: string;
+    }
   }
 }
 

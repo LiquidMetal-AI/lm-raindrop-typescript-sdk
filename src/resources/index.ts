@@ -12,8 +12,12 @@ export {
   type DocumentQueryCreateResponse,
   type DocumentQueryCreateParams,
 } from './document-query';
-export { Object, type BucketResponse } from './object';
-export { Search, type SearchRunResponse, type SearchRunParams } from './search';
+export {
+  LiquidmetalV1alpha1SearchAgentService,
+  type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse,
+  type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams,
+} from './liquidmetal-v1alpha1-search-agent-service';
+export { Search, type PaginationInfo, type SearchRunResponse, type SearchRunParams } from './search';
 export {
   SummarizePage,
   type SummarizePageCreateSummaryResponse,

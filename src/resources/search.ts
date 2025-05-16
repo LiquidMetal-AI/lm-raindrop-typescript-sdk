@@ -36,53 +36,47 @@ export class Search extends APIResource {
   }
 }
 
+export interface PaginationInfo {
+  /**
+   * **DESCRIPTION** Indicates more results available. Used for infinite scroll
+   * implementation **EXAMPLE** true
+   */
+  has_more?: boolean;
+
+  /**
+   * **DESCRIPTION** Current page number (1-based) **EXAMPLE** 1
+   */
+  page?: number;
+
+  /**
+   * **DESCRIPTION** Results per page. May be adjusted for performance **EXAMPLE** 15
+   */
+  page_size?: number;
+
+  /**
+   * **DESCRIPTION** Total number of available results **EXAMPLE** 1020
+   */
+  total?: number;
+
+  /**
+   * **DESCRIPTION** Total available pages. Calculated as ceil(total/page_size)
+   * **EXAMPLE** 68
+   */
+  total_pages?: number;
+}
+
 export interface SearchRunResponse {
   /**
    * **DESCRIPTION** Pagination details for result navigation **EXAMPLE** {"total":
    * 100, "page": 1, "page_size": 10, "total_pages": 10, "has_more": true}
    */
-  pagination?: SearchRunResponse.Pagination;
+  pagination?: PaginationInfo;
 
   /**
    * **DESCRIPTION** Matched results with metadata **EXAMPLE** [{"chunk_signature":
    * "chunk_123abc", "text": "Sample text", "score": 0.95}]
    */
   results?: Array<ChunkSearchAPI.TextResult>;
-}
-
-export namespace SearchRunResponse {
-  /**
-   * **DESCRIPTION** Pagination details for result navigation **EXAMPLE** {"total":
-   * 100, "page": 1, "page_size": 10, "total_pages": 10, "has_more": true}
-   */
-  export interface Pagination {
-    /**
-     * **DESCRIPTION** Indicates more results available. Used for infinite scroll
-     * implementation **EXAMPLE** true
-     */
-    has_more?: boolean;
-
-    /**
-     * **DESCRIPTION** Current page number (1-based) **EXAMPLE** 1
-     */
-    page?: number;
-
-    /**
-     * **DESCRIPTION** Results per page. May be adjusted for performance **EXAMPLE** 15
-     */
-    page_size?: number;
-
-    /**
-     * **DESCRIPTION** Total number of available results **EXAMPLE** 1020
-     */
-    total?: number;
-
-    /**
-     * **DESCRIPTION** Total available pages. Calculated as ceil(total/page_size)
-     * **EXAMPLE** 68
-     */
-    total_pages?: number;
-  }
 }
 
 export interface SearchRunParams {
@@ -115,5 +109,9 @@ export interface SearchRunParams {
 }
 
 export declare namespace Search {
-  export { type SearchRunResponse as SearchRunResponse, type SearchRunParams as SearchRunParams };
+  export {
+    type PaginationInfo as PaginationInfo,
+    type SearchRunResponse as SearchRunResponse,
+    type SearchRunParams as SearchRunParams,
+  };
 }
