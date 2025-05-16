@@ -16,7 +16,11 @@ export class ChunkSearch extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.chunkSearch.find();
+   * const response = await client.chunkSearch.find({
+   *   bucket_locations: [{ bucket: {} }],
+   *   input: 'Find documents about revenue in Q4 2023',
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
    * ```
    */
   find(body: ChunkSearchFindParams, options?: RequestOptions): APIPromise<ChunkSearchFindResponse> {
@@ -110,19 +114,19 @@ export interface ChunkSearchFindParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations?: Array<ChunkSearchFindParams.Bucket | ChunkSearchFindParams.ModuleID>;
+  bucket_locations: Array<ChunkSearchFindParams.Bucket | ChunkSearchFindParams.ModuleID>;
 
   /**
    * Natural language query or question. Can include complex criteria and
    * relationships. The system will optimize the search strategy based on this input
    */
-  input?: string;
+  input: string;
 
   /**
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id?: string;
+  request_id: string;
 }
 
 export namespace ChunkSearchFindParams {

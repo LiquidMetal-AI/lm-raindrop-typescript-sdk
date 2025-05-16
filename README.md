@@ -26,6 +26,7 @@ const client = new Raindrop();
 
 async function main() {
   const response = await client.search.find({
+    bucket_locations: [{ bucket: {} }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   });
@@ -48,6 +49,7 @@ const client = new Raindrop();
 
 async function main() {
   const params: Raindrop.SearchFindParams = {
+    bucket_locations: [{ bucket: {} }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   };
@@ -70,6 +72,7 @@ a subclass of `APIError` will be thrown:
 async function main() {
   const response = await client.search
     .find({
+      bucket_locations: [{ bucket: {} }],
       input: 'all my pdfs with images of cats that do not talk about dogs',
       request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
     })
@@ -117,7 +120,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.find({ input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{ bucket: {} }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   maxRetries: 5,
 });
 ```
@@ -135,7 +138,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.find({ input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ bucket_locations: [{ bucket: {} }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -160,6 +163,7 @@ const client = new Raindrop();
 
 const response = await client.search
   .find({
+    bucket_locations: [{ bucket: {} }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })
@@ -169,6 +173,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.search
   .find({
+    bucket_locations: [{ bucket: {} }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })

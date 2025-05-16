@@ -28,7 +28,11 @@ export class SummarizePage extends APIResource {
    *
    * @example
    * ```ts
-   * const summarizePage = await client.summarizePage.create();
+   * const summarizePage = await client.summarizePage.create({
+   *   page: 1,
+   *   page_size: 10,
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
    * ```
    */
   create(body: SummarizePageCreateParams, options?: RequestOptions): APIPromise<SummarizePageCreateResponse> {
@@ -48,17 +52,17 @@ export interface SummarizePageCreateParams {
   /**
    * Target page number (1-based)
    */
-  page?: number;
+  page: number;
 
   /**
    * Results per page. Affects summary granularity
    */
-  page_size?: number;
+  page_size: number;
 
   /**
    * Original search session identifier from the initial search
    */
-  request_id?: string;
+  request_id: string;
 }
 
 export declare namespace SummarizePage {
