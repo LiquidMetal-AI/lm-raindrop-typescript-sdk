@@ -25,15 +25,6 @@ export class SummarizePage extends APIResource {
    * - Mixed content types
    * - Technical documentation
    * - Research materials
-   *
-   * @example
-   * ```ts
-   * const response = await client.summarizePage.createSummary({
-   *   page: 1,
-   *   page_size: 10,
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
-   * ```
    */
   createSummary(
     body: SummarizePageCreateSummaryParams,
@@ -45,27 +36,34 @@ export class SummarizePage extends APIResource {
 
 export interface SummarizePageCreateSummaryResponse {
   /**
-   * AI-generated summary including key themes and topics, content type distribution,
-   * important findings, and document relationships
+   * **DESCRIPTION** AI-generated summary including key themes and topics, content
+   * type distribution, important findings, and document relationships **EXAMPLE**
+   * "The search results contain information about..."
    */
   summary?: string;
 }
 
 export interface SummarizePageCreateSummaryParams {
-  /**
-   * Target page number (1-based)
-   */
-  page: number;
+  organization_id?: string;
 
   /**
-   * Results per page. Affects summary granularity
+   * **DESCRIPTION** Target page number (1-based) **EXAMPLE** 1 **REQUIRED** TRUE
    */
-  page_size: number;
+  page?: number;
 
   /**
-   * Original search session identifier from the initial search
+   * **DESCRIPTION** Results per page. Affects summary granularity **EXAMPLE** 10
+   * **REQUIRED** TRUE
    */
-  request_id: string;
+  page_size?: number;
+
+  /**
+   * **DESCRIPTION** Original search session identifier from the initial search
+   * **EXAMPLE** "123e4567-e89b-12d3-a456-426614174000" **REQUIRED** TRUE
+   */
+  request_id?: string;
+
+  user_id?: string;
 }
 
 export declare namespace SummarizePage {

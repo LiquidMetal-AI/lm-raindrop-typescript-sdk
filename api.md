@@ -45,12 +45,3 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/object.ts">BucketResponse</a></code>
-- <code><a href="./src/resources/object.ts">ObjectListObjectsResponse</a></code>
-- <code><a href="./src/resources/object.ts">ObjectPutObjectResponse</a></code>
-- <code><a href="./src/resources/object.ts">ObjectRetrieveObjectResponse</a></code>
-
-Methods:
-
-- <code title="get /v1/object/{bucket_name}">client.object.<a href="./src/resources/object.ts">listObjects</a>(bucketName, { ...params }) -> ObjectListObjectsResponse</code>
-- <code title="post /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">putObject</a>(objectKey, { ...params }) -> ObjectPutObjectResponse</code>
-- <code title="get /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">retrieveObject</a>(objectKey, { ...params }) -> ObjectRetrieveObjectResponse</code>

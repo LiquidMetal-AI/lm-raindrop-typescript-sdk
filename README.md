@@ -28,12 +28,7 @@ import Raindrop from 'raindrop';
 const client = new Raindrop();
 
 async function main() {
-  const documentQuery = await client.documentQuery.create({
-    bucket_location: { bucket: {} },
-    input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
-  });
+  const documentQuery = await client.documentQuery.create();
 
   console.log(documentQuery.answer);
 }
@@ -52,13 +47,7 @@ import Raindrop from 'raindrop';
 const client = new Raindrop();
 
 async function main() {
-  const params: Raindrop.DocumentQueryCreateParams = {
-    bucket_location: { bucket: {} },
-    input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
-  };
-  const documentQuery: Raindrop.DocumentQueryCreateResponse = await client.documentQuery.create(params);
+  const documentQuery: Raindrop.DocumentQueryCreateResponse = await client.documentQuery.create();
 }
 
 main();
@@ -75,22 +64,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const documentQuery = await client.documentQuery
-    .create({
-      bucket_location: { bucket: {} },
-      input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-    })
-    .catch(async (err) => {
-      if (err instanceof Raindrop.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const documentQuery = await client.documentQuery.create().catch(async (err) => {
+    if (err instanceof Raindrop.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -121,11 +103,12 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Raindrop({
+  apiKey: 'My API Key',
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.documentQuery.create({
   maxRetries: 5,
 });
 ```
@@ -138,11 +121,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Raindrop({
+  apiKey: 'My API Key',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.documentQuery.create({
   timeout: 5 * 1000,
 });
 ```
@@ -165,25 +149,11 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.documentQuery
-  .create({
-    bucket_location: { bucket: {} },
-    input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  .asResponse();
+const response = await client.documentQuery.create().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: documentQuery, response: raw } = await client.documentQuery
-  .create({
-    bucket_location: { bucket: {} },
-    input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  .withResponse();
+const { data: documentQuery, response: raw } = await client.documentQuery.create().withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(documentQuery.answer);
 ```

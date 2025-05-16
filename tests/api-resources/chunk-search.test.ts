@@ -9,12 +9,8 @@ const client = new Raindrop({
 
 describe('resource chunkSearch', () => {
   // skipped: tests are disabled for the time being
-  test.skip('execute: only required params', async () => {
-    const responsePromise = client.chunkSearch.execute({
-      bucket_locations: [{ bucket: {} }],
-      input: 'Find documents about revenue in Q4 2023',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-    });
+  test.skip('execute', async () => {
+    const responsePromise = client.chunkSearch.execute({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,16 +18,5 @@ describe('resource chunkSearch', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('execute: required and optional params', async () => {
-    const response = await client.chunkSearch.execute({
-      bucket_locations: [
-        { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
-      ],
-      input: 'Find documents about revenue in Q4 2023',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-    });
   });
 });

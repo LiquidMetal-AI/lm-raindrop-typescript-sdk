@@ -32,16 +32,7 @@ import {
   DocumentQueryCreateParams,
   DocumentQueryCreateResponse,
 } from './resources/document-query';
-import {
-  BucketResponse,
-  Object,
-  ObjectListObjectsParams,
-  ObjectListObjectsResponse,
-  ObjectPutObjectParams,
-  ObjectPutObjectResponse,
-  ObjectRetrieveObjectParams,
-  ObjectRetrieveObjectResponse,
-} from './resources/object';
+import { BucketResponse, Object } from './resources/object';
 import { Search, SearchRunParams, SearchRunResponse } from './resources/search';
 import {
   SummarizePage,
@@ -215,10 +206,6 @@ export class Raindrop {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
-  }
-
-  protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ Authorization: this.apiKey }]);
   }
 
   /**
@@ -651,7 +638,6 @@ export class Raindrop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -758,14 +744,5 @@ export declare namespace Raindrop {
     type SearchRunParams as SearchRunParams,
   };
 
-  export {
-    Object as Object,
-    type BucketResponse as BucketResponse,
-    type ObjectListObjectsResponse as ObjectListObjectsResponse,
-    type ObjectPutObjectResponse as ObjectPutObjectResponse,
-    type ObjectRetrieveObjectResponse as ObjectRetrieveObjectResponse,
-    type ObjectListObjectsParams as ObjectListObjectsParams,
-    type ObjectPutObjectParams as ObjectPutObjectParams,
-    type ObjectRetrieveObjectParams as ObjectRetrieveObjectParams,
-  };
+  export { Object as Object, type BucketResponse as BucketResponse };
 }
