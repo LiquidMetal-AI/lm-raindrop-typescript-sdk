@@ -2,33 +2,9 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
-import { PagePromise, SearchPage, type SearchPageParams } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
-  /**
-   * Retrieve additional pages from a previous search. This endpoint enables
-   * navigation through large result sets while maintaining search context and result
-   * relevance. Retrieving paginated results requires a valid `request_id` from a
-   * previously completed search.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const textResult of client.search.retrieve({
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  retrieve(
-    query: SearchRetrieveParams,
-    options?: RequestOptions,
-  ): PagePromise<TextResultsSearchPage, TextResult> {
-    return this._client.getAPIList('/v1/search', SearchPage<TextResult>, { query, ...options });
-  }
-
   /**
    * Primary search endpoint that provides advanced search capabilities across all
    * document types stored in SmartBuckets.
@@ -43,7 +19,7 @@ export class Search extends APIResource {
    * - 'Find images of landscapes taken during sunset'
    * - 'Get documents mentioning revenue forecasts from Q4 2023'
    * - 'Find me all PDF documents that contain pictures of a cat'
-   * - 'Find me all audio files that contain infomration about the weather in SF in
+   * - 'Find me all audio files that contain information about the weather in SF in
    *   2024'
    *
    * Key capabilities:
@@ -55,153 +31,185 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const searchResponse = await client.search.find({
-   *   bucket_locations: [
-   *     { module_id: '01jtgtrd37acrqf7k24dggg31s' },
-   *   ],
-   *   input:
-   *     'Find me all documents with pictures of a cat that do not talk about dogs',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
+   * const response = await client.search.find();
    * ```
    */
-  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchResponse> {
+  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchFindResponse> {
     return this._client.post('/v1/search', { body, ...options });
   }
 }
 
-export type TextResultsSearchPage = SearchPage<TextResult>;
-
-export interface SearchResponse {
-  pagination: SearchResponse.Pagination;
+export interface SearchFindResponse {
+  /**
+   * Pagination details for result navigation
+   */
+  pagination?: SearchFindResponse.Pagination;
 
   /**
    * Matched results with metadata
    */
-  results: Array<TextResult>;
+  results?: Array<SearchFindResponse.Result>;
 }
 
-export namespace SearchResponse {
+export namespace SearchFindResponse {
+  /**
+   * Pagination details for result navigation
+   */
   export interface Pagination {
     /**
-     * Indicates more results available
+     * Indicates more results available. Used for infinite scroll implementation
      */
-    has_more: boolean;
+    has_more?: boolean;
 
     /**
      * Current page number (1-based)
      */
-    page: number;
+    page?: number;
 
     /**
-     * Results per page
+     * Results per page. May be adjusted for performance
      */
-    page_size: number;
+    page_size?: number;
 
     /**
      * Total number of available results
      */
-    total: number;
+    total?: number;
 
     /**
-     * Total available pages
+     * Total available pages. Calculated as ceil(total/page_size)
      */
-    total_pages: number;
+    total_pages?: number;
   }
-}
 
-export interface TextResult {
-  /**
-   * Unique identifier for this text segment
-   */
-  chunk_signature: string;
-
-  /**
-   * Parent document identifier
-   */
-  payload_signature?: string;
-
-  /**
-   * Relevance score (0.0 to 1.0)
-   */
-  score?: number;
-
-  /**
-   * Source document information in JSON format
-   */
-  source?: string;
-
-  /**
-   * The actual content of the result
-   */
-  text?: string;
-
-  /**
-   * Content MIME type
-   */
-  type?: 'text/plain' | 'application/pdf' | 'image/jpeg' | 'image/png';
-}
-
-export interface SearchRetrieveParams extends SearchPageParams {
-  /**
-   * Client-provided search session identifier from the initial search
-   */
-  request_id: string;
-}
-
-export interface SearchFindParams {
-  bucket_locations: Array<SearchFindParams.ModuleID | SearchFindParams.Bucket>;
-
-  /**
-   * Natural language search query that can include complex criteria
-   */
-  input: string;
-
-  /**
-   * Client-provided search session identifier. Required for pagination and result
-   * tracking. We recommend using a UUID or ULID for this value.
-   */
-  request_id: string;
-}
-
-export namespace SearchFindParams {
-  export interface ModuleID {
+  export interface Result {
     /**
-     * Version-agnostic identifier for a module
+     * Unique identifier for this text segment. Used for deduplication and result
+     * tracking
      */
-    module_id: string;
+    chunk_signature?: string | null;
+
+    /**
+     * Vector representation for similarity matching. Used in semantic search
+     * operations
+     */
+    embed?: string | null;
+
+    /**
+     * Parent document identifier. Links related content chunks together
+     */
+    payload_signature?: string | null;
+
+    /**
+     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+     */
+    score?: number | null;
+
+    /**
+     * Source document references. Contains bucket and object information
+     */
+    source?: Result.Source;
+
+    /**
+     * The actual content of the result. May be a document excerpt or full content
+     */
+    text?: string | null;
+
+    /**
+     * Content MIME type. Helps with proper result rendering
+     */
+    type?: string | null;
   }
 
-  export interface Bucket {
-    bucket: Bucket.Bucket;
-  }
-
-  export namespace Bucket {
-    export interface Bucket {
+  export namespace Result {
+    /**
+     * Source document references. Contains bucket and object information
+     */
+    export interface Source {
       /**
-       * Name of the application
+       * The bucket information containing this result
        */
-      application_name: string;
-
-      /**
-       * Name of the bucket
-       */
-      name: string;
+      bucket?: Source.Bucket;
 
       /**
-       * Version of the bucket
+       * The object key within the bucket
        */
-      version: string;
+      object?: string;
+    }
+
+    export namespace Source {
+      /**
+       * The bucket information containing this result
+       */
+      export interface Bucket {
+        application_name?: string;
+
+        application_version_id?: string;
+
+        bucket_name?: string;
+
+        module_id?: string;
+      }
     }
   }
 }
 
+export interface SearchFindParams {
+  /**
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
+   */
+  bucket_locations?: Array<SearchFindParams.Bucket | SearchFindParams.ModuleID>;
+
+  /**
+   * Natural language search query that can include complex criteria. Supports
+   * queries like finding documents with specific content types, PII, or semantic
+   * meaning
+   */
+  input?: string;
+
+  /**
+   * Client-provided search session identifier. Required for pagination and result
+   * tracking. We recommend using a UUID or ULID for this value
+   */
+  request_id?: string;
+}
+
+export namespace SearchFindParams {
+  export interface Bucket {
+    /**
+     * BucketName represents a bucket name with an optional version
+     */
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    /**
+     * BucketName represents a bucket name with an optional version
+     */
+    export interface Bucket {
+      /**
+       * Optional Application
+       */
+      application_name?: string | null;
+
+      /**
+       * The name of the bucket
+       */
+      name?: string;
+
+      /**
+       * Optional version of the bucket
+       */
+      version?: string | null;
+    }
+  }
+
+  export interface ModuleID {
+    module_id: string;
+  }
+}
+
 export declare namespace Search {
-  export {
-    type SearchResponse as SearchResponse,
-    type TextResult as TextResult,
-    type TextResultsSearchPage as TextResultsSearchPage,
-    type SearchRetrieveParams as SearchRetrieveParams,
-    type SearchFindParams as SearchFindParams,
-  };
+  export { type SearchFindResponse as SearchFindResponse, type SearchFindParams as SearchFindParams };
 }

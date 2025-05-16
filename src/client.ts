@@ -22,25 +22,20 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { Chat, ChatInteractParams, ChatInteractResponse } from './resources/chat';
 import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
-import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
+import { DocumentQuery } from './resources/document-query';
 import {
-  Search,
-  SearchFindParams,
-  SearchResponse,
-  SearchRetrieveParams,
-  TextResult,
-  TextResultsSearchPage,
-} from './resources/search';
-import {
-  StorageObject,
-  StorageObjectDeleteParams,
-  StorageObjectDeleteResponse,
-  StorageObjectDownloadParams,
-  StorageObjectListResponse,
-  StorageObjectUploadParams,
-  StorageObjectUploadResponse,
-} from './resources/storage-object';
+  Object,
+  ObjectListObjectsParams,
+  ObjectListObjectsResponse,
+  ObjectPutObjectParams,
+  ObjectPutObjectResponse,
+  ObjectRetrieveObjectParams,
+  ObjectRetrieveObjectResponse,
+} from './resources/object';
+import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
+import { StorageObject } from './resources/storage-object';
 import {
   SummarizePage,
   SummarizePageCreateParams,
@@ -214,10 +209,6 @@ export class Raindrop {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
-  }
-
-  protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
-    return buildHeaders([{ Authorization: this.apiKey }]);
   }
 
   /**
@@ -669,7 +660,6 @@ export class Raindrop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -741,12 +731,16 @@ export class Raindrop {
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
   storageObject: API.StorageObject = new API.StorageObject(this);
+  chat: API.Chat = new API.Chat(this);
+  object: API.Object = new API.Object(this);
 }
 Raindrop.Search = Search;
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
 Raindrop.StorageObject = StorageObject;
+Raindrop.Chat = Chat;
+Raindrop.Object = Object;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -755,18 +749,11 @@ export declare namespace Raindrop {
 
   export {
     Search as Search,
-    type SearchResponse as SearchResponse,
-    type TextResult as TextResult,
-    type TextResultsSearchPage as TextResultsSearchPage,
-    type SearchRetrieveParams as SearchRetrieveParams,
+    type SearchFindResponse as SearchFindResponse,
     type SearchFindParams as SearchFindParams,
   };
 
-  export {
-    DocumentQuery as DocumentQuery,
-    type DocumentQueryAskResponse as DocumentQueryAskResponse,
-    type DocumentQueryAskParams as DocumentQueryAskParams,
-  };
+  export { DocumentQuery as DocumentQuery };
 
   export {
     ChunkSearch as ChunkSearch,
@@ -780,13 +767,21 @@ export declare namespace Raindrop {
     type SummarizePageCreateParams as SummarizePageCreateParams,
   };
 
+  export { StorageObject as StorageObject };
+
   export {
-    StorageObject as StorageObject,
-    type StorageObjectListResponse as StorageObjectListResponse,
-    type StorageObjectDeleteResponse as StorageObjectDeleteResponse,
-    type StorageObjectUploadResponse as StorageObjectUploadResponse,
-    type StorageObjectDeleteParams as StorageObjectDeleteParams,
-    type StorageObjectDownloadParams as StorageObjectDownloadParams,
-    type StorageObjectUploadParams as StorageObjectUploadParams,
+    Chat as Chat,
+    type ChatInteractResponse as ChatInteractResponse,
+    type ChatInteractParams as ChatInteractParams,
+  };
+
+  export {
+    Object as Object,
+    type ObjectListObjectsResponse as ObjectListObjectsResponse,
+    type ObjectPutObjectResponse as ObjectPutObjectResponse,
+    type ObjectRetrieveObjectResponse as ObjectRetrieveObjectResponse,
+    type ObjectListObjectsParams as ObjectListObjectsParams,
+    type ObjectPutObjectParams as ObjectPutObjectParams,
+    type ObjectRetrieveObjectParams as ObjectRetrieveObjectParams,
   };
 }

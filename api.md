@@ -2,23 +2,13 @@
 
 Types:
 
-- <code><a href="./src/resources/search.ts">SearchResponse</a></code>
-- <code><a href="./src/resources/search.ts">TextResult</a></code>
+- <code><a href="./src/resources/search.ts">SearchFindResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/search">client.search.<a href="./src/resources/search.ts">retrieve</a>({ ...params }) -> TextResultsSearchPage</code>
-- <code title="post /v1/search">client.search.<a href="./src/resources/search.ts">find</a>({ ...params }) -> SearchResponse</code>
+- <code title="post /v1/search">client.search.<a href="./src/resources/search.ts">find</a>({ ...params }) -> SearchFindResponse</code>
 
 # DocumentQuery
-
-Types:
-
-- <code><a href="./src/resources/document-query.ts">DocumentQueryAskResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/document_query">client.documentQuery.<a href="./src/resources/document-query.ts">ask</a>({ ...params }) -> DocumentQueryAskResponse</code>
 
 # ChunkSearch
 
@@ -42,15 +32,26 @@ Methods:
 
 # StorageObject
 
+# Chat
+
 Types:
 
-- <code><a href="./src/resources/storage-object.ts">StorageObjectListResponse</a></code>
-- <code><a href="./src/resources/storage-object.ts">StorageObjectDeleteResponse</a></code>
-- <code><a href="./src/resources/storage-object.ts">StorageObjectUploadResponse</a></code>
+- <code><a href="./src/resources/chat.ts">ChatInteractResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/object/{bucket}">client.storageObject.<a href="./src/resources/storage-object.ts">list</a>(bucket) -> StorageObjectListResponse</code>
-- <code title="delete /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">delete</a>(key, { ...params }) -> StorageObjectDeleteResponse</code>
-- <code title="get /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">download</a>(key, { ...params }) -> Response</code>
-- <code title="put /v1/object/{bucket}/{key}">client.storageObject.<a href="./src/resources/storage-object.ts">upload</a>(key, { ...params }) -> StorageObjectUploadResponse</code>
+- <code title="post /v1/chat">client.chat.<a href="./src/resources/chat.ts">interact</a>({ ...params }) -> ChatInteractResponse</code>
+
+# Object
+
+Types:
+
+- <code><a href="./src/resources/object.ts">ObjectListObjectsResponse</a></code>
+- <code><a href="./src/resources/object.ts">ObjectPutObjectResponse</a></code>
+- <code><a href="./src/resources/object.ts">ObjectRetrieveObjectResponse</a></code>
+
+Methods:
+
+- <code title="get /v1/object/{bucket_name}">client.object.<a href="./src/resources/object.ts">listObjects</a>(bucketName, { ...params }) -> ObjectListObjectsResponse</code>
+- <code title="post /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">putObject</a>(objectKey, { ...params }) -> ObjectPutObjectResponse</code>
+- <code title="get /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">retrieveObject</a>(objectKey, { ...params }) -> ObjectRetrieveObjectResponse</code>

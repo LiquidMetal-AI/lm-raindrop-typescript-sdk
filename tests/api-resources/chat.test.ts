@@ -7,10 +7,10 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource chunkSearch', () => {
+describe('resource chat', () => {
   // skipped: tests are disabled for the time being
-  test.skip('find', async () => {
-    const responsePromise = client.chunkSearch.find({});
+  test.skip('interact', async () => {
+    const responsePromise = client.chat.interact({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
