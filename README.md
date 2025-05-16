@@ -30,9 +30,9 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const documentQuery = await client.documentQuery.create();
+  const object = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' });
 
-  console.log(documentQuery.answer);
+  console.log(object.bucket);
 }
 
 main();
@@ -51,7 +51,8 @@ const client = new Raindrop({
 });
 
 async function main() {
-  const documentQuery: Raindrop.DocumentQueryCreateResponse = await client.documentQuery.create();
+  const params: Raindrop.ObjectRetrieveParams = { bucket_name: 'bucket_name' };
+  const object: Raindrop.ObjectRetrieveResponse = await client.object.retrieve('object_key', params);
 }
 
 main();
@@ -68,15 +69,17 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const documentQuery = await client.documentQuery.create().catch(async (err) => {
-    if (err instanceof Raindrop.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const object = await client.object
+    .retrieve('object_key', { bucket_name: 'bucket_name' })
+    .catch(async (err) => {
+      if (err instanceof Raindrop.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
@@ -111,7 +114,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.documentQuery.create({
+await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +131,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.documentQuery.create({
+await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -151,13 +154,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.documentQuery.create().asResponse();
+const response = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: documentQuery, response: raw } = await client.documentQuery.create().withResponse();
+const { data: object, response: raw } = await client.object
+  .retrieve('object_key', { bucket_name: 'bucket_name' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(documentQuery.answer);
+console.log(object.bucket);
 ```
 
 ### Logging

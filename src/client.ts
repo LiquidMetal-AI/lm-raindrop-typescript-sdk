@@ -21,28 +21,15 @@ import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
-  ChunkSearch,
-  ChunkSearchExecuteParams,
-  ChunkSearchExecuteResponse,
-  TextResult,
-} from './resources/chunk-search';
-import {
-  BucketLocator,
-  DocumentQuery,
-  DocumentQueryCreateParams,
-  DocumentQueryCreateResponse,
-} from './resources/document-query';
-import {
-  LiquidmetalV1alpha1SearchAgentService,
-  LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams,
-  LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse,
-} from './resources/liquidmetal-v1alpha1-search-agent-service';
-import { PaginationInfo, Search, SearchRunParams, SearchRunResponse } from './resources/search';
-import {
-  SummarizePage,
-  SummarizePageCreateSummaryParams,
-  SummarizePageCreateSummaryResponse,
-} from './resources/summarize-page';
+  BucketResponse,
+  Object,
+  ObjectListParams,
+  ObjectListResponse,
+  ObjectRetrieveParams,
+  ObjectRetrieveResponse,
+  ObjectUploadParams,
+  ObjectUploadResponse,
+} from './resources/object';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -719,51 +706,20 @@ export class Raindrop {
 
   static toFile = Uploads.toFile;
 
-  documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
-  chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
-  summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  search: API.Search = new API.Search(this);
-  liquidmetalV1alpha1SearchAgentService: API.LiquidmetalV1alpha1SearchAgentService =
-    new API.LiquidmetalV1alpha1SearchAgentService(this);
+  object: API.Object = new API.Object(this);
 }
-Raindrop.DocumentQuery = DocumentQuery;
-Raindrop.ChunkSearch = ChunkSearch;
-Raindrop.SummarizePage = SummarizePage;
-Raindrop.Search = Search;
-Raindrop.LiquidmetalV1alpha1SearchAgentService = LiquidmetalV1alpha1SearchAgentService;
+Raindrop.Object = Object;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    DocumentQuery as DocumentQuery,
-    type BucketLocator as BucketLocator,
-    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
-    type DocumentQueryCreateParams as DocumentQueryCreateParams,
-  };
-
-  export {
-    ChunkSearch as ChunkSearch,
-    type TextResult as TextResult,
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
-  };
-
-  export {
-    SummarizePage as SummarizePage,
-    type SummarizePageCreateSummaryResponse as SummarizePageCreateSummaryResponse,
-    type SummarizePageCreateSummaryParams as SummarizePageCreateSummaryParams,
-  };
-
-  export {
-    Search as Search,
-    type PaginationInfo as PaginationInfo,
-    type SearchRunResponse as SearchRunResponse,
-    type SearchRunParams as SearchRunParams,
-  };
-
-  export {
-    LiquidmetalV1alpha1SearchAgentService as LiquidmetalV1alpha1SearchAgentService,
-    type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse as LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsResponse,
-    type LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams as LiquidmetalV1alpha1SearchAgentServiceGetPaginatedResultsParams,
+    Object as Object,
+    type BucketResponse as BucketResponse,
+    type ObjectRetrieveResponse as ObjectRetrieveResponse,
+    type ObjectListResponse as ObjectListResponse,
+    type ObjectUploadResponse as ObjectUploadResponse,
+    type ObjectRetrieveParams as ObjectRetrieveParams,
+    type ObjectListParams as ObjectListParams,
+    type ObjectUploadParams as ObjectUploadParams,
   };
 }
