@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop({
   apiKey: 'My API Key',
@@ -9,8 +9,8 @@ const client = new Raindrop({
 
 describe('resource search', () => {
   // skipped: tests are disabled for the time being
-  test.skip('find: only required params', async () => {
-    const responsePromise = client.search.find({
+  test.skip('run: only required params', async () => {
+    const responsePromise = client.search.run({
       bucket_locations: [{ bucket: {} }],
       input: 'Show me documents containing credit card numbers or social security numbers',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -25,8 +25,8 @@ describe('resource search', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('find: required and optional params', async () => {
-    const response = await client.search.find({
+  test.skip('run: required and optional params', async () => {
+    const response = await client.search.run({
       bucket_locations: [
         { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
       ],

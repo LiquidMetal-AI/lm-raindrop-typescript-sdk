@@ -5,23 +5,23 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class StorageObject extends APIResource {
+export class Object extends APIResource {
   /**
    * List all objects in a SmartBucket or regular bucket. The bucket parameter (ID)
    * is used to identify the bucket to list objects from.
    *
    * @example
    * ```ts
-   * const response = await client.storageObject.listObjects(
+   * const response = await client.object.listObjects(
    *   'bucket_name',
    * );
    * ```
    */
   listObjects(
     bucketName: string,
-    query: StorageObjectListObjectsParams | null | undefined = {},
+    query: ObjectListObjectsParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<StorageObjectListObjectsResponse> {
+  ): APIPromise<ObjectListObjectsResponse> {
     return this._client.get(path`/v1/object/${bucketName}`, { query, ...options });
   }
 
@@ -32,7 +32,7 @@ export class StorageObject extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.storageObject.putObject(
+   * const response = await client.object.putObject(
    *   'object_key',
    *   {
    *     bucket_name: 'bucket_name',
@@ -43,9 +43,9 @@ export class StorageObject extends APIResource {
    */
   putObject(
     objectKey: string,
-    params: StorageObjectPutObjectParams,
+    params: ObjectPutObjectParams,
     options?: RequestOptions,
-  ): APIPromise<StorageObjectPutObjectResponse> {
+  ): APIPromise<ObjectPutObjectResponse> {
     const { bucket_name, ...body } = params;
     return this._client.post(path`/v1/object/${bucket_name}/${objectKey}`, { body, ...options });
   }
@@ -57,7 +57,7 @@ export class StorageObject extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.storageObject.retrieveObject(
+   * const response = await client.object.retrieveObject(
    *   'object_key',
    *   { bucket_name: 'bucket_name' },
    * );
@@ -65,22 +65,32 @@ export class StorageObject extends APIResource {
    */
   retrieveObject(
     objectKey: string,
-    params: StorageObjectRetrieveObjectParams,
+    params: ObjectRetrieveObjectParams,
     options?: RequestOptions,
-  ): APIPromise<StorageObjectRetrieveObjectResponse> {
+  ): APIPromise<ObjectRetrieveObjectResponse> {
     const { bucket_name, ...query } = params;
     return this._client.get(path`/v1/object/${bucket_name}/${objectKey}`, { query, ...options });
   }
 }
 
-export interface StorageObjectListObjectsResponse {
+export interface BucketResponse {
+  application_name?: string;
+
+  application_version_id?: string;
+
+  bucket_name?: string;
+
+  module_id?: string;
+}
+
+export interface ObjectListObjectsResponse {
   /**
    * List of objects in the bucket with their metadata
    */
-  objects?: Array<StorageObjectListObjectsResponse.Object>;
+  objects?: Array<ObjectListObjectsResponse.Object>;
 }
 
-export namespace StorageObjectListObjectsResponse {
+export namespace ObjectListObjectsResponse {
   /**
    * ObjectInfo represents metadata about a single object
    */
@@ -107,11 +117,11 @@ export namespace StorageObjectListObjectsResponse {
   }
 }
 
-export interface StorageObjectPutObjectResponse {
+export interface ObjectPutObjectResponse {
   /**
    * Information about the bucket where the object was uploaded
    */
-  bucket?: StorageObjectPutObjectResponse.Bucket;
+  bucket?: BucketResponse;
 
   /**
    * Key/path of the uploaded object
@@ -119,26 +129,11 @@ export interface StorageObjectPutObjectResponse {
   key?: string;
 }
 
-export namespace StorageObjectPutObjectResponse {
-  /**
-   * Information about the bucket where the object was uploaded
-   */
-  export interface Bucket {
-    application_name?: string;
-
-    application_version_id?: string;
-
-    bucket_name?: string;
-
-    module_id?: string;
-  }
-}
-
-export interface StorageObjectRetrieveObjectResponse {
+export interface ObjectRetrieveObjectResponse {
   /**
    * Information about the bucket where the object is stored
    */
-  bucket?: StorageObjectRetrieveObjectResponse.Bucket;
+  bucket?: BucketResponse;
 
   /**
    * MIME type of the object
@@ -166,29 +161,14 @@ export interface StorageObjectRetrieveObjectResponse {
   size?: number | string;
 }
 
-export namespace StorageObjectRetrieveObjectResponse {
-  /**
-   * Information about the bucket where the object is stored
-   */
-  export interface Bucket {
-    application_name?: string;
-
-    application_version_id?: string;
-
-    bucket_name?: string;
-
-    module_id?: string;
-  }
-}
-
-export interface StorageObjectListObjectsParams {
+export interface ObjectListObjectsParams {
   /**
    * Module ID identifying the bucket
    */
   module_id?: string;
 }
 
-export interface StorageObjectPutObjectParams {
+export interface ObjectPutObjectParams {
   /**
    * Path param:
    */
@@ -215,7 +195,7 @@ export interface StorageObjectPutObjectParams {
   module_id?: string;
 }
 
-export interface StorageObjectRetrieveObjectParams {
+export interface ObjectRetrieveObjectParams {
   /**
    * Path param:
    */
@@ -232,13 +212,14 @@ export interface StorageObjectRetrieveObjectParams {
   module_id?: string;
 }
 
-export declare namespace StorageObject {
+export declare namespace Object {
   export {
-    type StorageObjectListObjectsResponse as StorageObjectListObjectsResponse,
-    type StorageObjectPutObjectResponse as StorageObjectPutObjectResponse,
-    type StorageObjectRetrieveObjectResponse as StorageObjectRetrieveObjectResponse,
-    type StorageObjectListObjectsParams as StorageObjectListObjectsParams,
-    type StorageObjectPutObjectParams as StorageObjectPutObjectParams,
-    type StorageObjectRetrieveObjectParams as StorageObjectRetrieveObjectParams,
+    type BucketResponse as BucketResponse,
+    type ObjectListObjectsResponse as ObjectListObjectsResponse,
+    type ObjectPutObjectResponse as ObjectPutObjectResponse,
+    type ObjectRetrieveObjectResponse as ObjectRetrieveObjectResponse,
+    type ObjectListObjectsParams as ObjectListObjectsParams,
+    type ObjectPutObjectParams as ObjectPutObjectParams,
+    type ObjectRetrieveObjectParams as ObjectRetrieveObjectParams,
   };
 }

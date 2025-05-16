@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as ChunkSearchAPI from './chunk-search';
+import * as DocumentQueryAPI from './document-query';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -31,7 +33,7 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.search.find({
+   * const response = await client.search.run({
    *   bucket_locations: [{ bucket: {} }],
    *   input:
    *     'Show me documents containing credit card numbers or social security numbers',
@@ -39,95 +41,24 @@ export class Search extends APIResource {
    * });
    * ```
    */
-  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchFindResponse> {
+  run(body: SearchRunParams, options?: RequestOptions): APIPromise<SearchRunResponse> {
     return this._client.post('/v1/search', { body, ...options });
   }
 }
 
-export interface TextResult {
-  /**
-   * Unique identifier for this text segment. Used for deduplication and result
-   * tracking
-   */
-  chunk_signature?: string | null;
-
-  /**
-   * Vector representation for similarity matching. Used in semantic search
-   * operations
-   */
-  embed?: string | null;
-
-  /**
-   * Parent document identifier. Links related content chunks together
-   */
-  payload_signature?: string | null;
-
-  /**
-   * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-   */
-  score?: number | null;
-
-  /**
-   * Source document references. Contains bucket and object information
-   */
-  source?: TextResult.Source;
-
-  /**
-   * The actual content of the result. May be a document excerpt or full content
-   */
-  text?: string | null;
-
-  /**
-   * Content MIME type. Helps with proper result rendering
-   */
-  type?: string | null;
-}
-
-export namespace TextResult {
-  /**
-   * Source document references. Contains bucket and object information
-   */
-  export interface Source {
-    /**
-     * The bucket information containing this result
-     */
-    bucket?: Source.Bucket;
-
-    /**
-     * The object key within the bucket
-     */
-    object?: string;
-  }
-
-  export namespace Source {
-    /**
-     * The bucket information containing this result
-     */
-    export interface Bucket {
-      application_name?: string;
-
-      application_version_id?: string;
-
-      bucket_name?: string;
-
-      module_id?: string;
-    }
-  }
-}
-
-export interface SearchFindResponse {
+export interface SearchRunResponse {
   /**
    * Pagination details for result navigation
    */
-  pagination?: SearchFindResponse.Pagination;
+  pagination?: SearchRunResponse.Pagination;
 
   /**
    * Matched results with metadata
    */
-  results?: Array<TextResult>;
+  results?: Array<ChunkSearchAPI.TextResult>;
 }
 
-export namespace SearchFindResponse {
+export namespace SearchRunResponse {
   /**
    * Pagination details for result navigation
    */
@@ -159,12 +90,12 @@ export namespace SearchFindResponse {
   }
 }
 
-export interface SearchFindParams {
+export interface SearchRunParams {
   /**
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<SearchFindParams.BucketLocation>;
+  bucket_locations: Array<DocumentQueryAPI.BucketLocator>;
 
   /**
    * Natural language search query that can include complex criteria. Supports
@@ -180,41 +111,6 @@ export interface SearchFindParams {
   request_id: string;
 }
 
-export namespace SearchFindParams {
-  export interface BucketLocation {
-    /**
-     * BucketName represents a bucket name with an optional version
-     */
-    bucket: BucketLocation.Bucket;
-  }
-
-  export namespace BucketLocation {
-    /**
-     * BucketName represents a bucket name with an optional version
-     */
-    export interface Bucket {
-      /**
-       * Optional Application
-       */
-      application_name?: string | null;
-
-      /**
-       * The name of the bucket
-       */
-      name?: string;
-
-      /**
-       * Optional version of the bucket
-       */
-      version?: string | null;
-    }
-  }
-}
-
 export declare namespace Search {
-  export {
-    type TextResult as TextResult,
-    type SearchFindResponse as SearchFindResponse,
-    type SearchFindParams as SearchFindParams,
-  };
+  export { type SearchRunResponse as SearchRunResponse, type SearchRunParams as SearchRunParams };
 }

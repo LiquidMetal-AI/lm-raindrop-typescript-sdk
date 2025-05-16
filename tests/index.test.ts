@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from '@liquidmetal-ai/lm-raindrop/core/api-promise';
+import { APIPromise } from 'raindrop/core/api-promise';
 
 import util from 'node:util';
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
-import { APIUserAbortError } from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
+import { APIUserAbortError } from 'raindrop';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -306,13 +306,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['RAINDROP_BASE_URL'] = ''; // empty
       const client = new Raindrop({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.raindrop.run');
+      expect(client.baseURL).toEqual('https://api.example.com');
     });
 
     test('blank env variable', () => {
       process.env['RAINDROP_BASE_URL'] = '  '; // blank
       const client = new Raindrop({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.raindrop.run');
+      expect(client.baseURL).toEqual('https://api.example.com');
     });
   });
 

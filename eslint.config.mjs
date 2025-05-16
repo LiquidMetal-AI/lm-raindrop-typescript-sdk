@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@liquidmetal-ai/lm-raindrop(/.*)?',
+              regex: '^raindrop(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
