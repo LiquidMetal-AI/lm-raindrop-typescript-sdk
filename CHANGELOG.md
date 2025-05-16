@@ -1,5 +1,55 @@
 # Changelog
 
+## 0.2.0 (2025-05-16)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([8fb9b96](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/8fb9b9629f5477c5ed2eead1748f531f0e408bee))
+* **api:** manual updates ([31cdc9e](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/31cdc9ed3c334b364e95cd09b87392a274ceb1c4))
+* **api:** manual updates ([5a3d678](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/5a3d678a164b07a6f74cb98d19d7b6fbc1fc691e))
+* **api:** manual updates ([8144a9a](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/8144a9a51087d51435019d3101985f7d6f563c1f))
+* **api:** manual updates ([a19d2f8](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/a19d2f8e798ac4357a8a9437879d59a02bf30fa8))
+* **api:** manual updates ([e2adb86](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/e2adb861d11ee88d4b3824c59e4ac0a34287efee))
+* **api:** manual updates ([44eac48](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/44eac48d49433f70f9c5710e0f9e59583bbebc3b))
+* **api:** manual updates ([d0b5fd8](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/d0b5fd821a5031a8204eae3360d477e220d3c47a))
+* **api:** manual updates ([3411964](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/34119649f76621f7a54eb0fe74d6e471f3e8616e))
+* **api:** manual updates ([f4dc411](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/f4dc41174e130c3338d4cfd4c6eec2efcc67debd))
+* **api:** manual updates ([9f89b5c](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/9f89b5c38c7241cd3d775ef67b7a620438489a18))
+* **api:** manual updates ([0ba1a5e](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/0ba1a5e45d58a6497304bb9a480bc3b72f936628))
+* **api:** manual updates ([daf6bd1](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/daf6bd19f48342bd0294b232dded143f78716fcb))
+* **api:** manual updates ([9d817de](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/9d817de173de2724b62c4f47837fd8c6a795948d))
+* **api:** manual updates ([921d12f](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/921d12fd35ad24dabb444105e4af78dfac2680ad))
+* **api:** manual updates ([15ec5e1](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/15ec5e15a482a6a3eed4e8161b9de3050f05f8a3))
+* **api:** manual updates ([b42da5b](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/b42da5b48e8c5e90c7b9fa5b1bafbf06b64062f0))
+* **api:** manual updates ([8a49910](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/8a49910d9af828e179ffb7310a5bc3c533e15acc))
+* **api:** manual updates ([c2cce36](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/c2cce36b111732ca2b9a0ed0046bd29b14dc9c1e))
+* **api:** manual updates ([6ed4822](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6ed4822caf53709cc08a9e9efa6c8904d770972e))
+* **api:** manual updates ([7619ddd](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/7619ddd84840f4865d4fc2c8c12226faf06fea2b))
+* **api:** updating API spec with latest changes ([6c3b4e5](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6c3b4e500c104cdcfca15c83168fadbf88d82035))
+* **api:** updating API spec with latest changes ([6d04a4d](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6d04a4d6cb838a557f5ac0f082636a7905503353))
+* **api:** updating API spec with latest changes ([c3ca7f4](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/c3ca7f45dae6f1018ada7a84ec64d16eccc65bfc))
+* **api:** updating API spec with latest changes ([2e5d037](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/2e5d0370ca8545f5379b1d034423399fa1415a03))
+* **api:** updating API spec with latest changes ([13a683b](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/13a683b3d9202afd56188b9261ccbde91b244809))
+* **api:** updating API spec with latest changes ([d4dcd14](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/d4dcd14e3f40d29f50199a57dc1e67028cdad5ab))
+* **api:** updating API spec with latest changes ([90d2fcf](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/90d2fcf84d2e108387e6be91be0426bec6e028a4))
+* **api:** updating API spec with latest changes ([25b879b](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/25b879b104dd99d2964c355a999f47c9c576027d))
+* **api:** updating API spec with latest changes ([17b7b6f](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/17b7b6feb39c8d88e09c0b1211db015fe302ae78))
+* **api:** updating API spec with latest changes ([a92e3fc](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/a92e3fc76c9c22dd90f1ad78c5652b2b2f11000f))
+* **api:** updating API spec with latest changes ([23633cc](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/23633cc8684df07d12c9880c49642448adb36c2d))
+
+
+### Bug Fixes
+
+* **client:** always overwrite when merging headers ([06f98d7](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/06f98d7e4f4d17cdd0a91d9893d039a3c359a22a))
+
+
+### Chores
+
+* **package:** remove engines ([64539ba](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/64539ba2b8cf6b520179868a364fe60cb81a65b8))
+* update SDK settings ([6d32cff](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6d32cffd5e83f284ec9d22988c10b174792d465d))
+
 ## 0.1.0 (2025-05-09)
 
 Full Changelog: [v0.1.1...v0.1.0](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.1...v0.1.0)
