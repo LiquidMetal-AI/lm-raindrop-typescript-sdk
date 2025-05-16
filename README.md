@@ -22,18 +22,17 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
-  const searchResponse = await client.search.find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const response = await client.documentQuery.ask({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   });
 
-  console.log(searchResponse.pagination);
+  console.log(response.answer);
 }
 
 main();
@@ -47,17 +46,16 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
-  const params: Raindrop.SearchFindParams = {
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const params: Raindrop.DocumentQueryAskParams = {
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   };
-  const searchResponse: Raindrop.SearchResponse = await client.search.find(params);
+  const response: Raindrop.DocumentQueryAskResponse = await client.documentQuery.ask(params);
 }
 
 main();
@@ -74,11 +72,12 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const searchResponse = await client.search
-    .find({
-      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
-      input: 'all my pdfs with images of cats that do not talk about dogs',
-      request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const response = await client.documentQuery
+    .ask({
+      bucket_location: { bucket: {} },
+      input: 'What are the key points in this document?',
+      object_id: 'document.pdf',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
@@ -123,7 +122,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.documentQuery.ask({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -140,7 +139,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.find({ bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.documentQuery.ask({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -163,25 +162,27 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.search
-  .find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+const response = await client.documentQuery
+  .ask({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: searchResponse, response: raw } = await client.search
-  .find({
-    bucket_ids: ['01jtgtrd37acrqf7k24dggg31s'],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+const { data: response, response: raw } = await client.documentQuery
+  .ask({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(searchResponse.pagination);
+console.log(response.answer);
 ```
 
 ### Logging

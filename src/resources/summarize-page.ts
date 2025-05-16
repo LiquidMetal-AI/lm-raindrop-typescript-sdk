@@ -17,47 +17,60 @@ export class SummarizePage extends APIResource {
    * - Extracts important findings
    * - Highlights document relationships
    * - Provides content type distribution
+   * - Summarizes metadata patterns
+   *
+   * This is particularly valuable when dealing with:
+   *
+   * - Large document collections
+   * - Mixed content types
+   * - Technical documentation
+   * - Research materials
    *
    * @example
    * ```ts
-   * const summarizePage = await client.summarizePage.create({
+   * const response = await client.summarizePage.sumarizePage({
+   *   page: 1,
+   *   page_size: 10,
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
-  create(body: SummarizePageCreateParams, options?: RequestOptions): APIPromise<SummarizePageCreateResponse> {
+  sumarizePage(
+    body: SummarizePageSumarizePageParams,
+    options?: RequestOptions,
+  ): APIPromise<SummarizePageSumarizePageResponse> {
     return this._client.post('/v1/summarize_page', { body, ...options });
   }
 }
 
-export interface SummarizePageCreateResponse {
+export interface SummarizePageSumarizePageResponse {
   /**
    * AI-generated summary including key themes and topics, content type distribution,
    * important findings, and document relationships
    */
-  summary: string;
+  summary?: string;
 }
 
-export interface SummarizePageCreateParams {
-  /**
-   * Client-provided search session identifier from the original search
-   */
-  request_id: string;
-
+export interface SummarizePageSumarizePageParams {
   /**
    * Target page number (1-based)
    */
-  page?: number;
+  page: number;
 
   /**
-   * Results per page. Affects how many documents are included in the summary
+   * Results per page. Affects summary granularity
    */
-  page_size?: number;
+  page_size: number;
+
+  /**
+   * Original search session identifier from the initial search
+   */
+  request_id: string;
 }
 
 export declare namespace SummarizePage {
   export {
-    type SummarizePageCreateResponse as SummarizePageCreateResponse,
-    type SummarizePageCreateParams as SummarizePageCreateParams,
+    type SummarizePageSumarizePageResponse as SummarizePageSumarizePageResponse,
+    type SummarizePageSumarizePageParams as SummarizePageSumarizePageParams,
   };
 }

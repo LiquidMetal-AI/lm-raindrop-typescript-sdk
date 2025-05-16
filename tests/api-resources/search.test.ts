@@ -9,31 +9,10 @@ const client = new Raindrop({
 
 describe('resource search', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.search.retrieve({ request_id: '123e4567-e89b-12d3-a456-426614174000' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.search.retrieve({
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-      page: 2,
-      page_size: 10,
-    });
-  });
-
-  // skipped: tests are disabled for the time being
   test.skip('find: only required params', async () => {
     const responsePromise = client.search.find({
-      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s', '01jtgtrd37acrqf7k24dggg31v'],
-      input: 'Find me all documents with pictures of a cat that do not talk about dogs',
+      bucket_locations: [{ bucket: {} }],
+      input: 'Show me documents containing credit card numbers or social security numbers',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,8 +27,10 @@ describe('resource search', () => {
   // skipped: tests are disabled for the time being
   test.skip('find: required and optional params', async () => {
     const response = await client.search.find({
-      bucket_ids: ['01jtgtrd37acrqf7k24dggg31s', '01jtgtrd37acrqf7k24dggg31v'],
-      input: 'Find me all documents with pictures of a cat that do not talk about dogs',
+      bucket_locations: [
+        { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+      ],
+      input: 'Show me documents containing credit card numbers or social security numbers',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
   });

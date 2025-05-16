@@ -12,14 +12,14 @@ export class DocumentQuery extends APIResource {
    * system understands context and can handle complex queries about document
    * contents.
    *
-   * The query system maintains conversation context throught the `request_id`,
+   * The query system maintains conversation context throught the request_id,
    * enabling follow-up questions and deep exploration of document content. It works
    * across all supported file types and automatically handles multi-page documents,
    * making complex file interaction as simple as having a conversation.
    *
    * The system will:
    *
-   * - Maintain conversation history for context when using the same `request_id`
+   * - Maintain conversation history for context when using the same request_id
    * - Process questions against file content
    * - Generate contextual, relevant responses
    *
@@ -29,9 +29,9 @@ export class DocumentQuery extends APIResource {
    * @example
    * ```ts
    * const response = await client.documentQuery.ask({
-   *   bucket: '01jtgtrd37acrqf7k24dggg31s',
-   *   input: 'What is the key points in this document?',
-   *   object_id: 'object_id',
+   *   bucket_location: { bucket: {} },
+   *   input: 'What are the key points in this document?',
+   *   object_id: 'document.pdf',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
@@ -41,43 +41,81 @@ export class DocumentQuery extends APIResource {
   }
 }
 
+export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
+
+export namespace BucketLocator {
+  export interface Bucket {
+    /**
+     * BucketName represents a bucket name with an optional version
+     */
+    bucket: Bucket.Bucket;
+  }
+
+  export namespace Bucket {
+    /**
+     * BucketName represents a bucket name with an optional version
+     */
+    export interface Bucket {
+      /**
+       * Optional Application
+       */
+      application_name?: string | null;
+
+      /**
+       * The name of the bucket
+       */
+      name?: string;
+
+      /**
+       * Optional version of the bucket
+       */
+      version?: string | null;
+    }
+  }
+
+  export interface ModuleID {
+    module_id: string;
+  }
+}
+
 export interface DocumentQueryAskResponse {
   /**
    * AI-generated response that may include direct document quotes, content
    * summaries, contextual explanations, references to specific sections, and related
    * content suggestions
    */
-  answer: string;
+  answer?: string;
 }
 
 export interface DocumentQueryAskParams {
   /**
-   * The storage bucket ID containing the target document. Must be an accessible
-   * Smart Bucket
+   * The storage bucket containing the target document. Must be a valid, registered
+   * Smart Bucket. Used to identify which bucket to query against
    */
-  bucket: string;
+  bucket_location: BucketLocator;
 
   /**
    * User's input or question about the document. Can be natural language questions,
-   * commands, or requests
+   * commands, or requests. The system will process this against the document content
    */
   input: string;
 
   /**
-   * Document identifier within the bucket. Typically matches the storage path or key
+   * Document identifier within the bucket. Typically matches the storage path or
+   * key. Used to identify which document to chat with
    */
   object_id: string;
 
   /**
    * Client-provided conversation session identifier. Required for maintaining
-   * context in follow-up questions. We recommend using a UUID or ULID for this
-   * value.
+   * context in follow-up questions. We recommend using a UUID or ULID for this value
    */
   request_id: string;
 }
 
 export declare namespace DocumentQuery {
   export {
+    type BucketLocator as BucketLocator,
     type DocumentQueryAskResponse as DocumentQueryAskResponse,
     type DocumentQueryAskParams as DocumentQueryAskParams,
   };

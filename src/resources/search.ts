@@ -1,27 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as ChunkSearchAPI from './chunk-search';
+import * as DocumentQueryAPI from './document-query';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
-  /**
-   * Retrieve additional pages from a previous search. This endpoint enables
-   * navigation through large result sets while maintaining search context and result
-   * relevance. Retrieving paginated results requires a valid `request_id` from a
-   * previously completed search.
-   *
-   * @example
-   * ```ts
-   * const searchResponse = await client.search.retrieve({
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
-   * ```
-   */
-  retrieve(query: SearchRetrieveParams, options?: RequestOptions): APIPromise<SearchResponse> {
-    return this._client.get('/v1/search', { query, ...options });
-  }
-
   /**
    * Primary search endpoint that provides advanced search capabilities across all
    * document types stored in SmartBuckets.
@@ -36,7 +21,7 @@ export class Search extends APIResource {
    * - 'Find images of landscapes taken during sunset'
    * - 'Get documents mentioning revenue forecasts from Q4 2023'
    * - 'Find me all PDF documents that contain pictures of a cat'
-   * - 'Find me all audio files that contain infomration about the weather in SF in
+   * - 'Find me all audio files that contain information about the weather in SF in
    *   2024'
    *
    * Key capabilities:
@@ -48,133 +33,84 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const searchResponse = await client.search.find({
-   *   bucket_ids: [
-   *     '01jtgtrd37acrqf7k24dggg31s',
-   *     '01jtgtrd37acrqf7k24dggg31v',
-   *   ],
+   * const response = await client.search.find({
+   *   bucket_locations: [{ bucket: {} }],
    *   input:
-   *     'Find me all documents with pictures of a cat that do not talk about dogs',
+   *     'Show me documents containing credit card numbers or social security numbers',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
-  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchResponse> {
+  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchFindResponse> {
     return this._client.post('/v1/search', { body, ...options });
   }
 }
 
-export interface SearchResponse {
-  pagination: SearchResponse.Pagination;
+export interface SearchFindResponse {
+  /**
+   * Pagination details for result navigation
+   */
+  pagination?: SearchFindResponse.Pagination;
 
   /**
    * Matched results with metadata
    */
-  results: Array<TextResult>;
+  results?: Array<ChunkSearchAPI.TextResult>;
 }
 
-export namespace SearchResponse {
+export namespace SearchFindResponse {
+  /**
+   * Pagination details for result navigation
+   */
   export interface Pagination {
     /**
-     * Indicates more results available
+     * Indicates more results available. Used for infinite scroll implementation
      */
-    has_more: boolean;
+    has_more?: boolean;
 
     /**
      * Current page number (1-based)
      */
-    page: number;
+    page?: number;
 
     /**
-     * Results per page
+     * Results per page. May be adjusted for performance
      */
-    page_size: number;
+    page_size?: number;
 
     /**
      * Total number of available results
      */
-    total: number;
+    total?: number;
 
     /**
-     * Total available pages
+     * Total available pages. Calculated as ceil(total/page_size)
      */
-    total_pages: number;
+    total_pages?: number;
   }
-}
-
-export interface TextResult {
-  /**
-   * Unique identifier for this text segment
-   */
-  chunk_signature: string;
-
-  /**
-   * Parent document identifier
-   */
-  payload_signature?: string;
-
-  /**
-   * Relevance score (0.0 to 1.0)
-   */
-  score?: number;
-
-  /**
-   * Source document information in JSON format
-   */
-  source?: string;
-
-  /**
-   * The actual content of the result
-   */
-  text?: string;
-
-  /**
-   * Content MIME type
-   */
-  type?: 'text/plain' | 'application/pdf' | 'image/jpeg' | 'image/png';
-}
-
-export interface SearchRetrieveParams {
-  /**
-   * Client-provided search session identifier from the initial search
-   */
-  request_id: string;
-
-  /**
-   * Requested page number
-   */
-  page?: number;
-
-  /**
-   * Results per page
-   */
-  page_size?: number;
 }
 
 export interface SearchFindParams {
   /**
-   * Optional list of specific bucket IDs to search in. If not provided, searches the
-   * latest version of all buckets
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
    */
-  bucket_ids: Array<string>;
+  bucket_locations: Array<DocumentQueryAPI.BucketLocator>;
 
   /**
-   * Natural language search query that can include complex criteria
+   * Natural language search query that can include complex criteria. Supports
+   * queries like finding documents with specific content types, PII, or semantic
+   * meaning
    */
   input: string;
 
   /**
    * Client-provided search session identifier. Required for pagination and result
-   * tracking. We recommend using a UUID or ULID for this value.
+   * tracking. We recommend using a UUID or ULID for this value
    */
   request_id: string;
 }
 
 export declare namespace Search {
-  export {
-    type SearchResponse as SearchResponse,
-    type TextResult as TextResult,
-    type SearchRetrieveParams as SearchRetrieveParams,
-    type SearchFindParams as SearchFindParams,
-  };
+  export { type SearchFindResponse as SearchFindResponse, type SearchFindParams as SearchFindParams };
 }

@@ -20,28 +20,23 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
-import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
 import {
-  Search,
-  SearchFindParams,
-  SearchResponse,
-  SearchRetrieveParams,
+  ChunkSearch,
+  ChunkSearchFindParams,
+  ChunkSearchFindResponse,
   TextResult,
-} from './resources/search';
+} from './resources/chunk-search';
 import {
-  StorageObject,
-  StorageObjectDeleteParams,
-  StorageObjectDeleteResponse,
-  StorageObjectDownloadParams,
-  StorageObjectListResponse,
-  StorageObjectUploadParams,
-  StorageObjectUploadResponse,
-} from './resources/storage-object';
+  BucketLocator,
+  DocumentQuery,
+  DocumentQueryAskParams,
+  DocumentQueryAskResponse,
+} from './resources/document-query';
+import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
 import {
   SummarizePage,
-  SummarizePageCreateParams,
-  SummarizePageCreateResponse,
+  SummarizePageSumarizePageParams,
+  SummarizePageSumarizePageResponse,
 } from './resources/summarize-page';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
@@ -49,7 +44,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * API key with format `Bearer lm_apikey_...` that grants access to a specific resources or a group of resources. You can create new API keys in the raindrop dashboard (raindrop.run) under settings->API Keys
+   * Defaults to process.env['RAINDROP_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -142,7 +137,7 @@ export class Raindrop {
    * API Client for interfacing with the Raindrop API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.raindrop.run] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -164,7 +159,7 @@ export class Raindrop {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.raindrop.run`,
+      baseURL: baseURL || `https://api.example.com`,
     };
 
     this.baseURL = options.baseURL!;
@@ -713,53 +708,41 @@ export class Raindrop {
 
   static toFile = Uploads.toFile;
 
-  search: API.Search = new API.Search(this);
   documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  storageObject: API.StorageObject = new API.StorageObject(this);
+  search: API.Search = new API.Search(this);
 }
-Raindrop.Search = Search;
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
-Raindrop.StorageObject = StorageObject;
+Raindrop.Search = Search;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Search as Search,
-    type SearchResponse as SearchResponse,
-    type TextResult as TextResult,
-    type SearchRetrieveParams as SearchRetrieveParams,
-    type SearchFindParams as SearchFindParams,
-  };
-
-  export {
     DocumentQuery as DocumentQuery,
+    type BucketLocator as BucketLocator,
     type DocumentQueryAskResponse as DocumentQueryAskResponse,
     type DocumentQueryAskParams as DocumentQueryAskParams,
   };
 
   export {
     ChunkSearch as ChunkSearch,
+    type TextResult as TextResult,
     type ChunkSearchFindResponse as ChunkSearchFindResponse,
     type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 
   export {
     SummarizePage as SummarizePage,
-    type SummarizePageCreateResponse as SummarizePageCreateResponse,
-    type SummarizePageCreateParams as SummarizePageCreateParams,
+    type SummarizePageSumarizePageResponse as SummarizePageSumarizePageResponse,
+    type SummarizePageSumarizePageParams as SummarizePageSumarizePageParams,
   };
 
   export {
-    StorageObject as StorageObject,
-    type StorageObjectListResponse as StorageObjectListResponse,
-    type StorageObjectDeleteResponse as StorageObjectDeleteResponse,
-    type StorageObjectUploadResponse as StorageObjectUploadResponse,
-    type StorageObjectDeleteParams as StorageObjectDeleteParams,
-    type StorageObjectDownloadParams as StorageObjectDownloadParams,
-    type StorageObjectUploadParams as StorageObjectUploadParams,
+    Search as Search,
+    type SearchFindResponse as SearchFindResponse,
+    type SearchFindParams as SearchFindParams,
   };
 }
