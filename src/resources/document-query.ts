@@ -55,7 +55,7 @@ export interface DocumentQueryAskParams {
    * The storage bucket containing the target document. Must be a valid, registered
    * Smart Bucket. Used to identify which bucket to query against
    */
-  bucket_location: DocumentQueryAskParams.Bucket | DocumentQueryAskParams.ModuleID;
+  bucket_location: DocumentQueryAskParams.BucketLocation;
 
   /**
    * User's input or question about the document. Can be natural language questions,
@@ -77,14 +77,18 @@ export interface DocumentQueryAskParams {
 }
 
 export namespace DocumentQueryAskParams {
-  export interface Bucket {
+  /**
+   * The storage bucket containing the target document. Must be a valid, registered
+   * Smart Bucket. Used to identify which bucket to query against
+   */
+  export interface BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
-    bucket: Bucket.Bucket;
+    bucket: BucketLocation.Bucket;
   }
 
-  export namespace Bucket {
+  export namespace BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
@@ -104,10 +108,6 @@ export namespace DocumentQueryAskParams {
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    module_id: string;
   }
 }
 

@@ -164,7 +164,7 @@ export interface SearchFindParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<SearchFindParams.Bucket | SearchFindParams.ModuleID>;
+  bucket_locations: Array<SearchFindParams.BucketLocation>;
 
   /**
    * Natural language search query that can include complex criteria. Supports
@@ -181,14 +181,14 @@ export interface SearchFindParams {
 }
 
 export namespace SearchFindParams {
-  export interface Bucket {
+  export interface BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
-    bucket: Bucket.Bucket;
+    bucket: BucketLocation.Bucket;
   }
 
-  export namespace Bucket {
+  export namespace BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
@@ -208,10 +208,6 @@ export namespace SearchFindParams {
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    module_id: string;
   }
 }
 

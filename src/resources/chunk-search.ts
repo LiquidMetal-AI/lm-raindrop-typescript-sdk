@@ -42,7 +42,7 @@ export interface ChunkSearchFindParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<ChunkSearchFindParams.Bucket | ChunkSearchFindParams.ModuleID>;
+  bucket_locations: Array<ChunkSearchFindParams.BucketLocation>;
 
   /**
    * Natural language query or question. Can include complex criteria and
@@ -58,14 +58,14 @@ export interface ChunkSearchFindParams {
 }
 
 export namespace ChunkSearchFindParams {
-  export interface Bucket {
+  export interface BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
-    bucket: Bucket.Bucket;
+    bucket: BucketLocation.Bucket;
   }
 
-  export namespace Bucket {
+  export namespace BucketLocation {
     /**
      * BucketName represents a bucket name with an optional version
      */
@@ -85,10 +85,6 @@ export namespace ChunkSearchFindParams {
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    module_id: string;
   }
 }
 
