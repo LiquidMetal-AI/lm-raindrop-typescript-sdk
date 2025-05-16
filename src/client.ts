@@ -25,17 +25,16 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import { Chat } from './resources/chat';
 import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
 import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
-import {
-  Object,
-  ObjectListObjectsParams,
-  ObjectListObjectsResponse,
-  ObjectPutObjectParams,
-  ObjectPutObjectResponse,
-  ObjectRetrieveObjectParams,
-  ObjectRetrieveObjectResponse,
-} from './resources/object';
 import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
-import { StorageObject } from './resources/storage-object';
+import {
+  StorageObject,
+  StorageObjectListObjectsParams,
+  StorageObjectListObjectsResponse,
+  StorageObjectPutObjectParams,
+  StorageObjectPutObjectResponse,
+  StorageObjectRetrieveObjectParams,
+  StorageObjectRetrieveObjectResponse,
+} from './resources/storage-object';
 import {
   SummarizePage,
   SummarizePageCreateParams,
@@ -730,17 +729,15 @@ export class Raindrop {
   documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  storageObject: API.StorageObject = new API.StorageObject(this);
   chat: API.Chat = new API.Chat(this);
-  object: API.Object = new API.Object(this);
+  storageObject: API.StorageObject = new API.StorageObject(this);
 }
 Raindrop.Search = Search;
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
-Raindrop.StorageObject = StorageObject;
 Raindrop.Chat = Chat;
-Raindrop.Object = Object;
+Raindrop.StorageObject = StorageObject;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -771,17 +768,15 @@ export declare namespace Raindrop {
     type SummarizePageCreateParams as SummarizePageCreateParams,
   };
 
-  export { StorageObject as StorageObject };
-
   export { Chat as Chat };
 
   export {
-    Object as Object,
-    type ObjectListObjectsResponse as ObjectListObjectsResponse,
-    type ObjectPutObjectResponse as ObjectPutObjectResponse,
-    type ObjectRetrieveObjectResponse as ObjectRetrieveObjectResponse,
-    type ObjectListObjectsParams as ObjectListObjectsParams,
-    type ObjectPutObjectParams as ObjectPutObjectParams,
-    type ObjectRetrieveObjectParams as ObjectRetrieveObjectParams,
+    StorageObject as StorageObject,
+    type StorageObjectListObjectsResponse as StorageObjectListObjectsResponse,
+    type StorageObjectPutObjectResponse as StorageObjectPutObjectResponse,
+    type StorageObjectRetrieveObjectResponse as StorageObjectRetrieveObjectResponse,
+    type StorageObjectListObjectsParams as StorageObjectListObjectsParams,
+    type StorageObjectPutObjectParams as StorageObjectPutObjectParams,
+    type StorageObjectRetrieveObjectParams as StorageObjectRetrieveObjectParams,
   };
 }
