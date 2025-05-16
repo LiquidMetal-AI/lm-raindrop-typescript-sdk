@@ -28,7 +28,7 @@ export class DocumentQuery extends APIResource {
    *
    * @example
    * ```ts
-   * const documentQuery = await client.documentQuery.create({
+   * const response = await client.documentQuery.ask({
    *   bucket_location: { bucket: {} },
    *   input: 'What are the key points in this document?',
    *   object_id: 'document.pdf',
@@ -36,7 +36,7 @@ export class DocumentQuery extends APIResource {
    * });
    * ```
    */
-  create(body: DocumentQueryCreateParams, options?: RequestOptions): APIPromise<DocumentQueryCreateResponse> {
+  ask(body: DocumentQueryAskParams, options?: RequestOptions): APIPromise<DocumentQueryAskResponse> {
     return this._client.post('/v1/document_query', { body, ...options });
   }
 }
@@ -78,7 +78,7 @@ export namespace BucketLocator {
   }
 }
 
-export interface DocumentQueryCreateResponse {
+export interface DocumentQueryAskResponse {
   /**
    * AI-generated response that may include direct document quotes, content
    * summaries, contextual explanations, references to specific sections, and related
@@ -87,7 +87,7 @@ export interface DocumentQueryCreateResponse {
   answer?: string;
 }
 
-export interface DocumentQueryCreateParams {
+export interface DocumentQueryAskParams {
   /**
    * The storage bucket containing the target document. Must be a valid, registered
    * Smart Bucket. Used to identify which bucket to query against
@@ -116,7 +116,7 @@ export interface DocumentQueryCreateParams {
 export declare namespace DocumentQuery {
   export {
     type BucketLocator as BucketLocator,
-    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
-    type DocumentQueryCreateParams as DocumentQueryCreateParams,
+    type DocumentQueryAskResponse as DocumentQueryAskResponse,
+    type DocumentQueryAskParams as DocumentQueryAskParams,
   };
 }

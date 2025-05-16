@@ -33,7 +33,7 @@ export class Search extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.search.run({
+   * const response = await client.search.find({
    *   bucket_locations: [{ bucket: {} }],
    *   input:
    *     'Show me documents containing credit card numbers or social security numbers',
@@ -41,16 +41,16 @@ export class Search extends APIResource {
    * });
    * ```
    */
-  run(body: SearchRunParams, options?: RequestOptions): APIPromise<SearchRunResponse> {
+  find(body: SearchFindParams, options?: RequestOptions): APIPromise<SearchFindResponse> {
     return this._client.post('/v1/search', { body, ...options });
   }
 }
 
-export interface SearchRunResponse {
+export interface SearchFindResponse {
   /**
    * Pagination details for result navigation
    */
-  pagination?: SearchRunResponse.Pagination;
+  pagination?: SearchFindResponse.Pagination;
 
   /**
    * Matched results with metadata
@@ -58,7 +58,7 @@ export interface SearchRunResponse {
   results?: Array<ChunkSearchAPI.TextResult>;
 }
 
-export namespace SearchRunResponse {
+export namespace SearchFindResponse {
   /**
    * Pagination details for result navigation
    */
@@ -90,7 +90,7 @@ export namespace SearchRunResponse {
   }
 }
 
-export interface SearchRunParams {
+export interface SearchFindParams {
   /**
    * The buckets to search. If provided, the search will only return results from
    * these buckets
@@ -112,5 +112,5 @@ export interface SearchRunParams {
 }
 
 export declare namespace Search {
-  export { type SearchRunResponse as SearchRunResponse, type SearchRunParams as SearchRunParams };
+  export { type SearchFindResponse as SearchFindResponse, type SearchFindParams as SearchFindParams };
 }

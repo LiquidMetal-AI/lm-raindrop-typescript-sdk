@@ -3,18 +3,18 @@
 export {
   ChunkSearch,
   type TextResult,
-  type ChunkSearchExecuteResponse,
-  type ChunkSearchExecuteParams,
+  type ChunkSearchFindResponse,
+  type ChunkSearchFindParams,
 } from './chunk-search';
 export {
   DocumentQuery,
   type BucketLocator,
-  type DocumentQueryCreateResponse,
-  type DocumentQueryCreateParams,
+  type DocumentQueryAskResponse,
+  type DocumentQueryAskParams,
 } from './document-query';
-export { Search, type SearchRunResponse, type SearchRunParams } from './search';
+export { Search, type SearchFindResponse, type SearchFindParams } from './search';
 export {
   SummarizePage,
-  type SummarizePageCreateSummaryResponse,
-  type SummarizePageCreateSummaryParams,
+  type SummarizePageSumarizePageResponse,
+  type SummarizePageSumarizePageParams,
 } from './summarize-page';

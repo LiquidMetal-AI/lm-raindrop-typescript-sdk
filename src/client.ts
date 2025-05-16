@@ -22,21 +22,21 @@ import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
   ChunkSearch,
-  ChunkSearchExecuteParams,
-  ChunkSearchExecuteResponse,
+  ChunkSearchFindParams,
+  ChunkSearchFindResponse,
   TextResult,
 } from './resources/chunk-search';
 import {
   BucketLocator,
   DocumentQuery,
-  DocumentQueryCreateParams,
-  DocumentQueryCreateResponse,
+  DocumentQueryAskParams,
+  DocumentQueryAskResponse,
 } from './resources/document-query';
-import { Search, SearchRunParams, SearchRunResponse } from './resources/search';
+import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
 import {
   SummarizePage,
-  SummarizePageCreateSummaryParams,
-  SummarizePageCreateSummaryResponse,
+  SummarizePageSumarizePageParams,
+  SummarizePageSumarizePageResponse,
 } from './resources/summarize-page';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
@@ -723,26 +723,26 @@ export declare namespace Raindrop {
   export {
     DocumentQuery as DocumentQuery,
     type BucketLocator as BucketLocator,
-    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
-    type DocumentQueryCreateParams as DocumentQueryCreateParams,
+    type DocumentQueryAskResponse as DocumentQueryAskResponse,
+    type DocumentQueryAskParams as DocumentQueryAskParams,
   };
 
   export {
     ChunkSearch as ChunkSearch,
     type TextResult as TextResult,
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+    type ChunkSearchFindResponse as ChunkSearchFindResponse,
+    type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 
   export {
     SummarizePage as SummarizePage,
-    type SummarizePageCreateSummaryResponse as SummarizePageCreateSummaryResponse,
-    type SummarizePageCreateSummaryParams as SummarizePageCreateSummaryParams,
+    type SummarizePageSumarizePageResponse as SummarizePageSumarizePageResponse,
+    type SummarizePageSumarizePageParams as SummarizePageSumarizePageParams,
   };
 
   export {
     Search as Search,
-    type SearchRunResponse as SearchRunResponse,
-    type SearchRunParams as SearchRunParams,
+    type SearchFindResponse as SearchFindResponse,
+    type SearchFindParams as SearchFindParams,
   };
 }
