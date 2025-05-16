@@ -9,13 +9,8 @@ const client = new Raindrop({
 
 describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.documentQuery.create({
-      bucket_location: { bucket: {} },
-      input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.documentQuery.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,17 +18,5 @@ describe('resource documentQuery', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.documentQuery.create({
-      bucket_location: {
-        bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
-      },
-      input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
-    });
   });
 });

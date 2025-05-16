@@ -25,16 +25,6 @@ export class DocumentQuery extends APIResource {
    *
    * Document query is supported for all file types, including PDFs, images, and
    * audio files.
-   *
-   * @example
-   * ```ts
-   * const documentQuery = await client.documentQuery.create({
-   *   bucket_location: { bucket: {} },
-   *   input: 'What are the key points in this document?',
-   *   object_id: 'document.pdf',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
-   * ```
    */
   create(body: DocumentQueryCreateParams, options?: RequestOptions): APIPromise<DocumentQueryCreateResponse> {
     return this._client.post('/v1/document_query', { body, ...options });
@@ -80,37 +70,49 @@ export namespace BucketLocator {
 
 export interface DocumentQueryCreateResponse {
   /**
-   * AI-generated response that may include direct document quotes, content
-   * summaries, contextual explanations, references to specific sections, and related
-   * content suggestions
+   * **DESCRIPTION** AI-generated response that may include direct document quotes,
+   * content summaries, contextual explanations, references to specific sections, and
+   * related content suggestions **EXAMPLE** "Based on the document, the key points
+   * are..."
    */
   answer?: string;
 }
 
 export interface DocumentQueryCreateParams {
   /**
-   * The storage bucket containing the target document. Must be a valid, registered
-   * Smart Bucket. Used to identify which bucket to query against
+   * **DESCRIPTION** The storage bucket containing the target document. Must be a
+   * valid, registered Smart Bucket. Used to identify which bucket to query against
+   * **EXAMPLE** {"bucket": {"name": "my-bucket", "version":
+   * "01jtgtraw3b5qbahrhvrj3ygbb", "application_name": "my-app"}} **REQUIRED** TRUE
    */
-  bucket_location: BucketLocator;
+  bucket_location?: BucketLocator;
 
   /**
-   * User's input or question about the document. Can be natural language questions,
-   * commands, or requests. The system will process this against the document content
+   * **DESCRIPTION** User's input or question about the document. Can be natural
+   * language questions, commands, or requests. The system will process this against
+   * the document content **EXAMPLE** "What are the key points in this document?"
+   * **REQUIRED** TRUE
    */
-  input: string;
+  input?: string;
 
   /**
-   * Document identifier within the bucket. Typically matches the storage path or
-   * key. Used to identify which document to chat with
+   * **DESCRIPTION** Document identifier within the bucket. Typically matches the
+   * storage path or key. Used to identify which document to chat with **EXAMPLE**
+   * "document.pdf" **REQUIRED** TRUE
    */
-  object_id: string;
+  object_id?: string;
+
+  organization_id?: string;
 
   /**
-   * Client-provided conversation session identifier. Required for maintaining
-   * context in follow-up questions. We recommend using a UUID or ULID for this value
+   * **DESCRIPTION** Client-provided conversation session identifier. Required for
+   * maintaining context in follow-up questions. We recommend using a UUID or ULID
+   * for this value **EXAMPLE** "123e4567-e89b-12d3-a456-426614174000" **REQUIRED**
+   * TRUE
    */
-  request_id: string;
+  request_id?: string;
+
+  user_id?: string;
 }
 
 export declare namespace DocumentQuery {

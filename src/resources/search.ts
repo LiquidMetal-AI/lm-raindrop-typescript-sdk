@@ -30,16 +30,6 @@ export class Search extends APIResource {
    * - Content-based search across text, images, and audio
    * - Automatic PII detection
    * - Multi-modal search (text, images, audio)
-   *
-   * @example
-   * ```ts
-   * const response = await client.search.run({
-   *   bucket_locations: [{ bucket: {} }],
-   *   input:
-   *     'Show me documents containing credit card numbers or social security numbers',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
-   * ```
    */
   run(body: SearchRunParams, options?: RequestOptions): APIPromise<SearchRunResponse> {
     return this._client.post('/v1/search', { body, ...options });
@@ -48,43 +38,48 @@ export class Search extends APIResource {
 
 export interface SearchRunResponse {
   /**
-   * Pagination details for result navigation
+   * **DESCRIPTION** Pagination details for result navigation **EXAMPLE** {"total":
+   * 100, "page": 1, "page_size": 10, "total_pages": 10, "has_more": true}
    */
   pagination?: SearchRunResponse.Pagination;
 
   /**
-   * Matched results with metadata
+   * **DESCRIPTION** Matched results with metadata **EXAMPLE** [{"chunk_signature":
+   * "chunk_123abc", "text": "Sample text", "score": 0.95}]
    */
   results?: Array<ChunkSearchAPI.TextResult>;
 }
 
 export namespace SearchRunResponse {
   /**
-   * Pagination details for result navigation
+   * **DESCRIPTION** Pagination details for result navigation **EXAMPLE** {"total":
+   * 100, "page": 1, "page_size": 10, "total_pages": 10, "has_more": true}
    */
   export interface Pagination {
     /**
-     * Indicates more results available. Used for infinite scroll implementation
+     * **DESCRIPTION** Indicates more results available. Used for infinite scroll
+     * implementation **EXAMPLE** true
      */
     has_more?: boolean;
 
     /**
-     * Current page number (1-based)
+     * **DESCRIPTION** Current page number (1-based) **EXAMPLE** 1
      */
     page?: number;
 
     /**
-     * Results per page. May be adjusted for performance
+     * **DESCRIPTION** Results per page. May be adjusted for performance **EXAMPLE** 15
      */
     page_size?: number;
 
     /**
-     * Total number of available results
+     * **DESCRIPTION** Total number of available results **EXAMPLE** 1020
      */
     total?: number;
 
     /**
-     * Total available pages. Calculated as ceil(total/page_size)
+     * **DESCRIPTION** Total available pages. Calculated as ceil(total/page_size)
+     * **EXAMPLE** 68
      */
     total_pages?: number;
   }
@@ -92,23 +87,31 @@ export namespace SearchRunResponse {
 
 export interface SearchRunParams {
   /**
-   * The buckets to search. If provided, the search will only return results from
-   * these buckets
+   * **DESCRIPTION** The buckets to search. If provided, the search will only return
+   * results from these buckets **EXAMPLE** [{"bucket": {"name": "my-bucket",
+   * "version": "01jtgtraw3b5qbahrhvrj3ygbb", "application_name": "my-app"}}]
+   * **REQUIRED** TRUE
    */
-  bucket_locations: Array<DocumentQueryAPI.BucketLocator>;
+  bucket_locations?: Array<DocumentQueryAPI.BucketLocator>;
 
   /**
-   * Natural language search query that can include complex criteria. Supports
-   * queries like finding documents with specific content types, PII, or semantic
-   * meaning
+   * **DESCRIPTION** Natural language search query that can include complex criteria.
+   * Supports queries like finding documents with specific content types, PII, or
+   * semantic meaning **EXAMPLE** "Show me documents containing credit card numbers
+   * or social security numbers" **REQUIRED** TRUE
    */
-  input: string;
+  input?: string;
+
+  organization_id?: string;
 
   /**
-   * Client-provided search session identifier. Required for pagination and result
-   * tracking. We recommend using a UUID or ULID for this value
+   * **DESCRIPTION** Client-provided search session identifier. Required for
+   * pagination and result tracking. We recommend using a UUID or ULID for this value
+   * **EXAMPLE** "123e4567-e89b-12d3-a456-426614174000" **REQUIRED** TRUE
    */
-  request_id: string;
+  request_id?: string;
+
+  user_id?: string;
 }
 
 export declare namespace Search {

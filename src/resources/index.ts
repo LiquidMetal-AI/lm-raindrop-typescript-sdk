@@ -12,16 +12,7 @@ export {
   type DocumentQueryCreateResponse,
   type DocumentQueryCreateParams,
 } from './document-query';
-export {
-  Object,
-  type BucketResponse,
-  type ObjectListObjectsResponse,
-  type ObjectPutObjectResponse,
-  type ObjectRetrieveObjectResponse,
-  type ObjectListObjectsParams,
-  type ObjectPutObjectParams,
-  type ObjectRetrieveObjectParams,
-} from './object';
+export { Object, type BucketResponse } from './object';
 export { Search, type SearchRunResponse, type SearchRunParams } from './search';
 export {
   SummarizePage,
