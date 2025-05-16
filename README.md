@@ -1,6 +1,6 @@
 # Raindrop TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/@liquidmetal-ai/lm-raindrop.svg)](https://npmjs.org/package/@liquidmetal-ai/lm-raindrop) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@liquidmetal-ai/lm-raindrop)
+[![NPM version](https://img.shields.io/npm/v/raindrop.svg)](https://npmjs.org/package/raindrop) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/raindrop)
 
 This library provides convenient access to the Raindrop REST API from server-side TypeScript or JavaScript.
 
@@ -11,8 +11,11 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install @liquidmetal-ai/lm-raindrop
+npm install git+ssh://git@github.com:stainless-sdks/raindrop-typescript.git
 ```
+
+> [!NOTE]
+> Once this package is [published to npm](https://app.stainless.com/docs/guides/publish), this will become: `npm install raindrop`
 
 ## Usage
 
@@ -20,18 +23,19 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop();
 
 async function main() {
-  const response = await client.search.find({
-    bucket_locations: [{ bucket: {} }],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const documentQuery = await client.documentQuery.create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   });
 
-  console.log(response.pagination);
+  console.log(documentQuery.answer);
 }
 
 main();
@@ -43,17 +47,18 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop();
 
 async function main() {
-  const params: Raindrop.SearchFindParams = {
-    bucket_locations: [{ bucket: {} }],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const params: Raindrop.DocumentQueryCreateParams = {
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   };
-  const response: Raindrop.SearchFindResponse = await client.search.find(params);
+  const documentQuery: Raindrop.DocumentQueryCreateResponse = await client.documentQuery.create(params);
 }
 
 main();
@@ -70,11 +75,12 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.search
-    .find({
-      bucket_locations: [{ bucket: {} }],
-      input: 'all my pdfs with images of cats that do not talk about dogs',
-      request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+  const documentQuery = await client.documentQuery
+    .create({
+      bucket_location: { bucket: {} },
+      input: 'What are the key points in this document?',
+      object_id: 'document.pdf',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
     })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
@@ -119,7 +125,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.search.find({ bucket_locations: [{ bucket: {} }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -136,7 +142,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.search.find({ bucket_locations: [{ bucket: {} }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -159,25 +165,27 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.search
-  .find({
-    bucket_locations: [{ bucket: {} }],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+const response = await client.documentQuery
+  .create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.search
-  .find({
-    bucket_locations: [{ bucket: {} }],
-    input: 'all my pdfs with images of cats that do not talk about dogs',
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
+const { data: documentQuery, response: raw } = await client.documentQuery
+  .create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.pagination);
+console.log(documentQuery.answer);
 ```
 
 ### Logging
@@ -194,7 +202,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop({
   logLevel: 'debug', // Show all log messages
@@ -222,7 +230,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 import pino from 'pino';
 
 const logger = pino();
@@ -292,7 +300,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 import fetch from 'my-fetch';
 
 const client = new Raindrop({ fetch });
@@ -303,7 +311,7 @@ const client = new Raindrop({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop({
   fetchOptions: {
@@ -320,7 +328,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -334,7 +342,7 @@ const client = new Raindrop({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Raindrop from '@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'raindrop';
 
 const client = new Raindrop({
   fetchOptions: {
@@ -346,7 +354,7 @@ const client = new Raindrop({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Raindrop from 'npm:@liquidmetal-ai/lm-raindrop';
+import Raindrop from 'npm:raindrop';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Raindrop({
@@ -368,7 +376,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/raindrop-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

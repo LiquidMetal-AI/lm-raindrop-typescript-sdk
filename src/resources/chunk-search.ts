@@ -1,7 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as SearchAPI from './search';
+import * as DocumentQueryAPI from './document-query';
+import * as ObjectAPI from './object';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -17,32 +18,88 @@ export class ChunkSearch extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.chunkSearch.find({
+   * const response = await client.chunkSearch.execute({
    *   bucket_locations: [{ bucket: {} }],
    *   input: 'Find documents about revenue in Q4 2023',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
-  find(body: ChunkSearchFindParams, options?: RequestOptions): APIPromise<ChunkSearchFindResponse> {
+  execute(body: ChunkSearchExecuteParams, options?: RequestOptions): APIPromise<ChunkSearchExecuteResponse> {
     return this._client.post('/v1/chunk_search', { body, ...options });
   }
 }
 
-export interface ChunkSearchFindResponse {
+export interface TextResult {
+  /**
+   * Unique identifier for this text segment. Used for deduplication and result
+   * tracking
+   */
+  chunk_signature?: string | null;
+
+  /**
+   * Vector representation for similarity matching. Used in semantic search
+   * operations
+   */
+  embed?: string | null;
+
+  /**
+   * Parent document identifier. Links related content chunks together
+   */
+  payload_signature?: string | null;
+
+  /**
+   * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+   */
+  score?: number | null;
+
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  source?: TextResult.Source;
+
+  /**
+   * The actual content of the result. May be a document excerpt or full content
+   */
+  text?: string | null;
+
+  /**
+   * Content MIME type. Helps with proper result rendering
+   */
+  type?: string | null;
+}
+
+export namespace TextResult {
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  export interface Source {
+    /**
+     * The bucket information containing this result
+     */
+    bucket?: ObjectAPI.BucketResponse;
+
+    /**
+     * The object key within the bucket
+     */
+    object?: string;
+  }
+}
+
+export interface ChunkSearchExecuteResponse {
   /**
    * Ordered list of relevant text segments. Each result includes full context and
    * metadata
    */
-  results?: Array<SearchAPI.TextResult>;
+  results?: Array<TextResult>;
 }
 
-export interface ChunkSearchFindParams {
+export interface ChunkSearchExecuteParams {
   /**
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<ChunkSearchFindParams.BucketLocation>;
+  bucket_locations: Array<DocumentQueryAPI.BucketLocator>;
 
   /**
    * Natural language query or question. Can include complex criteria and
@@ -57,40 +114,10 @@ export interface ChunkSearchFindParams {
   request_id: string;
 }
 
-export namespace ChunkSearchFindParams {
-  export interface BucketLocation {
-    /**
-     * BucketName represents a bucket name with an optional version
-     */
-    bucket: BucketLocation.Bucket;
-  }
-
-  export namespace BucketLocation {
-    /**
-     * BucketName represents a bucket name with an optional version
-     */
-    export interface Bucket {
-      /**
-       * Optional Application
-       */
-      application_name?: string | null;
-
-      /**
-       * The name of the bucket
-       */
-      name?: string;
-
-      /**
-       * Optional version of the bucket
-       */
-      version?: string | null;
-    }
-  }
-}
-
 export declare namespace ChunkSearch {
   export {
-    type ChunkSearchFindResponse as ChunkSearchFindResponse,
-    type ChunkSearchFindParams as ChunkSearchFindParams,
+    type TextResult as TextResult,
+    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
+    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
   };
 }

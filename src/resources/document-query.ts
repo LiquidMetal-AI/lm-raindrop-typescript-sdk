@@ -28,7 +28,7 @@ export class DocumentQuery extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.documentQuery.ask({
+   * const documentQuery = await client.documentQuery.create({
    *   bucket_location: { bucket: {} },
    *   input: 'What are the key points in this document?',
    *   object_id: 'document.pdf',
@@ -36,59 +36,22 @@ export class DocumentQuery extends APIResource {
    * });
    * ```
    */
-  ask(body: DocumentQueryAskParams, options?: RequestOptions): APIPromise<DocumentQueryAskResponse> {
+  create(body: DocumentQueryCreateParams, options?: RequestOptions): APIPromise<DocumentQueryCreateResponse> {
     return this._client.post('/v1/document_query', { body, ...options });
   }
 }
 
-export interface DocumentQueryAskResponse {
-  /**
-   * AI-generated response that may include direct document quotes, content
-   * summaries, contextual explanations, references to specific sections, and related
-   * content suggestions
-   */
-  answer?: string;
-}
+export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
 
-export interface DocumentQueryAskParams {
-  /**
-   * The storage bucket containing the target document. Must be a valid, registered
-   * Smart Bucket. Used to identify which bucket to query against
-   */
-  bucket_location: DocumentQueryAskParams.BucketLocation;
-
-  /**
-   * User's input or question about the document. Can be natural language questions,
-   * commands, or requests. The system will process this against the document content
-   */
-  input: string;
-
-  /**
-   * Document identifier within the bucket. Typically matches the storage path or
-   * key. Used to identify which document to chat with
-   */
-  object_id: string;
-
-  /**
-   * Client-provided conversation session identifier. Required for maintaining
-   * context in follow-up questions. We recommend using a UUID or ULID for this value
-   */
-  request_id: string;
-}
-
-export namespace DocumentQueryAskParams {
-  /**
-   * The storage bucket containing the target document. Must be a valid, registered
-   * Smart Bucket. Used to identify which bucket to query against
-   */
-  export interface BucketLocation {
+export namespace BucketLocator {
+  export interface Bucket {
     /**
      * BucketName represents a bucket name with an optional version
      */
-    bucket: BucketLocation.Bucket;
+    bucket: Bucket.Bucket;
   }
 
-  export namespace BucketLocation {
+  export namespace Bucket {
     /**
      * BucketName represents a bucket name with an optional version
      */
@@ -109,11 +72,51 @@ export namespace DocumentQueryAskParams {
       version?: string | null;
     }
   }
+
+  export interface ModuleID {
+    module_id: string;
+  }
+}
+
+export interface DocumentQueryCreateResponse {
+  /**
+   * AI-generated response that may include direct document quotes, content
+   * summaries, contextual explanations, references to specific sections, and related
+   * content suggestions
+   */
+  answer?: string;
+}
+
+export interface DocumentQueryCreateParams {
+  /**
+   * The storage bucket containing the target document. Must be a valid, registered
+   * Smart Bucket. Used to identify which bucket to query against
+   */
+  bucket_location: BucketLocator;
+
+  /**
+   * User's input or question about the document. Can be natural language questions,
+   * commands, or requests. The system will process this against the document content
+   */
+  input: string;
+
+  /**
+   * Document identifier within the bucket. Typically matches the storage path or
+   * key. Used to identify which document to chat with
+   */
+  object_id: string;
+
+  /**
+   * Client-provided conversation session identifier. Required for maintaining
+   * context in follow-up questions. We recommend using a UUID or ULID for this value
+   */
+  request_id: string;
 }
 
 export declare namespace DocumentQuery {
   export {
-    type DocumentQueryAskResponse as DocumentQueryAskResponse,
-    type DocumentQueryAskParams as DocumentQueryAskParams,
+    type BucketLocator as BucketLocator,
+    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
+    type DocumentQueryCreateParams as DocumentQueryCreateParams,
   };
 }

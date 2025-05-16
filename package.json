@@ -1,12 +1,12 @@
 {
-  "name": "@liquidmetal-ai/lm-raindrop",
+  "name": "raindrop",
   "version": "0.1.0",
   "description": "The official TypeScript library for the Raindrop API",
-  "author": "Raindrop <customer@liquidmetal.ai>",
+  "author": "Raindrop <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:LiquidMetal-AI/lm-raindrop-typescript-sdk",
+  "repository": "github:stainless-sdks/raindrop-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
@@ -50,8 +50,8 @@
     "synckit": "0.8.8"
   },
   "imports": {
-    "@liquidmetal-ai/lm-raindrop": ".",
-    "@liquidmetal-ai/lm-raindrop/*": "./src/*"
+    "raindrop": ".",
+    "raindrop/*": "./src/*"
   },
   "exports": {
     ".": {

@@ -1,19 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ChunkSearch, type ChunkSearchFindResponse, type ChunkSearchFindParams } from './chunk-search';
-export { DocumentQuery, type DocumentQueryAskResponse, type DocumentQueryAskParams } from './document-query';
-export { Search, type TextResult, type SearchFindResponse, type SearchFindParams } from './search';
 export {
-  StorageObject,
-  type StorageObjectListObjectsResponse,
-  type StorageObjectPutObjectResponse,
-  type StorageObjectRetrieveObjectResponse,
-  type StorageObjectListObjectsParams,
-  type StorageObjectPutObjectParams,
-  type StorageObjectRetrieveObjectParams,
-} from './storage-object';
+  ChunkSearch,
+  type TextResult,
+  type ChunkSearchExecuteResponse,
+  type ChunkSearchExecuteParams,
+} from './chunk-search';
+export {
+  DocumentQuery,
+  type BucketLocator,
+  type DocumentQueryCreateResponse,
+  type DocumentQueryCreateParams,
+} from './document-query';
+export {
+  Object,
+  type BucketResponse,
+  type ObjectListObjectsResponse,
+  type ObjectPutObjectResponse,
+  type ObjectRetrieveObjectResponse,
+  type ObjectListObjectsParams,
+  type ObjectPutObjectParams,
+  type ObjectRetrieveObjectParams,
+} from './object';
+export { Search, type SearchRunResponse, type SearchRunParams } from './search';
 export {
   SummarizePage,
-  type SummarizePageCreateResponse,
-  type SummarizePageCreateParams,
+  type SummarizePageCreateSummaryResponse,
+  type SummarizePageCreateSummaryParams,
 } from './summarize-page';

@@ -14,30 +14,39 @@ import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { VERSION } from './version';
 import * as Errors from './core/error';
-import * as Pagination from './core/pagination';
-import { AbstractPage, type SearchPageParams, SearchPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
-import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
-import { Search, SearchFindParams, SearchFindResponse, TextResult } from './resources/search';
 import {
-  StorageObject,
-  StorageObjectListObjectsParams,
-  StorageObjectListObjectsResponse,
-  StorageObjectPutObjectParams,
-  StorageObjectPutObjectResponse,
-  StorageObjectRetrieveObjectParams,
-  StorageObjectRetrieveObjectResponse,
-} from './resources/storage-object';
+  ChunkSearch,
+  ChunkSearchExecuteParams,
+  ChunkSearchExecuteResponse,
+  TextResult,
+} from './resources/chunk-search';
+import {
+  BucketLocator,
+  DocumentQuery,
+  DocumentQueryCreateParams,
+  DocumentQueryCreateResponse,
+} from './resources/document-query';
+import {
+  BucketResponse,
+  Object,
+  ObjectListObjectsParams,
+  ObjectListObjectsResponse,
+  ObjectPutObjectParams,
+  ObjectPutObjectResponse,
+  ObjectRetrieveObjectParams,
+  ObjectRetrieveObjectResponse,
+} from './resources/object';
+import { Search, SearchRunParams, SearchRunResponse } from './resources/search';
 import {
   SummarizePage,
-  SummarizePageCreateParams,
-  SummarizePageCreateResponse,
+  SummarizePageCreateSummaryParams,
+  SummarizePageCreateSummaryResponse,
 } from './resources/summarize-page';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
@@ -45,8 +54,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * API key with format `Bearer lm_apikey_...`. You can create new keys in the Raindrop dashboard (raindrop.run → Settings → API Keys).
-   *
+   * Defaults to process.env['RAINDROP_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -139,7 +147,7 @@ export class Raindrop {
    * API Client for interfacing with the Raindrop API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.raindrop.run] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -161,7 +169,7 @@ export class Raindrop {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.raindrop.run`,
+      baseURL: baseURL || `https://api.example.com`,
     };
 
     this.baseURL = options.baseURL!;
@@ -478,25 +486,6 @@ export class Raindrop {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
-  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
-    path: string,
-    Page: new (...args: any[]) => PageClass,
-    opts?: RequestOptions,
-  ): Pagination.PagePromise<PageClass, Item> {
-    return this.requestAPIList(Page, { method: 'get', path, ...opts });
-  }
-
-  requestAPIList<
-    Item = unknown,
-    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
-  >(
-    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
-    options: FinalRequestOptions,
-  ): Pagination.PagePromise<PageClass, Item> {
-    const request = this.makeRequest(options, null, undefined);
-    return new Pagination.PagePromise<PageClass, Item>(this as any as Raindrop, request, Page);
-  }
-
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -729,55 +718,54 @@ export class Raindrop {
 
   static toFile = Uploads.toFile;
 
-  search: API.Search = new API.Search(this);
   documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  storageObject: API.StorageObject = new API.StorageObject(this);
+  search: API.Search = new API.Search(this);
+  object: API.Object = new API.Object(this);
 }
-Raindrop.Search = Search;
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
-Raindrop.StorageObject = StorageObject;
+Raindrop.Search = Search;
+Raindrop.Object = Object;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
-  export import SearchPage = Pagination.SearchPage;
-  export { type SearchPageParams as SearchPageParams, type SearchPageResponse as SearchPageResponse };
-
-  export {
-    Search as Search,
-    type TextResult as TextResult,
-    type SearchFindResponse as SearchFindResponse,
-    type SearchFindParams as SearchFindParams,
-  };
-
   export {
     DocumentQuery as DocumentQuery,
-    type DocumentQueryAskResponse as DocumentQueryAskResponse,
-    type DocumentQueryAskParams as DocumentQueryAskParams,
+    type BucketLocator as BucketLocator,
+    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
+    type DocumentQueryCreateParams as DocumentQueryCreateParams,
   };
 
   export {
     ChunkSearch as ChunkSearch,
-    type ChunkSearchFindResponse as ChunkSearchFindResponse,
-    type ChunkSearchFindParams as ChunkSearchFindParams,
+    type TextResult as TextResult,
+    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
+    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
   };
 
   export {
     SummarizePage as SummarizePage,
-    type SummarizePageCreateResponse as SummarizePageCreateResponse,
-    type SummarizePageCreateParams as SummarizePageCreateParams,
+    type SummarizePageCreateSummaryResponse as SummarizePageCreateSummaryResponse,
+    type SummarizePageCreateSummaryParams as SummarizePageCreateSummaryParams,
   };
 
   export {
-    StorageObject as StorageObject,
-    type StorageObjectListObjectsResponse as StorageObjectListObjectsResponse,
-    type StorageObjectPutObjectResponse as StorageObjectPutObjectResponse,
-    type StorageObjectRetrieveObjectResponse as StorageObjectRetrieveObjectResponse,
-    type StorageObjectListObjectsParams as StorageObjectListObjectsParams,
-    type StorageObjectPutObjectParams as StorageObjectPutObjectParams,
-    type StorageObjectRetrieveObjectParams as StorageObjectRetrieveObjectParams,
+    Search as Search,
+    type SearchRunResponse as SearchRunResponse,
+    type SearchRunParams as SearchRunParams,
+  };
+
+  export {
+    Object as Object,
+    type BucketResponse as BucketResponse,
+    type ObjectListObjectsResponse as ObjectListObjectsResponse,
+    type ObjectPutObjectResponse as ObjectPutObjectResponse,
+    type ObjectRetrieveObjectResponse as ObjectRetrieveObjectResponse,
+    type ObjectListObjectsParams as ObjectListObjectsParams,
+    type ObjectPutObjectParams as ObjectPutObjectParams,
+    type ObjectRetrieveObjectParams as ObjectRetrieveObjectParams,
   };
 }
