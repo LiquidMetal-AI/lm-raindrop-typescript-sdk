@@ -38,20 +38,18 @@ Methods:
 
 - <code title="post /v1/summarize_page">client.summarizePage.<a href="./src/resources/summarize-page.ts">create</a>({ ...params }) -> SummarizePageCreateResponse</code>
 
-# StorageObject
-
 # Chat
 
-# Object
+# StorageObject
 
 Types:
 
-- <code><a href="./src/resources/object.ts">ObjectListObjectsResponse</a></code>
-- <code><a href="./src/resources/object.ts">ObjectPutObjectResponse</a></code>
-- <code><a href="./src/resources/object.ts">ObjectRetrieveObjectResponse</a></code>
+- <code><a href="./src/resources/storage-object.ts">StorageObjectListObjectsResponse</a></code>
+- <code><a href="./src/resources/storage-object.ts">StorageObjectPutObjectResponse</a></code>
+- <code><a href="./src/resources/storage-object.ts">StorageObjectRetrieveObjectResponse</a></code>
 
 Methods:
 
-- <code title="get /v1/object/{bucket_name}">client.object.<a href="./src/resources/object.ts">listObjects</a>(bucketName, { ...params }) -> ObjectListObjectsResponse</code>
-- <code title="post /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">putObject</a>(objectKey, { ...params }) -> ObjectPutObjectResponse</code>
-- <code title="get /v1/object/{bucket_name}/{object_key}">client.object.<a href="./src/resources/object.ts">retrieveObject</a>(objectKey, { ...params }) -> ObjectRetrieveObjectResponse</code>
+- <code title="get /v1/object/{bucket_name}">client.storageObject.<a href="./src/resources/storage-object.ts">listObjects</a>(bucketName, { ...params }) -> StorageObjectListObjectsResponse</code>
+- <code title="post /v1/object/{bucket_name}/{object_key}">client.storageObject.<a href="./src/resources/storage-object.ts">putObject</a>(objectKey, { ...params }) -> StorageObjectPutObjectResponse</code>
+- <code title="get /v1/object/{bucket_name}/{object_key}">client.storageObject.<a href="./src/resources/storage-object.ts">retrieveObject</a>(objectKey, { ...params }) -> StorageObjectRetrieveObjectResponse</code>
