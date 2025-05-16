@@ -38,8 +38,6 @@ Methods:
 
 - <code title="post /v1/summarize_page">client.summarizePage.<a href="./src/resources/summarize-page.ts">create</a>({ ...params }) -> SummarizePageCreateResponse</code>
 
-# Chat
-
 # StorageObject
 
 Types:

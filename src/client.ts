@@ -22,7 +22,6 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { Chat } from './resources/chat';
 import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
 import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
 import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
@@ -729,14 +728,12 @@ export class Raindrop {
   documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  chat: API.Chat = new API.Chat(this);
   storageObject: API.StorageObject = new API.StorageObject(this);
 }
 Raindrop.Search = Search;
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
-Raindrop.Chat = Chat;
 Raindrop.StorageObject = StorageObject;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
@@ -767,8 +764,6 @@ export declare namespace Raindrop {
     type SummarizePageCreateResponse as SummarizePageCreateResponse,
     type SummarizePageCreateParams as SummarizePageCreateParams,
   };
-
-  export { Chat as Chat };
 
   export {
     StorageObject as StorageObject,
