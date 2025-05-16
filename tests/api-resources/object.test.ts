@@ -10,13 +10,7 @@ const client = new Raindrop({
 describe('resource object', () => {
   // skipped: tests are disabled for the time being
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.object.retrieve('object_key', {
-      bucket_name: 'bucket_name',
-      key: 'key',
-      module_id: 'module_id',
-      organization_id: 'organization_id',
-      user_id: 'user_id',
-    });
+    const responsePromise = client.object.retrieve('object_key', { bucket_name: 'bucket_name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -38,12 +32,8 @@ describe('resource object', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.object.list('bucket_name', {
-      module_id: 'module_id',
-      organization_id: 'organization_id',
-      user_id: 'user_id',
-    });
+  test.skip('list', async () => {
+    const responsePromise = client.object.list('bucket_name');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -54,23 +44,20 @@ describe('resource object', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.object.list('bucket_name', {
-      module_id: 'module_id',
-      organization_id: 'organization_id',
-      user_id: 'user_id',
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.object.list(
+        'bucket_name',
+        { module_id: 'module_id', organization_id: 'organization_id', user_id: 'user_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Raindrop.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
   test.skip('upload: only required params', async () => {
-    const responsePromise = client.object.upload('object_key', {
-      bucket_name: 'bucket_name',
-      query_key: 'key',
-      query_module_id: 'module_id',
-      query_organization_id: 'organization_id',
-      query_user_id: 'user_id',
-    });
+    const responsePromise = client.object.upload('object_key', { path_bucket_name: 'bucket_name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,17 +70,15 @@ describe('resource object', () => {
   // skipped: tests are disabled for the time being
   test.skip('upload: required and optional params', async () => {
     const response = await client.object.upload('object_key', {
-      bucket_name: 'bucket_name',
-      query_key: 'key',
-      query_module_id: 'module_id',
-      query_organization_id: 'organization_id',
-      query_user_id: 'user_id',
+      path_bucket_name: 'bucket_name',
+      body_bucket_name: 'bucket_name',
       content: 'U3RhaW5sZXNzIHJvY2tz',
       content_type: 'content_type',
-      body_key: 'key',
-      body_module_id: 'module_id',
-      body_organization_id: 'organization_id',
-      body_user_id: 'user_id',
+      key: 'key',
+      module_id: 'module_id',
+      body_object_key: 'object_key',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 });
