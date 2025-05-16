@@ -25,14 +25,17 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Raindrop from 'raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
-  const object = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' });
+  const documentQuery = await client.documentQuery.create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
+  });
 
-  console.log(object.bucket);
+  console.log(documentQuery.answer);
 }
 
 main();
@@ -46,13 +49,16 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Raindrop from 'raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
-  const params: Raindrop.ObjectRetrieveParams = { bucket_name: 'bucket_name' };
-  const object: Raindrop.ObjectRetrieveResponse = await client.object.retrieve('object_key', params);
+  const params: Raindrop.DocumentQueryCreateParams = {
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
+  };
+  const documentQuery: Raindrop.DocumentQueryCreateResponse = await client.documentQuery.create(params);
 }
 
 main();
@@ -69,8 +75,13 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const object = await client.object
-    .retrieve('object_key', { bucket_name: 'bucket_name' })
+  const documentQuery = await client.documentQuery
+    .create({
+      bucket_location: { bucket: {} },
+      input: 'What are the key points in this document?',
+      object_id: 'document.pdf',
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
+    })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
         console.log(err.status); // 400
@@ -114,7 +125,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
+await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +142,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }, {
+await client.documentQuery.create({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -154,15 +165,27 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.object.retrieve('object_key', { bucket_name: 'bucket_name' }).asResponse();
+const response = await client.documentQuery
+  .create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: object, response: raw } = await client.object
-  .retrieve('object_key', { bucket_name: 'bucket_name' })
+const { data: documentQuery, response: raw } = await client.documentQuery
+  .create({
+    bucket_location: { bucket: {} },
+    input: 'What are the key points in this document?',
+    object_id: 'document.pdf',
+    request_id: '123e4567-e89b-12d3-a456-426614174000',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(object.bucket);
+console.log(documentQuery.answer);
 ```
 
 ### Logging

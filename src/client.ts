@@ -21,15 +21,23 @@ import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
-  BucketResponse,
-  Object,
-  ObjectListParams,
-  ObjectListResponse,
-  ObjectRetrieveParams,
-  ObjectRetrieveResponse,
-  ObjectUploadParams,
-  ObjectUploadResponse,
-} from './resources/object';
+  ChunkSearch,
+  ChunkSearchExecuteParams,
+  ChunkSearchExecuteResponse,
+  TextResult,
+} from './resources/chunk-search';
+import {
+  BucketLocator,
+  DocumentQuery,
+  DocumentQueryCreateParams,
+  DocumentQueryCreateResponse,
+} from './resources/document-query';
+import { Search, SearchRunParams, SearchRunResponse } from './resources/search';
+import {
+  SummarizePage,
+  SummarizePageCreateSummaryParams,
+  SummarizePageCreateSummaryResponse,
+} from './resources/summarize-page';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -38,7 +46,7 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['RAINDROP_API_KEY'].
    */
-  apiKey?: string | null | undefined;
+  apiKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -111,7 +119,7 @@ export interface ClientOptions {
  * API Client for interfacing with the Raindrop API.
  */
 export class Raindrop {
-  apiKey: string | null;
+  apiKey: string;
 
   baseURL: string;
   maxRetries: number;
@@ -128,7 +136,7 @@ export class Raindrop {
   /**
    * API Client for interfacing with the Raindrop API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? null]
+   * @param {string | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -139,9 +147,15 @@ export class Raindrop {
    */
   constructor({
     baseURL = readEnv('RAINDROP_BASE_URL'),
-    apiKey = readEnv('RAINDROP_API_KEY') ?? null,
+    apiKey = readEnv('RAINDROP_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
+    if (apiKey === undefined) {
+      throw new Errors.RaindropError(
+        "The RAINDROP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Raindrop client with an apiKey option, like new Raindrop({ apiKey: 'My API Key' }).",
+      );
+    }
+
     const options: ClientOptions = {
       apiKey,
       ...opts,
@@ -190,23 +204,11 @@ export class Raindrop {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.apiKey && values.get('authorization')) {
-      return;
-    }
-    if (nulls.has('authorization')) {
-      return;
-    }
-
-    throw new Error(
-      'Could not resolve authentication method. Expected the apiKey to be set. Or for the "Authorization" headers to be explicitly omitted',
-    );
+    return;
   }
 
   protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
-    if (this.apiKey == null) {
-      return undefined;
-    }
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    return buildHeaders([{ Authorization: this.apiKey }]);
   }
 
   /**
@@ -706,20 +708,41 @@ export class Raindrop {
 
   static toFile = Uploads.toFile;
 
-  object: API.Object = new API.Object(this);
+  documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
+  chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
+  summarizePage: API.SummarizePage = new API.SummarizePage(this);
+  search: API.Search = new API.Search(this);
 }
-Raindrop.Object = Object;
+Raindrop.DocumentQuery = DocumentQuery;
+Raindrop.ChunkSearch = ChunkSearch;
+Raindrop.SummarizePage = SummarizePage;
+Raindrop.Search = Search;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Object as Object,
-    type BucketResponse as BucketResponse,
-    type ObjectRetrieveResponse as ObjectRetrieveResponse,
-    type ObjectListResponse as ObjectListResponse,
-    type ObjectUploadResponse as ObjectUploadResponse,
-    type ObjectRetrieveParams as ObjectRetrieveParams,
-    type ObjectListParams as ObjectListParams,
-    type ObjectUploadParams as ObjectUploadParams,
+    DocumentQuery as DocumentQuery,
+    type BucketLocator as BucketLocator,
+    type DocumentQueryCreateResponse as DocumentQueryCreateResponse,
+    type DocumentQueryCreateParams as DocumentQueryCreateParams,
+  };
+
+  export {
+    ChunkSearch as ChunkSearch,
+    type TextResult as TextResult,
+    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
+    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+  };
+
+  export {
+    SummarizePage as SummarizePage,
+    type SummarizePageCreateSummaryResponse as SummarizePageCreateSummaryResponse,
+    type SummarizePageCreateSummaryParams as SummarizePageCreateSummaryParams,
+  };
+
+  export {
+    Search as Search,
+    type SearchRunResponse as SearchRunResponse,
+    type SearchRunParams as SearchRunParams,
   };
 }
