@@ -7,8 +7,8 @@ import { path } from '../internal/utils/path';
 
 export class Object extends APIResource {
   /**
-   * **DESCRIPTION** Download a file from a SmartBucket or regular bucket. The bucket
-   * parameter (ID) is used to identify the bucket to download from. The key is the
+   * **DESCRIPTION** Delete a file from a SmartBucket or regular bucket. The bucket
+   * parameter (ID) is used to identify the bucket to delete from. The key is the
    * path to the object in the bucket.
    */
   retrieve(
@@ -26,7 +26,7 @@ export class Object extends APIResource {
    */
   list(
     bucketName: string,
-    query: ObjectListParams,
+    query: ObjectListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ObjectListResponse> {
     return this._client.get(path`/v1/object/${bucketName}`, { query, ...options });
@@ -42,17 +42,8 @@ export class Object extends APIResource {
     params: ObjectUploadParams,
     options?: RequestOptions,
   ): APIPromise<ObjectUploadResponse> {
-    const { bucket_name, query_key, query_module_id, query_organization_id, query_user_id, ...body } = params;
-    return this._client.post(path`/v1/object/${bucket_name}/${objectKey}`, {
-      query: {
-        key: query_key,
-        module_id: query_module_id,
-        organization_id: query_organization_id,
-        user_id: query_user_id,
-      },
-      body,
-      ...options,
-    });
+    const { path_bucket_name, ...body } = params;
+    return this._client.post(path`/v1/object/${path_bucket_name}/${objectKey}`, { body, ...options });
   }
 }
 
@@ -167,32 +158,32 @@ export interface ObjectUploadResponse {
 
 export interface ObjectRetrieveParams {
   /**
-   * Path param:
+   * Path param: **DESCRIPTION** Name of the bucket **REQUIRED** true
    */
   bucket_name: string;
 
   /**
-   * Query param: **DESCRIPTION** Object key/path to download **REQUIRED** true
+   * Query param: **DESCRIPTION** Object key/path to delete **REQUIRED** true
    * **EXAMPLE** "my-key"
    */
-  key: string;
+  key?: string;
 
   /**
    * Query param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
    * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
    */
-  module_id: string;
+  module_id?: string;
 
   /**
    * Query param: **DESCRIPTION** Organization ID for access control **REQUIRED**
    * true
    */
-  organization_id: string;
+  organization_id?: string;
 
   /**
    * Query param: **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  user_id: string;
+  user_id?: string;
 }
 
 export interface ObjectListParams {
@@ -200,47 +191,29 @@ export interface ObjectListParams {
    * **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true **EXAMPLE**
    * "01jtgtrd37acrqf7k24dggg31s"
    */
-  module_id: string;
+  module_id?: string;
 
   /**
    * **DESCRIPTION** Organization ID for access control **REQUIRED** true
    */
-  organization_id: string;
+  organization_id?: string;
 
   /**
    * **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  user_id: string;
+  user_id?: string;
 }
 
 export interface ObjectUploadParams {
   /**
-   * Path param:
+   * Path param: **DESCRIPTION** Name of the bucket **REQUIRED** true
    */
-  bucket_name: string;
+  path_bucket_name: string;
 
   /**
-   * Query param: **DESCRIPTION** Object key/path in the bucket **REQUIRED** true
-   * **EXAMPLE** "my-key"
+   * Body param: **DESCRIPTION** Name of the bucket **REQUIRED** true
    */
-  query_key: string;
-
-  /**
-   * Query param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
-   * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
-   */
-  query_module_id: string;
-
-  /**
-   * Query param: **DESCRIPTION** Organization ID for access control **REQUIRED**
-   * true
-   */
-  query_organization_id: string;
-
-  /**
-   * Query param: **DESCRIPTION** User ID for access control **REQUIRED** true
-   */
-  query_user_id: string;
+  body_bucket_name?: string;
 
   /**
    * Body param: **DESCRIPTION** Binary content of the object **REQUIRED** true
@@ -257,23 +230,29 @@ export interface ObjectUploadParams {
    * Body param: **DESCRIPTION** Object key/path in the bucket **REQUIRED** true
    * **EXAMPLE** "my-key"
    */
-  body_key?: string;
+  key?: string;
 
   /**
    * Body param: **DESCRIPTION** Module ID identifying the bucket **REQUIRED** true
    * **EXAMPLE** "01jtgtrd37acrqf7k24dggg31s"
    */
-  body_module_id?: string;
+  module_id?: string;
+
+  /**
+   * Body param: **DESCRIPTION** Key/path of the object in the bucket **REQUIRED**
+   * true
+   */
+  body_object_key?: string;
 
   /**
    * Body param: **DESCRIPTION** Organization ID for access control **REQUIRED** true
    */
-  body_organization_id?: string;
+  organization_id?: string;
 
   /**
    * Body param: **DESCRIPTION** User ID for access control **REQUIRED** true
    */
-  body_user_id?: string;
+  user_id?: string;
 }
 
 export declare namespace Object {
