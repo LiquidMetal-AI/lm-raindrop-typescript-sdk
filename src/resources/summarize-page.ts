@@ -28,22 +28,22 @@ export class SummarizePage extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.summarizePage.createSummary({
+   * const response = await client.summarizePage.sumarizePage({
    *   page: 1,
    *   page_size: 10,
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
-  createSummary(
-    body: SummarizePageCreateSummaryParams,
+  sumarizePage(
+    body: SummarizePageSumarizePageParams,
     options?: RequestOptions,
-  ): APIPromise<SummarizePageCreateSummaryResponse> {
+  ): APIPromise<SummarizePageSumarizePageResponse> {
     return this._client.post('/v1/summarize_page', { body, ...options });
   }
 }
 
-export interface SummarizePageCreateSummaryResponse {
+export interface SummarizePageSumarizePageResponse {
   /**
    * AI-generated summary including key themes and topics, content type distribution,
    * important findings, and document relationships
@@ -51,7 +51,7 @@ export interface SummarizePageCreateSummaryResponse {
   summary?: string;
 }
 
-export interface SummarizePageCreateSummaryParams {
+export interface SummarizePageSumarizePageParams {
   /**
    * Target page number (1-based)
    */
@@ -70,7 +70,7 @@ export interface SummarizePageCreateSummaryParams {
 
 export declare namespace SummarizePage {
   export {
-    type SummarizePageCreateSummaryResponse as SummarizePageCreateSummaryResponse,
-    type SummarizePageCreateSummaryParams as SummarizePageCreateSummaryParams,
+    type SummarizePageSumarizePageResponse as SummarizePageSumarizePageResponse,
+    type SummarizePageSumarizePageParams as SummarizePageSumarizePageParams,
   };
 }

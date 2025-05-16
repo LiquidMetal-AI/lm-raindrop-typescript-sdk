@@ -9,8 +9,8 @@ const client = new Raindrop({
 
 describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.documentQuery.create({
+  test.skip('ask: only required params', async () => {
+    const responsePromise = client.documentQuery.ask({
       bucket_location: { bucket: {} },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
@@ -26,8 +26,8 @@ describe('resource documentQuery', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.documentQuery.create({
+  test.skip('ask: required and optional params', async () => {
+    const response = await client.documentQuery.ask({
       bucket_location: {
         bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
       },

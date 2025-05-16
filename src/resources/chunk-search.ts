@@ -17,14 +17,14 @@ export class ChunkSearch extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.chunkSearch.execute({
+   * const response = await client.chunkSearch.find({
    *   bucket_locations: [{ bucket: {} }],
    *   input: 'Find documents about revenue in Q4 2023',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
-  execute(body: ChunkSearchExecuteParams, options?: RequestOptions): APIPromise<ChunkSearchExecuteResponse> {
+  find(body: ChunkSearchFindParams, options?: RequestOptions): APIPromise<ChunkSearchFindResponse> {
     return this._client.post('/v1/chunk_search', { body, ...options });
   }
 }
@@ -100,7 +100,7 @@ export namespace TextResult {
   }
 }
 
-export interface ChunkSearchExecuteResponse {
+export interface ChunkSearchFindResponse {
   /**
    * Ordered list of relevant text segments. Each result includes full context and
    * metadata
@@ -108,7 +108,7 @@ export interface ChunkSearchExecuteResponse {
   results?: Array<TextResult>;
 }
 
-export interface ChunkSearchExecuteParams {
+export interface ChunkSearchFindParams {
   /**
    * The buckets to search. If provided, the search will only return results from
    * these buckets
@@ -131,7 +131,7 @@ export interface ChunkSearchExecuteParams {
 export declare namespace ChunkSearch {
   export {
     type TextResult as TextResult,
-    type ChunkSearchExecuteResponse as ChunkSearchExecuteResponse,
-    type ChunkSearchExecuteParams as ChunkSearchExecuteParams,
+    type ChunkSearchFindResponse as ChunkSearchFindResponse,
+    type ChunkSearchFindParams as ChunkSearchFindParams,
   };
 }
