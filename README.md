@@ -22,18 +22,15 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
-  const searchResponse = await client.search.find({
-    bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }],
+  const response = await client.search.find({
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   });
 
-  console.log(searchResponse.pagination);
+  console.log(response.pagination);
 }
 
 main();
@@ -47,17 +44,14 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
-const client = new Raindrop({
-  apiKey: process.env['RAINDROP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Raindrop();
 
 async function main() {
   const params: Raindrop.SearchFindParams = {
-    bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   };
-  const searchResponse: Raindrop.SearchResponse = await client.search.find(params);
+  const response: Raindrop.SearchFindResponse = await client.search.find(params);
 }
 
 main();
@@ -74,9 +68,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const searchResponse = await client.search
+  const response = await client.search
     .find({
-      bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }],
       input: 'all my pdfs with images of cats that do not talk about dogs',
       request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
     })
@@ -119,11 +112,12 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Raindrop({
+  apiKey: 'My API Key',
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.search.find({ bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   maxRetries: 5,
 });
 ```
@@ -136,11 +130,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Raindrop({
+  apiKey: 'My API Key',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.search.find({ bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }], input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
+await client.search.find({ input: 'all my pdfs with images of cats that do not talk about dogs', request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -148,40 +143,6 @@ await client.search.find({ bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24d
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
-
-## Auto-pagination
-
-List methods in the Raindrop API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllSearches(params) {
-  const allSearches = [];
-  // Automatically fetches more pages as needed.
-  for await (const textResult of client.search.retrieve({
-    request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
-    page: 1,
-  })) {
-    allSearches.push(textResult);
-  }
-  return allSearches;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.search.retrieve({ request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57', page: 1 });
-for (const textResult of page.results) {
-  console.log(textResult);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
 
 ## Advanced Usage
 
@@ -199,7 +160,6 @@ const client = new Raindrop();
 
 const response = await client.search
   .find({
-    bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })
@@ -207,15 +167,14 @@ const response = await client.search
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: searchResponse, response: raw } = await client.search
+const { data: response, response: raw } = await client.search
   .find({
-    bucket_locations: [{ module_id: '01jtgtrd37acrqf7k24dggg31s' }],
     input: 'all my pdfs with images of cats that do not talk about dogs',
     request_id: 'c523cb44-9b59-4bf5-a840-01891d735b57',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(searchResponse.pagination);
+console.log(response.pagination);
 ```
 
 ### Logging
