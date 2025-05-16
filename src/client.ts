@@ -22,9 +22,9 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { Chat, ChatInteractParams, ChatInteractResponse } from './resources/chat';
+import { Chat } from './resources/chat';
 import { ChunkSearch, ChunkSearchFindParams, ChunkSearchFindResponse } from './resources/chunk-search';
-import { DocumentQuery } from './resources/document-query';
+import { DocumentQuery, DocumentQueryAskParams, DocumentQueryAskResponse } from './resources/document-query';
 import {
   Object,
   ObjectListObjectsParams,
@@ -753,7 +753,11 @@ export declare namespace Raindrop {
     type SearchFindParams as SearchFindParams,
   };
 
-  export { DocumentQuery as DocumentQuery };
+  export {
+    DocumentQuery as DocumentQuery,
+    type DocumentQueryAskResponse as DocumentQueryAskResponse,
+    type DocumentQueryAskParams as DocumentQueryAskParams,
+  };
 
   export {
     ChunkSearch as ChunkSearch,
@@ -769,11 +773,7 @@ export declare namespace Raindrop {
 
   export { StorageObject as StorageObject };
 
-  export {
-    Chat as Chat,
-    type ChatInteractResponse as ChatInteractResponse,
-    type ChatInteractParams as ChatInteractParams,
-  };
+  export { Chat as Chat };
 
   export {
     Object as Object,

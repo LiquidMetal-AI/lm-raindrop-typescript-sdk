@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Chat, type ChatInteractResponse, type ChatInteractParams } from './chat';
+export { Chat } from './chat';
 export { ChunkSearch, type ChunkSearchFindResponse, type ChunkSearchFindParams } from './chunk-search';
-export { DocumentQuery } from './document-query';
+export { DocumentQuery, type DocumentQueryAskResponse, type DocumentQueryAskParams } from './document-query';
 export {
   Object,
   type ObjectListObjectsResponse,

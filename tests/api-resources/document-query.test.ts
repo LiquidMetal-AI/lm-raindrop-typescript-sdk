@@ -7,10 +7,10 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource chat', () => {
+describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
-  test.skip('interact: only required params', async () => {
-    const responsePromise = client.chat.interact({
+  test.skip('ask: only required params', async () => {
+    const responsePromise = client.documentQuery.ask({
       bucket_location: { bucket: {} },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
@@ -26,8 +26,8 @@ describe('resource chat', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('interact: required and optional params', async () => {
-    const response = await client.chat.interact({
+  test.skip('ask: required and optional params', async () => {
+    const response = await client.documentQuery.ask({
       bucket_location: {
         bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
       },

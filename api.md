@@ -10,6 +10,14 @@ Methods:
 
 # DocumentQuery
 
+Types:
+
+- <code><a href="./src/resources/document-query.ts">DocumentQueryAskResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/document_query">client.documentQuery.<a href="./src/resources/document-query.ts">ask</a>({ ...params }) -> DocumentQueryAskResponse</code>
+
 # ChunkSearch
 
 Types:
@@ -33,14 +41,6 @@ Methods:
 # StorageObject
 
 # Chat
-
-Types:
-
-- <code><a href="./src/resources/chat.ts">ChatInteractResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/chat">client.chat.<a href="./src/resources/chat.ts">interact</a>({ ...params }) -> ChatInteractResponse</code>
 
 # Object
 
