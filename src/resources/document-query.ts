@@ -29,7 +29,7 @@ export class DocumentQuery extends APIResource {
    * @example
    * ```ts
    * const response = await client.documentQuery.ask({
-   *   bucket_location: { bucket: {} },
+   *   bucket_location: { bucket: { name: 'my-bucket' } },
    *   input: 'What are the key points in this document?',
    *   object_id: 'document.pdf',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -46,34 +46,38 @@ export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
 export namespace BucketLocator {
   export interface Bucket {
     /**
-     * BucketName represents a bucket name with an optional version
+     * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
     bucket: Bucket.Bucket;
   }
 
   export namespace Bucket {
     /**
-     * BucketName represents a bucket name with an optional version
+     * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
     export interface Bucket {
       /**
-       * Optional Application
+       * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
+       */
+      name: string;
+
+      /**
+       * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
       application_name?: string | null;
 
       /**
-       * The name of the bucket
-       */
-      name?: string;
-
-      /**
-       * Optional version of the bucket
+       * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       * **REQUIRED** FALSE
        */
       version?: string | null;
     }
   }
 
   export interface ModuleID {
+    /**
+     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
+     */
     module_id: string;
   }
 }
