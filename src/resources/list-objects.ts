@@ -8,13 +8,14 @@ export class ListObjects extends APIResource {
   /**
    * List all objects in a SmartBucket or regular bucket. The bucket parameter (ID)
    * is used to identify the bucket to list objects from.
+   *
+   * @example
+   * ```ts
+   * const listObject = await client.listObjects.create();
+   * ```
    */
-  create(
-    params: ListObjectCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ListObjectCreateResponse> {
-    const { module_id } = params ?? {};
-    return this._client.post('/v1/list_objects', { query: { module_id }, ...options });
+  create(body: ListObjectCreateParams, options?: RequestOptions): APIPromise<ListObjectCreateResponse> {
+    return this._client.post('/v1/list_objects', { body, ...options });
   }
 }
 
