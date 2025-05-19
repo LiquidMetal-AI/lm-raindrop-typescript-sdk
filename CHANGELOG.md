@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5 (2025-05-19)
+
+Full Changelog: [v0.1.4...v0.1.5](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.4...v0.1.5)
+
+### Features
+
+* **api:** manual updates ([9690b7a](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/9690b7ae58d74dc3f313b6c4c22b75a6de762cc9))
+
 ## 0.1.4 (2025-05-19)
 
 Full Changelog: [v0.1.3...v0.1.4](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.3...v0.1.4)
