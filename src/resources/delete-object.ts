@@ -9,13 +9,14 @@ export class DeleteObject extends APIResource {
    * Delete a file from a SmartBucket or regular bucket. The bucket parameter (ID) is
    * used to identify the bucket to delete from. The key is the path to the object in
    * the bucket.
+   *
+   * @example
+   * ```ts
+   * const deleteObject = await client.deleteObject.delete();
+   * ```
    */
-  delete(
-    params: DeleteObjectDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<unknown> {
-    const { key, module_id } = params ?? {};
-    return this._client.post('/v1/delete_object', { query: { key, module_id }, ...options });
+  delete(body: DeleteObjectDeleteParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/v1/delete_object', { body, ...options });
   }
 }
 

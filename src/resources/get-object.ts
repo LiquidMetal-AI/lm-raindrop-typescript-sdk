@@ -9,13 +9,14 @@ export class GetObject extends APIResource {
    * Download a file from a SmartBucket or regular bucket. The bucket parameter (ID)
    * is used to identify the bucket to download from. The key is the path to the
    * object in the bucket.
+   *
+   * @example
+   * ```ts
+   * const response = await client.getObject.download();
+   * ```
    */
-  download(
-    params: GetObjectDownloadParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<GetObjectDownloadResponse> {
-    const { key, module_id } = params ?? {};
-    return this._client.post('/v1/get_object', { query: { key, module_id }, ...options });
+  download(body: GetObjectDownloadParams, options?: RequestOptions): APIPromise<GetObjectDownloadResponse> {
+    return this._client.post('/v1/get_object', { body, ...options });
   }
 }
 
