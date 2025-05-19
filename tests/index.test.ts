@@ -306,13 +306,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['RAINDROP_BASE_URL'] = ''; // empty
       const client = new Raindrop({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.example.com');
+      expect(client.baseURL).toEqual('https://api.raindrop.run');
     });
 
     test('blank env variable', () => {
       process.env['RAINDROP_BASE_URL'] = '  '; // blank
       const client = new Raindrop({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.example.com');
+      expect(client.baseURL).toEqual('https://api.raindrop.run');
     });
   });
 
