@@ -11,7 +11,7 @@ describe('resource search', () => {
   // skipped: tests are disabled for the time being
   test.skip('find: only required params', async () => {
     const responsePromise = client.search.find({
-      bucket_locations: [{ bucket: {} }],
+      bucket_locations: [{ bucket: { name: 'my-bucket' } }],
       input: 'Show me documents containing credit card numbers or social security numbers',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
     });
@@ -28,7 +28,7 @@ describe('resource search', () => {
   test.skip('find: required and optional params', async () => {
     const response = await client.search.find({
       bucket_locations: [
-        { bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+        { bucket: { name: 'my-bucket', application_name: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
       ],
       input: 'Show me documents containing credit card numbers or social security numbers',
       request_id: '123e4567-e89b-12d3-a456-426614174000',

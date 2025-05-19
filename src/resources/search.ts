@@ -34,7 +34,7 @@ export class Search extends APIResource {
    * @example
    * ```ts
    * const response = await client.search.find({
-   *   bucket_locations: [{ bucket: {} }],
+   *   bucket_locations: [{ bucket: { name: 'my-bucket' } }],
    *   input:
    *     'Show me documents containing credit card numbers or social security numbers',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',

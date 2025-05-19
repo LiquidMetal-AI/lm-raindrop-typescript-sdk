@@ -26,7 +26,7 @@ const client = new Raindrop();
 
 async function main() {
   const response = await client.documentQuery.ask({
-    bucket_location: { bucket: {} },
+    bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
     request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -50,7 +50,7 @@ const client = new Raindrop();
 
 async function main() {
   const params: Raindrop.DocumentQueryAskParams = {
-    bucket_location: { bucket: {} },
+    bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
     request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -74,7 +74,7 @@ a subclass of `APIError` will be thrown:
 async function main() {
   const response = await client.documentQuery
     .ask({
-      bucket_location: { bucket: {} },
+      bucket_location: { bucket: { name: 'my-bucket' } },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -118,12 +118,11 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Raindrop({
-  apiKey: 'My API Key',
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.documentQuery.ask({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.documentQuery.ask({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -136,12 +135,11 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Raindrop({
-  apiKey: 'My API Key',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.documentQuery.ask({ bucket_location: { bucket: {} }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.documentQuery.ask({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -166,7 +164,7 @@ const client = new Raindrop();
 
 const response = await client.documentQuery
   .ask({
-    bucket_location: { bucket: {} },
+    bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
     request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -177,7 +175,7 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.documentQuery
   .ask({
-    bucket_location: { bucket: {} },
+    bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
     request_id: '123e4567-e89b-12d3-a456-426614174000',

@@ -18,7 +18,7 @@ export class ChunkSearch extends APIResource {
    * @example
    * ```ts
    * const response = await client.chunkSearch.find({
-   *   bucket_locations: [{ bucket: {} }],
+   *   bucket_locations: [{ bucket: { name: 'my-bucket' } }],
    *   input: 'Find documents about revenue in Q4 2023',
    *   request_id: '123e4567-e89b-12d3-a456-426614174000',
    * });
@@ -89,12 +89,24 @@ export namespace TextResult {
      * The bucket information containing this result
      */
     export interface Bucket {
+      /**
+       * **EXAMPLE** "my-app"
+       */
       application_name?: string;
 
+      /**
+       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       */
       application_version_id?: string;
 
+      /**
+       * **EXAMPLE** "my-smartbucket"
+       */
       bucket_name?: string;
 
+      /**
+       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       */
       module_id?: string;
     }
   }

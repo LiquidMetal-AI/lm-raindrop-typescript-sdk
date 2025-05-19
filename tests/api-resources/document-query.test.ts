@@ -11,7 +11,7 @@ describe('resource documentQuery', () => {
   // skipped: tests are disabled for the time being
   test.skip('ask: only required params', async () => {
     const responsePromise = client.documentQuery.ask({
-      bucket_location: { bucket: {} },
+      bucket_location: { bucket: { name: 'my-bucket' } },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
       request_id: '123e4567-e89b-12d3-a456-426614174000',
@@ -29,7 +29,7 @@ describe('resource documentQuery', () => {
   test.skip('ask: required and optional params', async () => {
     const response = await client.documentQuery.ask({
       bucket_location: {
-        bucket: { application_name: 'my-app', name: 'my-bucket', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
+        bucket: { name: 'my-bucket', application_name: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
       },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
