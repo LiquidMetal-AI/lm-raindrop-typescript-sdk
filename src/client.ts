@@ -32,16 +32,6 @@ import {
   DocumentQueryAskParams,
   DocumentQueryAskResponse,
 } from './resources/document-query';
-import {
-  Object,
-  ObjectDeleteParams,
-  ObjectDeleteResponse,
-  ObjectListResponse,
-  ObjectRetrieveParams,
-  ObjectRetrieveResponse,
-  ObjectUploadParams,
-  ObjectUploadResponse,
-} from './resources/object';
 import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
 import {
   SummarizePage,
@@ -722,13 +712,11 @@ export class Raindrop {
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
   search: API.Search = new API.Search(this);
-  object: API.Object = new API.Object(this);
 }
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
 Raindrop.Search = Search;
-Raindrop.Object = Object;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -756,16 +744,5 @@ export declare namespace Raindrop {
     Search as Search,
     type SearchFindResponse as SearchFindResponse,
     type SearchFindParams as SearchFindParams,
-  };
-
-  export {
-    Object as Object,
-    type ObjectRetrieveResponse as ObjectRetrieveResponse,
-    type ObjectListResponse as ObjectListResponse,
-    type ObjectDeleteResponse as ObjectDeleteResponse,
-    type ObjectUploadResponse as ObjectUploadResponse,
-    type ObjectRetrieveParams as ObjectRetrieveParams,
-    type ObjectDeleteParams as ObjectDeleteParams,
-    type ObjectUploadParams as ObjectUploadParams,
   };
 }
