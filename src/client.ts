@@ -27,11 +27,19 @@ import {
   TextResult,
 } from './resources/chunk-search';
 import {
+  DeleteObject,
+  DeleteObjectDeleteParams,
+  DeleteObjectDeleteResponse,
+} from './resources/delete-object';
+import {
   BucketLocator,
   DocumentQuery,
   DocumentQueryAskParams,
   DocumentQueryAskResponse,
 } from './resources/document-query';
+import { GetObject, GetObjectDownloadParams, GetObjectDownloadResponse } from './resources/get-object';
+import { ListObjectCreateParams, ListObjectCreateResponse, ListObjects } from './resources/list-objects';
+import { PutObject, PutObjectUploadParams, PutObjectUploadResponse } from './resources/put-object';
 import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
 import {
   SummarizePage,
@@ -712,11 +720,19 @@ export class Raindrop {
   chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
   summarizePage: API.SummarizePage = new API.SummarizePage(this);
   search: API.Search = new API.Search(this);
+  putObject: API.PutObject = new API.PutObject(this);
+  getObject: API.GetObject = new API.GetObject(this);
+  deleteObject: API.DeleteObject = new API.DeleteObject(this);
+  listObjects: API.ListObjects = new API.ListObjects(this);
 }
 Raindrop.DocumentQuery = DocumentQuery;
 Raindrop.ChunkSearch = ChunkSearch;
 Raindrop.SummarizePage = SummarizePage;
 Raindrop.Search = Search;
+Raindrop.PutObject = PutObject;
+Raindrop.GetObject = GetObject;
+Raindrop.DeleteObject = DeleteObject;
+Raindrop.ListObjects = ListObjects;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -744,5 +760,29 @@ export declare namespace Raindrop {
     Search as Search,
     type SearchFindResponse as SearchFindResponse,
     type SearchFindParams as SearchFindParams,
+  };
+
+  export {
+    PutObject as PutObject,
+    type PutObjectUploadResponse as PutObjectUploadResponse,
+    type PutObjectUploadParams as PutObjectUploadParams,
+  };
+
+  export {
+    GetObject as GetObject,
+    type GetObjectDownloadResponse as GetObjectDownloadResponse,
+    type GetObjectDownloadParams as GetObjectDownloadParams,
+  };
+
+  export {
+    DeleteObject as DeleteObject,
+    type DeleteObjectDeleteResponse as DeleteObjectDeleteResponse,
+    type DeleteObjectDeleteParams as DeleteObjectDeleteParams,
+  };
+
+  export {
+    ListObjects as ListObjects,
+    type ListObjectCreateResponse as ListObjectCreateResponse,
+    type ListObjectCreateParams as ListObjectCreateParams,
   };
 }
