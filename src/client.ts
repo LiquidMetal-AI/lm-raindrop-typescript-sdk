@@ -137,7 +137,7 @@ export class Raindrop {
    * API Client for interfacing with the Raindrop API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['RAINDROP_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['RAINDROP_BASE_URL'] ?? https://api.raindrop.run] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -159,7 +159,7 @@ export class Raindrop {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.example.com`,
+      baseURL: baseURL || `https://api.raindrop.run`,
     };
 
     this.baseURL = options.baseURL!;
