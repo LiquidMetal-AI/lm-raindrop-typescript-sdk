@@ -21,31 +21,28 @@ import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
-  ChunkSearch,
-  ChunkSearchFindParams,
-  ChunkSearchFindResponse,
-  TextResult,
-} from './resources/chunk-search';
-import {
-  DeleteObject,
-  DeleteObjectDeleteParams,
-  DeleteObjectDeleteResponse,
-} from './resources/delete-object';
+  Bucket,
+  BucketDeleteParams,
+  BucketDeleteResponse,
+  BucketGetParams,
+  BucketGetResponse,
+  BucketListParams,
+  BucketListResponse,
+  BucketPutParams,
+  BucketPutResponse,
+} from './resources/bucket';
 import {
   BucketLocator,
-  DocumentQuery,
-  DocumentQueryAskParams,
-  DocumentQueryAskResponse,
-} from './resources/document-query';
-import { GetObject, GetObjectDownloadParams, GetObjectDownloadResponse } from './resources/get-object';
-import { ListObjectCreateParams, ListObjectCreateResponse, ListObjects } from './resources/list-objects';
-import { PutObject, PutObjectUploadParams, PutObjectUploadResponse } from './resources/put-object';
-import { Search, SearchFindParams, SearchFindResponse } from './resources/search';
-import {
-  SummarizePage,
-  SummarizePageSumarizePageParams,
-  SummarizePageSumarizePageResponse,
-} from './resources/summarize-page';
+  Query,
+  QueryChunkSearchParams,
+  QueryChunkSearchResponse,
+  QueryDocumentQueryParams,
+  QueryDocumentQueryResponse,
+  QueryFindParams,
+  QueryFindResponse,
+  QuerySumarizePageParams,
+  QuerySumarizePageResponse,
+} from './resources/query';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -716,73 +713,36 @@ export class Raindrop {
 
   static toFile = Uploads.toFile;
 
-  documentQuery: API.DocumentQuery = new API.DocumentQuery(this);
-  chunkSearch: API.ChunkSearch = new API.ChunkSearch(this);
-  summarizePage: API.SummarizePage = new API.SummarizePage(this);
-  search: API.Search = new API.Search(this);
-  putObject: API.PutObject = new API.PutObject(this);
-  getObject: API.GetObject = new API.GetObject(this);
-  deleteObject: API.DeleteObject = new API.DeleteObject(this);
-  listObjects: API.ListObjects = new API.ListObjects(this);
+  query: API.Query = new API.Query(this);
+  bucket: API.Bucket = new API.Bucket(this);
 }
-Raindrop.DocumentQuery = DocumentQuery;
-Raindrop.ChunkSearch = ChunkSearch;
-Raindrop.SummarizePage = SummarizePage;
-Raindrop.Search = Search;
-Raindrop.PutObject = PutObject;
-Raindrop.GetObject = GetObject;
-Raindrop.DeleteObject = DeleteObject;
-Raindrop.ListObjects = ListObjects;
+Raindrop.Query = Query;
+Raindrop.Bucket = Bucket;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    DocumentQuery as DocumentQuery,
+    Query as Query,
     type BucketLocator as BucketLocator,
-    type DocumentQueryAskResponse as DocumentQueryAskResponse,
-    type DocumentQueryAskParams as DocumentQueryAskParams,
+    type QueryChunkSearchResponse as QueryChunkSearchResponse,
+    type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
+    type QueryFindResponse as QueryFindResponse,
+    type QuerySumarizePageResponse as QuerySumarizePageResponse,
+    type QueryChunkSearchParams as QueryChunkSearchParams,
+    type QueryDocumentQueryParams as QueryDocumentQueryParams,
+    type QueryFindParams as QueryFindParams,
+    type QuerySumarizePageParams as QuerySumarizePageParams,
   };
 
   export {
-    ChunkSearch as ChunkSearch,
-    type TextResult as TextResult,
-    type ChunkSearchFindResponse as ChunkSearchFindResponse,
-    type ChunkSearchFindParams as ChunkSearchFindParams,
-  };
-
-  export {
-    SummarizePage as SummarizePage,
-    type SummarizePageSumarizePageResponse as SummarizePageSumarizePageResponse,
-    type SummarizePageSumarizePageParams as SummarizePageSumarizePageParams,
-  };
-
-  export {
-    Search as Search,
-    type SearchFindResponse as SearchFindResponse,
-    type SearchFindParams as SearchFindParams,
-  };
-
-  export {
-    PutObject as PutObject,
-    type PutObjectUploadResponse as PutObjectUploadResponse,
-    type PutObjectUploadParams as PutObjectUploadParams,
-  };
-
-  export {
-    GetObject as GetObject,
-    type GetObjectDownloadResponse as GetObjectDownloadResponse,
-    type GetObjectDownloadParams as GetObjectDownloadParams,
-  };
-
-  export {
-    DeleteObject as DeleteObject,
-    type DeleteObjectDeleteResponse as DeleteObjectDeleteResponse,
-    type DeleteObjectDeleteParams as DeleteObjectDeleteParams,
-  };
-
-  export {
-    ListObjects as ListObjects,
-    type ListObjectCreateResponse as ListObjectCreateResponse,
-    type ListObjectCreateParams as ListObjectCreateParams,
+    Bucket as Bucket,
+    type BucketListResponse as BucketListResponse,
+    type BucketDeleteResponse as BucketDeleteResponse,
+    type BucketGetResponse as BucketGetResponse,
+    type BucketPutResponse as BucketPutResponse,
+    type BucketListParams as BucketListParams,
+    type BucketDeleteParams as BucketDeleteParams,
+    type BucketGetParams as BucketGetParams,
+    type BucketPutParams as BucketPutParams,
   };
 }

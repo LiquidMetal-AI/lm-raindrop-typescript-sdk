@@ -25,7 +25,7 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 async function main() {
-  const response = await client.documentQuery.ask({
+  const response = await client.query.documentQuery({
     bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
@@ -49,13 +49,13 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 async function main() {
-  const params: Raindrop.DocumentQueryAskParams = {
+  const params: Raindrop.QueryDocumentQueryParams = {
     bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
     request_id: '123e4567-e89b-12d3-a456-426614174000',
   };
-  const response: Raindrop.DocumentQueryAskResponse = await client.documentQuery.ask(params);
+  const response: Raindrop.QueryDocumentQueryResponse = await client.query.documentQuery(params);
 }
 
 main();
@@ -72,8 +72,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.documentQuery
-    .ask({
+  const response = await client.query
+    .documentQuery({
       bucket_location: { bucket: { name: 'my-bucket' } },
       input: 'What are the key points in this document?',
       object_id: 'document.pdf',
@@ -122,7 +122,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.documentQuery.ask({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -139,7 +139,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.documentQuery.ask({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -162,8 +162,8 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Raindrop();
 
-const response = await client.documentQuery
-  .ask({
+const response = await client.query
+  .documentQuery({
     bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
@@ -173,8 +173,8 @@ const response = await client.documentQuery
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.documentQuery
-  .ask({
+const { data: response, response: raw } = await client.query
+  .documentQuery({
     bucket_location: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
     object_id: 'document.pdf',
