@@ -1,81 +1,32 @@
-# DocumentQuery
+# Query
 
 Types:
 
-- <code><a href="./src/resources/document-query.ts">BucketLocator</a></code>
-- <code><a href="./src/resources/document-query.ts">DocumentQueryAskResponse</a></code>
+- <code><a href="./src/resources/query.ts">BucketLocator</a></code>
+- <code><a href="./src/resources/query.ts">QueryChunkSearchResponse</a></code>
+- <code><a href="./src/resources/query.ts">QueryDocumentQueryResponse</a></code>
+- <code><a href="./src/resources/query.ts">QueryFindResponse</a></code>
+- <code><a href="./src/resources/query.ts">QuerySumarizePageResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/document_query">client.documentQuery.<a href="./src/resources/document-query.ts">ask</a>({ ...params }) -> DocumentQueryAskResponse</code>
+- <code title="post /v1/chunk_search">client.query.<a href="./src/resources/query.ts">chunkSearch</a>({ ...params }) -> QueryChunkSearchResponse</code>
+- <code title="post /v1/document_query">client.query.<a href="./src/resources/query.ts">documentQuery</a>({ ...params }) -> QueryDocumentQueryResponse</code>
+- <code title="post /v1/search">client.query.<a href="./src/resources/query.ts">find</a>({ ...params }) -> QueryFindResponse</code>
+- <code title="post /v1/summarize_page">client.query.<a href="./src/resources/query.ts">sumarizePage</a>({ ...params }) -> QuerySumarizePageResponse</code>
 
-# ChunkSearch
+# Bucket
 
 Types:
 
-- <code><a href="./src/resources/chunk-search.ts">TextResult</a></code>
-- <code><a href="./src/resources/chunk-search.ts">ChunkSearchFindResponse</a></code>
+- <code><a href="./src/resources/bucket.ts">BucketListResponse</a></code>
+- <code><a href="./src/resources/bucket.ts">BucketDeleteResponse</a></code>
+- <code><a href="./src/resources/bucket.ts">BucketGetResponse</a></code>
+- <code><a href="./src/resources/bucket.ts">BucketPutResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/chunk_search">client.chunkSearch.<a href="./src/resources/chunk-search.ts">find</a>({ ...params }) -> ChunkSearchFindResponse</code>
-
-# SummarizePage
-
-Types:
-
-- <code><a href="./src/resources/summarize-page.ts">SummarizePageSumarizePageResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/summarize_page">client.summarizePage.<a href="./src/resources/summarize-page.ts">sumarizePage</a>({ ...params }) -> SummarizePageSumarizePageResponse</code>
-
-# Search
-
-Types:
-
-- <code><a href="./src/resources/search.ts">SearchFindResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/search">client.search.<a href="./src/resources/search.ts">find</a>({ ...params }) -> SearchFindResponse</code>
-
-# PutObject
-
-Types:
-
-- <code><a href="./src/resources/put-object.ts">PutObjectUploadResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/put_object">client.putObject.<a href="./src/resources/put-object.ts">upload</a>({ ...params }) -> PutObjectUploadResponse</code>
-
-# GetObject
-
-Types:
-
-- <code><a href="./src/resources/get-object.ts">GetObjectDownloadResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/get_object">client.getObject.<a href="./src/resources/get-object.ts">download</a>({ ...params }) -> GetObjectDownloadResponse</code>
-
-# DeleteObject
-
-Types:
-
-- <code><a href="./src/resources/delete-object.ts">DeleteObjectDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/delete_object">client.deleteObject.<a href="./src/resources/delete-object.ts">delete</a>({ ...params }) -> unknown</code>
-
-# ListObjects
-
-Types:
-
-- <code><a href="./src/resources/list-objects.ts">ListObjectCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/list_objects">client.listObjects.<a href="./src/resources/list-objects.ts">create</a>({ ...params }) -> ListObjectCreateResponse</code>
+- <code title="post /v1/list_objects">client.bucket.<a href="./src/resources/bucket.ts">list</a>({ ...params }) -> BucketListResponse</code>
+- <code title="post /v1/delete_object">client.bucket.<a href="./src/resources/bucket.ts">delete</a>({ ...params }) -> unknown</code>
+- <code title="post /v1/get_object">client.bucket.<a href="./src/resources/bucket.ts">get</a>({ ...params }) -> BucketGetResponse</code>
+- <code title="post /v1/put_object">client.bucket.<a href="./src/resources/bucket.ts">put</a>({ ...params }) -> BucketPutResponse</code>
