@@ -9,8 +9,8 @@ const client = new Raindrop({
 
 describe('resource bucket', () => {
   // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.bucket.list({ organizationId: 'organizationId', userId: 'userId' });
+  test.skip('list', async () => {
+    const responsePromise = client.bucket.list({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,17 +21,8 @@ describe('resource bucket', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await client.bucket.list({
-      organizationId: 'organizationId',
-      userId: 'userId',
-      moduleId: '01jtgtrd37acrqf7k24dggg31s',
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = client.bucket.delete({ organizationId: 'organizationId', userId: 'userId' });
+  test.skip('delete', async () => {
+    const responsePromise = client.bucket.delete({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,18 +33,8 @@ describe('resource bucket', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await client.bucket.delete({
-      organizationId: 'organizationId',
-      userId: 'userId',
-      key: 'my-key',
-      moduleId: '01jtgtrd37acrqf7k24dggg31s',
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
-    const responsePromise = client.bucket.get({ organizationId: 'organizationId', userId: 'userId' });
+  test.skip('get', async () => {
+    const responsePromise = client.bucket.get({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,25 +42,11 @@ describe('resource bucket', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
-    const response = await client.bucket.get({
-      organizationId: 'organizationId',
-      userId: 'userId',
-      key: 'my-key',
-      moduleId: '01jtgtrd37acrqf7k24dggg31s',
-    });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('put: only required params', async () => {
-    const responsePromise = client.bucket.put({
-      content: 'U3RhaW5sZXNzIHJvY2tz',
-      organizationId: 'organizationId',
-      userId: 'userId',
-    });
+    const responsePromise = client.bucket.put({ content: 'U3RhaW5sZXNzIHJvY2tz' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,8 +60,6 @@ describe('resource bucket', () => {
   test.skip('put: required and optional params', async () => {
     const response = await client.bucket.put({
       content: 'U3RhaW5sZXNzIHJvY2tz',
-      organizationId: 'organizationId',
-      userId: 'userId',
       contentType: 'application/pdf',
       key: 'my-key',
       moduleId: '01jtgtrd37acrqf7k24dggg31s',

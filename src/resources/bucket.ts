@@ -11,10 +11,7 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const buckets = await client.bucket.list({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
-   * });
+   * const buckets = await client.bucket.list();
    * ```
    */
   list(body: BucketListParams, options?: RequestOptions): APIPromise<BucketListResponse> {
@@ -28,10 +25,7 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const bucket = await client.bucket.delete({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
-   * });
+   * const bucket = await client.bucket.delete();
    * ```
    */
   delete(body: BucketDeleteParams, options?: RequestOptions): APIPromise<unknown> {
@@ -45,10 +39,7 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const bucket = await client.bucket.get({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
-   * });
+   * const bucket = await client.bucket.get();
    * ```
    */
   get(body: BucketGetParams, options?: RequestOptions): APIPromise<BucketGetResponse> {
@@ -64,8 +55,6 @@ export class Bucket extends APIResource {
    * ```ts
    * const response = await client.bucket.put({
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
    * });
    * ```
    */
@@ -161,32 +150,12 @@ export namespace BucketPutResponse {
 
 export interface BucketListParams {
   /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
-  /**
    * Module ID identifying the bucket
    */
   moduleId?: string;
 }
 
 export interface BucketDeleteParams {
-  /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
   /**
    * Object key/path to delete
    */
@@ -199,16 +168,6 @@ export interface BucketDeleteParams {
 }
 
 export interface BucketGetParams {
-  /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
   /**
    * Object key/path to download
    */
@@ -225,16 +184,6 @@ export interface BucketPutParams {
    * Binary content of the object
    */
   content: string;
-
-  /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
 
   /**
    * MIME type of the object
