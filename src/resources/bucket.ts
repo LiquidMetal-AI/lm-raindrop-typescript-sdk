@@ -12,8 +12,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const buckets = await client.bucket.list({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -29,8 +28,8 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.delete({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -46,8 +45,8 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.get({
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -64,8 +63,9 @@ export class Bucket extends APIResource {
    * ```ts
    * const response = await client.bucket.put({
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
-   *   organizationId: 'organizationId',
-   *   userId: 'userId',
+   *   contentType: 'application/pdf',
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -78,7 +78,7 @@ export interface BucketListResponse {
   /**
    * List of objects in the bucket with their metadata
    */
-  objects?: Array<BucketListResponse.Object>;
+  objects: Array<BucketListResponse.Object>;
 }
 
 export namespace BucketListResponse {
@@ -89,22 +89,22 @@ export namespace BucketListResponse {
     /**
      * MIME type of the object
      */
-    contentType?: string;
+    contentType: string;
 
     /**
      * Object key/path in the bucket
      */
-    key?: string;
+    key: string;
 
     /**
      * Last modification timestamp
      */
-    lastModified?: string;
+    lastModified: string;
 
     /**
      * Size of the object in bytes
      */
-    size?: number | string;
+    size: number | string;
   }
 }
 
@@ -161,63 +161,33 @@ export namespace BucketPutResponse {
 
 export interface BucketListParams {
   /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
-  /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketDeleteParams {
   /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
-  /**
    * Object key/path to delete
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketGetParams {
   /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
-  /**
    * Object key/path to download
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketPutParams {
@@ -227,29 +197,19 @@ export interface BucketPutParams {
   content: string;
 
   /**
-   * Organization ID for access control
-   */
-  organizationId: string;
-
-  /**
-   * User ID for access control
-   */
-  userId: string;
-
-  /**
    * MIME type of the object
    */
-  contentType?: string;
+  contentType: string;
 
   /**
    * Object key/path in the bucket
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export declare namespace Bucket {

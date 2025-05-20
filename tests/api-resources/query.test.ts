@@ -32,8 +32,6 @@ describe('resource query', () => {
       ],
       input: 'Find documents about revenue in Q4 2023',
       requestId: '123e4567-e89b-12d3-a456-426614174000',
-      organizationId: 'organizationId',
-      userId: 'userId',
     });
   });
 
@@ -63,8 +61,6 @@ describe('resource query', () => {
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
       requestId: '123e4567-e89b-12d3-a456-426614174000',
-      organizationId: 'organizationId',
-      userId: 'userId',
     });
   });
 
@@ -90,8 +86,6 @@ describe('resource query', () => {
       page: 2,
       pageSize: 10,
       requestId: '123e4567-e89b-12d3-a456-426614174000',
-      organizationId: 'organizationId',
-      userId: 'userId',
     });
   });
 
@@ -119,8 +113,6 @@ describe('resource query', () => {
       ],
       input: 'Show me documents containing credit card numbers or social security numbers',
       requestId: '123e4567-e89b-12d3-a456-426614174000',
-      organizationId: 'organizationId',
-      userId: 'userId',
     });
   });
 
@@ -146,8 +138,6 @@ describe('resource query', () => {
       page: 1,
       pageSize: 10,
       requestId: '123e4567-e89b-12d3-a456-426614174000',
-      organizationId: 'organizationId',
-      userId: 'userId',
     });
   });
 });
