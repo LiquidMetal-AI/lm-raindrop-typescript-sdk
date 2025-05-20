@@ -65,6 +65,31 @@ describe('resource query', () => {
   });
 
   // skipped: tests are disabled for the time being
+  test.skip('getPaginatedSearch: only required params', async () => {
+    const responsePromise = client.query.getPaginatedSearch({
+      page: 2,
+      page_size: 10,
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('getPaginatedSearch: required and optional params', async () => {
+    const response = await client.query.getPaginatedSearch({
+      page: 2,
+      page_size: 10,
+      request_id: '123e4567-e89b-12d3-a456-426614174000',
+    });
+  });
+
+  // skipped: tests are disabled for the time being
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
       bucket_locations: [{ bucket: { name: 'my-bucket' } }],
