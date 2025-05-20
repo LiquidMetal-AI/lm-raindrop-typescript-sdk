@@ -26,10 +26,10 @@ const client = new Raindrop();
 
 async function main() {
   const response = await client.query.documentQuery({
-    bucket_location: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
+    objectId: 'document.pdf',
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
   });
 
   console.log(response.answer);
@@ -50,10 +50,10 @@ const client = new Raindrop();
 
 async function main() {
   const params: Raindrop.QueryDocumentQueryParams = {
-    bucket_location: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
+    objectId: 'document.pdf',
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
   };
   const response: Raindrop.QueryDocumentQueryResponse = await client.query.documentQuery(params);
 }
@@ -74,10 +74,10 @@ a subclass of `APIError` will be thrown:
 async function main() {
   const response = await client.query
     .documentQuery({
-      bucket_location: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-bucket' } },
       input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      objectId: 'document.pdf',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     })
     .catch(async (err) => {
       if (err instanceof Raindrop.APIError) {
@@ -122,7 +122,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.query.documentQuery({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '123e4567-e89b-12d3-a456-426614174000' }, {
   maxRetries: 5,
 });
 ```
@@ -139,7 +139,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.query.documentQuery({ bucket_location: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', object_id: 'document.pdf', request_id: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '123e4567-e89b-12d3-a456-426614174000' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -147,6 +147,45 @@ await client.query.documentQuery({ bucket_location: { bucket: { name: 'my-bucket
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Raindrop API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllQueries(params) {
+  const allQueries = [];
+  // Automatically fetches more pages as needed.
+  for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch({
+    page: 1,
+    pageSize: 15,
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
+  })) {
+    allQueries.push(queryGetPaginatedSearchResponse);
+  }
+  return allQueries;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.query.getPaginatedSearch({
+  page: 1,
+  pageSize: 15,
+  requestId: '123e4567-e89b-12d3-a456-426614174000',
+});
+for (const queryGetPaginatedSearchResponse of page.results) {
+  console.log(queryGetPaginatedSearchResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -164,10 +203,10 @@ const client = new Raindrop();
 
 const response = await client.query
   .documentQuery({
-    bucket_location: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
+    objectId: 'document.pdf',
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -175,10 +214,10 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.query
   .documentQuery({
-    bucket_location: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-bucket' } },
     input: 'What are the key points in this document?',
-    object_id: 'document.pdf',
-    request_id: '123e4567-e89b-12d3-a456-426614174000',
+    objectId: 'document.pdf',
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));

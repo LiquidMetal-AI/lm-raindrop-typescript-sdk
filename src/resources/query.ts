@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { PageNumber, type PageNumberParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Query extends APIResource {
@@ -17,9 +18,9 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.chunkSearch({
-   *   bucket_locations: [{ bucket: { name: 'my-bucket' } }],
+   *   bucketLocations: [{ bucket: { name: 'my-bucket' } }],
    *   input: 'Find documents about revenue in Q4 2023',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
@@ -51,10 +52,10 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.documentQuery({
-   *   bucket_location: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-bucket' } },
    *   input: 'What are the key points in this document?',
-   *   object_id: 'document.pdf',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   *   objectId: 'document.pdf',
+   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
@@ -73,18 +74,27 @@ export class Query extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.query.getPaginatedSearch({
-   *   page: 2,
-   *   page_size: 10,
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
-   * });
+   * // Automatically fetches more pages as needed.
+   * for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch(
+   *   {
+   *     page: 2,
+   *     pageSize: 10,
+   *     requestId: '123e4567-e89b-12d3-a456-426614174000',
+   *   },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   getPaginatedSearch(
     body: QueryGetPaginatedSearchParams,
     options?: RequestOptions,
-  ): APIPromise<QueryGetPaginatedSearchResponse> {
-    return this._client.post('/v1/get_paginated_results', { body, ...options });
+  ): PagePromise<QueryGetPaginatedSearchResponsesPageNumber, QueryGetPaginatedSearchResponse> {
+    return this._client.getAPIList('/v1/search_get_page', PageNumber<QueryGetPaginatedSearchResponse>, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -114,10 +124,10 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.search({
-   *   bucket_locations: [{ bucket: { name: 'my-bucket' } }],
+   *   bucketLocations: [{ bucket: { name: 'my-bucket' } }],
    *   input:
    *     'Show me documents containing credit card numbers or social security numbers',
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
@@ -150,8 +160,8 @@ export class Query extends APIResource {
    * ```ts
    * const response = await client.query.sumarizePage({
    *   page: 1,
-   *   page_size: 10,
-   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   *   pageSize: 10,
+   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
    * });
    * ```
    */
@@ -162,6 +172,8 @@ export class Query extends APIResource {
     return this._client.post('/v1/summarize_page', { body, ...options });
   }
 }
+
+export type QueryGetPaginatedSearchResponsesPageNumber = PageNumber<QueryGetPaginatedSearchResponse>;
 
 export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
 
@@ -186,7 +198,7 @@ export namespace BucketLocator {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      application_name?: string | null;
+      applicationName?: string | null;
 
       /**
        * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
@@ -200,7 +212,7 @@ export namespace BucketLocator {
     /**
      * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
      */
-    module_id: string;
+    moduleId: string;
   }
 }
 
@@ -218,7 +230,7 @@ export namespace QueryChunkSearchResponse {
      * Unique identifier for this text segment. Used for deduplication and result
      * tracking
      */
-    chunk_signature?: string | null;
+    chunkSignature?: string | null;
 
     /**
      * Vector representation for similarity matching. Used in semantic search
@@ -229,7 +241,7 @@ export namespace QueryChunkSearchResponse {
     /**
      * Parent document identifier. Links related content chunks together
      */
-    payload_signature?: string | null;
+    payloadSignature?: string | null;
 
     /**
      * Relevance score (0.0 to 1.0). Higher scores indicate better matches
@@ -276,22 +288,22 @@ export namespace QueryChunkSearchResponse {
         /**
          * **EXAMPLE** "my-app"
          */
-        application_name?: string;
+        applicationName?: string;
 
         /**
          * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
          */
-        application_version_id?: string;
+        applicationVersionId?: string;
 
         /**
          * **EXAMPLE** "my-smartbucket"
          */
-        bucket_name?: string;
+        bucketName?: string;
 
         /**
          * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
          */
-        module_id?: string;
+        moduleId?: string;
       }
     }
   }
@@ -308,127 +320,83 @@ export interface QueryDocumentQueryResponse {
 
 export interface QueryGetPaginatedSearchResponse {
   /**
-   * Updated pagination information
+   * Unique identifier for this text segment. Used for deduplication and result
+   * tracking
    */
-  pagination?: QueryGetPaginatedSearchResponse.Pagination;
+  chunkSignature?: string | null;
 
   /**
-   * Page results with full metadata
+   * Vector representation for similarity matching. Used in semantic search
+   * operations
    */
-  results?: Array<QueryGetPaginatedSearchResponse.Result>;
+  embed?: string | null;
+
+  /**
+   * Parent document identifier. Links related content chunks together
+   */
+  payloadSignature?: string | null;
+
+  /**
+   * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+   */
+  score?: number | null;
+
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  source?: QueryGetPaginatedSearchResponse.Source;
+
+  /**
+   * The actual content of the result. May be a document excerpt or full content
+   */
+  text?: string | null;
+
+  /**
+   * Content MIME type. Helps with proper result rendering
+   */
+  type?: string | null;
 }
 
 export namespace QueryGetPaginatedSearchResponse {
   /**
-   * Updated pagination information
+   * Source document references. Contains bucket and object information
    */
-  export interface Pagination {
+  export interface Source {
     /**
-     * Indicates more results available. Used for infinite scroll implementation
+     * The bucket information containing this result
      */
-    has_more?: boolean;
+    bucket?: Source.Bucket;
 
     /**
-     * Current page number (1-based)
+     * The object key within the bucket
      */
-    page?: number;
-
-    /**
-     * Results per page. May be adjusted for performance
-     */
-    page_size?: number;
-
-    /**
-     * Total number of available results
-     */
-    total?: number;
-
-    /**
-     * Total available pages. Calculated as ceil(total/page_size)
-     */
-    total_pages?: number;
+    object?: string;
   }
 
-  export interface Result {
+  export namespace Source {
     /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
+     * The bucket information containing this result
      */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
+    export interface Bucket {
       /**
-       * The bucket information containing this result
+       * **EXAMPLE** "my-app"
        */
-      bucket?: Source.Bucket;
+      applicationName?: string;
 
       /**
-       * The object key within the bucket
+       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
        */
-      object?: string;
-    }
+      applicationVersionId?: string;
 
-    export namespace Source {
       /**
-       * The bucket information containing this result
+       * **EXAMPLE** "my-smartbucket"
        */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        application_name?: string;
+      bucketName?: string;
 
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        application_version_id?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucket_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        module_id?: string;
-      }
+      /**
+       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       */
+      moduleId?: string;
     }
   }
 }
@@ -453,7 +421,7 @@ export namespace QuerySearchResponse {
     /**
      * Indicates more results available. Used for infinite scroll implementation
      */
-    has_more?: boolean;
+    hasMore?: boolean;
 
     /**
      * Current page number (1-based)
@@ -463,7 +431,7 @@ export namespace QuerySearchResponse {
     /**
      * Results per page. May be adjusted for performance
      */
-    page_size?: number;
+    pageSize?: number;
 
     /**
      * Total number of available results
@@ -473,7 +441,7 @@ export namespace QuerySearchResponse {
     /**
      * Total available pages. Calculated as ceil(total/page_size)
      */
-    total_pages?: number;
+    totalPages?: number;
   }
 
   export interface Result {
@@ -481,7 +449,7 @@ export namespace QuerySearchResponse {
      * Unique identifier for this text segment. Used for deduplication and result
      * tracking
      */
-    chunk_signature?: string | null;
+    chunkSignature?: string | null;
 
     /**
      * Vector representation for similarity matching. Used in semantic search
@@ -492,7 +460,7 @@ export namespace QuerySearchResponse {
     /**
      * Parent document identifier. Links related content chunks together
      */
-    payload_signature?: string | null;
+    payloadSignature?: string | null;
 
     /**
      * Relevance score (0.0 to 1.0). Higher scores indicate better matches
@@ -539,22 +507,22 @@ export namespace QuerySearchResponse {
         /**
          * **EXAMPLE** "my-app"
          */
-        application_name?: string;
+        applicationName?: string;
 
         /**
          * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
          */
-        application_version_id?: string;
+        applicationVersionId?: string;
 
         /**
          * **EXAMPLE** "my-smartbucket"
          */
-        bucket_name?: string;
+        bucketName?: string;
 
         /**
          * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
          */
-        module_id?: string;
+        moduleId?: string;
       }
     }
   }
@@ -573,7 +541,7 @@ export interface QueryChunkSearchParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<BucketLocator>;
+  bucketLocations: Array<BucketLocator>;
 
   /**
    * Natural language query or question. Can include complex criteria and
@@ -585,7 +553,11 @@ export interface QueryChunkSearchParams {
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
+  requestId: string;
+
+  organizationId?: string;
+
+  userId?: string;
 }
 
 export interface QueryDocumentQueryParams {
@@ -593,7 +565,7 @@ export interface QueryDocumentQueryParams {
    * The storage bucket containing the target document. Must be a valid, registered
    * Smart Bucket. Used to identify which bucket to query against
    */
-  bucket_location: BucketLocator;
+  bucketLocation: BucketLocator;
 
   /**
    * User's input or question about the document. Can be natural language questions,
@@ -605,30 +577,28 @@ export interface QueryDocumentQueryParams {
    * Document identifier within the bucket. Typically matches the storage path or
    * key. Used to identify which document to chat with
    */
-  object_id: string;
+  objectId: string;
 
   /**
    * Client-provided conversation session identifier. Required for maintaining
    * context in follow-up questions. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
+  requestId: string;
+
+  organizationId?: string;
+
+  userId?: string;
 }
 
-export interface QueryGetPaginatedSearchParams {
-  /**
-   * Requested page number
-   */
-  page: number | null;
-
-  /**
-   * Results per page
-   */
-  page_size: number | null;
-
+export interface QueryGetPaginatedSearchParams extends PageNumberParams {
   /**
    * Original search session identifier from the initial search
    */
-  request_id: string;
+  requestId: string;
+
+  organizationId?: string;
+
+  userId?: string;
 }
 
 export interface QuerySearchParams {
@@ -636,7 +606,7 @@ export interface QuerySearchParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<BucketLocator>;
+  bucketLocations: Array<BucketLocator>;
 
   /**
    * Natural language search query that can include complex criteria. Supports
@@ -649,7 +619,11 @@ export interface QuerySearchParams {
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
+  requestId: string;
+
+  organizationId?: string;
+
+  userId?: string;
 }
 
 export interface QuerySumarizePageParams {
@@ -661,12 +635,16 @@ export interface QuerySumarizePageParams {
   /**
    * Results per page. Affects summary granularity
    */
-  page_size: number;
+  pageSize: number;
 
   /**
    * Original search session identifier from the initial search
    */
-  request_id: string;
+  requestId: string;
+
+  organizationId?: string;
+
+  userId?: string;
 }
 
 export declare namespace Query {
@@ -677,6 +655,7 @@ export declare namespace Query {
     type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
     type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
+    type QueryGetPaginatedSearchResponsesPageNumber as QueryGetPaginatedSearchResponsesPageNumber,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
     type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,
