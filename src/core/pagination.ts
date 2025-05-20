@@ -151,13 +151,13 @@ export class PageNumber<Item> extends AbstractPage<Item> implements PageNumberRe
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const query = this.options.query as PageNumberParams;
-    const currentPage = query?.page ?? 1;
+    const body = this.options.body as PageNumberParams;
+    const currentPage = body?.page ?? 1;
 
     return {
       ...this.options,
-      query: {
-        ...maybeObj(this.options.query),
+      body: {
+        ...maybeObj(this.options.body),
         page: currentPage + 1,
       },
     };
