@@ -16,12 +16,10 @@ export {
   type BucketLocator,
   type QueryChunkSearchResponse,
   type QueryDocumentQueryResponse,
-  type QueryGetPaginatedSearchResponse,
   type QuerySearchResponse,
   type QuerySumarizePageResponse,
   type QueryChunkSearchParams,
   type QueryDocumentQueryParams,
-  type QueryGetPaginatedSearchParams,
   type QuerySearchParams,
   type QuerySumarizePageParams,
 } from './query';
