@@ -38,8 +38,10 @@ import {
   QueryChunkSearchResponse,
   QueryDocumentQueryParams,
   QueryDocumentQueryResponse,
-  QueryFindParams,
-  QueryFindResponse,
+  QueryGetPaginatedSearchParams,
+  QueryGetPaginatedSearchResponse,
+  QuerySearchParams,
+  QuerySearchResponse,
   QuerySumarizePageParams,
   QuerySumarizePageResponse,
 } from './resources/query';
@@ -726,11 +728,13 @@ export declare namespace Raindrop {
     type BucketLocator as BucketLocator,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
-    type QueryFindResponse as QueryFindResponse,
+    type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
+    type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
-    type QueryFindParams as QueryFindParams,
+    type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,
+    type QuerySearchParams as QuerySearchParams,
     type QuerySumarizePageParams as QuerySumarizePageParams,
   };
 
