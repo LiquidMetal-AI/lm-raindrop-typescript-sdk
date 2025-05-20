@@ -66,6 +66,28 @@ export class Query extends APIResource {
   }
 
   /**
+   * Retrieve additional pages from a previous search. This endpoint enables
+   * navigation through large result sets while maintaining search context and result
+   * relevance. Retrieving paginated results requires a valid request_id from a
+   * previously completed search.
+   *
+   * @example
+   * ```ts
+   * const response = await client.query.getPaginatedSearch({
+   *   page: 2,
+   *   page_size: 10,
+   *   request_id: '123e4567-e89b-12d3-a456-426614174000',
+   * });
+   * ```
+   */
+  getPaginatedSearch(
+    body: QueryGetPaginatedSearchParams,
+    options?: RequestOptions,
+  ): APIPromise<QueryGetPaginatedSearchResponse> {
+    return this._client.post('/v1/get_paginated_results', { body, ...options });
+  }
+
+  /**
    * Primary search endpoint that provides advanced search capabilities across all
    * document types stored in SmartBuckets.
    *
@@ -91,7 +113,7 @@ export class Query extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.query.find({
+   * const response = await client.query.search({
    *   bucket_locations: [{ bucket: { name: 'my-bucket' } }],
    *   input:
    *     'Show me documents containing credit card numbers or social security numbers',
@@ -99,7 +121,7 @@ export class Query extends APIResource {
    * });
    * ```
    */
-  find(body: QueryFindParams, options?: RequestOptions): APIPromise<QueryFindResponse> {
+  search(body: QuerySearchParams, options?: RequestOptions): APIPromise<QuerySearchResponse> {
     return this._client.post('/v1/search', { body, ...options });
   }
 
@@ -284,19 +306,146 @@ export interface QueryDocumentQueryResponse {
   answer?: string;
 }
 
-export interface QueryFindResponse {
+export interface QueryGetPaginatedSearchResponse {
+  /**
+   * Updated pagination information
+   */
+  pagination?: QueryGetPaginatedSearchResponse.Pagination;
+
+  /**
+   * Page results with full metadata
+   */
+  results?: Array<QueryGetPaginatedSearchResponse.Result>;
+}
+
+export namespace QueryGetPaginatedSearchResponse {
+  /**
+   * Updated pagination information
+   */
+  export interface Pagination {
+    /**
+     * Indicates more results available. Used for infinite scroll implementation
+     */
+    has_more?: boolean;
+
+    /**
+     * Current page number (1-based)
+     */
+    page?: number;
+
+    /**
+     * Results per page. May be adjusted for performance
+     */
+    page_size?: number;
+
+    /**
+     * Total number of available results
+     */
+    total?: number;
+
+    /**
+     * Total available pages. Calculated as ceil(total/page_size)
+     */
+    total_pages?: number;
+  }
+
+  export interface Result {
+    /**
+     * Unique identifier for this text segment. Used for deduplication and result
+     * tracking
+     */
+    chunk_signature?: string | null;
+
+    /**
+     * Vector representation for similarity matching. Used in semantic search
+     * operations
+     */
+    embed?: string | null;
+
+    /**
+     * Parent document identifier. Links related content chunks together
+     */
+    payload_signature?: string | null;
+
+    /**
+     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+     */
+    score?: number | null;
+
+    /**
+     * Source document references. Contains bucket and object information
+     */
+    source?: Result.Source;
+
+    /**
+     * The actual content of the result. May be a document excerpt or full content
+     */
+    text?: string | null;
+
+    /**
+     * Content MIME type. Helps with proper result rendering
+     */
+    type?: string | null;
+  }
+
+  export namespace Result {
+    /**
+     * Source document references. Contains bucket and object information
+     */
+    export interface Source {
+      /**
+       * The bucket information containing this result
+       */
+      bucket?: Source.Bucket;
+
+      /**
+       * The object key within the bucket
+       */
+      object?: string;
+    }
+
+    export namespace Source {
+      /**
+       * The bucket information containing this result
+       */
+      export interface Bucket {
+        /**
+         * **EXAMPLE** "my-app"
+         */
+        application_name?: string;
+
+        /**
+         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+         */
+        application_version_id?: string;
+
+        /**
+         * **EXAMPLE** "my-smartbucket"
+         */
+        bucket_name?: string;
+
+        /**
+         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+         */
+        module_id?: string;
+      }
+    }
+  }
+}
+
+export interface QuerySearchResponse {
   /**
    * Pagination details for result navigation
    */
-  pagination?: QueryFindResponse.Pagination;
+  pagination?: QuerySearchResponse.Pagination;
 
   /**
    * Matched results with metadata
    */
-  results?: Array<QueryFindResponse.Result>;
+  results?: Array<QuerySearchResponse.Result>;
 }
 
-export namespace QueryFindResponse {
+export namespace QuerySearchResponse {
   /**
    * Pagination details for result navigation
    */
@@ -465,7 +614,24 @@ export interface QueryDocumentQueryParams {
   request_id: string;
 }
 
-export interface QueryFindParams {
+export interface QueryGetPaginatedSearchParams {
+  /**
+   * Requested page number
+   */
+  page: number | null;
+
+  /**
+   * Results per page
+   */
+  page_size: number | null;
+
+  /**
+   * Original search session identifier from the initial search
+   */
+  request_id: string;
+}
+
+export interface QuerySearchParams {
   /**
    * The buckets to search. If provided, the search will only return results from
    * these buckets
@@ -508,11 +674,13 @@ export declare namespace Query {
     type BucketLocator as BucketLocator,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
-    type QueryFindResponse as QueryFindResponse,
+    type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
+    type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
-    type QueryFindParams as QueryFindParams,
+    type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,
+    type QuerySearchParams as QuerySearchParams,
     type QuerySumarizePageParams as QuerySumarizePageParams,
   };
 }
