@@ -11,7 +11,9 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const buckets = await client.bucket.list();
+   * const buckets = await client.bucket.list({
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
+   * });
    * ```
    */
   list(body: BucketListParams, options?: RequestOptions): APIPromise<BucketListResponse> {
@@ -25,7 +27,10 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const bucket = await client.bucket.delete();
+   * const bucket = await client.bucket.delete({
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
+   * });
    * ```
    */
   delete(body: BucketDeleteParams, options?: RequestOptions): APIPromise<unknown> {
@@ -39,7 +44,10 @@ export class Bucket extends APIResource {
    *
    * @example
    * ```ts
-   * const bucket = await client.bucket.get();
+   * const bucket = await client.bucket.get({
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
+   * });
    * ```
    */
   get(body: BucketGetParams, options?: RequestOptions): APIPromise<BucketGetResponse> {
@@ -55,6 +63,9 @@ export class Bucket extends APIResource {
    * ```ts
    * const response = await client.bucket.put({
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
+   *   contentType: 'application/pdf',
+   *   key: 'my-key',
+   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -67,7 +78,7 @@ export interface BucketListResponse {
   /**
    * List of objects in the bucket with their metadata
    */
-  objects?: Array<BucketListResponse.Object>;
+  objects: Array<BucketListResponse.Object>;
 }
 
 export namespace BucketListResponse {
@@ -78,22 +89,22 @@ export namespace BucketListResponse {
     /**
      * MIME type of the object
      */
-    contentType?: string;
+    contentType: string;
 
     /**
      * Object key/path in the bucket
      */
-    key?: string;
+    key: string;
 
     /**
      * Last modification timestamp
      */
-    lastModified?: string;
+    lastModified: string;
 
     /**
      * Size of the object in bytes
      */
-    size?: number | string;
+    size: number | string;
   }
 }
 
@@ -152,31 +163,31 @@ export interface BucketListParams {
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketDeleteParams {
   /**
    * Object key/path to delete
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketGetParams {
   /**
    * Object key/path to download
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export interface BucketPutParams {
@@ -188,17 +199,17 @@ export interface BucketPutParams {
   /**
    * MIME type of the object
    */
-  contentType?: string;
+  contentType: string;
 
   /**
    * Object key/path in the bucket
    */
-  key?: string;
+  key: string;
 
   /**
    * Module ID identifying the bucket
    */
-  moduleId?: string;
+  moduleId: string;
 }
 
 export declare namespace Bucket {
