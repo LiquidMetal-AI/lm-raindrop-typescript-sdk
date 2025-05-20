@@ -115,8 +115,6 @@ export interface PageNumberResponse<Item> {
 
 export namespace PageNumberResponse {
   export interface Pagination {
-    hasMore?: boolean;
-
     page?: number;
 
     pageSize?: number;
