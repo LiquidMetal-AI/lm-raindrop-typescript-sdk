@@ -11,9 +11,9 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('chunkSearch: only required params', async () => {
     const responsePromise = client.query.chunkSearch({
-      bucket_locations: [{ bucket: { name: 'my-bucket' } }],
+      bucketLocations: [{ bucket: { name: 'my-bucket' } }],
       input: 'Find documents about revenue in Q4 2023',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,21 +27,23 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('chunkSearch: required and optional params', async () => {
     const response = await client.query.chunkSearch({
-      bucket_locations: [
-        { bucket: { name: 'my-bucket', application_name: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+      bucketLocations: [
+        { bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
       ],
       input: 'Find documents about revenue in Q4 2023',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      organizationId: 'organizationId',
+      userId: 'userId',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.query.documentQuery({
-      bucket_location: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-bucket' } },
       input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      objectId: 'document.pdf',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -55,12 +57,14 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.query.documentQuery({
-      bucket_location: {
-        bucket: { name: 'my-bucket', application_name: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
+      bucketLocation: {
+        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
       },
       input: 'What are the key points in this document?',
-      object_id: 'document.pdf',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      objectId: 'document.pdf',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      organizationId: 'organizationId',
+      userId: 'userId',
     });
   });
 
@@ -68,8 +72,8 @@ describe('resource query', () => {
   test.skip('getPaginatedSearch: only required params', async () => {
     const responsePromise = client.query.getPaginatedSearch({
       page: 2,
-      page_size: 10,
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      pageSize: 10,
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,17 +88,19 @@ describe('resource query', () => {
   test.skip('getPaginatedSearch: required and optional params', async () => {
     const response = await client.query.getPaginatedSearch({
       page: 2,
-      page_size: 10,
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      pageSize: 10,
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      organizationId: 'organizationId',
+      userId: 'userId',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
-      bucket_locations: [{ bucket: { name: 'my-bucket' } }],
+      bucketLocations: [{ bucket: { name: 'my-bucket' } }],
       input: 'Show me documents containing credit card numbers or social security numbers',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -108,11 +114,13 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('search: required and optional params', async () => {
     const response = await client.query.search({
-      bucket_locations: [
-        { bucket: { name: 'my-bucket', application_name: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+      bucketLocations: [
+        { bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
       ],
       input: 'Show me documents containing credit card numbers or social security numbers',
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      organizationId: 'organizationId',
+      userId: 'userId',
     });
   });
 
@@ -120,8 +128,8 @@ describe('resource query', () => {
   test.skip('sumarizePage: only required params', async () => {
     const responsePromise = client.query.sumarizePage({
       page: 1,
-      page_size: 10,
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      pageSize: 10,
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -136,8 +144,10 @@ describe('resource query', () => {
   test.skip('sumarizePage: required and optional params', async () => {
     const response = await client.query.sumarizePage({
       page: 1,
-      page_size: 10,
-      request_id: '123e4567-e89b-12d3-a456-426614174000',
+      pageSize: 10,
+      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      organizationId: 'organizationId',
+      userId: 'userId',
     });
   });
 });

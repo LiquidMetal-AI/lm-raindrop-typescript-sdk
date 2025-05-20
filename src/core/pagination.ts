@@ -117,7 +117,7 @@ export namespace PageNumberResponse {
   export interface Pagination {
     page?: number;
 
-    pageSize?: number;
+    page_size?: number;
 
     totalPages?: number;
   }
@@ -126,7 +126,7 @@ export namespace PageNumberResponse {
 export interface PageNumberParams {
   page?: number;
 
-  pageSize?: number;
+  page_size?: number;
 }
 
 export class PageNumber<Item> extends AbstractPage<Item> implements PageNumberResponse<Item> {
