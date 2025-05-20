@@ -148,6 +148,45 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the Raindrop API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllQueries(params) {
+  const allQueries = [];
+  // Automatically fetches more pages as needed.
+  for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch({
+    page: 1,
+    pageSize: 15,
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
+  })) {
+    allQueries.push(queryGetPaginatedSearchResponse);
+  }
+  return allQueries;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.query.getPaginatedSearch({
+  page: 1,
+  pageSize: 15,
+  requestId: '123e4567-e89b-12d3-a456-426614174000',
+});
+for (const queryGetPaginatedSearchResponse of page.results) {
+  console.log(queryGetPaginatedSearchResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
