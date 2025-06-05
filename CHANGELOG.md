@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.1.7 (2025-06-05)
+
+Full Changelog: [v0.1.6...v0.1.7](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.6...v0.1.7)
+
+### Features
+
+* **api:** manual updates ([1a32d0a](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/1a32d0ad1fded9bd1bb27e8e98e3080646411d2e))
+
+
+### Bug Fixes
+
+* compat with more runtimes ([a0f4bc2](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/a0f4bc2a395a601343c3c514d7e255ad024a9f44))
+
+
+### Chores
+
+* adjust eslint.config.mjs ignore pattern ([35f648f](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/35f648f3bbb9fcf1e244e651b59c3091de398883))
+* **deps:** bump eslint-plugin-prettier ([99c696c](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/99c696c34c74035de0b66dd235852c08232ee196))
+* **docs:** grammar improvements ([53ac5aa](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/53ac5aaa7a2e2487fff8c417d605f1e7d9cff7d6))
+* **docs:** use top-level-await in example snippets ([d2ce004](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/d2ce0049c395ba4822ddfec6cf542bbe020cdc96))
+* improve publish-npm script --latest tag logic ([bbb25e2](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/bbb25e2856d6dc4dc25f6cef7158a46d40886a69))
+* **internal:** fix readablestream types in node 20 ([4413e0c](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/4413e0c1d399be4c9c10fd2f511ccfd17e652b3a))
+* **internal:** update jest config ([ba9c799](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/ba9c7994a07438b926a64be6b662c8b57cc2ca68))
+
+
+### Documentation
+
+* **pagination:** improve naming ([6b39ad7](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6b39ad750c2cff40ba2e9a8cb72f3f6caa15fcf7))
+
 ## 0.1.6 (2025-05-20)
 
 Full Changelog: [v0.1.6-alpha.4...v0.1.6](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.6-alpha.4...v0.1.6)
