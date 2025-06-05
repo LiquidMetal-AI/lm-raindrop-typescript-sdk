@@ -76,7 +76,7 @@ export class Bucket extends APIResource {
 
 export interface BucketListResponse {
   /**
-   * List of objects in the bucket with their metadata
+   * List of objects in the bucket with their metadata.
    */
   objects: Array<BucketListResponse.Object>;
 }

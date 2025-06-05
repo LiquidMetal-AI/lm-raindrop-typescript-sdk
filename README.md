@@ -24,18 +24,14 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
 const client = new Raindrop();
 
-async function main() {
-  const response = await client.query.documentQuery({
-    bucketLocation: { bucket: { name: 'my-bucket' } },
-    input: 'What are the key points in this document?',
-    objectId: 'document.pdf',
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
-  });
+const response = await client.query.documentQuery({
+  bucketLocation: { bucket: { name: 'my-bucket' } },
+  input: 'What are the key points in this document?',
+  objectId: 'document.pdf',
+  requestId: '123e4567-e89b-12d3-a456-426614174000',
+});
 
-  console.log(response.answer);
-}
-
-main();
+console.log(response.answer);
 ```
 
 ### Request & Response types
@@ -48,17 +44,13 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 
 const client = new Raindrop();
 
-async function main() {
-  const params: Raindrop.QueryDocumentQueryParams = {
-    bucketLocation: { bucket: { name: 'my-bucket' } },
-    input: 'What are the key points in this document?',
-    objectId: 'document.pdf',
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
-  };
-  const response: Raindrop.QueryDocumentQueryResponse = await client.query.documentQuery(params);
-}
-
-main();
+const params: Raindrop.QueryDocumentQueryParams = {
+  bucketLocation: { bucket: { name: 'my-bucket' } },
+  input: 'What are the key points in this document?',
+  objectId: 'document.pdf',
+  requestId: '123e4567-e89b-12d3-a456-426614174000',
+};
+const response: Raindrop.QueryDocumentQueryResponse = await client.query.documentQuery(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -71,26 +63,22 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const response = await client.query
-    .documentQuery({
-      bucketLocation: { bucket: { name: 'my-bucket' } },
-      input: 'What are the key points in this document?',
-      objectId: 'document.pdf',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
-    })
-    .catch(async (err) => {
-      if (err instanceof Raindrop.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
-}
-
-main();
+const response = await client.query
+  .documentQuery({
+    bucketLocation: { bucket: { name: 'my-bucket' } },
+    input: 'What are the key points in this document?',
+    objectId: 'document.pdf',
+    requestId: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  .catch(async (err) => {
+    if (err instanceof Raindrop.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -154,17 +142,17 @@ List methods in the Raindrop API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllQueries(params) {
-  const allQueries = [];
+async function fetchAllQueryGetPaginatedSearchResponses(params) {
+  const allQueryGetPaginatedSearchResponses = [];
   // Automatically fetches more pages as needed.
   for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch({
     page: 1,
     pageSize: 15,
     requestId: '123e4567-e89b-12d3-a456-426614174000',
   })) {
-    allQueries.push(queryGetPaginatedSearchResponse);
+    allQueryGetPaginatedSearchResponses.push(queryGetPaginatedSearchResponse);
   }
-  return allQueries;
+  return allQueryGetPaginatedSearchResponses;
 }
 ```
 
