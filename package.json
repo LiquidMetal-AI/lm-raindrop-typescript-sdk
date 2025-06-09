@@ -1,6 +1,6 @@
 {
   "name": "@liquidmetal-ai/lm-raindrop",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "The official TypeScript library for the Raindrop API",
   "author": "Raindrop <>",
   "types": "dist/index.d.ts",

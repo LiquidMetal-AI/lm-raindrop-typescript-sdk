@@ -22,6 +22,7 @@ import { APIPromise } from './core/api-promise';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { Answer } from './resources/answer';
 import {
   Bucket,
   BucketDeleteParams,
@@ -739,9 +740,11 @@ export class Raindrop {
 
   query: API.Query = new API.Query(this);
   bucket: API.Bucket = new API.Bucket(this);
+  answer: API.Answer = new API.Answer(this);
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
+Raindrop.Answer = Answer;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -775,4 +778,6 @@ export declare namespace Raindrop {
     type BucketGetParams as BucketGetParams,
     type BucketPutParams as BucketPutParams,
   };
+
+  export { Answer as Answer };
 }

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as QueryAPI from './query';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -12,7 +13,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const buckets = await client.bucket.list({
-   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    * });
    * ```
    */
@@ -28,8 +29,8 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.delete({
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
-   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -45,8 +46,8 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.get({
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
-   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -62,10 +63,10 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const response = await client.bucket.put({
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
    *   contentType: 'application/pdf',
    *   key: 'my-key',
-   *   moduleId: '01jtgtrd37acrqf7k24dggg31s',
    * });
    * ```
    */
@@ -161,36 +162,45 @@ export namespace BucketPutResponse {
 
 export interface BucketListParams {
   /**
-   * Module ID identifying the bucket
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
    */
-  moduleId: string;
+  bucketLocation: QueryAPI.BucketLocator;
 }
 
 export interface BucketDeleteParams {
   /**
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
+   */
+  bucketLocation: QueryAPI.BucketLocator;
+
+  /**
    * Object key/path to delete
    */
   key: string;
-
-  /**
-   * Module ID identifying the bucket
-   */
-  moduleId: string;
 }
 
 export interface BucketGetParams {
   /**
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
+   */
+  bucketLocation: QueryAPI.BucketLocator;
+
+  /**
    * Object key/path to download
    */
   key: string;
-
-  /**
-   * Module ID identifying the bucket
-   */
-  moduleId: string;
 }
 
 export interface BucketPutParams {
+  /**
+   * The buckets to search. If provided, the search will only return results from
+   * these buckets
+   */
+  bucketLocation: QueryAPI.BucketLocator;
+
   /**
    * Binary content of the object
    */
@@ -205,11 +215,6 @@ export interface BucketPutParams {
    * Object key/path in the bucket
    */
   key: string;
-
-  /**
-   * Module ID identifying the bucket
-   */
-  moduleId: string;
 }
 
 export declare namespace Bucket {
