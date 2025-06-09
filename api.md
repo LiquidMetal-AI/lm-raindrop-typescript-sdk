@@ -34,11 +34,3 @@ Methods:
 - <code title="post /v1/put_object">client.bucket.<a href="./src/resources/bucket.ts">put</a>({ ...params }) -> BucketPutResponse</code>
 
 # Answer
-
-Types:
-
-- <code><a href="./src/resources/answer.ts">AnswerCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/answer">client.answer.<a href="./src/resources/answer.ts">create</a>({ ...params }) -> AnswerCreateResponse</code>

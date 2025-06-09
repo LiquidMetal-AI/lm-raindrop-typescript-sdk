@@ -25,10 +25,10 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 const response = await client.query.documentQuery({
-  bucketLocation: { bucket: { name: 'my-bucket' } },
+  bucketLocation: { bucket: { name: 'my-smartbucket' } },
   input: 'What are the key points in this document?',
   objectId: 'document.pdf',
-  requestId: '123e4567-e89b-12d3-a456-426614174000',
+  requestId: '<YOUR-REQUEST-ID>',
 });
 
 console.log(response.answer);
@@ -45,10 +45,10 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 const params: Raindrop.QueryDocumentQueryParams = {
-  bucketLocation: { bucket: { name: 'my-bucket' } },
+  bucketLocation: { bucket: { name: 'my-smartbucket' } },
   input: 'What are the key points in this document?',
   objectId: 'document.pdf',
-  requestId: '123e4567-e89b-12d3-a456-426614174000',
+  requestId: '<YOUR-REQUEST-ID>',
 };
 const response: Raindrop.QueryDocumentQueryResponse = await client.query.documentQuery(params);
 ```
@@ -65,10 +65,10 @@ a subclass of `APIError` will be thrown:
 ```ts
 const response = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-smartbucket' } },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
+    requestId: '<YOUR-REQUEST-ID>',
   })
   .catch(async (err) => {
     if (err instanceof Raindrop.APIError) {
@@ -110,7 +110,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
   maxRetries: 5,
 });
 ```
@@ -127,7 +127,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-bucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '123e4567-e89b-12d3-a456-426614174000' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -148,7 +148,7 @@ async function fetchAllQueryGetPaginatedSearchResponses(params) {
   for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch({
     page: 1,
     pageSize: 15,
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
+    requestId: '<YOUR-REQUEST-ID>',
   })) {
     allQueryGetPaginatedSearchResponses.push(queryGetPaginatedSearchResponse);
   }
@@ -159,11 +159,7 @@ async function fetchAllQueryGetPaginatedSearchResponses(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.query.getPaginatedSearch({
-  page: 1,
-  pageSize: 15,
-  requestId: '123e4567-e89b-12d3-a456-426614174000',
-});
+let page = await client.query.getPaginatedSearch({ page: 1, pageSize: 15, requestId: '<YOUR-REQUEST-ID>' });
 for (const queryGetPaginatedSearchResponse of page.results) {
   console.log(queryGetPaginatedSearchResponse);
 }
@@ -191,10 +187,10 @@ const client = new Raindrop();
 
 const response = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-smartbucket' } },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
+    requestId: '<YOUR-REQUEST-ID>',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -202,10 +198,10 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-bucket' } },
+    bucketLocation: { bucket: { name: 'my-smartbucket' } },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
-    requestId: '123e4567-e89b-12d3-a456-426614174000',
+    requestId: '<YOUR-REQUEST-ID>',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));

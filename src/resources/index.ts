@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Answer, type AnswerCreateResponse, type AnswerCreateParams } from './answer';
+export { Answer } from './answer';
 export {
   Bucket,
   type BucketListResponse,

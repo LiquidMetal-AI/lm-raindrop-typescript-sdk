@@ -18,9 +18,9 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.chunkSearch({
-   *   bucketLocations: [{ bucket: { name: 'my-bucket' } }],
+   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
    *   input: 'Find documents about revenue in Q4 2023',
-   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -52,10 +52,10 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.documentQuery({
-   *   bucketLocation: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   input: 'What are the key points in this document?',
    *   objectId: 'document.pdf',
-   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -76,11 +76,7 @@ export class Query extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch(
-   *   {
-   *     page: 2,
-   *     pageSize: 10,
-   *     requestId: '123e4567-e89b-12d3-a456-426614174000',
-   *   },
+   *   { page: 1, pageSize: 10, requestId: '<YOUR-REQUEST-ID>' },
    * )) {
    *   // ...
    * }
@@ -124,10 +120,9 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.search({
-   *   bucketLocations: [{ bucket: { name: 'my-bucket' } }],
-   *   input:
-   *     'Show me documents containing credit card numbers or social security numbers',
-   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
+   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+   *   input: 'All my files',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -161,7 +156,7 @@ export class Query extends APIResource {
    * const response = await client.query.sumarizePage({
    *   page: 1,
    *   pageSize: 10,
-   *   requestId: '123e4567-e89b-12d3-a456-426614174000',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -419,19 +414,19 @@ export namespace QuerySearchResponse {
    */
   export interface Pagination {
     /**
-     * Indicates more results available. Used for infinite scroll implementation
-     */
-    hasMore?: boolean;
-
-    /**
      * Current page number (1-based)
      */
-    page?: number;
+    page: number;
 
     /**
      * Results per page. May be adjusted for performance
      */
-    pageSize?: number;
+    pageSize: number;
+
+    /**
+     * Indicates more results available. Used for infinite scroll implementation
+     */
+    hasMore?: boolean;
 
     /**
      * Total number of available results
