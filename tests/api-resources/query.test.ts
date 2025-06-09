@@ -11,9 +11,9 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('chunkSearch: only required params', async () => {
     const responsePromise = client.query.chunkSearch({
-      bucketLocations: [{ bucket: { name: 'my-bucket' } }],
+      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
       input: 'Find documents about revenue in Q4 2023',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,20 +28,26 @@ describe('resource query', () => {
   test.skip('chunkSearch: required and optional params', async () => {
     const response = await client.query.chunkSearch({
       bucketLocations: [
-        { bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+        {
+          bucket: {
+            name: 'my-smartbucket',
+            applicationName: 'my-app',
+            version: '01jxanr45haeswhay4n0q8340y',
+          },
+        },
       ],
       input: 'Find documents about revenue in Q4 2023',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.query.documentQuery({
-      bucketLocation: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-smartbucket' } },
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,20 +62,20 @@ describe('resource query', () => {
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.query.documentQuery({
       bucketLocation: {
-        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' },
+        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('getPaginatedSearch: only required params', async () => {
     const responsePromise = client.query.getPaginatedSearch({
-      page: 2,
+      page: 1,
       pageSize: 10,
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -83,18 +89,18 @@ describe('resource query', () => {
   // skipped: tests are disabled for the time being
   test.skip('getPaginatedSearch: required and optional params', async () => {
     const response = await client.query.getPaginatedSearch({
-      page: 2,
+      page: 1,
       pageSize: 10,
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
-      bucketLocations: [{ bucket: { name: 'my-bucket' } }],
-      input: 'Show me documents containing credit card numbers or social security numbers',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+      input: 'All my files',
+      requestId: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -109,10 +115,16 @@ describe('resource query', () => {
   test.skip('search: required and optional params', async () => {
     const response = await client.query.search({
       bucketLocations: [
-        { bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtgtraw3b5qbahrhvrj3ygbb' } },
+        {
+          bucket: {
+            name: 'my-smartbucket',
+            applicationName: 'my-app',
+            version: '01jxanr45haeswhay4n0q8340y',
+          },
+        },
       ],
-      input: 'Show me documents containing credit card numbers or social security numbers',
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      input: 'All my files',
+      requestId: '<YOUR-REQUEST-ID>',
     });
   });
 
@@ -121,7 +133,7 @@ describe('resource query', () => {
     const responsePromise = client.query.sumarizePage({
       page: 1,
       pageSize: 10,
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -137,7 +149,7 @@ describe('resource query', () => {
     const response = await client.query.sumarizePage({
       page: 1,
       pageSize: 10,
-      requestId: '123e4567-e89b-12d3-a456-426614174000',
+      requestId: '<YOUR-REQUEST-ID>',
     });
   });
 });

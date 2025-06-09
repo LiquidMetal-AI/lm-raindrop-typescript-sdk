@@ -13,7 +13,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const buckets = await client.bucket.list({
-   *   bucketLocation: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    * });
    * ```
    */
@@ -29,7 +29,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.delete({
-   *   bucketLocation: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
    * });
    * ```
@@ -46,7 +46,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.get({
-   *   bucketLocation: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
    * });
    * ```
@@ -63,7 +63,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const response = await client.bucket.put({
-   *   bucketLocation: { bucket: { name: 'my-bucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
    *   contentType: 'application/pdf',
    *   key: 'my-key',

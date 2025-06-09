@@ -10,7 +10,7 @@ const client = new Raindrop({
 describe('resource bucket', () => {
   // skipped: tests are disabled for the time being
   test.skip('list: only required params', async () => {
-    const responsePromise = client.bucket.list({ bucketLocation: { bucket: { name: 'my-bucket' } } });
+    const responsePromise = client.bucket.list({ bucketLocation: { bucket: { name: 'my-smartbucket' } } });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource bucket', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.bucket.list({
       bucketLocation: {
-        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtryx2f2f61ryk06vd8mr91p' },
+        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
     });
   });
@@ -32,7 +32,7 @@ describe('resource bucket', () => {
   // skipped: tests are disabled for the time being
   test.skip('delete: only required params', async () => {
     const responsePromise = client.bucket.delete({
-      bucketLocation: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-smartbucket' } },
       key: 'my-key',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource bucket', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.bucket.delete({
       bucketLocation: {
-        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtryx2f2f61ryk06vd8mr91p' },
+        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       key: 'my-key',
     });
@@ -57,7 +57,7 @@ describe('resource bucket', () => {
   // skipped: tests are disabled for the time being
   test.skip('get: only required params', async () => {
     const responsePromise = client.bucket.get({
-      bucketLocation: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-smartbucket' } },
       key: 'my-key',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +73,7 @@ describe('resource bucket', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.bucket.get({
       bucketLocation: {
-        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtryx2f2f61ryk06vd8mr91p' },
+        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       key: 'my-key',
     });
@@ -82,7 +82,7 @@ describe('resource bucket', () => {
   // skipped: tests are disabled for the time being
   test.skip('put: only required params', async () => {
     const responsePromise = client.bucket.put({
-      bucketLocation: { bucket: { name: 'my-bucket' } },
+      bucketLocation: { bucket: { name: 'my-smartbucket' } },
       content: 'U3RhaW5sZXNzIHJvY2tz',
       contentType: 'application/pdf',
       key: 'my-key',
@@ -100,7 +100,7 @@ describe('resource bucket', () => {
   test.skip('put: required and optional params', async () => {
     const response = await client.bucket.put({
       bucketLocation: {
-        bucket: { name: 'my-bucket', applicationName: 'my-app', version: '01jtryx2f2f61ryk06vd8mr91p' },
+        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       content: 'U3RhaW5sZXNzIHJvY2tz',
       contentType: 'application/pdf',
