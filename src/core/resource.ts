@@ -2,7 +2,7 @@
 
 import type { Raindrop } from '../client';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Raindrop;
 
   constructor(client: Raindrop) {
