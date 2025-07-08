@@ -11,7 +11,7 @@ describe('resource putMemory', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
     const responsePromise = client.putMemory.create({
-      agentMemoryLocation: { agentMemory: { name: 'my-agent-memory' } },
+      agentMemoryLocation: { agentMemory: { name: 'memory-name' } },
       content: 'User prefers dark theme for the interface',
       sessionId: '01jxanr45haeswhay4n0q8340y',
     });
@@ -28,11 +28,7 @@ describe('resource putMemory', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.putMemory.create({
       agentMemoryLocation: {
-        agentMemory: {
-          name: 'my-agent-memory',
-          applicationName: 'my-app',
-          version: '01jtryx2f2f61ryk06vd8mr91p',
-        },
+        agentMemory: { name: 'memory-name', applicationName: 'my-app', version: '1234' },
       },
       content: 'User prefers dark theme for the interface',
       sessionId: '01jxanr45haeswhay4n0q8340y',

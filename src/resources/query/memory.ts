@@ -21,7 +21,7 @@ export class Memory extends APIResource {
    * ```ts
    * const response = await client.query.memory.search({
    *   agentMemoryLocation: {
-   *     agentMemory: { name: 'my-agent-memory' },
+   *     agentMemory: { name: 'memory-name' },
    *   },
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
    *   terms: 'user interface preferences',
@@ -129,14 +129,16 @@ export interface MemorySearchParams {
 export namespace MemorySearchParams {
   export interface AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     agentMemory: AgentMemory.AgentMemory;
   }
 
   export namespace AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     export interface AgentMemory {
       /**

@@ -13,7 +13,7 @@ export class DeleteMemory extends APIResource {
    * ```ts
    * const deleteMemory = await client.deleteMemory.create({
    *   agentMemoryLocation: {
-   *     agentMemory: { name: 'my-agent-memory' },
+   *     agentMemory: { name: 'memory-name' },
    *   },
    *   memoryId: '01jxanr45haeswhay4n0q8340y',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
@@ -52,14 +52,16 @@ export interface DeleteMemoryCreateParams {
 export namespace DeleteMemoryCreateParams {
   export interface AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     agentMemory: AgentMemory.AgentMemory;
   }
 
   export namespace AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     export interface AgentMemory {
       /**

@@ -11,7 +11,7 @@ describe('resource memory', () => {
   // skipped: tests are disabled for the time being
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.memory.search({
-      agentMemoryLocation: { agentMemory: { name: 'my-agent-memory' } },
+      agentMemoryLocation: { agentMemory: { name: 'memory-name' } },
       sessionId: '01jxanr45haeswhay4n0q8340y',
       terms: 'user interface preferences',
     });
@@ -28,11 +28,7 @@ describe('resource memory', () => {
   test.skip('search: required and optional params', async () => {
     const response = await client.query.memory.search({
       agentMemoryLocation: {
-        agentMemory: {
-          name: 'my-agent-memory',
-          applicationName: 'my-app',
-          version: '01jtryx2f2f61ryk06vd8mr91p',
-        },
+        agentMemory: { name: 'memory-name', applicationName: 'my-app', version: '1234' },
       },
       sessionId: '01jxanr45haeswhay4n0q8340y',
       terms: 'user interface preferences',
