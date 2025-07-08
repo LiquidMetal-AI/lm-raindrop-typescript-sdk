@@ -43,8 +43,6 @@ Methods:
 - <code title="post /v1/get_object">client.bucket.<a href="./src/resources/bucket.ts">get</a>({ ...params }) -> BucketGetResponse</code>
 - <code title="post /v1/put_object">client.bucket.<a href="./src/resources/bucket.ts">put</a>({ ...params }) -> BucketPutResponse</code>
 
-# Answer
-
 # PutMemory
 
 Types:

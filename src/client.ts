@@ -18,7 +18,6 @@ import { AbstractPage, type PageNumberParams, PageNumberResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Answer } from './resources/answer';
 import {
   Bucket,
   BucketDeleteParams,
@@ -783,7 +782,6 @@ export class Raindrop {
 
   query: API.Query = new API.Query(this);
   bucket: API.Bucket = new API.Bucket(this);
-  answer: API.Answer = new API.Answer(this);
   putMemory: API.PutMemory = new API.PutMemory(this);
   getMemory: API.GetMemory = new API.GetMemory(this);
   deleteMemory: API.DeleteMemory = new API.DeleteMemory(this);
@@ -794,7 +792,6 @@ export class Raindrop {
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
-Raindrop.Answer = Answer;
 Raindrop.PutMemory = PutMemory;
 Raindrop.GetMemory = GetMemory;
 Raindrop.DeleteMemory = DeleteMemory;
@@ -835,8 +832,6 @@ export declare namespace Raindrop {
     type BucketGetParams as BucketGetParams,
     type BucketPutParams as BucketPutParams,
   };
-
-  export { Answer as Answer };
 
   export {
     PutMemory as PutMemory,
