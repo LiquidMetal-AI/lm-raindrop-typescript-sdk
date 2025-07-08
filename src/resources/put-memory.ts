@@ -21,7 +21,7 @@ export class PutMemory extends APIResource {
    * ```ts
    * const putMemory = await client.putMemory.create({
    *   agentMemoryLocation: {
-   *     agentMemory: { name: 'my-agent-memory' },
+   *     agentMemory: { name: 'memory-name' },
    *   },
    *   content: 'User prefers dark theme for the interface',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
@@ -75,14 +75,16 @@ export interface PutMemoryCreateParams {
 export namespace PutMemoryCreateParams {
   export interface AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     agentMemory: AgentMemory.AgentMemory;
   }
 
   export namespace AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     export interface AgentMemory {
       /**

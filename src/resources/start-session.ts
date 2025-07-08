@@ -13,7 +13,7 @@ export class StartSession extends APIResource {
    * ```ts
    * const startSession = await client.startSession.create({
    *   agentMemoryLocation: {
-   *     agentMemory: { name: 'my-agent-memory' },
+   *     agentMemory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -40,14 +40,16 @@ export interface StartSessionCreateParams {
 export namespace StartSessionCreateParams {
   export interface AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     agentMemory: AgentMemory.AgentMemory;
   }
 
   export namespace AgentMemory {
     /**
-     * **EXAMPLE** { name: 'my-agent-memory' } **REQUIRED** FALSE
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
      */
     export interface AgentMemory {
       /**
