@@ -104,9 +104,6 @@ export namespace PutMemoryCreateParams {
   }
 
   export interface ModuleID {
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
-     */
     moduleId: string;
   }
 }
