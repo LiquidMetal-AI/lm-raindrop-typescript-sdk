@@ -1,6 +1,6 @@
 # Raindrop TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/@liquidmetal-ai/lm-raindrop.svg)](https://npmjs.org/package/@liquidmetal-ai/lm-raindrop) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@liquidmetal-ai/lm-raindrop)
+[![NPM version](<https://img.shields.io/npm/v/@liquidmetal-ai/lm-raindrop.svg?label=npm%20(stable)>)](https://npmjs.org/package/@liquidmetal-ai/lm-raindrop) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@liquidmetal-ai/lm-raindrop)
 
 This library provides convenient access to the Raindrop REST API from server-side TypeScript or JavaScript.
 
@@ -285,9 +285,8 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.foo.create({
-  foo: 'my_param',
-  bar: 12,
+client.query.documentQuery({
+  // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
 });

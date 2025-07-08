@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.1.9 (2025-07-08)
+
+Full Changelog: [v0.1.8...v0.1.9](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.8...v0.1.9)
+
+### Features
+
+* **api:** manual updates ([20613e5](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/20613e5e9975fd6af708e0e169d49cb29624ae00))
+* **api:** updating API spec with latest changes ([92e12d1](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/92e12d137b074ab1365e845bf4aa2f628590143c))
+* **api:** updating API spec with latest changes ([46d7099](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/46d709976dd0368a466d53e8694ee1a5199e59ed))
+* **api:** updating API spec with latest changes ([72e60b2](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/72e60b24d67fc9347776392b81737f4c4e3a86f7))
+* **client:** add support for endpoint-specific base URLs ([8283830](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/828383004afb94ec278867b85a92a8dfeff37ba7))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([31838a5](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/31838a563c754b1c6938c3b684f28fcae2a4787a))
+* **client:** explicitly copy fetch in withOptions ([83ecb14](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/83ecb14425fd2a27da0f883d17c9dad3f38ccee8))
+* **client:** get fetchOptions type more reliably ([6039c14](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6039c141d362e86406d9013bc28775a656e27b89))
+* publish script — handle NPM errors correctly ([4655c73](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/4655c73d32403d17ca624bf3ee39fc1e0af02d98))
+
+
+### Chores
+
+* add docs to RequestOptions type ([b579b83](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/b579b83e981a0b5c3b7ebca8c54fbe7d3029a357))
+* **ci:** enable for pull requests ([9fbb733](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/9fbb73337bfc423d12223cf92993878724472b83))
+* **ci:** only run for pushes and fork pull requests ([46e56ca](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/46e56ca797edeae685dc20c5b406e7d2367fa751))
+* **client:** improve path param validation ([4eb0fb4](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/4eb0fb4e3e92f47648aaab4b84ce0638c43c27ea))
+* **client:** refactor imports ([6d9c446](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6d9c4464f903fc225e2a85f518b9387f5e6adfdc))
+* **internal:** add pure annotations, make base APIResource abstract ([3c6cb12](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/3c6cb1230c268df517c839cd2d89f16d65ba25f9))
+* **readme:** update badges ([3c12a05](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/3c12a05fe11f61fd19a4e1f62500cf9a0abe5e27))
+* **readme:** use better example snippet for undocumented params ([1c80ceb](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/1c80cebfa37bd03f555643dcd12406daea10d7a1))
+
 ## 0.1.8 (2025-06-09)
 
 Full Changelog: [v0.1.7...v0.1.8](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.7...v0.1.8)

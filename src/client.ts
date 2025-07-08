@@ -5,7 +5,6 @@ import type { HTTPMethod, PromiseOrValue, MergedRequestInit, FinalizedRequestIni
 import { uuid4 } from './internal/utils/uuid';
 import { validatePositiveInteger, isAbsoluteURL, safeJSON } from './internal/utils/values';
 import { sleep } from './internal/utils/sleep';
-import { type Logger, type LogLevel, parseLogLevel } from './internal/utils/log';
 export type { Logger, LogLevel } from './internal/utils/log';
 import { castToError, isAbortError } from './internal/errors';
 import type { APIResponseProps } from './internal/parse';
@@ -19,10 +18,6 @@ import { AbstractPage, type PageNumberParams, PageNumberResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { type Fetch } from './internal/builtin-types';
-import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
-import { FinalRequestOptions, RequestOptions } from './internal/request-options';
-import { Answer } from './resources/answer';
 import {
   Bucket,
   BucketDeleteParams,
@@ -34,6 +29,29 @@ import {
   BucketPutParams,
   BucketPutResponse,
 } from './resources/bucket';
+import {
+  DeleteMemory,
+  DeleteMemoryCreateParams,
+  DeleteMemoryCreateResponse,
+} from './resources/delete-memory';
+import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
+import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
+import { PutMemory, PutMemoryCreateParams, PutMemoryCreateResponse } from './resources/put-memory';
+import {
+  RehydrateSession,
+  RehydrateSessionRehydrateParams,
+  RehydrateSessionRehydrateResponse,
+} from './resources/rehydrate-session';
+import {
+  StartSession,
+  StartSessionCreateParams,
+  StartSessionCreateResponse,
+} from './resources/start-session';
+import {
+  SummarizeMemory,
+  SummarizeMemoryCreateParams,
+  SummarizeMemoryCreateResponse,
+} from './resources/summarize-memory';
 import {
   BucketLocator,
   Query,
@@ -48,9 +66,18 @@ import {
   QuerySearchResponse,
   QuerySumarizePageParams,
   QuerySumarizePageResponse,
-} from './resources/query';
+} from './resources/query/query';
+import { type Fetch } from './internal/builtin-types';
+import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
+import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { readEnv } from './internal/utils/env';
-import { formatRequestDetails, loggerFor } from './internal/utils/log';
+import {
+  type LogLevel,
+  type Logger,
+  formatRequestDetails,
+  loggerFor,
+  parseLogLevel,
+} from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
@@ -72,6 +99,8 @@ export interface ClientOptions {
    *
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
+   *
+   * @unit milliseconds
    */
   timeout?: number | undefined;
   /**
@@ -204,10 +233,18 @@ export class Raindrop {
       timeout: this.timeout,
       logger: this.logger,
       logLevel: this.logLevel,
+      fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       ...options,
     });
+  }
+
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== 'https://api.raindrop.run';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -259,11 +296,16 @@ export class Raindrop {
     return Errors.APIError.generate(status, error, message, headers);
   }
 
-  buildURL(path: string, query: Record<string, unknown> | null | undefined): string {
+  buildURL(
+    path: string,
+    query: Record<string, unknown> | null | undefined,
+    defaultBaseURL?: string | undefined,
+  ): string {
+    const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
         new URL(path)
-      : new URL(this.baseURL + (this.baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
+      : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
     if (!isEmptyObj(defaultQuery)) {
@@ -623,9 +665,9 @@ export class Raindrop {
     { retryCount = 0 }: { retryCount?: number } = {},
   ): { req: FinalizedRequestInit; url: string; timeout: number } {
     const options = { ...inputOptions };
-    const { method, path, query } = options;
+    const { method, path, query, defaultBaseURL } = options;
 
-    const url = this.buildURL(path!, query as Record<string, unknown>);
+    const url = this.buildURL(path!, query as Record<string, unknown>, defaultBaseURL);
     if ('timeout' in options) validatePositiveInteger('timeout', options.timeout);
     options.timeout = options.timeout ?? this.timeout;
     const { bodyHeaders, body } = this.buildBody({ options });
@@ -740,11 +782,23 @@ export class Raindrop {
 
   query: API.Query = new API.Query(this);
   bucket: API.Bucket = new API.Bucket(this);
-  answer: API.Answer = new API.Answer(this);
+  putMemory: API.PutMemory = new API.PutMemory(this);
+  getMemory: API.GetMemory = new API.GetMemory(this);
+  deleteMemory: API.DeleteMemory = new API.DeleteMemory(this);
+  summarizeMemory: API.SummarizeMemory = new API.SummarizeMemory(this);
+  startSession: API.StartSession = new API.StartSession(this);
+  endSession: API.EndSession = new API.EndSession(this);
+  rehydrateSession: API.RehydrateSession = new API.RehydrateSession(this);
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
-Raindrop.Answer = Answer;
+Raindrop.PutMemory = PutMemory;
+Raindrop.GetMemory = GetMemory;
+Raindrop.DeleteMemory = DeleteMemory;
+Raindrop.SummarizeMemory = SummarizeMemory;
+Raindrop.StartSession = StartSession;
+Raindrop.EndSession = EndSession;
+Raindrop.RehydrateSession = RehydrateSession;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -779,5 +833,45 @@ export declare namespace Raindrop {
     type BucketPutParams as BucketPutParams,
   };
 
-  export { Answer as Answer };
+  export {
+    PutMemory as PutMemory,
+    type PutMemoryCreateResponse as PutMemoryCreateResponse,
+    type PutMemoryCreateParams as PutMemoryCreateParams,
+  };
+
+  export {
+    GetMemory as GetMemory,
+    type GetMemoryRetrieveResponse as GetMemoryRetrieveResponse,
+    type GetMemoryRetrieveParams as GetMemoryRetrieveParams,
+  };
+
+  export {
+    DeleteMemory as DeleteMemory,
+    type DeleteMemoryCreateResponse as DeleteMemoryCreateResponse,
+    type DeleteMemoryCreateParams as DeleteMemoryCreateParams,
+  };
+
+  export {
+    SummarizeMemory as SummarizeMemory,
+    type SummarizeMemoryCreateResponse as SummarizeMemoryCreateResponse,
+    type SummarizeMemoryCreateParams as SummarizeMemoryCreateParams,
+  };
+
+  export {
+    StartSession as StartSession,
+    type StartSessionCreateResponse as StartSessionCreateResponse,
+    type StartSessionCreateParams as StartSessionCreateParams,
+  };
+
+  export {
+    EndSession as EndSession,
+    type EndSessionCreateResponse as EndSessionCreateResponse,
+    type EndSessionCreateParams as EndSessionCreateParams,
+  };
+
+  export {
+    RehydrateSession as RehydrateSession,
+    type RehydrateSessionRehydrateResponse as RehydrateSessionRehydrateResponse,
+    type RehydrateSessionRehydrateParams as RehydrateSessionRehydrateParams,
+  };
 }
