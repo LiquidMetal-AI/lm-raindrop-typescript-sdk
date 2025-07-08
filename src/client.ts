@@ -31,6 +31,29 @@ import {
   BucketPutResponse,
 } from './resources/bucket';
 import {
+  DeleteMemory,
+  DeleteMemoryCreateParams,
+  DeleteMemoryCreateResponse,
+} from './resources/delete-memory';
+import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
+import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
+import { PutMemory, PutMemoryCreateParams, PutMemoryCreateResponse } from './resources/put-memory';
+import {
+  RehydrateSession,
+  RehydrateSessionRehydrateParams,
+  RehydrateSessionRehydrateResponse,
+} from './resources/rehydrate-session';
+import {
+  StartSession,
+  StartSessionCreateParams,
+  StartSessionCreateResponse,
+} from './resources/start-session';
+import {
+  SummarizeMemory,
+  SummarizeMemoryCreateParams,
+  SummarizeMemoryCreateResponse,
+} from './resources/summarize-memory';
+import {
   BucketLocator,
   Query,
   QueryChunkSearchParams,
@@ -44,7 +67,7 @@ import {
   QuerySearchResponse,
   QuerySumarizePageParams,
   QuerySumarizePageResponse,
-} from './resources/query';
+} from './resources/query/query';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -761,10 +784,24 @@ export class Raindrop {
   query: API.Query = new API.Query(this);
   bucket: API.Bucket = new API.Bucket(this);
   answer: API.Answer = new API.Answer(this);
+  putMemory: API.PutMemory = new API.PutMemory(this);
+  getMemory: API.GetMemory = new API.GetMemory(this);
+  deleteMemory: API.DeleteMemory = new API.DeleteMemory(this);
+  summarizeMemory: API.SummarizeMemory = new API.SummarizeMemory(this);
+  startSession: API.StartSession = new API.StartSession(this);
+  endSession: API.EndSession = new API.EndSession(this);
+  rehydrateSession: API.RehydrateSession = new API.RehydrateSession(this);
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
 Raindrop.Answer = Answer;
+Raindrop.PutMemory = PutMemory;
+Raindrop.GetMemory = GetMemory;
+Raindrop.DeleteMemory = DeleteMemory;
+Raindrop.SummarizeMemory = SummarizeMemory;
+Raindrop.StartSession = StartSession;
+Raindrop.EndSession = EndSession;
+Raindrop.RehydrateSession = RehydrateSession;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -800,4 +837,46 @@ export declare namespace Raindrop {
   };
 
   export { Answer as Answer };
+
+  export {
+    PutMemory as PutMemory,
+    type PutMemoryCreateResponse as PutMemoryCreateResponse,
+    type PutMemoryCreateParams as PutMemoryCreateParams,
+  };
+
+  export {
+    GetMemory as GetMemory,
+    type GetMemoryRetrieveResponse as GetMemoryRetrieveResponse,
+    type GetMemoryRetrieveParams as GetMemoryRetrieveParams,
+  };
+
+  export {
+    DeleteMemory as DeleteMemory,
+    type DeleteMemoryCreateResponse as DeleteMemoryCreateResponse,
+    type DeleteMemoryCreateParams as DeleteMemoryCreateParams,
+  };
+
+  export {
+    SummarizeMemory as SummarizeMemory,
+    type SummarizeMemoryCreateResponse as SummarizeMemoryCreateResponse,
+    type SummarizeMemoryCreateParams as SummarizeMemoryCreateParams,
+  };
+
+  export {
+    StartSession as StartSession,
+    type StartSessionCreateResponse as StartSessionCreateResponse,
+    type StartSessionCreateParams as StartSessionCreateParams,
+  };
+
+  export {
+    EndSession as EndSession,
+    type EndSessionCreateResponse as EndSessionCreateResponse,
+    type EndSessionCreateParams as EndSessionCreateParams,
+  };
+
+  export {
+    RehydrateSession as RehydrateSession,
+    type RehydrateSessionRehydrateResponse as RehydrateSessionRehydrateResponse,
+    type RehydrateSessionRehydrateParams as RehydrateSessionRehydrateParams,
+  };
 }
