@@ -4,50 +4,55 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class DeleteMemory extends APIResource {
+export class DeleteSemanticMemory extends APIResource {
   /**
-   * Removes a specific memory entry from storage. This operation is permanent and
-   * cannot be undone.
+   * Removes a specific semantic memory document by its object ID. This operation
+   * permanently deletes the document and is irreversible.
    *
    * @example
    * ```ts
-   * const deleteMemory = await client.deleteMemory.create({
-   *   memoryId: '01jxanr45haeswhay4n0q8340y',
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
-   * });
+   * const deleteSemanticMemory =
+   *   await client.deleteSemanticMemory.delete({
+   *     objectId: '01jxanr45haeswhay4n0q8340y',
+   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *   });
    * ```
    */
-  create(body: DeleteMemoryCreateParams, options?: RequestOptions): APIPromise<DeleteMemoryCreateResponse> {
-    return this._client.post('/v1/delete_memory', { body, ...options });
+  delete(
+    body: DeleteSemanticMemoryDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DeleteSemanticMemoryDeleteResponse> {
+    return this._client.post('/v1/delete_semantic_memory', { body, ...options });
   }
 }
 
-export interface DeleteMemoryCreateResponse {
+export interface DeleteSemanticMemoryDeleteResponse {
   /**
-   * Indicates whether the deletion was successful
+   * Error message if the operation failed
+   */
+  error?: string | null;
+
+  /**
+   * Indicates whether the document was deleted successfully
    */
   success?: boolean;
 }
 
-export interface DeleteMemoryCreateParams {
+export interface DeleteSemanticMemoryDeleteParams {
   /**
-   * Unique identifier of the memory entry to delete
+   * Unique object identifier of the document to delete
    */
-  memoryId: string;
-
-  /**
-   * Unique session identifier for the working memory instance
-   */
-  sessionId: string;
+  objectId: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: DeleteMemoryCreateParams.ModuleID | DeleteMemoryCreateParams.SmartMemory;
+  smartMemoryLocation:
+    | DeleteSemanticMemoryDeleteParams.ModuleID
+    | DeleteSemanticMemoryDeleteParams.SmartMemory;
 }
 
-export namespace DeleteMemoryCreateParams {
+export namespace DeleteSemanticMemoryDeleteParams {
   export interface ModuleID {
     moduleId: string;
   }
@@ -85,9 +90,9 @@ export namespace DeleteMemoryCreateParams {
   }
 }
 
-export declare namespace DeleteMemory {
+export declare namespace DeleteSemanticMemory {
   export {
-    type DeleteMemoryCreateResponse as DeleteMemoryCreateResponse,
-    type DeleteMemoryCreateParams as DeleteMemoryCreateParams,
+    type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
+    type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
 }

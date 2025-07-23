@@ -4,55 +4,55 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class EndSession extends APIResource {
+export class GetProcedure extends APIResource {
   /**
-   * Ends a working memory session, optionally flushing working memory to long-term
-   * storage. When flush is enabled, important memories are processed and stored for
-   * future retrieval.
+   * Retrieves a specific procedure by key from procedural memory. Procedures are
+   * persistent knowledge artifacts that remain available across all sessions and can
+   * be shared between different agent instances.
    *
    * @example
    * ```ts
-   * const endSession = await client.endSession.create({
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   * const getProcedure = await client.getProcedure.create({
+   *   key: 'TechnicalReportSystemPrompt',
    *   smartMemoryLocation: { moduleId: 'moduleId' },
    * });
    * ```
    */
-  create(body: EndSessionCreateParams, options?: RequestOptions): APIPromise<EndSessionCreateResponse> {
-    return this._client.post('/v1/end_session', { body, ...options });
+  create(body: GetProcedureCreateParams, options?: RequestOptions): APIPromise<GetProcedureCreateResponse> {
+    return this._client.post('/v1/get_procedure', { body, ...options });
   }
 }
 
-export interface EndSessionCreateResponse {
+export interface GetProcedureCreateResponse {
   /**
-   * Indicates whether the session was ended successfully
+   * Indicates whether the procedure was found
    */
-  success?: boolean;
+  found?: boolean;
+
+  /**
+   * The procedure content, or empty if not found
+   */
+  value?: string | null;
 }
 
-export interface EndSessionCreateParams {
+export interface GetProcedureCreateParams {
   /**
-   * Unique session identifier to end
+   * Unique key of the procedure to retrieve
    */
-  sessionId: string;
+  key: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
+  smartMemoryLocation: GetProcedureCreateParams.ModuleID | GetProcedureCreateParams.SmartMemory;
 
   /**
-   * Whether to flush working memory to long-term storage
+   * Optional procedural memory ID to use for actor isolation
    */
-  flush?: boolean | null;
-
-  /**
-   * Optional custom system prompt for memory summarization during flush
-   */
-  systemPrompt?: string | null;
+  proceduralMemoryId?: string | null;
 }
 
-export namespace EndSessionCreateParams {
+export namespace GetProcedureCreateParams {
   export interface ModuleID {
     moduleId: string;
   }
@@ -90,9 +90,9 @@ export namespace EndSessionCreateParams {
   }
 }
 
-export declare namespace EndSession {
+export declare namespace GetProcedure {
   export {
-    type EndSessionCreateResponse as EndSessionCreateResponse,
-    type EndSessionCreateParams as EndSessionCreateParams,
+    type GetProcedureCreateResponse as GetProcedureCreateResponse,
+    type GetProcedureCreateParams as GetProcedureCreateParams,
   };
 }

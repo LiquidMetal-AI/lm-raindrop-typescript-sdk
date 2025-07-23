@@ -4,55 +4,54 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class EndSession extends APIResource {
+export class DeleteProcedure extends APIResource {
   /**
-   * Ends a working memory session, optionally flushing working memory to long-term
-   * storage. When flush is enabled, important memories are processed and stored for
-   * future retrieval.
+   * Removes a specific procedure from procedural memory. This operation is permanent
+   * and affects all future sessions.
    *
    * @example
    * ```ts
-   * const endSession = await client.endSession.create({
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
-   * });
+   * const deleteProcedure = await client.deleteProcedure.create(
+   *   {
+   *     key: 'TechnicalReportSystemPrompt',
+   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *   },
+   * );
    * ```
    */
-  create(body: EndSessionCreateParams, options?: RequestOptions): APIPromise<EndSessionCreateResponse> {
-    return this._client.post('/v1/end_session', { body, ...options });
+  create(
+    body: DeleteProcedureCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<DeleteProcedureCreateResponse> {
+    return this._client.post('/v1/delete_procedure', { body, ...options });
   }
 }
 
-export interface EndSessionCreateResponse {
+export interface DeleteProcedureCreateResponse {
   /**
-   * Indicates whether the session was ended successfully
+   * Indicates whether the procedure was deleted successfully
    */
   success?: boolean;
 }
 
-export interface EndSessionCreateParams {
+export interface DeleteProcedureCreateParams {
   /**
-   * Unique session identifier to end
+   * Unique key of the procedure to delete
    */
-  sessionId: string;
+  key: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
+  smartMemoryLocation: DeleteProcedureCreateParams.ModuleID | DeleteProcedureCreateParams.SmartMemory;
 
   /**
-   * Whether to flush working memory to long-term storage
+   * Optional procedural memory ID to use for actor isolation
    */
-  flush?: boolean | null;
-
-  /**
-   * Optional custom system prompt for memory summarization during flush
-   */
-  systemPrompt?: string | null;
+  proceduralMemoryId?: string | null;
 }
 
-export namespace EndSessionCreateParams {
+export namespace DeleteProcedureCreateParams {
   export interface ModuleID {
     moduleId: string;
   }
@@ -90,9 +89,9 @@ export namespace EndSessionCreateParams {
   }
 }
 
-export declare namespace EndSession {
+export declare namespace DeleteProcedure {
   export {
-    type EndSessionCreateResponse as EndSessionCreateResponse,
-    type EndSessionCreateParams as EndSessionCreateParams,
+    type DeleteProcedureCreateResponse as DeleteProcedureCreateResponse,
+    type DeleteProcedureCreateParams as DeleteProcedureCreateParams,
   };
 }

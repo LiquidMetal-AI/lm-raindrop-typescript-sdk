@@ -13,10 +13,8 @@ export class RehydrateSession extends APIResource {
    * @example
    * ```ts
    * const response = await client.rehydrateSession.rehydrate({
-   *   agentMemoryLocation: {
-   *     agentMemory: { name: 'memory-name' },
-   *   },
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: { moduleId: 'moduleId' },
    * });
    * ```
    */
@@ -48,14 +46,14 @@ export interface RehydrateSessionRehydrateResponse {
 
 export interface RehydrateSessionRehydrateParams {
   /**
-   * Agent memory locator for targeting the correct agent memory instance
-   */
-  agentMemoryLocation: RehydrateSessionRehydrateParams.AgentMemory | RehydrateSessionRehydrateParams.ModuleID;
-
-  /**
    * Session identifier to restore from episodic memory
    */
   sessionId: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance
+   */
+  smartMemoryLocation: RehydrateSessionRehydrateParams.ModuleID | RehydrateSessionRehydrateParams.SmartMemory;
 
   /**
    * If true, only restore a summary. If false, restore all memories
@@ -64,22 +62,26 @@ export interface RehydrateSessionRehydrateParams {
 }
 
 export namespace RehydrateSessionRehydrateParams {
-  export interface AgentMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    agentMemory: AgentMemory.AgentMemory;
+  export interface ModuleID {
+    moduleId: string;
   }
 
-  export namespace AgentMemory {
+  export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    export interface AgentMemory {
+    smartMemory: SmartMemory.SmartMemory;
+  }
+
+  export namespace SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    export interface SmartMemory {
       /**
-       * The name of the agent memory **EXAMPLE** "my-agent-memory" **REQUIRED** TRUE
+       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
        */
       name: string;
 
@@ -89,15 +91,11 @@ export namespace RehydrateSessionRehydrateParams {
       applicationName?: string | null;
 
       /**
-       * Optional version of the agent memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
        * **REQUIRED** FALSE
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    moduleId: string;
   }
 }
 

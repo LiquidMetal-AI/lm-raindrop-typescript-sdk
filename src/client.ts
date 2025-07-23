@@ -34,9 +34,44 @@ import {
   DeleteMemoryCreateParams,
   DeleteMemoryCreateResponse,
 } from './resources/delete-memory';
+import {
+  DeleteProcedure,
+  DeleteProcedureCreateParams,
+  DeleteProcedureCreateResponse,
+} from './resources/delete-procedure';
+import {
+  DeleteSemanticMemory,
+  DeleteSemanticMemoryDeleteParams,
+  DeleteSemanticMemoryDeleteResponse,
+} from './resources/delete-semantic-memory';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
 import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
+import {
+  GetProcedure,
+  GetProcedureCreateParams,
+  GetProcedureCreateResponse,
+} from './resources/get-procedure';
+import {
+  GetSemanticMemory,
+  GetSemanticMemoryCreateParams,
+  GetSemanticMemoryCreateResponse,
+} from './resources/get-semantic-memory';
+import {
+  ListProcedureCreateParams,
+  ListProcedureCreateResponse,
+  ListProcedures,
+} from './resources/list-procedures';
 import { PutMemory, PutMemoryCreateParams, PutMemoryCreateResponse } from './resources/put-memory';
+import {
+  PutProcedure,
+  PutProcedureCreateParams,
+  PutProcedureCreateResponse,
+} from './resources/put-procedure';
+import {
+  PutSemanticMemory,
+  PutSemanticMemoryCreateParams,
+  PutSemanticMemoryCreateResponse,
+} from './resources/put-semantic-memory';
 import {
   RehydrateSession,
   RehydrateSessionRehydrateParams,
@@ -792,6 +827,13 @@ export class Raindrop {
   startSession: API.StartSession = new API.StartSession(this);
   endSession: API.EndSession = new API.EndSession(this);
   rehydrateSession: API.RehydrateSession = new API.RehydrateSession(this);
+  putProcedure: API.PutProcedure = new API.PutProcedure(this);
+  getProcedure: API.GetProcedure = new API.GetProcedure(this);
+  deleteProcedure: API.DeleteProcedure = new API.DeleteProcedure(this);
+  listProcedures: API.ListProcedures = new API.ListProcedures(this);
+  putSemanticMemory: API.PutSemanticMemory = new API.PutSemanticMemory(this);
+  getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
+  deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
@@ -802,6 +844,13 @@ Raindrop.SummarizeMemory = SummarizeMemory;
 Raindrop.StartSession = StartSession;
 Raindrop.EndSession = EndSession;
 Raindrop.RehydrateSession = RehydrateSession;
+Raindrop.PutProcedure = PutProcedure;
+Raindrop.GetProcedure = GetProcedure;
+Raindrop.DeleteProcedure = DeleteProcedure;
+Raindrop.ListProcedures = ListProcedures;
+Raindrop.PutSemanticMemory = PutSemanticMemory;
+Raindrop.GetSemanticMemory = GetSemanticMemory;
+Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -876,5 +925,47 @@ export declare namespace Raindrop {
     RehydrateSession as RehydrateSession,
     type RehydrateSessionRehydrateResponse as RehydrateSessionRehydrateResponse,
     type RehydrateSessionRehydrateParams as RehydrateSessionRehydrateParams,
+  };
+
+  export {
+    PutProcedure as PutProcedure,
+    type PutProcedureCreateResponse as PutProcedureCreateResponse,
+    type PutProcedureCreateParams as PutProcedureCreateParams,
+  };
+
+  export {
+    GetProcedure as GetProcedure,
+    type GetProcedureCreateResponse as GetProcedureCreateResponse,
+    type GetProcedureCreateParams as GetProcedureCreateParams,
+  };
+
+  export {
+    DeleteProcedure as DeleteProcedure,
+    type DeleteProcedureCreateResponse as DeleteProcedureCreateResponse,
+    type DeleteProcedureCreateParams as DeleteProcedureCreateParams,
+  };
+
+  export {
+    ListProcedures as ListProcedures,
+    type ListProcedureCreateResponse as ListProcedureCreateResponse,
+    type ListProcedureCreateParams as ListProcedureCreateParams,
+  };
+
+  export {
+    PutSemanticMemory as PutSemanticMemory,
+    type PutSemanticMemoryCreateResponse as PutSemanticMemoryCreateResponse,
+    type PutSemanticMemoryCreateParams as PutSemanticMemoryCreateParams,
+  };
+
+  export {
+    GetSemanticMemory as GetSemanticMemory,
+    type GetSemanticMemoryCreateResponse as GetSemanticMemoryCreateResponse,
+    type GetSemanticMemoryCreateParams as GetSemanticMemoryCreateParams,
+  };
+
+  export {
+    DeleteSemanticMemory as DeleteSemanticMemory,
+    type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
+    type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
 }

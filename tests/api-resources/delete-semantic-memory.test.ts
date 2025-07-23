@@ -7,11 +7,11 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource endSession', () => {
+describe('resource deleteSemanticMemory', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.deleteSemanticMemory.delete({
+      objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: { moduleId: 'moduleId' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,12 +24,10 @@ describe('resource endSession', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.deleteSemanticMemory.delete({
+      objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: { moduleId: 'moduleId' },
-      flush: true,
-      systemPrompt: 'Summarize the key decisions and action items from this session',
     });
   });
 });
