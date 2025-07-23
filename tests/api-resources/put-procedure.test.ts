@@ -7,12 +7,13 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource endSession', () => {
+describe('resource putProcedure', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+    const responsePromise = client.putProcedure.create({
+      key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: { moduleId: 'moduleId' },
+      value: 'You are a technical documentation assistant...',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,11 +26,11 @@ describe('resource endSession', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+    const response = await client.putProcedure.create({
+      key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: { moduleId: 'moduleId' },
-      flush: true,
-      systemPrompt: 'Summarize the key decisions and action items from this session',
+      value: 'You are a technical documentation assistant...',
+      proceduralMemoryId: 'demo-smartmemory',
     });
   });
 });

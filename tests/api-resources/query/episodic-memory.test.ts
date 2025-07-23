@@ -7,12 +7,12 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource endSession', () => {
+describe('resource episodicMemory', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.query.episodicMemory.search({
       smartMemoryLocation: { moduleId: 'moduleId' },
+      terms: 'sessions about user interface preferences',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,12 +24,13 @@ describe('resource endSession', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.endSession.create({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('search: required and optional params', async () => {
+    const response = await client.query.episodicMemory.search({
       smartMemoryLocation: { moduleId: 'moduleId' },
-      flush: true,
-      systemPrompt: 'Summarize the key decisions and action items from this session',
+      terms: 'sessions about user interface preferences',
+      endTime: '2019-12-27T18:11:19.117Z',
+      nMostRecent: 10,
+      startTime: '2019-12-27T18:11:19.117Z',
     });
   });
 });

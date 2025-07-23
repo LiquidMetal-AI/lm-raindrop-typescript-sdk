@@ -16,9 +16,44 @@ export {
   type DeleteMemoryCreateResponse,
   type DeleteMemoryCreateParams,
 } from './delete-memory';
+export {
+  DeleteProcedure,
+  type DeleteProcedureCreateResponse,
+  type DeleteProcedureCreateParams,
+} from './delete-procedure';
+export {
+  DeleteSemanticMemory,
+  type DeleteSemanticMemoryDeleteResponse,
+  type DeleteSemanticMemoryDeleteParams,
+} from './delete-semantic-memory';
 export { EndSession, type EndSessionCreateResponse, type EndSessionCreateParams } from './end-session';
 export { GetMemory, type GetMemoryRetrieveResponse, type GetMemoryRetrieveParams } from './get-memory';
+export {
+  GetProcedure,
+  type GetProcedureCreateResponse,
+  type GetProcedureCreateParams,
+} from './get-procedure';
+export {
+  GetSemanticMemory,
+  type GetSemanticMemoryCreateResponse,
+  type GetSemanticMemoryCreateParams,
+} from './get-semantic-memory';
+export {
+  ListProcedures,
+  type ListProcedureCreateResponse,
+  type ListProcedureCreateParams,
+} from './list-procedures';
 export { PutMemory, type PutMemoryCreateResponse, type PutMemoryCreateParams } from './put-memory';
+export {
+  PutProcedure,
+  type PutProcedureCreateResponse,
+  type PutProcedureCreateParams,
+} from './put-procedure';
+export {
+  PutSemanticMemory,
+  type PutSemanticMemoryCreateResponse,
+  type PutSemanticMemoryCreateParams,
+} from './put-semantic-memory';
 export {
   Query,
   type BucketLocator,

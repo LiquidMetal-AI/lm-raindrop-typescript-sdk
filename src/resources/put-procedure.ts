@@ -4,55 +4,56 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class EndSession extends APIResource {
+export class PutProcedure extends APIResource {
   /**
-   * Ends a working memory session, optionally flushing working memory to long-term
-   * storage. When flush is enabled, important memories are processed and stored for
-   * future retrieval.
+   * Stores a new procedure in the agent's procedural memory. Procedures are reusable
+   * knowledge artifacts like system prompts, templates, workflows, or instructions
+   * that can be retrieved and applied across different sessions and contexts.
    *
    * @example
    * ```ts
-   * const endSession = await client.endSession.create({
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   * const putProcedure = await client.putProcedure.create({
+   *   key: 'TechnicalReportSystemPrompt',
    *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   value: 'You are a technical documentation assistant...',
    * });
    * ```
    */
-  create(body: EndSessionCreateParams, options?: RequestOptions): APIPromise<EndSessionCreateResponse> {
-    return this._client.post('/v1/end_session', { body, ...options });
+  create(body: PutProcedureCreateParams, options?: RequestOptions): APIPromise<PutProcedureCreateResponse> {
+    return this._client.post('/v1/put_procedure', { body, ...options });
   }
 }
 
-export interface EndSessionCreateResponse {
+export interface PutProcedureCreateResponse {
   /**
-   * Indicates whether the session was ended successfully
+   * Indicates whether the procedure was stored successfully
    */
   success?: boolean;
 }
 
-export interface EndSessionCreateParams {
+export interface PutProcedureCreateParams {
   /**
-   * Unique session identifier to end
+   * Unique key to identify this procedure
    */
-  sessionId: string;
+  key: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
+  smartMemoryLocation: PutProcedureCreateParams.ModuleID | PutProcedureCreateParams.SmartMemory;
 
   /**
-   * Whether to flush working memory to long-term storage
+   * The procedure content (prompt, template, instructions, etc.)
    */
-  flush?: boolean | null;
+  value: string;
 
   /**
-   * Optional custom system prompt for memory summarization during flush
+   * Optional procedural memory ID to use for actor isolation
    */
-  systemPrompt?: string | null;
+  proceduralMemoryId?: string | null;
 }
 
-export namespace EndSessionCreateParams {
+export namespace PutProcedureCreateParams {
   export interface ModuleID {
     moduleId: string;
   }
@@ -90,9 +91,9 @@ export namespace EndSessionCreateParams {
   }
 }
 
-export declare namespace EndSession {
+export declare namespace PutProcedure {
   export {
-    type EndSessionCreateResponse as EndSessionCreateResponse,
-    type EndSessionCreateParams as EndSessionCreateParams,
+    type PutProcedureCreateResponse as PutProcedureCreateResponse,
+    type PutProcedureCreateParams as PutProcedureCreateParams,
   };
 }

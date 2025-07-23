@@ -11,8 +11,8 @@ describe('resource rehydrateSession', () => {
   // skipped: tests are disabled for the time being
   test.skip('rehydrate: only required params', async () => {
     const responsePromise = client.rehydrateSession.rehydrate({
-      agentMemoryLocation: { agentMemory: { name: 'memory-name' } },
       sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: { moduleId: 'moduleId' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,10 +26,8 @@ describe('resource rehydrateSession', () => {
   // skipped: tests are disabled for the time being
   test.skip('rehydrate: required and optional params', async () => {
     const response = await client.rehydrateSession.rehydrate({
-      agentMemoryLocation: {
-        agentMemory: { name: 'memory-name', applicationName: 'my-app', version: '1234' },
-      },
       sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: { moduleId: 'moduleId' },
       summaryOnly: false,
     });
   });
