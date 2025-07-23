@@ -13,7 +13,13 @@ export class EpisodicMemory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.episodicMemory.search({
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   terms: 'sessions about user interface preferences',
    * });
    * ```
@@ -116,7 +122,7 @@ export interface EpisodicMemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: EpisodicMemorySearchParams.ModuleID | EpisodicMemorySearchParams.SmartMemory;
+  smartMemoryLocation: unknown | EpisodicMemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query to find relevant episodic memory sessions
@@ -140,10 +146,6 @@ export interface EpisodicMemorySearchParams {
 }
 
 export namespace EpisodicMemorySearchParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

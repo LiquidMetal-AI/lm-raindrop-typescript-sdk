@@ -12,7 +12,9 @@ describe('resource rehydrateSession', () => {
   test.skip('rehydrate: only required params', async () => {
     const responsePromise = client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +29,9 @@ describe('resource rehydrateSession', () => {
   test.skip('rehydrate: required and optional params', async () => {
     const response = await client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       summaryOnly: false,
     });
   });

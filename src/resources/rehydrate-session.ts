@@ -14,7 +14,13 @@ export class RehydrateSession extends APIResource {
    * ```ts
    * const response = await client.rehydrateSession.rehydrate({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -53,7 +59,7 @@ export interface RehydrateSessionRehydrateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: RehydrateSessionRehydrateParams.ModuleID | RehydrateSessionRehydrateParams.SmartMemory;
+  smartMemoryLocation: unknown | RehydrateSessionRehydrateParams.SmartMemory;
 
   /**
    * If true, only restore a summary. If false, restore all memories
@@ -62,10 +68,6 @@ export interface RehydrateSessionRehydrateParams {
 }
 
 export namespace RehydrateSessionRehydrateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

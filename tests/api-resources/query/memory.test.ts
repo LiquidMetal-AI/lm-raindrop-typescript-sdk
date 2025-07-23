@@ -12,7 +12,9 @@ describe('resource memory', () => {
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.memory.search({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'user interface preferences',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +30,9 @@ describe('resource memory', () => {
   test.skip('search: required and optional params', async () => {
     const response = await client.query.memory.search({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'user interface preferences',
       endTime: '2019-12-27T18:11:19.117Z',
       nMostRecent: 10,

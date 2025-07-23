@@ -14,7 +14,13 @@ export class GetProcedure extends APIResource {
    * ```ts
    * const getProcedure = await client.getProcedure.create({
    *   key: 'TechnicalReportSystemPrompt',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -44,7 +50,7 @@ export interface GetProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: GetProcedureCreateParams.ModuleID | GetProcedureCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | GetProcedureCreateParams.SmartMemory;
 
   /**
    * Optional procedural memory ID to use for actor isolation
@@ -53,10 +59,6 @@ export interface GetProcedureCreateParams {
 }
 
 export namespace GetProcedureCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

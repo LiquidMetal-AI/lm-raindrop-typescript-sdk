@@ -11,7 +11,9 @@ describe('resource procedures', () => {
   // skipped: tests are disabled for the time being
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.procedures.search({
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'system prompt',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +28,9 @@ describe('resource procedures', () => {
   // skipped: tests are disabled for the time being
   test.skip('search: required and optional params', async () => {
     const response = await client.query.procedures.search({
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'system prompt',
       nMostRecent: 10,
       proceduralMemoryId: 'demo-smartmemory',

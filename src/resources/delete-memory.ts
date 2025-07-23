@@ -14,7 +14,13 @@ export class DeleteMemory extends APIResource {
    * const deleteMemory = await client.deleteMemory.create({
    *   memoryId: '01jxanr45haeswhay4n0q8340y',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -44,14 +50,10 @@ export interface DeleteMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: DeleteMemoryCreateParams.ModuleID | DeleteMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | DeleteMemoryCreateParams.SmartMemory;
 }
 
 export namespace DeleteMemoryCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

@@ -25,7 +25,13 @@ export class SummarizeMemory extends APIResource {
    *       '01jxanr45haeswhay4n0q8341z',
    *     ],
    *     sessionId: '01jxanr45haeswhay4n0q8340y',
-   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *     smartMemoryLocation: {
+   *       smart_memory: {
+   *         name: 'memory-name',
+   *         application_name: 'demo',
+   *         version: '1234',
+   *       },
+   *     },
    *   },
    * );
    * ```
@@ -64,7 +70,7 @@ export interface SummarizeMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: SummarizeMemoryCreateParams.ModuleID | SummarizeMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | SummarizeMemoryCreateParams.SmartMemory;
 
   /**
    * Optional custom system prompt for summarization
@@ -73,10 +79,6 @@ export interface SummarizeMemoryCreateParams {
 }
 
 export namespace SummarizeMemoryCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

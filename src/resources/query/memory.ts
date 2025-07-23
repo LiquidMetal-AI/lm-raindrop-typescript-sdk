@@ -21,7 +21,13 @@ export class Memory extends APIResource {
    * ```ts
    * const response = await client.query.memory.search({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   terms: 'user interface preferences',
    * });
    * ```
@@ -96,7 +102,7 @@ export interface MemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: MemorySearchParams.ModuleID | MemorySearchParams.SmartMemory;
+  smartMemoryLocation: unknown | MemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query
@@ -125,10 +131,6 @@ export interface MemorySearchParams {
 }
 
 export namespace MemorySearchParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
