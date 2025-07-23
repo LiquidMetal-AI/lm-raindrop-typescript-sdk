@@ -12,7 +12,13 @@ export class ListProcedures extends APIResource {
    * @example
    * ```ts
    * const listProcedure = await client.listProcedures.create({
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -56,7 +62,7 @@ export interface ListProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: ListProcedureCreateParams.ModuleID | ListProcedureCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | ListProcedureCreateParams.SmartMemory;
 
   /**
    * Optional procedural memory ID to use for actor isolation
@@ -65,10 +71,6 @@ export interface ListProcedureCreateParams {
 }
 
 export namespace ListProcedureCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

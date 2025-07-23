@@ -13,7 +13,9 @@ describe('resource deleteMemory', () => {
     const responsePromise = client.deleteMemory.create({
       memoryId: '01jxanr45haeswhay4n0q8340y',
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +31,9 @@ describe('resource deleteMemory', () => {
     const response = await client.deleteMemory.create({
       memoryId: '01jxanr45haeswhay4n0q8340y',
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
   });
 });

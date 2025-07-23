@@ -14,7 +14,13 @@ export class PutProcedure extends APIResource {
    * ```ts
    * const putProcedure = await client.putProcedure.create({
    *   key: 'TechnicalReportSystemPrompt',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   value: 'You are a technical documentation assistant...',
    * });
    * ```
@@ -40,7 +46,7 @@ export interface PutProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: PutProcedureCreateParams.ModuleID | PutProcedureCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | PutProcedureCreateParams.SmartMemory;
 
   /**
    * The procedure content (prompt, template, instructions, etc.)
@@ -54,10 +60,6 @@ export interface PutProcedureCreateParams {
 }
 
 export namespace PutProcedureCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

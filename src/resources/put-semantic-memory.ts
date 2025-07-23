@@ -15,7 +15,13 @@ export class PutSemanticMemory extends APIResource {
    * const putSemanticMemory =
    *   await client.putSemanticMemory.create({
    *     document: 'document',
-   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *     smartMemoryLocation: {
+   *       smart_memory: {
+   *         name: 'memory-name',
+   *         application_name: 'demo',
+   *         version: '1234',
+   *       },
+   *     },
    *   });
    * ```
    */
@@ -53,14 +59,10 @@ export interface PutSemanticMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: PutSemanticMemoryCreateParams.ModuleID | PutSemanticMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | PutSemanticMemoryCreateParams.SmartMemory;
 }
 
 export namespace PutSemanticMemoryCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

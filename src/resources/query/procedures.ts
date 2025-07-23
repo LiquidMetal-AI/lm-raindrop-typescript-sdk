@@ -15,7 +15,13 @@ export class Procedures extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.procedures.search({
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   terms: 'system prompt',
    * });
    * ```
@@ -60,7 +66,7 @@ export interface ProcedureSearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
+  smartMemoryLocation: unknown | ProcedureSearchParams.SmartMemory;
 
   /**
    * Search terms to match against procedure keys and values
@@ -89,10 +95,6 @@ export interface ProcedureSearchParams {
 }
 
 export namespace ProcedureSearchParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

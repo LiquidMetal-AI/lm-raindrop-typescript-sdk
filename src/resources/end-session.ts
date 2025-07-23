@@ -14,7 +14,13 @@ export class EndSession extends APIResource {
    * ```ts
    * const endSession = await client.endSession.create({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -39,7 +45,7 @@ export interface EndSessionCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | EndSessionCreateParams.SmartMemory;
 
   /**
    * Whether to flush working memory to long-term storage
@@ -53,10 +59,6 @@ export interface EndSessionCreateParams {
 }
 
 export namespace EndSessionCreateParams {
-  export interface ModuleID {
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

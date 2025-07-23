@@ -183,7 +183,7 @@ export class Query extends APIResource {
 
 export type QueryGetPaginatedSearchResponsesPageNumber = PageNumber<QueryGetPaginatedSearchResponse>;
 
-export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
+export type BucketLocator = BucketLocator.Bucket | unknown;
 
 export namespace BucketLocator {
   export interface Bucket {
@@ -214,13 +214,6 @@ export namespace BucketLocator {
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
-     */
-    moduleId: string;
   }
 }
 
@@ -307,11 +300,6 @@ export namespace QueryChunkSearchResponse {
          * **EXAMPLE** "my-smartbucket"
          */
         bucketName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        moduleId?: string;
       }
     }
   }
@@ -400,11 +388,6 @@ export namespace QueryGetPaginatedSearchResponse {
        * **EXAMPLE** "my-smartbucket"
        */
       bucketName?: string;
-
-      /**
-       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       */
-      moduleId?: string;
     }
   }
 }
@@ -526,11 +509,6 @@ export namespace QuerySearchResponse {
          * **EXAMPLE** "my-smartbucket"
          */
         bucketName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        moduleId?: string;
       }
     }
   }
