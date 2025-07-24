@@ -22,7 +22,13 @@ export class PutMemory extends APIResource {
    * const putMemory = await client.putMemory.create({
    *   content: 'User prefers dark theme for the interface',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: '{ name: "my-smartmemory" }',
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -74,7 +80,7 @@ export namespace PutMemoryCreateParams {
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
     smartMemory: SmartMemory.SmartMemory;
   }
@@ -82,7 +88,7 @@ export namespace PutMemoryCreateParams {
   export namespace SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
     export interface SmartMemory {
       /**
