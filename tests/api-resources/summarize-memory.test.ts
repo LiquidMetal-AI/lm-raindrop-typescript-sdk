@@ -11,9 +11,11 @@ describe('resource summarizeMemory', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
     const responsePromise = client.summarizeMemory.create({
-      agentMemoryLocation: { agentMemory: { name: 'memory-name' } },
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,11 +29,11 @@ describe('resource summarizeMemory', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
     const response = await client.summarizeMemory.create({
-      agentMemoryLocation: {
-        agentMemory: { name: 'memory-name', applicationName: 'my-app', version: '1234' },
-      },
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       systemPrompt: 'Summarize the key decisions and action items',
     });
   });

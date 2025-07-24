@@ -7,14 +7,14 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource getMemory', () => {
+describe('resource procedures', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('search: only required params', async () => {
+    const responsePromise = client.query.procedures.search({
       smartMemoryLocation: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      terms: 'system prompt',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,17 +26,16 @@ describe('resource getMemory', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('search: required and optional params', async () => {
+    const response = await client.query.procedures.search({
       smartMemoryLocation: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
-      endTime: '2019-12-27T18:11:19.117Z',
-      key: 'user-preference-theme',
+      terms: 'system prompt',
       nMostRecent: 10,
-      startTime: '2019-12-27T18:11:19.117Z',
-      timeline: 'user-conversation-2024',
+      proceduralMemoryId: 'demo-smartmemory',
+      searchKeys: true,
+      searchValues: true,
     });
   });
 });

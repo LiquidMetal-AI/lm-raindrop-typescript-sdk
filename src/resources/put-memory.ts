@@ -20,11 +20,15 @@ export class PutMemory extends APIResource {
    * @example
    * ```ts
    * const putMemory = await client.putMemory.create({
-   *   agentMemoryLocation: {
-   *     agentMemory: { name: 'memory-name' },
-   *   },
    *   content: 'User prefers dark theme for the interface',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -42,11 +46,6 @@ export interface PutMemoryCreateResponse {
 
 export interface PutMemoryCreateParams {
   /**
-   * Agent memory locator for targeting the correct agent memory instance
-   */
-  agentMemoryLocation: PutMemoryCreateParams.AgentMemory | PutMemoryCreateParams.ModuleID;
-
-  /**
    * The actual memory content to store
    */
   content: string;
@@ -55,6 +54,11 @@ export interface PutMemoryCreateParams {
    * Unique session identifier for the working memory instance
    */
   sessionId: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance
+   */
+  smartMemoryLocation: unknown | PutMemoryCreateParams.SmartMemory;
 
   /**
    * Agent identifier responsible for this memory
@@ -73,22 +77,22 @@ export interface PutMemoryCreateParams {
 }
 
 export namespace PutMemoryCreateParams {
-  export interface AgentMemory {
+  export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    agentMemory: AgentMemory.AgentMemory;
+    smartMemory: SmartMemory.SmartMemory;
   }
 
-  export namespace AgentMemory {
+  export namespace SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    export interface AgentMemory {
+    export interface SmartMemory {
       /**
-       * The name of the agent memory **EXAMPLE** "my-agent-memory" **REQUIRED** TRUE
+       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
        */
       name: string;
 
@@ -98,15 +102,11 @@ export namespace PutMemoryCreateParams {
       applicationName?: string | null;
 
       /**
-       * Optional version of the agent memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
        * **REQUIRED** FALSE
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    moduleId: string;
   }
 }
 

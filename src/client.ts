@@ -34,9 +34,44 @@ import {
   DeleteMemoryCreateParams,
   DeleteMemoryCreateResponse,
 } from './resources/delete-memory';
+import {
+  DeleteProcedure,
+  DeleteProcedureCreateParams,
+  DeleteProcedureCreateResponse,
+} from './resources/delete-procedure';
+import {
+  DeleteSemanticMemory,
+  DeleteSemanticMemoryDeleteParams,
+  DeleteSemanticMemoryDeleteResponse,
+} from './resources/delete-semantic-memory';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
 import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
+import {
+  GetProcedure,
+  GetProcedureCreateParams,
+  GetProcedureCreateResponse,
+} from './resources/get-procedure';
+import {
+  GetSemanticMemory,
+  GetSemanticMemoryCreateParams,
+  GetSemanticMemoryCreateResponse,
+} from './resources/get-semantic-memory';
+import {
+  ListProcedureCreateParams,
+  ListProcedureCreateResponse,
+  ListProcedures,
+} from './resources/list-procedures';
 import { PutMemory, PutMemoryCreateParams, PutMemoryCreateResponse } from './resources/put-memory';
+import {
+  PutProcedure,
+  PutProcedureCreateParams,
+  PutProcedureCreateResponse,
+} from './resources/put-procedure';
+import {
+  PutSemanticMemory,
+  PutSemanticMemoryCreateParams,
+  PutSemanticMemoryCreateResponse,
+} from './resources/put-semantic-memory';
 import {
   RehydrateSession,
   RehydrateSessionRehydrateParams,
@@ -226,7 +261,7 @@ export class Raindrop {
    * Create a new client instance re-using the same options given to the current client with optional overriding.
    */
   withOptions(options: Partial<ClientOptions>): this {
-    return new (this.constructor as any as new (props: ClientOptions) => typeof this)({
+    const client = new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
       baseURL: this.baseURL,
       maxRetries: this.maxRetries,
@@ -238,6 +273,7 @@ export class Raindrop {
       apiKey: this.apiKey,
       ...options,
     });
+    return client;
   }
 
   /**
@@ -255,7 +291,7 @@ export class Raindrop {
     return;
   }
 
-  protected authHeaders(opts: FinalRequestOptions): NullableHeaders | undefined {
+  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
@@ -387,7 +423,9 @@ export class Raindrop {
 
     await this.prepareOptions(options);
 
-    const { req, url, timeout } = this.buildRequest(options, { retryCount: maxRetries - retriesRemaining });
+    const { req, url, timeout } = await this.buildRequest(options, {
+      retryCount: maxRetries - retriesRemaining,
+    });
 
     await this.prepareRequest(req, { url, options });
 
@@ -465,7 +503,7 @@ export class Raindrop {
     } with status ${response.status} in ${headersTime - startTime}ms`;
 
     if (!response.ok) {
-      const shouldRetry = this.shouldRetry(response);
+      const shouldRetry = await this.shouldRetry(response);
       if (retriesRemaining && shouldRetry) {
         const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
 
@@ -583,7 +621,7 @@ export class Raindrop {
     }
   }
 
-  private shouldRetry(response: Response): boolean {
+  private async shouldRetry(response: Response): Promise<boolean> {
     // Note this is not a standard header.
     const shouldRetryHeader = response.headers.get('x-should-retry');
 
@@ -660,10 +698,10 @@ export class Raindrop {
     return sleepSeconds * jitter * 1000;
   }
 
-  buildRequest(
+  async buildRequest(
     inputOptions: FinalRequestOptions,
     { retryCount = 0 }: { retryCount?: number } = {},
-  ): { req: FinalizedRequestInit; url: string; timeout: number } {
+  ): Promise<{ req: FinalizedRequestInit; url: string; timeout: number }> {
     const options = { ...inputOptions };
     const { method, path, query, defaultBaseURL } = options;
 
@@ -671,7 +709,7 @@ export class Raindrop {
     if ('timeout' in options) validatePositiveInteger('timeout', options.timeout);
     options.timeout = options.timeout ?? this.timeout;
     const { bodyHeaders, body } = this.buildBody({ options });
-    const reqHeaders = this.buildHeaders({ options: inputOptions, method, bodyHeaders, retryCount });
+    const reqHeaders = await this.buildHeaders({ options: inputOptions, method, bodyHeaders, retryCount });
 
     const req: FinalizedRequestInit = {
       method,
@@ -687,7 +725,7 @@ export class Raindrop {
     return { req, url, timeout: options.timeout };
   }
 
-  private buildHeaders({
+  private async buildHeaders({
     options,
     method,
     bodyHeaders,
@@ -697,7 +735,7 @@ export class Raindrop {
     method: HTTPMethod;
     bodyHeaders: HeadersLike;
     retryCount: number;
-  }): Headers {
+  }): Promise<Headers> {
     let idempotencyHeaders: HeadersLike = {};
     if (this.idempotencyHeader && method !== 'get') {
       if (!options.idempotencyKey) options.idempotencyKey = this.defaultIdempotencyKey();
@@ -713,7 +751,7 @@ export class Raindrop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      this.authHeaders(options),
+      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
@@ -789,6 +827,13 @@ export class Raindrop {
   startSession: API.StartSession = new API.StartSession(this);
   endSession: API.EndSession = new API.EndSession(this);
   rehydrateSession: API.RehydrateSession = new API.RehydrateSession(this);
+  putProcedure: API.PutProcedure = new API.PutProcedure(this);
+  getProcedure: API.GetProcedure = new API.GetProcedure(this);
+  deleteProcedure: API.DeleteProcedure = new API.DeleteProcedure(this);
+  listProcedures: API.ListProcedures = new API.ListProcedures(this);
+  putSemanticMemory: API.PutSemanticMemory = new API.PutSemanticMemory(this);
+  getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
+  deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
 }
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
@@ -799,6 +844,13 @@ Raindrop.SummarizeMemory = SummarizeMemory;
 Raindrop.StartSession = StartSession;
 Raindrop.EndSession = EndSession;
 Raindrop.RehydrateSession = RehydrateSession;
+Raindrop.PutProcedure = PutProcedure;
+Raindrop.GetProcedure = GetProcedure;
+Raindrop.DeleteProcedure = DeleteProcedure;
+Raindrop.ListProcedures = ListProcedures;
+Raindrop.PutSemanticMemory = PutSemanticMemory;
+Raindrop.GetSemanticMemory = GetSemanticMemory;
+Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
@@ -873,5 +925,47 @@ export declare namespace Raindrop {
     RehydrateSession as RehydrateSession,
     type RehydrateSessionRehydrateResponse as RehydrateSessionRehydrateResponse,
     type RehydrateSessionRehydrateParams as RehydrateSessionRehydrateParams,
+  };
+
+  export {
+    PutProcedure as PutProcedure,
+    type PutProcedureCreateResponse as PutProcedureCreateResponse,
+    type PutProcedureCreateParams as PutProcedureCreateParams,
+  };
+
+  export {
+    GetProcedure as GetProcedure,
+    type GetProcedureCreateResponse as GetProcedureCreateResponse,
+    type GetProcedureCreateParams as GetProcedureCreateParams,
+  };
+
+  export {
+    DeleteProcedure as DeleteProcedure,
+    type DeleteProcedureCreateResponse as DeleteProcedureCreateResponse,
+    type DeleteProcedureCreateParams as DeleteProcedureCreateParams,
+  };
+
+  export {
+    ListProcedures as ListProcedures,
+    type ListProcedureCreateResponse as ListProcedureCreateResponse,
+    type ListProcedureCreateParams as ListProcedureCreateParams,
+  };
+
+  export {
+    PutSemanticMemory as PutSemanticMemory,
+    type PutSemanticMemoryCreateResponse as PutSemanticMemoryCreateResponse,
+    type PutSemanticMemoryCreateParams as PutSemanticMemoryCreateParams,
+  };
+
+  export {
+    GetSemanticMemory as GetSemanticMemory,
+    type GetSemanticMemoryCreateResponse as GetSemanticMemoryCreateResponse,
+    type GetSemanticMemoryCreateParams as GetSemanticMemoryCreateParams,
+  };
+
+  export {
+    DeleteSemanticMemory as DeleteSemanticMemory,
+    type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
+    type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
 }

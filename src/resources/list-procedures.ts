@@ -4,14 +4,14 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class StartSession extends APIResource {
+export class ListProcedures extends APIResource {
   /**
-   * Starts a new working memory session for an agent. Each session provides isolated
-   * memory operations and automatic cleanup capabilities.
+   * Lists all procedures stored in procedural memory. Returns metadata about each
+   * procedure including creation and modification times.
    *
    * @example
    * ```ts
-   * const startSession = await client.startSession.create({
+   * const listProcedure = await client.listProcedures.create({
    *   smartMemoryLocation: {
    *     smart_memory: {
    *       name: 'memory-name',
@@ -22,26 +22,55 @@ export class StartSession extends APIResource {
    * });
    * ```
    */
-  create(body: StartSessionCreateParams, options?: RequestOptions): APIPromise<StartSessionCreateResponse> {
-    return this._client.post('/v1/start_session', { body, ...options });
+  create(body: ListProcedureCreateParams, options?: RequestOptions): APIPromise<ListProcedureCreateResponse> {
+    return this._client.post('/v1/list_procedures', { body, ...options });
   }
 }
 
-export interface StartSessionCreateResponse {
+export interface ListProcedureCreateResponse {
   /**
-   * Unique identifier for the new session
+   * List of all stored procedures
    */
-  sessionId?: string;
+  procedures?: Array<ListProcedureCreateResponse.Procedure>;
 }
 
-export interface StartSessionCreateParams {
+export namespace ListProcedureCreateResponse {
+  export interface Procedure {
+    /**
+     * When this procedure was first created
+     */
+    createdAt?: string;
+
+    /**
+     * Unique key for this procedure
+     */
+    key?: string;
+
+    /**
+     * When this procedure was last updated
+     */
+    updatedAt?: string;
+
+    /**
+     * The procedure content
+     */
+    value?: string;
+  }
+}
+
+export interface ListProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | StartSessionCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | ListProcedureCreateParams.SmartMemory;
+
+  /**
+   * Optional procedural memory ID to use for actor isolation
+   */
+  proceduralMemoryId?: string | null;
 }
 
-export namespace StartSessionCreateParams {
+export namespace ListProcedureCreateParams {
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
@@ -75,9 +104,9 @@ export namespace StartSessionCreateParams {
   }
 }
 
-export declare namespace StartSession {
+export declare namespace ListProcedures {
   export {
-    type StartSessionCreateResponse as StartSessionCreateResponse,
-    type StartSessionCreateParams as StartSessionCreateParams,
+    type ListProcedureCreateResponse as ListProcedureCreateResponse,
+    type ListProcedureCreateParams as ListProcedureCreateParams,
   };
 }

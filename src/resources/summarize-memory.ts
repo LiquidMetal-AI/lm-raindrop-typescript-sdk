@@ -20,14 +20,18 @@ export class SummarizeMemory extends APIResource {
    * ```ts
    * const summarizeMemory = await client.summarizeMemory.create(
    *   {
-   *     agentMemoryLocation: {
-   *       agentMemory: { name: 'memory-name' },
-   *     },
    *     memoryIds: [
    *       '01jxanr45haeswhay4n0q8340y',
    *       '01jxanr45haeswhay4n0q8341z',
    *     ],
    *     sessionId: '01jxanr45haeswhay4n0q8340y',
+   *     smartMemoryLocation: {
+   *       smart_memory: {
+   *         name: 'memory-name',
+   *         application_name: 'demo',
+   *         version: '1234',
+   *       },
+   *     },
    *   },
    * );
    * ```
@@ -54,11 +58,6 @@ export interface SummarizeMemoryCreateResponse {
 
 export interface SummarizeMemoryCreateParams {
   /**
-   * Agent memory locator for targeting the correct agent memory instance
-   */
-  agentMemoryLocation: SummarizeMemoryCreateParams.AgentMemory | SummarizeMemoryCreateParams.ModuleID;
-
-  /**
    * List of memory IDs to summarize
    */
   memoryIds: Array<string>;
@@ -69,28 +68,33 @@ export interface SummarizeMemoryCreateParams {
   sessionId: string;
 
   /**
+   * Smart memory locator for targeting the correct smart memory instance
+   */
+  smartMemoryLocation: unknown | SummarizeMemoryCreateParams.SmartMemory;
+
+  /**
    * Optional custom system prompt for summarization
    */
   systemPrompt?: string | null;
 }
 
 export namespace SummarizeMemoryCreateParams {
-  export interface AgentMemory {
+  export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    agentMemory: AgentMemory.AgentMemory;
+    smartMemory: SmartMemory.SmartMemory;
   }
 
-  export namespace AgentMemory {
+  export namespace SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    export interface AgentMemory {
+    export interface SmartMemory {
       /**
-       * The name of the agent memory **EXAMPLE** "my-agent-memory" **REQUIRED** TRUE
+       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
        */
       name: string;
 
@@ -100,15 +104,11 @@ export namespace SummarizeMemoryCreateParams {
       applicationName?: string | null;
 
       /**
-       * Optional version of the agent memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
        * **REQUIRED** FALSE
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    moduleId: string;
   }
 }
 

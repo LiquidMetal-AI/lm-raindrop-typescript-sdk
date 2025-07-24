@@ -7,11 +7,11 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource getMemory', () => {
+describe('resource putSemanticMemory', () => {
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.putSemanticMemory.create({
+      document: 'document',
       smartMemoryLocation: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
@@ -26,17 +26,12 @@ describe('resource getMemory', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
+  test.skip('create: required and optional params', async () => {
+    const response = await client.putSemanticMemory.create({
+      document: 'document',
       smartMemoryLocation: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
-      endTime: '2019-12-27T18:11:19.117Z',
-      key: 'user-preference-theme',
-      nMostRecent: 10,
-      startTime: '2019-12-27T18:11:19.117Z',
-      timeline: 'user-conversation-2024',
     });
   });
 });

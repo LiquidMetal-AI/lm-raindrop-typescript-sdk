@@ -1,14 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as EpisodicMemoryAPI from './episodic-memory';
+import { EpisodicMemory, EpisodicMemorySearchParams, EpisodicMemorySearchResponse } from './episodic-memory';
 import * as MemoryAPI from './memory';
 import { Memory, MemorySearchParams, MemorySearchResponse } from './memory';
+import * as ProceduresAPI from './procedures';
+import { ProcedureSearchParams, ProcedureSearchResponse, Procedures } from './procedures';
+import * as SemanticMemoryAPI from './semantic-memory';
+import { SemanticMemory, SemanticMemorySearchParams, SemanticMemorySearchResponse } from './semantic-memory';
 import { APIPromise } from '../../core/api-promise';
 import { PageNumber, type PageNumberParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
 export class Query extends APIResource {
   memory: MemoryAPI.Memory = new MemoryAPI.Memory(this._client);
+  episodicMemory: EpisodicMemoryAPI.EpisodicMemory = new EpisodicMemoryAPI.EpisodicMemory(this._client);
+  procedures: ProceduresAPI.Procedures = new ProceduresAPI.Procedures(this._client);
+  semanticMemory: SemanticMemoryAPI.SemanticMemory = new SemanticMemoryAPI.SemanticMemory(this._client);
 
   /**
    * Chunk Search provides search capabilities that serve as a complete drop-in
@@ -174,7 +183,7 @@ export class Query extends APIResource {
 
 export type QueryGetPaginatedSearchResponsesPageNumber = PageNumber<QueryGetPaginatedSearchResponse>;
 
-export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
+export type BucketLocator = BucketLocator.Bucket | unknown;
 
 export namespace BucketLocator {
   export interface Bucket {
@@ -205,13 +214,6 @@ export namespace BucketLocator {
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
-     */
-    moduleId: string;
   }
 }
 
@@ -298,11 +300,6 @@ export namespace QueryChunkSearchResponse {
          * **EXAMPLE** "my-smartbucket"
          */
         bucketName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        moduleId?: string;
       }
     }
   }
@@ -391,11 +388,6 @@ export namespace QueryGetPaginatedSearchResponse {
        * **EXAMPLE** "my-smartbucket"
        */
       bucketName?: string;
-
-      /**
-       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       */
-      moduleId?: string;
     }
   }
 }
@@ -517,11 +509,6 @@ export namespace QuerySearchResponse {
          * **EXAMPLE** "my-smartbucket"
          */
         bucketName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        moduleId?: string;
       }
     }
   }
@@ -627,6 +614,9 @@ export interface QuerySumarizePageParams {
 }
 
 Query.Memory = Memory;
+Query.EpisodicMemory = EpisodicMemory;
+Query.Procedures = Procedures;
+Query.SemanticMemory = SemanticMemory;
 
 export declare namespace Query {
   export {
@@ -648,5 +638,23 @@ export declare namespace Query {
     Memory as Memory,
     type MemorySearchResponse as MemorySearchResponse,
     type MemorySearchParams as MemorySearchParams,
+  };
+
+  export {
+    EpisodicMemory as EpisodicMemory,
+    type EpisodicMemorySearchResponse as EpisodicMemorySearchResponse,
+    type EpisodicMemorySearchParams as EpisodicMemorySearchParams,
+  };
+
+  export {
+    Procedures as Procedures,
+    type ProcedureSearchResponse as ProcedureSearchResponse,
+    type ProcedureSearchParams as ProcedureSearchParams,
+  };
+
+  export {
+    SemanticMemory as SemanticMemory,
+    type SemanticMemorySearchResponse as SemanticMemorySearchResponse,
+    type SemanticMemorySearchParams as SemanticMemorySearchParams,
   };
 }

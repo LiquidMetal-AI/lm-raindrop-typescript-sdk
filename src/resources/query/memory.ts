@@ -20,10 +20,14 @@ export class Memory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.memory.search({
-   *   agentMemoryLocation: {
-   *     agentMemory: { name: 'memory-name' },
-   *   },
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: {
+   *     smart_memory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   terms: 'user interface preferences',
    * });
    * ```
@@ -91,14 +95,14 @@ export namespace MemorySearchResponse {
 
 export interface MemorySearchParams {
   /**
-   * Agent memory locator for targeting the correct agent memory instance
-   */
-  agentMemoryLocation: MemorySearchParams.AgentMemory | MemorySearchParams.ModuleID;
-
-  /**
    * Unique session identifier for the working memory instance
    */
   sessionId: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance
+   */
+  smartMemoryLocation: unknown | MemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query
@@ -127,22 +131,22 @@ export interface MemorySearchParams {
 }
 
 export namespace MemorySearchParams {
-  export interface AgentMemory {
+  export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    agentMemory: AgentMemory.AgentMemory;
+    smartMemory: SmartMemory.SmartMemory;
   }
 
-  export namespace AgentMemory {
+  export namespace SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
+     * **REQUIRED** TRUE
      */
-    export interface AgentMemory {
+    export interface SmartMemory {
       /**
-       * The name of the agent memory **EXAMPLE** "my-agent-memory" **REQUIRED** TRUE
+       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
        */
       name: string;
 
@@ -152,15 +156,11 @@ export namespace MemorySearchParams {
       applicationName?: string | null;
 
       /**
-       * Optional version of the agent memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
        * **REQUIRED** FALSE
        */
       version?: string | null;
     }
-  }
-
-  export interface ModuleID {
-    moduleId: string;
   }
 }
 

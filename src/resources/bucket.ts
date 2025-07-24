@@ -152,11 +152,6 @@ export namespace BucketPutResponse {
      * **EXAMPLE** "my-smartbucket"
      */
     bucketName?: string;
-
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-     */
-    moduleId?: string;
   }
 }
 

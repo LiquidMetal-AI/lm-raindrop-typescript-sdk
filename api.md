@@ -27,6 +27,36 @@ Methods:
 
 - <code title="post /v1/search_memory">client.query.memory.<a href="./src/resources/query/memory.ts">search</a>({ ...params }) -> MemorySearchResponse</code>
 
+## EpisodicMemory
+
+Types:
+
+- <code><a href="./src/resources/query/episodic-memory.ts">EpisodicMemorySearchResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/search_episodic_memory">client.query.episodicMemory.<a href="./src/resources/query/episodic-memory.ts">search</a>({ ...params }) -> EpisodicMemorySearchResponse</code>
+
+## Procedures
+
+Types:
+
+- <code><a href="./src/resources/query/procedures.ts">ProcedureSearchResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/search_procedures">client.query.procedures.<a href="./src/resources/query/procedures.ts">search</a>({ ...params }) -> ProcedureSearchResponse</code>
+
+## SemanticMemory
+
+Types:
+
+- <code><a href="./src/resources/query/semantic-memory.ts">SemanticMemorySearchResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/search_semantic_memory">client.query.semanticMemory.<a href="./src/resources/query/semantic-memory.ts">search</a>({ ...params }) -> SemanticMemorySearchResponse</code>
+
 # Bucket
 
 Types:
@@ -112,3 +142,73 @@ Types:
 Methods:
 
 - <code title="post /v1/rehydrate_session">client.rehydrateSession.<a href="./src/resources/rehydrate-session.ts">rehydrate</a>({ ...params }) -> RehydrateSessionRehydrateResponse</code>
+
+# PutProcedure
+
+Types:
+
+- <code><a href="./src/resources/put-procedure.ts">PutProcedureCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/put_procedure">client.putProcedure.<a href="./src/resources/put-procedure.ts">create</a>({ ...params }) -> PutProcedureCreateResponse</code>
+
+# GetProcedure
+
+Types:
+
+- <code><a href="./src/resources/get-procedure.ts">GetProcedureCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/get_procedure">client.getProcedure.<a href="./src/resources/get-procedure.ts">create</a>({ ...params }) -> GetProcedureCreateResponse</code>
+
+# DeleteProcedure
+
+Types:
+
+- <code><a href="./src/resources/delete-procedure.ts">DeleteProcedureCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/delete_procedure">client.deleteProcedure.<a href="./src/resources/delete-procedure.ts">create</a>({ ...params }) -> DeleteProcedureCreateResponse</code>
+
+# ListProcedures
+
+Types:
+
+- <code><a href="./src/resources/list-procedures.ts">ListProcedureCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/list_procedures">client.listProcedures.<a href="./src/resources/list-procedures.ts">create</a>({ ...params }) -> ListProcedureCreateResponse</code>
+
+# PutSemanticMemory
+
+Types:
+
+- <code><a href="./src/resources/put-semantic-memory.ts">PutSemanticMemoryCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/put_semantic_memory">client.putSemanticMemory.<a href="./src/resources/put-semantic-memory.ts">create</a>({ ...params }) -> PutSemanticMemoryCreateResponse</code>
+
+# GetSemanticMemory
+
+Types:
+
+- <code><a href="./src/resources/get-semantic-memory.ts">GetSemanticMemoryCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/get_semantic_memory">client.getSemanticMemory.<a href="./src/resources/get-semantic-memory.ts">create</a>({ ...params }) -> GetSemanticMemoryCreateResponse</code>
+
+# DeleteSemanticMemory
+
+Types:
+
+- <code><a href="./src/resources/delete-semantic-memory.ts">DeleteSemanticMemoryDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/delete_semantic_memory">client.deleteSemanticMemory.<a href="./src/resources/delete-semantic-memory.ts">delete</a>({ ...params }) -> DeleteSemanticMemoryDeleteResponse</code>
