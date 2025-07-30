@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.11 (2025-07-30)
+
+Full Changelog: [v0.1.10...v0.1.11](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.10...v0.1.11)
+
+### Chores
+
+* **internal:** remove redundant imports config ([7b4067a](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/7b4067ac6eed71e44cc4b6d3f6b54d9320ec6d8b))
+
 ## 0.1.10 (2025-07-24)
 
 Full Changelog: [v0.1.9...v0.1.10](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.9...v0.1.10)
