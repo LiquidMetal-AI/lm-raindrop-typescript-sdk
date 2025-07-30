@@ -46,10 +46,6 @@
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
   },
-  "imports": {
-    "@liquidmetal-ai/lm-raindrop": ".",
-    "@liquidmetal-ai/lm-raindrop/*": "./src/*"
-  },
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
