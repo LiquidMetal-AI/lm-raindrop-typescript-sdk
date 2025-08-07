@@ -1,6 +1,6 @@
 {
   "name": "@liquidmetal-ai/lm-raindrop",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "The official TypeScript library for the Raindrop API",
   "author": "Raindrop <>",
   "types": "dist/index.d.ts",
@@ -13,6 +13,9 @@
     "**/*"
   ],
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "./scripts/test",
     "build": "./scripts/build",
@@ -45,10 +48,6 @@
     "tsconfig-paths": "^4.0.0",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
-  },
-  "imports": {
-    "@liquidmetal-ai/lm-raindrop": ".",
-    "@liquidmetal-ai/lm-raindrop/*": "./src/*"
   },
   "exports": {
     ".": {
