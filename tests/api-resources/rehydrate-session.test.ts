@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource rehydrateSession', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('rehydrate: only required params', async () => {
     const responsePromise = client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',
@@ -25,7 +25,7 @@ describe('resource rehydrateSession', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('rehydrate: required and optional params', async () => {
     const response = await client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',

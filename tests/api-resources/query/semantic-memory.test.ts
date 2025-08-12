@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource semanticMemory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.semanticMemory.search({
       needle: 'AI development best practices',
@@ -25,7 +25,7 @@ describe('resource semanticMemory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.semanticMemory.search({
       needle: 'AI development best practices',

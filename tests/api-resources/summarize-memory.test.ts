@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource summarizeMemory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.summarizeMemory.create({
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
@@ -26,7 +26,7 @@ describe('resource summarizeMemory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.summarizeMemory.create({
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],

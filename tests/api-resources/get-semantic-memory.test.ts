@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource getSemanticMemory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.getSemanticMemory.create({
       objectId: '01jxanr45haeswhay4n0q8340y',
@@ -25,7 +25,7 @@ describe('resource getSemanticMemory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.getSemanticMemory.create({
       objectId: '01jxanr45haeswhay4n0q8340y',

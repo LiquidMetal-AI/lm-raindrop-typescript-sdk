@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource memory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.memory.search({
       sessionId: '01jxanr45haeswhay4n0q8340y',
@@ -26,7 +26,7 @@ describe('resource memory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.memory.search({
       sessionId: '01jxanr45haeswhay4n0q8340y',
