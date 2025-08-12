@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource putMemory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.putMemory.create({
       content: 'User prefers dark theme for the interface',
@@ -26,7 +26,7 @@ describe('resource putMemory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.putMemory.create({
       content: 'User prefers dark theme for the interface',

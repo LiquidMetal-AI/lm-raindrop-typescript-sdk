@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource bucket', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.bucket.list({ bucketLocation: { bucket: { name: 'my-smartbucket' } } });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource bucket', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.bucket.list({
       bucketLocation: {
@@ -29,7 +29,7 @@ describe('resource bucket', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.bucket.delete({
       bucketLocation: { bucket: { name: 'my-smartbucket' } },
@@ -44,7 +44,7 @@ describe('resource bucket', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.bucket.delete({
       bucketLocation: {
@@ -54,7 +54,7 @@ describe('resource bucket', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.bucket.get({
       bucketLocation: { bucket: { name: 'my-smartbucket' } },
@@ -69,7 +69,7 @@ describe('resource bucket', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
     const response = await client.bucket.get({
       bucketLocation: {
@@ -79,7 +79,7 @@ describe('resource bucket', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('put: only required params', async () => {
     const responsePromise = client.bucket.put({
       bucketLocation: { bucket: { name: 'my-smartbucket' } },
@@ -96,7 +96,7 @@ describe('resource bucket', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('put: required and optional params', async () => {
     const response = await client.bucket.put({
       bucketLocation: {
