@@ -835,6 +835,7 @@ export class Raindrop {
   getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
   deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
 }
+
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
 Raindrop.PutMemory = PutMemory;
@@ -851,6 +852,7 @@ Raindrop.ListProcedures = ListProcedures;
 Raindrop.PutSemanticMemory = PutSemanticMemory;
 Raindrop.GetSemanticMemory = GetSemanticMemory;
 Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
+
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 
