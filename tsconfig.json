@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@liquidmetal-ai/lm-raindrop/*": ["src/*"],
-      "@liquidmetal-ai/lm-raindrop": ["src/index.ts"]
+      "@liquidmetal-ai/lm-raindrop/*": ["./src/*"],
+      "@liquidmetal-ai/lm-raindrop": ["./src/index.ts"]
     },
     "noEmit": true,
 
