@@ -453,7 +453,7 @@ export class Raindrop {
     const response = await this.fetchWithTimeout(url, req, timeout, controller).catch(castToError);
     const headersTime = Date.now();
 
-    if (response instanceof Error) {
+    if (response instanceof globalThis.Error) {
       const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
       if (options.signal?.aborted) {
         throw new Errors.APIUserAbortError();
@@ -779,7 +779,7 @@ export class Raindrop {
         // Preserve legacy string encoding behavior for now
         headers.values.has('content-type')) ||
       // `Blob` is superset of `File`
-      body instanceof Blob ||
+      ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
       body instanceof FormData ||
       // `URLSearchParams` -> `application/x-www-form-urlencoded`
@@ -835,6 +835,7 @@ export class Raindrop {
   getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
   deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
 }
+
 Raindrop.Query = Query;
 Raindrop.Bucket = Bucket;
 Raindrop.PutMemory = PutMemory;
@@ -851,6 +852,7 @@ Raindrop.ListProcedures = ListProcedures;
 Raindrop.PutSemanticMemory = PutSemanticMemory;
 Raindrop.GetSemanticMemory = GetSemanticMemory;
 Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
+
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
 

@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource startSession', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.startSession.create({
       smartMemoryLocation: {
@@ -24,7 +24,7 @@ describe('resource startSession', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.startSession.create({
       smartMemoryLocation: {

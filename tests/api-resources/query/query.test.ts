@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource query', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('chunkSearch: only required params', async () => {
     const responsePromise = client.query.chunkSearch({
       bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
@@ -24,7 +24,7 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('chunkSearch: required and optional params', async () => {
     const response = await client.query.chunkSearch({
       bucketLocations: [
@@ -41,7 +41,7 @@ describe('resource query', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.query.documentQuery({
       bucketLocation: { bucket: { name: 'my-smartbucket' } },
@@ -58,7 +58,7 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.query.documentQuery({
       bucketLocation: {
@@ -70,7 +70,7 @@ describe('resource query', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getPaginatedSearch: only required params', async () => {
     const responsePromise = client.query.getPaginatedSearch({
       page: 1,
@@ -86,7 +86,7 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getPaginatedSearch: required and optional params', async () => {
     const response = await client.query.getPaginatedSearch({
       page: 1,
@@ -95,7 +95,7 @@ describe('resource query', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
       bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
@@ -111,7 +111,7 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.search({
       bucketLocations: [
@@ -128,7 +128,7 @@ describe('resource query', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('sumarizePage: only required params', async () => {
     const responsePromise = client.query.sumarizePage({
       page: 1,
@@ -144,7 +144,7 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('sumarizePage: required and optional params', async () => {
     const response = await client.query.sumarizePage({
       page: 1,

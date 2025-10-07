@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.6.4 (2025-10-07)
+
+Full Changelog: [v0.1.10...v0.6.4](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.10...v0.6.4)
+
+### Features
+
+* **mcp:** add code execution tool ([939d04d](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/939d04d0c6ddc0da3a514a5495b6011161bc1b1e))
+
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([451792e](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/451792e96b7802ea4d1fca8943e4417efc9e706e))
+
+
+### Performance Improvements
+
+* faster formatting ([45c1555](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/45c1555744e5a06f6d76dc1540cecb422c9921ea))
+
+
+### Chores
+
+* add package to package.json ([6bba679](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/6bba679a439a6e87896c5c4c42d6ea183fc9fadd))
+* ci build action ([b4dedf9](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/b4dedf9c7b2745c288b68b09ef95948745c8726d))
+* **client:** qualify global Blob ([79a311f](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/79a311fd63029ab4f59c8082388dbf385080fdea))
+* **deps:** update dependency @types/node to v20.17.58 ([acd9aeb](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/acd9aeb8b9be9bbca0ce627984e23b7b35032d9e))
+* do not install brew dependencies in ./scripts/bootstrap by default ([ce14e83](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/ce14e8376eec1d793f5380ce1d362f6428d48d59))
+* **internal:** codegen related update ([eca8cf9](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/eca8cf9a0a4582e7b3217d36278d8e3f4044fa17))
+* **internal:** codegen related update ([eaa7b3b](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/eaa7b3b8332ffda73112f1a7abd911bc5d8888ef))
+* **internal:** fix incremental formatting in some cases ([11119fa](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/11119fa2360cc7a6b8b7742b7aa983ee43e68432))
+* **internal:** formatting change ([a2e8d23](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/a2e8d231138f3f7d482d3813ba23ae47b2060832))
+* **internal:** ignore .eslintcache ([9320053](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/9320053239b879fdb7f94831272fc48a01f47b44))
+* **internal:** move publish config ([1718b29](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/1718b299943abefd9a8d2129da0c3a76c0f026fb))
+* **internal:** remove .eslintcache ([33c6c72](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/33c6c7266ef61bd3558e26c45d57e1a48a841d41))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([7dac604](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/7dac604ef459b5602b34cfdd42831bc49a3304ae))
+* **internal:** remove redundant imports config ([7b4067a](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/7b4067ac6eed71e44cc4b6d3f6b54d9320ec6d8b))
+* **internal:** update comment in script ([34bc5bc](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/34bc5bc3961b6787f6c4c655d0b6f2f882557bba))
+* **internal:** update global Error reference ([37c7087](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/37c7087cfad1ed8fddd92b6e64a48dcb4b30bda0))
+* **internal:** use npm pack for build uploads ([39ac2cd](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/39ac2cd43370c903693f39f5753c94734b0ee625))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([438413d](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/438413d4c401e7db81cc6c3831042beeb5da8fb8))
+* update @stainless-api/prism-cli to v5.15.0 ([27a6634](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/27a663436d31b3fe1653ff57e864b98f58c2b2e4))
+* update CI script ([394ce74](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/394ce74f93f5bcca9b520eb59ba58dd3ca13e119))
+
 ## 0.1.10 (2025-07-24)
 
 Full Changelog: [v0.1.9...v0.1.10](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.1.9...v0.1.10)

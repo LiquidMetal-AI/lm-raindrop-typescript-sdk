@@ -8,7 +8,7 @@ const client = new Raindrop({
 });
 
 describe('resource getMemory', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
@@ -25,7 +25,7 @@ describe('resource getMemory', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
