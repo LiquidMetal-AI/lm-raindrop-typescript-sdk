@@ -65,7 +65,7 @@ export namespace GetSemanticMemoryCreateParams {
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** TRUE
+     * **REQUIRED** FALSE
      */
     smartMemory: SmartMemory.SmartMemory;
   }
@@ -73,7 +73,7 @@ export namespace GetSemanticMemoryCreateParams {
   export namespace SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** TRUE
+     * **REQUIRED** FALSE
      */
     export interface SmartMemory {
       /**
