@@ -540,6 +540,12 @@ export interface QueryChunkSearchParams {
    * tracking. We recommend using a UUID or ULID for this value
    */
   requestId: string;
+
+  /**
+   * Optional partition identifier for multi-tenant data isolation. Defaults to
+   * 'default' if not specified
+   */
+  partition?: string | null;
 }
 
 export interface QueryDocumentQueryParams {
@@ -566,6 +572,12 @@ export interface QueryDocumentQueryParams {
    * context in follow-up questions. We recommend using a UUID or ULID for this value
    */
   requestId: string;
+
+  /**
+   * Optional partition identifier for multi-tenant data isolation. Defaults to
+   * 'default' if not specified
+   */
+  partition?: string | null;
 }
 
 export interface QueryGetPaginatedSearchParams extends PageNumberParams {
@@ -573,6 +585,12 @@ export interface QueryGetPaginatedSearchParams extends PageNumberParams {
    * Original search session identifier from the initial search
    */
   requestId: string;
+
+  /**
+   * Optional partition identifier for multi-tenant data isolation. Defaults to
+   * 'default' if not specified
+   */
+  partition?: string | null;
 }
 
 export interface QuerySearchParams {
@@ -594,6 +612,12 @@ export interface QuerySearchParams {
    * tracking. We recommend using a UUID or ULID for this value
    */
   requestId: string;
+
+  /**
+   * Optional partition identifier for multi-tenant data isolation. Defaults to
+   * 'default' if not specified
+   */
+  partition?: string | null;
 }
 
 export interface QuerySumarizePageParams {
@@ -611,6 +635,12 @@ export interface QuerySumarizePageParams {
    * Original search session identifier from the initial search
    */
   requestId: string;
+
+  /**
+   * Optional partition identifier for multi-tenant data isolation. Defaults to
+   * 'default' if not specified
+   */
+  partition?: string | null;
 }
 
 Query.Memory = Memory;

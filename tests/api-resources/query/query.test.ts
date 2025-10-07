@@ -38,6 +38,7 @@ describe('resource query', () => {
       ],
       input: 'Find documents about revenue in Q4 2023',
       requestId: '<YOUR-REQUEST-ID>',
+      partition: 'tenant-123',
     });
   });
 
@@ -67,6 +68,7 @@ describe('resource query', () => {
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
       requestId: '<YOUR-REQUEST-ID>',
+      partition: 'tenant-123',
     });
   });
 
@@ -92,6 +94,7 @@ describe('resource query', () => {
       page: 1,
       pageSize: 10,
       requestId: '<YOUR-REQUEST-ID>',
+      partition: 'tenant-123',
     });
   });
 
@@ -125,6 +128,7 @@ describe('resource query', () => {
       ],
       input: 'All my files',
       requestId: '<YOUR-REQUEST-ID>',
+      partition: 'tenant-123',
     });
   });
 
@@ -150,6 +154,7 @@ describe('resource query', () => {
       page: 1,
       pageSize: 10,
       requestId: '<YOUR-REQUEST-ID>',
+      partition: 'tenant-123',
     });
   });
 });
