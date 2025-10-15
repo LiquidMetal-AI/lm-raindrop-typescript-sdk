@@ -20,13 +20,9 @@ export class Memory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.memory.search({
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   session_id: '01jxanr45haeswhay4n0q8340y',
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    *   terms: 'user interface preferences',
    * });
@@ -74,7 +70,7 @@ export namespace MemorySearchResponse {
     /**
      * What triggered this memory creation
      */
-    dueTo?: string;
+    due_to?: string;
 
     /**
      * Optional key for direct retrieval
@@ -84,7 +80,7 @@ export namespace MemorySearchResponse {
     /**
      * Session identifier where this memory was created
      */
-    sessionId?: string;
+    session_id?: string;
 
     /**
      * Timeline this memory belongs to
@@ -97,12 +93,12 @@ export interface MemorySearchParams {
   /**
    * Unique session identifier for the working memory instance
    */
-  sessionId: string;
+  session_id: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | MemorySearchParams.SmartMemory;
+  smart_memory_location: MemorySearchParams.ModuleID | MemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query
@@ -112,31 +108,42 @@ export interface MemorySearchParams {
   /**
    * End time for temporal filtering
    */
-  endTime?: string | null;
+  end_time?: string | null;
 
   /**
    * Maximum number of most recent results to return
    */
-  nMostRecent?: number | null;
+  n_most_recent?: number | null;
+
+  organization_id?: string;
 
   /**
    * Start time for temporal filtering
    */
-  startTime?: string | null;
+  start_time?: string | null;
 
   /**
    * Timeline to filter search results
    */
   timeline?: string | null;
+
+  user_id?: string;
 }
 
 export namespace MemorySearchParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -153,7 +160,7 @@ export namespace MemorySearchParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

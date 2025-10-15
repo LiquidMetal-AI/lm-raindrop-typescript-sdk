@@ -12,12 +12,8 @@ export class ListProcedures extends APIResource {
    * @example
    * ```ts
    * const listProcedure = await client.listProcedures.create({
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -39,7 +35,7 @@ export namespace ListProcedureCreateResponse {
     /**
      * When this procedure was first created
      */
-    createdAt?: string;
+    created_at?: string;
 
     /**
      * Unique key for this procedure
@@ -49,7 +45,7 @@ export namespace ListProcedureCreateResponse {
     /**
      * When this procedure was last updated
      */
-    updatedAt?: string;
+    updated_at?: string;
 
     /**
      * The procedure content
@@ -62,21 +58,32 @@ export interface ListProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | ListProcedureCreateParams.SmartMemory;
+  smart_memory_location: ListProcedureCreateParams.ModuleID | ListProcedureCreateParams.SmartMemory;
+
+  organization_id?: string;
 
   /**
    * Optional procedural memory ID to use for actor isolation
    */
-  proceduralMemoryId?: string | null;
+  procedural_memory_id?: string | null;
+
+  user_id?: string;
 }
 
 export namespace ListProcedureCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -93,7 +100,7 @@ export namespace ListProcedureCreateParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

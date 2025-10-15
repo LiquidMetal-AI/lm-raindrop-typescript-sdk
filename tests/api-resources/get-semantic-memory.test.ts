@@ -11,10 +11,8 @@ describe('resource getSemanticMemory', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.getSemanticMemory.create({
-      objectId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      object_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: { smart_memory: { name: 'memory-name' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,10 +26,12 @@ describe('resource getSemanticMemory', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.getSemanticMemory.create({
-      objectId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
+      object_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 });

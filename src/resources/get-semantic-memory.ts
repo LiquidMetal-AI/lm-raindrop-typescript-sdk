@@ -13,13 +13,9 @@ export class GetSemanticMemory extends APIResource {
    * ```ts
    * const getSemanticMemory =
    *   await client.getSemanticMemory.create({
-   *     objectId: '01jxanr45haeswhay4n0q8340y',
-   *     smartMemoryLocation: {
-   *       smart_memory: {
-   *         name: 'memory-name',
-   *         application_name: 'demo',
-   *         version: '1234',
-   *       },
+   *     object_id: '01jxanr45haeswhay4n0q8340y',
+   *     smart_memory_location: {
+   *       smart_memory: { name: 'memory-name' },
    *     },
    *   });
    * ```
@@ -53,21 +49,32 @@ export interface GetSemanticMemoryCreateParams {
   /**
    * Unique object identifier of the document to retrieve
    */
-  objectId: string;
+  object_id: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | GetSemanticMemoryCreateParams.SmartMemory;
+  smart_memory_location: GetSemanticMemoryCreateParams.ModuleID | GetSemanticMemoryCreateParams.SmartMemory;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export namespace GetSemanticMemoryCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -84,7 +91,7 @@ export namespace GetSemanticMemoryCreateParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

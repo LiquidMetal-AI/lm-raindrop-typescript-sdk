@@ -12,12 +12,8 @@ export class StartSession extends APIResource {
    * @example
    * ```ts
    * const startSession = await client.startSession.create({
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -31,23 +27,34 @@ export interface StartSessionCreateResponse {
   /**
    * Unique identifier for the new session
    */
-  sessionId?: string;
+  session_id?: string;
 }
 
 export interface StartSessionCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | StartSessionCreateParams.SmartMemory;
+  smart_memory_location: StartSessionCreateParams.ModuleID | StartSessionCreateParams.SmartMemory;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export namespace StartSessionCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -64,7 +71,7 @@ export namespace StartSessionCreateParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

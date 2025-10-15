@@ -11,10 +11,8 @@ describe('resource getMemory', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: { smart_memory: { name: 'memory-name' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,15 +26,17 @@ describe('resource getMemory', () => {
   // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
-      endTime: '2019-12-27T18:11:19.117Z',
+      end_time: '2019-12-27T18:11:19.117Z',
       key: 'user-preference-theme',
-      nMostRecent: 10,
-      startTime: '2019-12-27T18:11:19.117Z',
+      n_most_recent: 10,
+      organization_id: 'organization_id',
+      start_time: '2019-12-27T18:11:19.117Z',
       timeline: 'user-conversation-2024',
+      user_id: 'user_id',
     });
   });
 });

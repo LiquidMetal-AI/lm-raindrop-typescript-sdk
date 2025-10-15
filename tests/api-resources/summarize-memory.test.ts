@@ -11,11 +11,9 @@ describe('resource summarizeMemory', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.summarizeMemory.create({
-      memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      memory_ids: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: { smart_memory: { name: 'memory-name' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,12 +27,14 @@ describe('resource summarizeMemory', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.summarizeMemory.create({
-      memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
+      memory_ids: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
-      systemPrompt: 'Summarize the key decisions and action items',
+      organization_id: 'organization_id',
+      system_prompt: 'Summarize the key decisions and action items',
+      user_id: 'user_id',
     });
   });
 });

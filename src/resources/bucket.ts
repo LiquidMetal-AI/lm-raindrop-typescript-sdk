@@ -13,7 +13,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const buckets = await client.bucket.list({
-   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
+   *   bucket_location: { bucket: { name: 'my-smartbucket' } },
    * });
    * ```
    */
@@ -29,7 +29,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.delete({
-   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
+   *   bucket_location: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
    * });
    * ```
@@ -46,7 +46,7 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const bucket = await client.bucket.get({
-   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
+   *   bucket_location: { bucket: { name: 'my-smartbucket' } },
    *   key: 'my-key',
    * });
    * ```
@@ -63,9 +63,9 @@ export class Bucket extends APIResource {
    * @example
    * ```ts
    * const response = await client.bucket.put({
-   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
+   *   bucket_location: { bucket: { name: 'my-smartbucket' } },
    *   content: 'U3RhaW5sZXNzIHJvY2tz',
-   *   contentType: 'application/pdf',
+   *   content_type: 'application/pdf',
    *   key: 'my-key',
    * });
    * ```
@@ -90,7 +90,7 @@ export namespace BucketListResponse {
     /**
      * MIME type of the object
      */
-    contentType: string;
+    content_type: string;
 
     /**
      * Object key/path in the bucket
@@ -100,7 +100,7 @@ export namespace BucketListResponse {
     /**
      * Last modification timestamp
      */
-    lastModified: string;
+    last_modified: string;
 
     /**
      * Size of the object in bytes
@@ -118,7 +118,7 @@ export interface BucketGetResponse {
    */
   content?: string;
 
-  contentType?: string;
+  content_type?: string;
 }
 
 export interface BucketPutResponse {
@@ -141,17 +141,22 @@ export namespace BucketPutResponse {
     /**
      * **EXAMPLE** "my-app"
      */
-    applicationName?: string;
+    application_name?: string;
 
     /**
      * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
      */
-    applicationVersionId?: string;
+    application_version_id?: string;
 
     /**
      * **EXAMPLE** "my-smartbucket"
      */
-    bucketName?: string;
+    bucket_name?: string;
+
+    /**
+     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+     */
+    module_id?: string;
   }
 }
 
@@ -160,7 +165,11 @@ export interface BucketListParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucketLocation: QueryAPI.BucketLocator;
+  bucket_location: QueryAPI.BucketLocator;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export interface BucketDeleteParams {
@@ -168,12 +177,16 @@ export interface BucketDeleteParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucketLocation: QueryAPI.BucketLocator;
+  bucket_location: QueryAPI.BucketLocator;
 
   /**
    * Object key/path to delete
    */
   key: string;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export interface BucketGetParams {
@@ -181,12 +194,16 @@ export interface BucketGetParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucketLocation: QueryAPI.BucketLocator;
+  bucket_location: QueryAPI.BucketLocator;
 
   /**
    * Object key/path to download
    */
   key: string;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export interface BucketPutParams {
@@ -194,7 +211,7 @@ export interface BucketPutParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucketLocation: QueryAPI.BucketLocator;
+  bucket_location: QueryAPI.BucketLocator;
 
   /**
    * Binary content of the object
@@ -204,12 +221,16 @@ export interface BucketPutParams {
   /**
    * MIME type of the object
    */
-  contentType: string;
+  content_type: string;
 
   /**
    * Object key/path in the bucket
    */
   key: string;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export declare namespace Bucket {

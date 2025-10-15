@@ -11,9 +11,7 @@ describe('resource startSession', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.startSession.create({
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { smart_memory: { name: 'memory-name' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,9 +25,11 @@ describe('resource startSession', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.startSession.create({
-      smartMemoryLocation: {
+      smart_memory_location: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 });
