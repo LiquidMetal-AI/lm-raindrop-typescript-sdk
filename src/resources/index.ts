@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export * from './shared';
 export {
   Bucket,
   type BucketListResponse,
@@ -57,6 +58,9 @@ export {
 export {
   Query,
   type BucketLocator,
+  type LiquidmetalV1alpha1BucketName,
+  type LiquidmetalV1alpha1SourceResult,
+  type LiquidmetalV1alpha1TextResult,
   type QueryChunkSearchResponse,
   type QueryDocumentQueryResponse,
   type QueryGetPaginatedSearchResponse,

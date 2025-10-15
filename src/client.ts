@@ -89,6 +89,9 @@ import {
 } from './resources/summarize-memory';
 import {
   BucketLocator,
+  LiquidmetalV1alpha1BucketName,
+  LiquidmetalV1alpha1SourceResult,
+  LiquidmetalV1alpha1TextResult,
   Query,
   QueryChunkSearchParams,
   QueryChunkSearchResponse,
@@ -861,6 +864,9 @@ export declare namespace Raindrop {
   export {
     Query as Query,
     type BucketLocator as BucketLocator,
+    type LiquidmetalV1alpha1BucketName as LiquidmetalV1alpha1BucketName,
+    type LiquidmetalV1alpha1SourceResult as LiquidmetalV1alpha1SourceResult,
+    type LiquidmetalV1alpha1TextResult as LiquidmetalV1alpha1TextResult,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
     type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
@@ -968,4 +974,7 @@ export declare namespace Raindrop {
     type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
     type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
+
+  export type LiquidmetalV1alpha1BucketResponse = API.LiquidmetalV1alpha1BucketResponse;
+  export type LiquidmetalV1alpha1SmartMemoryName = API.LiquidmetalV1alpha1SmartMemoryName;
 }
