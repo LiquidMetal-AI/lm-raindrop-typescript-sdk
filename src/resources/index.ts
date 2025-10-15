@@ -27,10 +27,7 @@ export {
   type DeleteSemanticMemoryDeleteParams,
 } from './delete-semantic-memory';
 export { EndSession, type EndSessionCreateResponse, type EndSessionCreateParams } from './end-session';
-export { ExecuteQuery } from './execute-query';
 export { GetMemory, type GetMemoryRetrieveResponse, type GetMemoryRetrieveParams } from './get-memory';
-export { GetMetadata } from './get-metadata';
-export { GetPiiData } from './get-pii-data';
 export {
   GetProcedure,
   type GetProcedureCreateResponse,
@@ -87,4 +84,3 @@ export {
   type SummarizeMemoryCreateResponse,
   type SummarizeMemoryCreateParams,
 } from './summarize-memory';
-export { UpdateMetadata } from './update-metadata';
