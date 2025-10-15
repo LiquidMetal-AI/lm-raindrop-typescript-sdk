@@ -11,9 +11,9 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('chunkSearch: only required params', async () => {
     const responsePromise = client.query.chunkSearch({
-      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+      bucket_locations: [{ bucket: { name: 'my-smartbucket' } }],
       input: 'Find documents about revenue in Q4 2023',
-      requestId: '<YOUR-REQUEST-ID>',
+      request_id: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,28 +27,30 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('chunkSearch: required and optional params', async () => {
     const response = await client.query.chunkSearch({
-      bucketLocations: [
+      bucket_locations: [
         {
           bucket: {
             name: 'my-smartbucket',
-            applicationName: 'my-app',
+            application_name: 'my-app',
             version: '01jxanr45haeswhay4n0q8340y',
           },
         },
       ],
       input: 'Find documents about revenue in Q4 2023',
-      requestId: '<YOUR-REQUEST-ID>',
+      request_id: '<YOUR-REQUEST-ID>',
+      organization_id: 'organization_id',
       partition: 'tenant-123',
+      user_id: 'user_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.query.documentQuery({
-      bucketLocation: { bucket: { name: 'my-smartbucket' } },
+      bucket_location: { bucket: { name: 'my-smartbucket' } },
       input: 'What are the key points in this document?',
-      objectId: 'document.pdf',
-      requestId: '<YOUR-REQUEST-ID>',
+      object_id: 'document.pdf',
+      request_id: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -62,13 +64,15 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.query.documentQuery({
-      bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+      bucket_location: {
+        bucket: { name: 'my-smartbucket', application_name: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       input: 'What are the key points in this document?',
-      objectId: 'document.pdf',
-      requestId: '<YOUR-REQUEST-ID>',
+      object_id: 'document.pdf',
+      request_id: '<YOUR-REQUEST-ID>',
+      organization_id: 'organization_id',
       partition: 'tenant-123',
+      user_id: 'user_id',
     });
   });
 
@@ -76,8 +80,8 @@ describe('resource query', () => {
   test.skip('getPaginatedSearch: only required params', async () => {
     const responsePromise = client.query.getPaginatedSearch({
       page: 1,
-      pageSize: 10,
-      requestId: '<YOUR-REQUEST-ID>',
+      page_size: 10,
+      request_id: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,18 +96,20 @@ describe('resource query', () => {
   test.skip('getPaginatedSearch: required and optional params', async () => {
     const response = await client.query.getPaginatedSearch({
       page: 1,
-      pageSize: 10,
-      requestId: '<YOUR-REQUEST-ID>',
+      page_size: 10,
+      request_id: '<YOUR-REQUEST-ID>',
+      organization_id: 'organization_id',
       partition: 'tenant-123',
+      user_id: 'user_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
-      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+      bucket_locations: [{ bucket: { name: 'my-smartbucket' } }],
       input: 'All my files',
-      requestId: '<YOUR-REQUEST-ID>',
+      request_id: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -117,18 +123,20 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.search({
-      bucketLocations: [
+      bucket_locations: [
         {
           bucket: {
             name: 'my-smartbucket',
-            applicationName: 'my-app',
+            application_name: 'my-app',
             version: '01jxanr45haeswhay4n0q8340y',
           },
         },
       ],
       input: 'All my files',
-      requestId: '<YOUR-REQUEST-ID>',
+      request_id: '<YOUR-REQUEST-ID>',
+      organization_id: 'organization_id',
       partition: 'tenant-123',
+      user_id: 'user_id',
     });
   });
 
@@ -136,8 +144,8 @@ describe('resource query', () => {
   test.skip('sumarizePage: only required params', async () => {
     const responsePromise = client.query.sumarizePage({
       page: 1,
-      pageSize: 10,
-      requestId: '<YOUR-REQUEST-ID>',
+      page_size: 10,
+      request_id: '<YOUR-REQUEST-ID>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -152,9 +160,11 @@ describe('resource query', () => {
   test.skip('sumarizePage: required and optional params', async () => {
     const response = await client.query.sumarizePage({
       page: 1,
-      pageSize: 10,
-      requestId: '<YOUR-REQUEST-ID>',
+      page_size: 10,
+      request_id: '<YOUR-REQUEST-ID>',
+      organization_id: 'organization_id',
       partition: 'tenant-123',
+      user_id: 'user_id',
     });
   });
 });

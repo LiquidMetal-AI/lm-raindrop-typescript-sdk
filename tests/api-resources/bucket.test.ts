@@ -10,7 +10,7 @@ const client = new Raindrop({
 describe('resource bucket', () => {
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.bucket.list({ bucketLocation: { bucket: { name: 'my-smartbucket' } } });
+    const responsePromise = client.bucket.list({ bucket_location: { bucket: { name: 'my-smartbucket' } } });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,16 +23,18 @@ describe('resource bucket', () => {
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.bucket.list({
-      bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+      bucket_location: {
+        bucket: { name: 'my-smartbucket', application_name: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.bucket.delete({
-      bucketLocation: { bucket: { name: 'my-smartbucket' } },
+      bucket_location: { bucket: { name: 'my-smartbucket' } },
       key: 'my-key',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,17 +49,19 @@ describe('resource bucket', () => {
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.bucket.delete({
-      bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+      bucket_location: {
+        bucket: { name: 'my-smartbucket', application_name: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       key: 'my-key',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('get: only required params', async () => {
     const responsePromise = client.bucket.get({
-      bucketLocation: { bucket: { name: 'my-smartbucket' } },
+      bucket_location: { bucket: { name: 'my-smartbucket' } },
       key: 'my-key',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -72,19 +76,21 @@ describe('resource bucket', () => {
   // Prism tests are disabled
   test.skip('get: required and optional params', async () => {
     const response = await client.bucket.get({
-      bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+      bucket_location: {
+        bucket: { name: 'my-smartbucket', application_name: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       key: 'my-key',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 
   // Prism tests are disabled
   test.skip('put: only required params', async () => {
     const responsePromise = client.bucket.put({
-      bucketLocation: { bucket: { name: 'my-smartbucket' } },
+      bucket_location: { bucket: { name: 'my-smartbucket' } },
       content: 'U3RhaW5sZXNzIHJvY2tz',
-      contentType: 'application/pdf',
+      content_type: 'application/pdf',
       key: 'my-key',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -99,12 +105,14 @@ describe('resource bucket', () => {
   // Prism tests are disabled
   test.skip('put: required and optional params', async () => {
     const response = await client.bucket.put({
-      bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+      bucket_location: {
+        bucket: { name: 'my-smartbucket', application_name: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
       },
       content: 'U3RhaW5sZXNzIHJvY2tz',
-      contentType: 'application/pdf',
+      content_type: 'application/pdf',
       key: 'my-key',
+      organization_id: 'organization_id',
+      user_id: 'user_id',
     });
   });
 });

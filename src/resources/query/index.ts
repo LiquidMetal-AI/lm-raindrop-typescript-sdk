@@ -20,7 +20,6 @@ export {
   type QueryGetPaginatedSearchParams,
   type QuerySearchParams,
   type QuerySumarizePageParams,
-  type QueryGetPaginatedSearchResponsesPageNumber,
 } from './query';
 export {
   SemanticMemory,

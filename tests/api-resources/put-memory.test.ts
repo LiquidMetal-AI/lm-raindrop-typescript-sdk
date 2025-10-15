@@ -12,10 +12,8 @@ describe('resource putMemory', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.putMemory.create({
       content: 'User prefers dark theme for the interface',
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: { smart_memory: { name: 'memory-name' } },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,13 +28,15 @@ describe('resource putMemory', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.putMemory.create({
       content: 'User prefers dark theme for the interface',
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
         smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       agent: 'assistant-v1',
       key: 'user-preference-theme',
+      organization_id: 'organization_id',
       timeline: 'user-conversation-2024',
+      user_id: 'user_id',
     });
   });
 });

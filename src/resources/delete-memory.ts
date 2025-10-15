@@ -12,14 +12,10 @@ export class DeleteMemory extends APIResource {
    * @example
    * ```ts
    * const deleteMemory = await client.deleteMemory.create({
-   *   memoryId: '01jxanr45haeswhay4n0q8340y',
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   memory_id: '01jxanr45haeswhay4n0q8340y',
+   *   session_id: '01jxanr45haeswhay4n0q8340y',
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -40,26 +36,37 @@ export interface DeleteMemoryCreateParams {
   /**
    * Unique identifier of the memory entry to delete
    */
-  memoryId: string;
+  memory_id: string;
 
   /**
    * Unique session identifier for the working memory instance
    */
-  sessionId: string;
+  session_id: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | DeleteMemoryCreateParams.SmartMemory;
+  smart_memory_location: DeleteMemoryCreateParams.ModuleID | DeleteMemoryCreateParams.SmartMemory;
+
+  organization_id?: string;
+
+  user_id?: string;
 }
 
 export namespace DeleteMemoryCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -76,7 +83,7 @@ export namespace DeleteMemoryCreateParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

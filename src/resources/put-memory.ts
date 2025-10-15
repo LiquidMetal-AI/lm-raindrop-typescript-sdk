@@ -21,13 +21,9 @@ export class PutMemory extends APIResource {
    * ```ts
    * const putMemory = await client.putMemory.create({
    *   content: 'User prefers dark theme for the interface',
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   session_id: '01jxanr45haeswhay4n0q8340y',
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -41,7 +37,7 @@ export interface PutMemoryCreateResponse {
   /**
    * Unique identifier for the stored memory entry
    */
-  memoryId?: string;
+  memory_id?: string;
 }
 
 export interface PutMemoryCreateParams {
@@ -53,12 +49,12 @@ export interface PutMemoryCreateParams {
   /**
    * Unique session identifier for the working memory instance
    */
-  sessionId: string;
+  session_id: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | PutMemoryCreateParams.SmartMemory;
+  smart_memory_location: PutMemoryCreateParams.ModuleID | PutMemoryCreateParams.SmartMemory;
 
   /**
    * Agent identifier responsible for this memory
@@ -70,19 +66,30 @@ export interface PutMemoryCreateParams {
    */
   key?: string | null;
 
+  organization_id?: string;
+
   /**
    * Timeline identifier for organizing related memories
    */
   timeline?: string | null;
+
+  user_id?: string;
 }
 
 export namespace PutMemoryCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -99,7 +106,7 @@ export namespace PutMemoryCreateParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"

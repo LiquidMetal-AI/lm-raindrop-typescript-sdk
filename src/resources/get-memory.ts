@@ -20,13 +20,9 @@ export class GetMemory extends APIResource {
    * @example
    * ```ts
    * const getMemory = await client.getMemory.retrieve({
-   *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smart_memory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
+   *   session_id: '01jxanr45haeswhay4n0q8340y',
+   *   smart_memory_location: {
+   *     smart_memory: { name: 'memory-name' },
    *   },
    * });
    * ```
@@ -73,7 +69,7 @@ export namespace GetMemoryRetrieveResponse {
     /**
      * What triggered this memory creation
      */
-    dueTo?: string;
+    due_to?: string;
 
     /**
      * Optional key for direct retrieval
@@ -83,7 +79,7 @@ export namespace GetMemoryRetrieveResponse {
     /**
      * Session identifier where this memory was created
      */
-    sessionId?: string;
+    session_id?: string;
 
     /**
      * Timeline this memory belongs to
@@ -96,17 +92,17 @@ export interface GetMemoryRetrieveParams {
   /**
    * Unique session identifier for the working memory instance
    */
-  sessionId: string;
+  session_id: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | GetMemoryRetrieveParams.SmartMemory;
+  smart_memory_location: GetMemoryRetrieveParams.ModuleID | GetMemoryRetrieveParams.SmartMemory;
 
   /**
    * End time for temporal filtering
    */
-  endTime?: string | null;
+  end_time?: string | null;
 
   /**
    * Specific key to retrieve
@@ -116,26 +112,37 @@ export interface GetMemoryRetrieveParams {
   /**
    * Maximum number of most recent memories to return
    */
-  nMostRecent?: number | null;
+  n_most_recent?: number | null;
+
+  organization_id?: string;
 
   /**
    * Start time for temporal filtering
    */
-  startTime?: string | null;
+  start_time?: string | null;
 
   /**
    * Timeline to filter memories
    */
   timeline?: string | null;
+
+  user_id?: string;
 }
 
 export namespace GetMemoryRetrieveParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    module_id: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
+    smart_memory: SmartMemory.SmartMemory;
   }
 
   export namespace SmartMemory {
@@ -152,7 +159,7 @@ export namespace GetMemoryRetrieveParams {
       /**
        * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
        */
-      applicationName?: string | null;
+      application_name?: string | null;
 
       /**
        * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
