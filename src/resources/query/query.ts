@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as QueryAPI from './query';
+import * as Shared from '../shared';
 import * as EpisodicMemoryAPI from './episodic-memory';
 import { EpisodicMemory, EpisodicMemorySearchParams, EpisodicMemorySearchResponse } from './episodic-memory';
 import * as MemoryAPI from './memory';
@@ -186,30 +188,7 @@ export namespace BucketLocator {
     /**
      * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
-    bucket: Bucket.Bucket;
-  }
-
-  export namespace Bucket {
-    /**
-     * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
-     */
-    export interface Bucket {
-      /**
-       * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
-       */
-      name: string;
-
-      /**
-       * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
-       */
-      application_name?: string | null;
-
-      /**
-       * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       * **REQUIRED** FALSE
-       */
-      version?: string | null;
-    }
+    bucket: QueryAPI.LiquidmetalV1alpha1BucketName;
   }
 
   export interface ModuleID {
@@ -220,97 +199,84 @@ export namespace BucketLocator {
   }
 }
 
+/**
+ * BucketName represents a bucket name with an optional version
+ */
+export interface LiquidmetalV1alpha1BucketName {
+  /**
+   * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
+   */
+  name: string;
+
+  /**
+   * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
+   */
+  application_name?: string | null;
+
+  /**
+   * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+   * **REQUIRED** FALSE
+   */
+  version?: string | null;
+}
+
+export interface LiquidmetalV1alpha1SourceResult {
+  /**
+   * The bucket information containing this result
+   */
+  bucket?: Shared.LiquidmetalV1alpha1BucketResponse;
+
+  /**
+   * The object key within the bucket
+   */
+  object?: string;
+}
+
+export interface LiquidmetalV1alpha1TextResult {
+  /**
+   * Unique identifier for this text segment. Used for deduplication and result
+   * tracking
+   */
+  chunk_signature?: string | null;
+
+  /**
+   * Vector representation for similarity matching. Used in semantic search
+   * operations
+   */
+  embed?: string | null;
+
+  /**
+   * Parent document identifier. Links related content chunks together
+   */
+  payload_signature?: string | null;
+
+  /**
+   * Relevance score (0.0 to 1.0). Higher scores indicate better matches
+   */
+  score?: number | null;
+
+  /**
+   * Source document references. Contains bucket and object information
+   */
+  source?: LiquidmetalV1alpha1SourceResult;
+
+  /**
+   * The actual content of the result. May be a document excerpt or full content
+   */
+  text?: string | null;
+
+  /**
+   * Content MIME type. Helps with proper result rendering
+   */
+  type?: string | null;
+}
+
 export interface QueryChunkSearchResponse {
   /**
    * Ordered list of relevant text segments. Each result includes full context and
    * metadata
    */
-  results?: Array<QueryChunkSearchResponse.Result>;
-}
-
-export namespace QueryChunkSearchResponse {
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        application_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        application_version_id?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucket_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        module_id?: string;
-      }
-    }
-  }
+  results?: Array<LiquidmetalV1alpha1TextResult>;
 }
 
 export interface QueryDocumentQueryResponse {
@@ -331,7 +297,7 @@ export interface QueryGetPaginatedSearchResponse {
   /**
    * Page results with full metadata
    */
-  results?: Array<QueryGetPaginatedSearchResponse.Result>;
+  results?: Array<LiquidmetalV1alpha1TextResult>;
 }
 
 export namespace QueryGetPaginatedSearchResponse {
@@ -364,89 +330,6 @@ export namespace QueryGetPaginatedSearchResponse {
      */
     total_pages?: number;
   }
-
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        application_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        application_version_id?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucket_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        module_id?: string;
-      }
-    }
-  }
 }
 
 export interface QuerySearchResponse {
@@ -458,7 +341,7 @@ export interface QuerySearchResponse {
   /**
    * Matched results with metadata
    */
-  results?: Array<QuerySearchResponse.Result>;
+  results?: Array<LiquidmetalV1alpha1TextResult>;
 }
 
 export namespace QuerySearchResponse {
@@ -490,89 +373,6 @@ export namespace QuerySearchResponse {
      * Total available pages. Calculated as ceil(total/pageSize)
      */
     total_pages?: number;
-  }
-
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunk_signature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payload_signature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        application_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        application_version_id?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucket_name?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        module_id?: string;
-      }
-    }
   }
 }
 
@@ -743,6 +543,9 @@ Query.SemanticMemory = SemanticMemory;
 export declare namespace Query {
   export {
     type BucketLocator as BucketLocator,
+    type LiquidmetalV1alpha1BucketName as LiquidmetalV1alpha1BucketName,
+    type LiquidmetalV1alpha1SourceResult as LiquidmetalV1alpha1SourceResult,
+    type LiquidmetalV1alpha1TextResult as LiquidmetalV1alpha1TextResult,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
     type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,

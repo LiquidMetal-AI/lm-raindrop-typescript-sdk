@@ -10,6 +10,9 @@ export { Procedures, type ProcedureSearchResponse, type ProcedureSearchParams } 
 export {
   Query,
   type BucketLocator,
+  type LiquidmetalV1alpha1BucketName,
+  type LiquidmetalV1alpha1SourceResult,
+  type LiquidmetalV1alpha1TextResult,
   type QueryChunkSearchResponse,
   type QueryDocumentQueryResponse,
   type QueryGetPaginatedSearchResponse,

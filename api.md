@@ -1,8 +1,18 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">LiquidmetalV1alpha1BucketResponse</a></code>
+- <code><a href="./src/resources/shared.ts">LiquidmetalV1alpha1SmartMemoryName</a></code>
+
 # Query
 
 Types:
 
 - <code><a href="./src/resources/query/query.ts">BucketLocator</a></code>
+- <code><a href="./src/resources/query/query.ts">LiquidmetalV1alpha1BucketName</a></code>
+- <code><a href="./src/resources/query/query.ts">LiquidmetalV1alpha1SourceResult</a></code>
+- <code><a href="./src/resources/query/query.ts">LiquidmetalV1alpha1TextResult</a></code>
 - <code><a href="./src/resources/query/query.ts">QueryChunkSearchResponse</a></code>
 - <code><a href="./src/resources/query/query.ts">QueryDocumentQueryResponse</a></code>
 - <code><a href="./src/resources/query/query.ts">QueryGetPaginatedSearchResponse</a></code>

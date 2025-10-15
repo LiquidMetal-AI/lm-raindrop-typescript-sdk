@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -71,31 +72,7 @@ export namespace GetProcedureCreateParams {
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: SmartMemory.SmartMemory;
-  }
-
-  export namespace SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    export interface SmartMemory {
-      /**
-       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
-       */
-      name: string;
-
-      /**
-       * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
-       */
-      application_name?: string | null;
-
-      /**
-       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       * **REQUIRED** FALSE
-       */
-      version?: string | null;
-    }
+    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

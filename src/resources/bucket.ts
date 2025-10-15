@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import * as QueryAPI from './query/query';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -125,39 +126,12 @@ export interface BucketPutResponse {
   /**
    * Information about the bucket where the object was uploaded
    */
-  bucket?: BucketPutResponse.Bucket;
+  bucket?: Shared.LiquidmetalV1alpha1BucketResponse;
 
   /**
    * Key/path of the uploaded object
    */
   key?: string;
-}
-
-export namespace BucketPutResponse {
-  /**
-   * Information about the bucket where the object was uploaded
-   */
-  export interface Bucket {
-    /**
-     * **EXAMPLE** "my-app"
-     */
-    application_name?: string;
-
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-     */
-    application_version_id?: string;
-
-    /**
-     * **EXAMPLE** "my-smartbucket"
-     */
-    bucket_name?: string;
-
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-     */
-    module_id?: string;
-  }
 }
 
 export interface BucketListParams {
