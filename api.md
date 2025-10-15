@@ -212,11 +212,3 @@ Types:
 Methods:
 
 - <code title="post /v1/delete_semantic_memory">client.deleteSemanticMemory.<a href="./src/resources/delete-semantic-memory.ts">delete</a>({ ...params }) -> DeleteSemanticMemoryDeleteResponse</code>
-
-# ExecuteQuery
-
-# GetMetadata
-
-# UpdateMetadata
-
-# GetPiiData

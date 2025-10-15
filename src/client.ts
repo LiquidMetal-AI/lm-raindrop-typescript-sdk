@@ -45,10 +45,7 @@ import {
   DeleteSemanticMemoryDeleteResponse,
 } from './resources/delete-semantic-memory';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
-import { ExecuteQuery } from './resources/execute-query';
 import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
-import { GetMetadata } from './resources/get-metadata';
-import { GetPiiData } from './resources/get-pii-data';
 import {
   GetProcedure,
   GetProcedureCreateParams,
@@ -90,7 +87,6 @@ import {
   SummarizeMemoryCreateParams,
   SummarizeMemoryCreateResponse,
 } from './resources/summarize-memory';
-import { UpdateMetadata } from './resources/update-metadata';
 import {
   BucketLocator,
   Query,
@@ -838,10 +834,6 @@ export class Raindrop {
   putSemanticMemory: API.PutSemanticMemory = new API.PutSemanticMemory(this);
   getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
   deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
-  executeQuery: API.ExecuteQuery = new API.ExecuteQuery(this);
-  getMetadata: API.GetMetadata = new API.GetMetadata(this);
-  updateMetadata: API.UpdateMetadata = new API.UpdateMetadata(this);
-  getPiiData: API.GetPiiData = new API.GetPiiData(this);
 }
 
 Raindrop.Query = Query;
@@ -860,10 +852,6 @@ Raindrop.ListProcedures = ListProcedures;
 Raindrop.PutSemanticMemory = PutSemanticMemory;
 Raindrop.GetSemanticMemory = GetSemanticMemory;
 Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
-Raindrop.ExecuteQuery = ExecuteQuery;
-Raindrop.GetMetadata = GetMetadata;
-Raindrop.UpdateMetadata = UpdateMetadata;
-Raindrop.GetPiiData = GetPiiData;
 
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
@@ -982,12 +970,4 @@ export declare namespace Raindrop {
     type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
     type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
-
-  export { ExecuteQuery as ExecuteQuery };
-
-  export { GetMetadata as GetMetadata };
-
-  export { UpdateMetadata as UpdateMetadata };
-
-  export { GetPiiData as GetPiiData };
 }
