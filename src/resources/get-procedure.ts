@@ -16,7 +16,11 @@ export class GetProcedure extends APIResource {
    * const getProcedure = await client.getProcedure.create({
    *   key: 'TechnicalReportSystemPrompt',
    *   smart_memory_location: {
-   *     smart_memory: { name: 'memory-name' },
+   *     smart_memory: {
+   *       application_name: 'demo',
+   *       name: 'memory-name',
+   *       version: '1234',
+   *     },
    *   },
    * });
    * ```

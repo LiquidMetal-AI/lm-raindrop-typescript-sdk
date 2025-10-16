@@ -14,7 +14,11 @@ export class StartSession extends APIResource {
    * ```ts
    * const startSession = await client.startSession.create({
    *   smart_memory_location: {
-   *     smart_memory: { name: 'memory-name' },
+   *     smart_memory: {
+   *       application_name: 'demo',
+   *       name: 'memory-name',
+   *       version: '1234',
+   *     },
    *   },
    * });
    * ```

@@ -12,7 +12,9 @@ describe('resource memory', () => {
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.memory.search({
       session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: { smart_memory: { name: 'memory-name' } },
+      smart_memory_location: {
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      },
       terms: 'user interface preferences',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,7 +31,7 @@ describe('resource memory', () => {
     const response = await client.query.memory.search({
       session_id: '01jxanr45haeswhay4n0q8340y',
       smart_memory_location: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
       },
       terms: 'user interface preferences',
       end_time: '2019-12-27T18:11:19.117Z',

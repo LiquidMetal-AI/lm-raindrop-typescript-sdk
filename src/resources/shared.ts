@@ -27,18 +27,18 @@ export interface LiquidmetalV1alpha1BucketResponse {
  */
 export interface LiquidmetalV1alpha1SmartMemoryName {
   /**
+   * Optional Application **EXAMPLE** "my-app" **REQUIRED** TRUE
+   */
+  application_name: string | null;
+
+  /**
    * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
    */
   name: string;
 
   /**
-   * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
-   */
-  application_name?: string | null;
-
-  /**
    * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-   * **REQUIRED** FALSE
+   * **REQUIRED** TRUE
    */
-  version?: string | null;
+  version: string | null;
 }

@@ -12,7 +12,9 @@ describe('resource putSemanticMemory', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.putSemanticMemory.create({
       document: 'document',
-      smart_memory_location: { smart_memory: { name: 'memory-name' } },
+      smart_memory_location: {
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +30,7 @@ describe('resource putSemanticMemory', () => {
     const response = await client.putSemanticMemory.create({
       document: 'document',
       smart_memory_location: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
       },
       organization_id: 'organization_id',
       user_id: 'user_id',
