@@ -16,7 +16,7 @@ export class EndSession extends APIResource {
    * const endSession = await client.endSession.create({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
    *   smartMemoryLocation: {
-   *     smart_memory: {
+   *     smartMemory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',
@@ -62,7 +62,7 @@ export interface EndSessionCreateParams {
 export namespace EndSessionCreateParams {
   export interface SmartMemory {
     /**
-     * **EXAMPLE** {"name":"memory-name","applicationName":"demo","version":"1234"}
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;

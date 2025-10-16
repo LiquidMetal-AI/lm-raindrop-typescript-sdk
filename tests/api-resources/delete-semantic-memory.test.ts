@@ -13,7 +13,7 @@ describe('resource deleteSemanticMemory', () => {
     const responsePromise = client.deleteSemanticMemory.delete({
       objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource deleteSemanticMemory', () => {
     const response = await client.deleteSemanticMemory.delete({
       objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
   });

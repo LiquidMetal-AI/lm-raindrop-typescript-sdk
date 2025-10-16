@@ -23,7 +23,7 @@ export class GetMemory extends APIResource {
    * const getMemory = await client.getMemory.retrieve({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
    *   smartMemoryLocation: {
-   *     smart_memory: {
+   *     smartMemory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',
@@ -133,7 +133,7 @@ export interface GetMemoryRetrieveParams {
 export namespace GetMemoryRetrieveParams {
   export interface SmartMemory {
     /**
-     * **EXAMPLE** {"name":"memory-name","applicationName":"demo","version":"1234"}
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
