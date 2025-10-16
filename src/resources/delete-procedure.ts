@@ -15,10 +15,10 @@ export class DeleteProcedure extends APIResource {
    * const deleteProcedure = await client.deleteProcedure.create(
    *   {
    *     key: 'TechnicalReportSystemPrompt',
-   *     smart_memory_location: {
+   *     smartMemoryLocation: {
    *       smart_memory: {
-   *         application_name: 'demo',
    *         name: 'memory-name',
+   *         application_name: 'demo',
    *         version: '1234',
    *       },
    *     },
@@ -50,32 +50,21 @@ export interface DeleteProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: DeleteProcedureCreateParams.ModuleID | DeleteProcedureCreateParams.SmartMemory;
-
-  organization_id?: string;
+  smartMemoryLocation: unknown | DeleteProcedureCreateParams.SmartMemory;
 
   /**
    * Optional procedural memory ID to use for actor isolation
    */
-  procedural_memory_id?: string | null;
-
-  user_id?: string;
+  proceduralMemoryId?: string | null;
 }
 
 export namespace DeleteProcedureCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

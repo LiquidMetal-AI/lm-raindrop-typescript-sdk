@@ -21,11 +21,11 @@ export class Memory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.memory.search({
-   *   session_id: '01jxanr45haeswhay4n0q8340y',
-   *   smart_memory_location: {
+   *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -75,7 +75,7 @@ export namespace MemorySearchResponse {
     /**
      * What triggered this memory creation
      */
-    due_to?: string;
+    dueTo?: string;
 
     /**
      * Optional key for direct retrieval
@@ -85,7 +85,7 @@ export namespace MemorySearchResponse {
     /**
      * Session identifier where this memory was created
      */
-    session_id?: string;
+    sessionId?: string;
 
     /**
      * Timeline this memory belongs to
@@ -98,12 +98,12 @@ export interface MemorySearchParams {
   /**
    * Unique session identifier for the working memory instance
    */
-  session_id: string;
+  sessionId: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: MemorySearchParams.ModuleID | MemorySearchParams.SmartMemory;
+  smartMemoryLocation: unknown | MemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query
@@ -113,42 +113,31 @@ export interface MemorySearchParams {
   /**
    * End time for temporal filtering
    */
-  end_time?: string | null;
+  endTime?: string | null;
 
   /**
    * Maximum number of most recent results to return
    */
-  n_most_recent?: number | null;
-
-  organization_id?: string;
+  nMostRecent?: number | null;
 
   /**
    * Start time for temporal filtering
    */
-  start_time?: string | null;
+  startTime?: string | null;
 
   /**
    * Timeline to filter search results
    */
   timeline?: string | null;
-
-  user_id?: string;
 }
 
 export namespace MemorySearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

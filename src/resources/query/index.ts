@@ -15,7 +15,6 @@ export {
   type LiquidmetalV1alpha1TextResult,
   type QueryChunkSearchResponse,
   type QueryDocumentQueryResponse,
-  type QueryGetPaginatedSearchResponse,
   type QuerySearchResponse,
   type QuerySumarizePageResponse,
   type QueryChunkSearchParams,
@@ -23,6 +22,7 @@ export {
   type QueryGetPaginatedSearchParams,
   type QuerySearchParams,
   type QuerySumarizePageParams,
+  type LiquidmetalV1alpha1TextResultsPageNumber,
 } from './query';
 export {
   SemanticMemory,

@@ -15,10 +15,10 @@ export class PutProcedure extends APIResource {
    * ```ts
    * const putProcedure = await client.putProcedure.create({
    *   key: 'TechnicalReportSystemPrompt',
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -47,37 +47,26 @@ export interface PutProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: PutProcedureCreateParams.ModuleID | PutProcedureCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | PutProcedureCreateParams.SmartMemory;
 
   /**
    * The procedure content (prompt, template, instructions, etc.)
    */
   value: string;
 
-  organization_id?: string;
-
   /**
    * Optional procedural memory ID to use for actor isolation
    */
-  procedural_memory_id?: string | null;
-
-  user_id?: string;
+  proceduralMemoryId?: string | null;
 }
 
 export namespace PutProcedureCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

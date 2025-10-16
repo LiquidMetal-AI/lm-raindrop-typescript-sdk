@@ -16,10 +16,10 @@ export class Procedures extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.procedures.search({
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -44,7 +44,7 @@ export namespace ProcedureSearchResponse {
     /**
      * When this procedure was first created
      */
-    created_at?: string;
+    createdAt?: string;
 
     /**
      * Unique key for this procedure
@@ -54,7 +54,7 @@ export namespace ProcedureSearchResponse {
     /**
      * When this procedure was last updated
      */
-    updated_at?: string;
+    updatedAt?: string;
 
     /**
      * The procedure content
@@ -67,7 +67,7 @@ export interface ProcedureSearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
+  smartMemoryLocation: unknown | ProcedureSearchParams.SmartMemory;
 
   /**
    * Search terms to match against procedure keys and values
@@ -77,42 +77,31 @@ export interface ProcedureSearchParams {
   /**
    * Maximum number of results to return
    */
-  n_most_recent?: number | null;
-
-  organization_id?: string;
+  nMostRecent?: number | null;
 
   /**
    * Optional procedural memory ID to use for actor isolation
    */
-  procedural_memory_id?: string | null;
+  proceduralMemoryId?: string | null;
 
   /**
    * Whether to search in procedure keys
    */
-  search_keys?: boolean | null;
+  searchKeys?: boolean | null;
 
   /**
    * Whether to search in procedure values
    */
-  search_values?: boolean | null;
-
-  user_id?: string;
+  searchValues?: boolean | null;
 }
 
 export namespace ProcedureSearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

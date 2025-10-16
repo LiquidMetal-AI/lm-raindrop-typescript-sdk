@@ -15,10 +15,10 @@ export class SemanticMemory extends APIResource {
    * ```ts
    * const response = await client.query.semanticMemory.search({
    *   needle: 'AI development best practices',
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -37,7 +37,7 @@ export interface SemanticMemorySearchResponse {
   /**
    * Search results with matching documents
    */
-  document_search_response?: SemanticMemorySearchResponse.DocumentSearchResponse | null;
+  documentSearchResponse?: SemanticMemorySearchResponse.DocumentSearchResponse | null;
 
   /**
    * Error message if the search failed
@@ -66,7 +66,7 @@ export namespace SemanticMemorySearchResponse {
       /**
        * Unique signature for this search result chunk
        */
-      chunk_signature?: string | null;
+      chunkSignature?: string | null;
 
       /**
        * Embedding vector information (if available)
@@ -76,7 +76,7 @@ export namespace SemanticMemorySearchResponse {
       /**
        * Payload signature for the original document
        */
-      payload_signature?: string | null;
+      payloadSignature?: string | null;
 
       /**
        * Relevance score for this search result
@@ -110,27 +110,16 @@ export interface SemanticMemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: SemanticMemorySearchParams.ModuleID | SemanticMemorySearchParams.SmartMemory;
-
-  organization_id?: string;
-
-  user_id?: string;
+  smartMemoryLocation: unknown | SemanticMemorySearchParams.SmartMemory;
 }
 
 export namespace SemanticMemorySearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

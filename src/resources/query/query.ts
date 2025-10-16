@@ -12,6 +12,7 @@ import { ProcedureSearchParams, ProcedureSearchResponse, Procedures } from './pr
 import * as SemanticMemoryAPI from './semantic-memory';
 import { SemanticMemory, SemanticMemorySearchParams, SemanticMemorySearchResponse } from './semantic-memory';
 import { APIPromise } from '../../core/api-promise';
+import { PageNumber, type PageNumberParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
 export class Query extends APIResource {
@@ -32,11 +33,9 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.chunkSearch({
-   *   bucket_locations: [
-   *     { bucket: { name: 'my-smartbucket' } },
-   *   ],
+   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
    *   input: 'Find documents about revenue in Q4 2023',
-   *   request_id: '<YOUR-REQUEST-ID>',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -68,10 +67,10 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.documentQuery({
-   *   bucket_location: { bucket: { name: 'my-smartbucket' } },
+   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
    *   input: 'What are the key points in this document?',
-   *   object_id: 'document.pdf',
-   *   request_id: '<YOUR-REQUEST-ID>',
+   *   objectId: 'document.pdf',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -90,18 +89,23 @@ export class Query extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.query.getPaginatedSearch({
-   *   page: 1,
-   *   page_size: 10,
-   *   request_id: '<YOUR-REQUEST-ID>',
-   * });
+   * // Automatically fetches more pages as needed.
+   * for await (const liquidmetalV1alpha1TextResult of client.query.getPaginatedSearch(
+   *   { page: 1, pageSize: 10, requestId: '<YOUR-REQUEST-ID>' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   getPaginatedSearch(
     body: QueryGetPaginatedSearchParams,
     options?: RequestOptions,
-  ): APIPromise<QueryGetPaginatedSearchResponse> {
-    return this._client.post('/v1/search_get_page', { body, ...options });
+  ): PagePromise<LiquidmetalV1alpha1TextResultsPageNumber, LiquidmetalV1alpha1TextResult> {
+    return this._client.getAPIList('/v1/search_get_page', PageNumber<LiquidmetalV1alpha1TextResult>, {
+      body,
+      method: 'post',
+      ...options,
+    });
   }
 
   /**
@@ -131,11 +135,9 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.search({
-   *   bucket_locations: [
-   *     { bucket: { name: 'my-smartbucket' } },
-   *   ],
+   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
    *   input: 'All my files',
-   *   request_id: '<YOUR-REQUEST-ID>',
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -168,8 +170,8 @@ export class Query extends APIResource {
    * ```ts
    * const response = await client.query.sumarizePage({
    *   page: 1,
-   *   page_size: 10,
-   *   request_id: '<YOUR-REQUEST-ID>',
+   *   pageSize: 10,
+   *   requestId: '<YOUR-REQUEST-ID>',
    * });
    * ```
    */
@@ -181,7 +183,9 @@ export class Query extends APIResource {
   }
 }
 
-export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
+export type LiquidmetalV1alpha1TextResultsPageNumber = PageNumber<LiquidmetalV1alpha1TextResult>;
+
+export type BucketLocator = BucketLocator.Bucket | unknown;
 
 export namespace BucketLocator {
   export interface Bucket {
@@ -189,13 +193,6 @@ export namespace BucketLocator {
      * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
     bucket: QueryAPI.LiquidmetalV1alpha1BucketName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
-     */
-    module_id: string;
   }
 }
 
@@ -211,7 +208,7 @@ export interface LiquidmetalV1alpha1BucketName {
   /**
    * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
    */
-  application_name?: string | null;
+  applicationName?: string | null;
 
   /**
    * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
@@ -237,7 +234,7 @@ export interface LiquidmetalV1alpha1TextResult {
    * Unique identifier for this text segment. Used for deduplication and result
    * tracking
    */
-  chunk_signature?: string | null;
+  chunkSignature?: string | null;
 
   /**
    * Vector representation for similarity matching. Used in semantic search
@@ -248,7 +245,7 @@ export interface LiquidmetalV1alpha1TextResult {
   /**
    * Parent document identifier. Links related content chunks together
    */
-  payload_signature?: string | null;
+  payloadSignature?: string | null;
 
   /**
    * Relevance score (0.0 to 1.0). Higher scores indicate better matches
@@ -288,50 +285,6 @@ export interface QueryDocumentQueryResponse {
   answer?: string;
 }
 
-export interface QueryGetPaginatedSearchResponse {
-  /**
-   * Updated pagination information
-   */
-  pagination?: QueryGetPaginatedSearchResponse.Pagination;
-
-  /**
-   * Page results with full metadata
-   */
-  results?: Array<LiquidmetalV1alpha1TextResult>;
-}
-
-export namespace QueryGetPaginatedSearchResponse {
-  /**
-   * Updated pagination information
-   */
-  export interface Pagination {
-    /**
-     * Current page number (1-based)
-     */
-    page: number;
-
-    /**
-     * Results per page. May be adjusted for performance
-     */
-    page_size: number;
-
-    /**
-     * Indicates more results available. Used for infinite scroll implementation
-     */
-    has_more?: boolean;
-
-    /**
-     * Total number of available results
-     */
-    total?: number;
-
-    /**
-     * Total available pages. Calculated as ceil(total/pageSize)
-     */
-    total_pages?: number;
-  }
-}
-
 export interface QuerySearchResponse {
   /**
    * Pagination details for result navigation
@@ -357,12 +310,12 @@ export namespace QuerySearchResponse {
     /**
      * Results per page. May be adjusted for performance
      */
-    page_size: number;
+    pageSize: number;
 
     /**
      * Indicates more results available. Used for infinite scroll implementation
      */
-    has_more?: boolean;
+    hasMore?: boolean;
 
     /**
      * Total number of available results
@@ -372,7 +325,7 @@ export namespace QuerySearchResponse {
     /**
      * Total available pages. Calculated as ceil(total/pageSize)
      */
-    total_pages?: number;
+    totalPages?: number;
   }
 }
 
@@ -389,7 +342,7 @@ export interface QueryChunkSearchParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<BucketLocator>;
+  bucketLocations: Array<BucketLocator>;
 
   /**
    * Natural language query or question. Can include complex criteria and
@@ -401,17 +354,13 @@ export interface QueryChunkSearchParams {
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
-
-  organization_id?: string;
+  requestId: string;
 
   /**
    * Optional partition identifier for multi-tenant data isolation. Defaults to
    * 'default' if not specified
    */
   partition?: string | null;
-
-  user_id?: string;
 }
 
 export interface QueryDocumentQueryParams {
@@ -419,7 +368,7 @@ export interface QueryDocumentQueryParams {
    * The storage bucket containing the target document. Must be a valid, registered
    * Smart Bucket. Used to identify which bucket to query against
    */
-  bucket_location: BucketLocator;
+  bucketLocation: BucketLocator;
 
   /**
    * User's input or question about the document. Can be natural language questions,
@@ -431,50 +380,32 @@ export interface QueryDocumentQueryParams {
    * Document identifier within the bucket. Typically matches the storage path or
    * key. Used to identify which document to chat with
    */
-  object_id: string;
+  objectId: string;
 
   /**
    * Client-provided conversation session identifier. Required for maintaining
    * context in follow-up questions. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
-
-  organization_id?: string;
+  requestId: string;
 
   /**
    * Optional partition identifier for multi-tenant data isolation. Defaults to
    * 'default' if not specified
    */
   partition?: string | null;
-
-  user_id?: string;
 }
 
-export interface QueryGetPaginatedSearchParams {
-  /**
-   * Requested page number
-   */
-  page: number | null;
-
-  /**
-   * Results per page
-   */
-  page_size: number | null;
-
+export interface QueryGetPaginatedSearchParams extends PageNumberParams {
   /**
    * Original search session identifier from the initial search
    */
-  request_id: string;
-
-  organization_id?: string;
+  requestId: string;
 
   /**
    * Optional partition identifier for multi-tenant data isolation. Defaults to
    * 'default' if not specified
    */
   partition?: string | null;
-
-  user_id?: string;
 }
 
 export interface QuerySearchParams {
@@ -482,7 +413,7 @@ export interface QuerySearchParams {
    * The buckets to search. If provided, the search will only return results from
    * these buckets
    */
-  bucket_locations: Array<BucketLocator>;
+  bucketLocations: Array<BucketLocator>;
 
   /**
    * Natural language search query that can include complex criteria. Supports
@@ -495,17 +426,13 @@ export interface QuerySearchParams {
    * Client-provided search session identifier. Required for pagination and result
    * tracking. We recommend using a UUID or ULID for this value
    */
-  request_id: string;
-
-  organization_id?: string;
+  requestId: string;
 
   /**
    * Optional partition identifier for multi-tenant data isolation. Defaults to
    * 'default' if not specified
    */
   partition?: string | null;
-
-  user_id?: string;
 }
 
 export interface QuerySumarizePageParams {
@@ -517,22 +444,18 @@ export interface QuerySumarizePageParams {
   /**
    * Results per page. Affects summary granularity
    */
-  page_size: number;
+  pageSize: number;
 
   /**
    * Original search session identifier from the initial search
    */
-  request_id: string;
-
-  organization_id?: string;
+  requestId: string;
 
   /**
    * Optional partition identifier for multi-tenant data isolation. Defaults to
    * 'default' if not specified
    */
   partition?: string | null;
-
-  user_id?: string;
 }
 
 Query.Memory = Memory;
@@ -548,9 +471,9 @@ export declare namespace Query {
     type LiquidmetalV1alpha1TextResult as LiquidmetalV1alpha1TextResult,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
-    type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
     type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
+    type LiquidmetalV1alpha1TextResultsPageNumber as LiquidmetalV1alpha1TextResultsPageNumber,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
     type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,

@@ -14,11 +14,11 @@ export class DeleteSemanticMemory extends APIResource {
    * ```ts
    * const deleteSemanticMemory =
    *   await client.deleteSemanticMemory.delete({
-   *     object_id: '01jxanr45haeswhay4n0q8340y',
-   *     smart_memory_location: {
+   *     objectId: '01jxanr45haeswhay4n0q8340y',
+   *     smartMemoryLocation: {
    *       smart_memory: {
-   *         application_name: 'demo',
    *         name: 'memory-name',
+   *         application_name: 'demo',
    *         version: '1234',
    *       },
    *     },
@@ -49,34 +49,21 @@ export interface DeleteSemanticMemoryDeleteParams {
   /**
    * Unique object identifier of the document to delete
    */
-  object_id: string;
+  objectId: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location:
-    | DeleteSemanticMemoryDeleteParams.ModuleID
-    | DeleteSemanticMemoryDeleteParams.SmartMemory;
-
-  organization_id?: string;
-
-  user_id?: string;
+  smartMemoryLocation: unknown | DeleteSemanticMemoryDeleteParams.SmartMemory;
 }
 
 export namespace DeleteSemanticMemoryDeleteParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

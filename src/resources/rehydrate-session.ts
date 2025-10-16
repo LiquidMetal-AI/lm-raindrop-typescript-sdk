@@ -14,11 +14,11 @@ export class RehydrateSession extends APIResource {
    * @example
    * ```ts
    * const response = await client.rehydrateSession.rehydrate({
-   *   session_id: '01jxanr45haeswhay4n0q8340y',
-   *   smart_memory_location: {
+   *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -43,7 +43,7 @@ export interface RehydrateSessionRehydrateResponse {
   /**
    * Storage key for checking async operation status (optional)
    */
-  status_key?: string | null;
+  statusKey?: string | null;
 
   /**
    * Indicates whether the rehydration was successful
@@ -55,39 +55,26 @@ export interface RehydrateSessionRehydrateParams {
   /**
    * Session identifier to restore from episodic memory
    */
-  session_id: string;
+  sessionId: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location:
-    | RehydrateSessionRehydrateParams.ModuleID
-    | RehydrateSessionRehydrateParams.SmartMemory;
-
-  organization_id?: string;
+  smartMemoryLocation: unknown | RehydrateSessionRehydrateParams.SmartMemory;
 
   /**
    * If true, only restore a summary. If false, restore all memories
    */
-  summary_only?: boolean | null;
-
-  user_id?: string;
+  summaryOnly?: boolean | null;
 }
 
 export namespace RehydrateSessionRehydrateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 
