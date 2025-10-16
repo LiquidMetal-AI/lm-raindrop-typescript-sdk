@@ -12,7 +12,9 @@ describe('resource endSession', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.endSession.create({
       session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: { smart_memory: { name: 'memory-name' } },
+      smart_memory_location: {
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +30,7 @@ describe('resource endSession', () => {
     const response = await client.endSession.create({
       session_id: '01jxanr45haeswhay4n0q8340y',
       smart_memory_location: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
       },
       flush: true,
       organization_id: 'organization_id',

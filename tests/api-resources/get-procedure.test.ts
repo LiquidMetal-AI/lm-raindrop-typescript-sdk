@@ -12,7 +12,9 @@ describe('resource getProcedure', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.getProcedure.create({
       key: 'TechnicalReportSystemPrompt',
-      smart_memory_location: { smart_memory: { name: 'memory-name' } },
+      smart_memory_location: {
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,7 +30,7 @@ describe('resource getProcedure', () => {
     const response = await client.getProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smart_memory_location: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
       },
       organization_id: 'organization_id',
       procedural_memory_id: 'demo-smartmemory',

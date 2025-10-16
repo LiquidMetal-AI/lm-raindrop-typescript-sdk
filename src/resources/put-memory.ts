@@ -24,7 +24,11 @@ export class PutMemory extends APIResource {
    *   content: 'User prefers dark theme for the interface',
    *   session_id: '01jxanr45haeswhay4n0q8340y',
    *   smart_memory_location: {
-   *     smart_memory: { name: 'memory-name' },
+   *     smart_memory: {
+   *       application_name: 'demo',
+   *       name: 'memory-name',
+   *       version: '1234',
+   *     },
    *   },
    * });
    * ```
