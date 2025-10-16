@@ -16,7 +16,7 @@ export class SemanticMemory extends APIResource {
    * const response = await client.query.semanticMemory.search({
    *   needle: 'AI development best practices',
    *   smartMemoryLocation: {
-   *     smart_memory: {
+   *     smartMemory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

@@ -16,7 +16,7 @@ export class PutProcedure extends APIResource {
    * const putProcedure = await client.putProcedure.create({
    *   key: 'TechnicalReportSystemPrompt',
    *   smartMemoryLocation: {
-   *     smart_memory: {
+   *     smartMemory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

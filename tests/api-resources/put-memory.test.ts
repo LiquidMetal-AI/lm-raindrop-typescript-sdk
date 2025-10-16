@@ -14,7 +14,7 @@ describe('resource putMemory', () => {
       content: 'User prefers dark theme for the interface',
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource putMemory', () => {
       content: 'User prefers dark theme for the interface',
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       agent: 'assistant-v1',
       key: 'user-preference-theme',
