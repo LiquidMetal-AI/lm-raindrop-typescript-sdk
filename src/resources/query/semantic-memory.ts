@@ -116,7 +116,7 @@ export interface SemanticMemorySearchParams {
 export namespace SemanticMemorySearchParams {
   export interface SmartMemory {
     /**
-     * **EXAMPLE** {"name":"memory-name","applicationName":"demo","version":"1234"}
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
