@@ -89,14 +89,16 @@ import {
 } from './resources/summarize-memory';
 import {
   BucketLocator,
+  LiquidmetalV1alpha1BucketName,
+  LiquidmetalV1alpha1SourceResult,
+  LiquidmetalV1alpha1TextResult,
+  LiquidmetalV1alpha1TextResultsPageNumber,
   Query,
   QueryChunkSearchParams,
   QueryChunkSearchResponse,
   QueryDocumentQueryParams,
   QueryDocumentQueryResponse,
   QueryGetPaginatedSearchParams,
-  QueryGetPaginatedSearchResponse,
-  QueryGetPaginatedSearchResponsesPageNumber,
   QuerySearchParams,
   QuerySearchResponse,
   QuerySumarizePageParams,
@@ -862,12 +864,14 @@ export declare namespace Raindrop {
   export {
     Query as Query,
     type BucketLocator as BucketLocator,
+    type LiquidmetalV1alpha1BucketName as LiquidmetalV1alpha1BucketName,
+    type LiquidmetalV1alpha1SourceResult as LiquidmetalV1alpha1SourceResult,
+    type LiquidmetalV1alpha1TextResult as LiquidmetalV1alpha1TextResult,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
-    type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
     type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
-    type QueryGetPaginatedSearchResponsesPageNumber as QueryGetPaginatedSearchResponsesPageNumber,
+    type LiquidmetalV1alpha1TextResultsPageNumber as LiquidmetalV1alpha1TextResultsPageNumber,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
     type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,
@@ -970,4 +974,7 @@ export declare namespace Raindrop {
     type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
     type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
+
+  export type LiquidmetalV1alpha1BucketResponse = API.LiquidmetalV1alpha1BucketResponse;
+  export type LiquidmetalV1alpha1SmartMemoryName = API.LiquidmetalV1alpha1SmartMemoryName;
 }

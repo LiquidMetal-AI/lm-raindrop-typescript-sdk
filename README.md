@@ -142,26 +142,26 @@ List methods in the Raindrop API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllQueryGetPaginatedSearchResponses(params) {
-  const allQueryGetPaginatedSearchResponses = [];
+async function fetchAllLiquidmetalV1alpha1TextResults(params) {
+  const allLiquidmetalV1alpha1TextResults = [];
   // Automatically fetches more pages as needed.
-  for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch({
+  for await (const liquidmetalV1alpha1TextResult of client.query.getPaginatedSearch({
     page: 1,
-    pageSize: 15,
+    pageSize: 10,
     requestId: '<YOUR-REQUEST-ID>',
   })) {
-    allQueryGetPaginatedSearchResponses.push(queryGetPaginatedSearchResponse);
+    allLiquidmetalV1alpha1TextResults.push(liquidmetalV1alpha1TextResult);
   }
-  return allQueryGetPaginatedSearchResponses;
+  return allLiquidmetalV1alpha1TextResults;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.query.getPaginatedSearch({ page: 1, pageSize: 15, requestId: '<YOUR-REQUEST-ID>' });
-for (const queryGetPaginatedSearchResponse of page.results) {
-  console.log(queryGetPaginatedSearchResponse);
+let page = await client.query.getPaginatedSearch({ page: 1, pageSize: 10, requestId: '<YOUR-REQUEST-ID>' });
+for (const liquidmetalV1alpha1TextResult of page.results) {
+  console.log(liquidmetalV1alpha1TextResult);
 }
 
 // Convenience methods are provided for manually paginating:

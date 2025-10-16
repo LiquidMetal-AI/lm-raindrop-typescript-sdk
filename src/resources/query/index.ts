@@ -10,9 +10,11 @@ export { Procedures, type ProcedureSearchResponse, type ProcedureSearchParams } 
 export {
   Query,
   type BucketLocator,
+  type LiquidmetalV1alpha1BucketName,
+  type LiquidmetalV1alpha1SourceResult,
+  type LiquidmetalV1alpha1TextResult,
   type QueryChunkSearchResponse,
   type QueryDocumentQueryResponse,
-  type QueryGetPaginatedSearchResponse,
   type QuerySearchResponse,
   type QuerySumarizePageResponse,
   type QueryChunkSearchParams,
@@ -20,7 +22,7 @@ export {
   type QueryGetPaginatedSearchParams,
   type QuerySearchParams,
   type QuerySumarizePageParams,
-  type QueryGetPaginatedSearchResponsesPageNumber,
+  type LiquidmetalV1alpha1TextResultsPageNumber,
 } from './query';
 export {
   SemanticMemory,

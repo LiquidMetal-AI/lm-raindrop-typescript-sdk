@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -59,34 +60,10 @@ export interface DeleteSemanticMemoryDeleteParams {
 export namespace DeleteSemanticMemoryDeleteParams {
   export interface SmartMemory {
     /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **EXAMPLE** {"name":"memory-name","applicationName":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smartMemory: SmartMemory.SmartMemory;
-  }
-
-  export namespace SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    export interface SmartMemory {
-      /**
-       * The name of the smart memory **EXAMPLE** "my-smartmemory" **REQUIRED** TRUE
-       */
-      name: string;
-
-      /**
-       * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
-       */
-      applicationName?: string | null;
-
-      /**
-       * Optional version of the smart memory **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       * **REQUIRED** FALSE
-       */
-      version?: string | null;
-    }
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as QueryAPI from './query';
+import * as Shared from '../shared';
 import * as EpisodicMemoryAPI from './episodic-memory';
 import { EpisodicMemory, EpisodicMemorySearchParams, EpisodicMemorySearchResponse } from './episodic-memory';
 import * as MemoryAPI from './memory';
@@ -88,7 +90,7 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const queryGetPaginatedSearchResponse of client.query.getPaginatedSearch(
+   * for await (const liquidmetalV1alpha1TextResult of client.query.getPaginatedSearch(
    *   { page: 1, pageSize: 10, requestId: '<YOUR-REQUEST-ID>' },
    * )) {
    *   // ...
@@ -98,8 +100,8 @@ export class Query extends APIResource {
   getPaginatedSearch(
     body: QueryGetPaginatedSearchParams,
     options?: RequestOptions,
-  ): PagePromise<QueryGetPaginatedSearchResponsesPageNumber, QueryGetPaginatedSearchResponse> {
-    return this._client.getAPIList('/v1/search_get_page', PageNumber<QueryGetPaginatedSearchResponse>, {
+  ): PagePromise<LiquidmetalV1alpha1TextResultsPageNumber, LiquidmetalV1alpha1TextResult> {
+    return this._client.getAPIList('/v1/search_get_page', PageNumber<LiquidmetalV1alpha1TextResult>, {
       body,
       method: 'post',
       ...options,
@@ -181,7 +183,7 @@ export class Query extends APIResource {
   }
 }
 
-export type QueryGetPaginatedSearchResponsesPageNumber = PageNumber<QueryGetPaginatedSearchResponse>;
+export type LiquidmetalV1alpha1TextResultsPageNumber = PageNumber<LiquidmetalV1alpha1TextResult>;
 
 export type BucketLocator = BucketLocator.Bucket | unknown;
 
@@ -190,131 +192,44 @@ export namespace BucketLocator {
     /**
      * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
-    bucket: Bucket.Bucket;
-  }
-
-  export namespace Bucket {
-    /**
-     * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
-     */
-    export interface Bucket {
-      /**
-       * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
-       */
-      name: string;
-
-      /**
-       * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
-       */
-      applicationName?: string | null;
-
-      /**
-       * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       * **REQUIRED** FALSE
-       */
-      version?: string | null;
-    }
+    bucket: QueryAPI.LiquidmetalV1alpha1BucketName;
   }
 }
 
-export interface QueryChunkSearchResponse {
+/**
+ * BucketName represents a bucket name with an optional version
+ */
+export interface LiquidmetalV1alpha1BucketName {
   /**
-   * Ordered list of relevant text segments. Each result includes full context and
-   * metadata
+   * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
    */
-  results?: Array<QueryChunkSearchResponse.Result>;
-}
+  name: string;
 
-export namespace QueryChunkSearchResponse {
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunkSignature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payloadSignature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        applicationName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        applicationVersionId?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucketName?: string;
-      }
-    }
-  }
-}
-
-export interface QueryDocumentQueryResponse {
   /**
-   * AI-generated response that may include direct document quotes, content
-   * summaries, contextual explanations, references to specific sections, and related
-   * content suggestions
+   * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
    */
-  answer?: string;
+  applicationName?: string | null;
+
+  /**
+   * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
+   * **REQUIRED** FALSE
+   */
+  version?: string | null;
 }
 
-export interface QueryGetPaginatedSearchResponse {
+export interface LiquidmetalV1alpha1SourceResult {
+  /**
+   * The bucket information containing this result
+   */
+  bucket?: Shared.LiquidmetalV1alpha1BucketResponse;
+
+  /**
+   * The object key within the bucket
+   */
+  object?: string;
+}
+
+export interface LiquidmetalV1alpha1TextResult {
   /**
    * Unique identifier for this text segment. Used for deduplication and result
    * tracking
@@ -340,7 +255,7 @@ export interface QueryGetPaginatedSearchResponse {
   /**
    * Source document references. Contains bucket and object information
    */
-  source?: QueryGetPaginatedSearchResponse.Source;
+  source?: LiquidmetalV1alpha1SourceResult;
 
   /**
    * The actual content of the result. May be a document excerpt or full content
@@ -353,43 +268,21 @@ export interface QueryGetPaginatedSearchResponse {
   type?: string | null;
 }
 
-export namespace QueryGetPaginatedSearchResponse {
+export interface QueryChunkSearchResponse {
   /**
-   * Source document references. Contains bucket and object information
+   * Ordered list of relevant text segments. Each result includes full context and
+   * metadata
    */
-  export interface Source {
-    /**
-     * The bucket information containing this result
-     */
-    bucket?: Source.Bucket;
+  results?: Array<LiquidmetalV1alpha1TextResult>;
+}
 
-    /**
-     * The object key within the bucket
-     */
-    object?: string;
-  }
-
-  export namespace Source {
-    /**
-     * The bucket information containing this result
-     */
-    export interface Bucket {
-      /**
-       * **EXAMPLE** "my-app"
-       */
-      applicationName?: string;
-
-      /**
-       * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-       */
-      applicationVersionId?: string;
-
-      /**
-       * **EXAMPLE** "my-smartbucket"
-       */
-      bucketName?: string;
-    }
-  }
+export interface QueryDocumentQueryResponse {
+  /**
+   * AI-generated response that may include direct document quotes, content
+   * summaries, contextual explanations, references to specific sections, and related
+   * content suggestions
+   */
+  answer?: string;
 }
 
 export interface QuerySearchResponse {
@@ -401,7 +294,7 @@ export interface QuerySearchResponse {
   /**
    * Matched results with metadata
    */
-  results?: Array<QuerySearchResponse.Result>;
+  results?: Array<LiquidmetalV1alpha1TextResult>;
 }
 
 export namespace QuerySearchResponse {
@@ -433,84 +326,6 @@ export namespace QuerySearchResponse {
      * Total available pages. Calculated as ceil(total/pageSize)
      */
     totalPages?: number;
-  }
-
-  export interface Result {
-    /**
-     * Unique identifier for this text segment. Used for deduplication and result
-     * tracking
-     */
-    chunkSignature?: string | null;
-
-    /**
-     * Vector representation for similarity matching. Used in semantic search
-     * operations
-     */
-    embed?: string | null;
-
-    /**
-     * Parent document identifier. Links related content chunks together
-     */
-    payloadSignature?: string | null;
-
-    /**
-     * Relevance score (0.0 to 1.0). Higher scores indicate better matches
-     */
-    score?: number | null;
-
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    source?: Result.Source;
-
-    /**
-     * The actual content of the result. May be a document excerpt or full content
-     */
-    text?: string | null;
-
-    /**
-     * Content MIME type. Helps with proper result rendering
-     */
-    type?: string | null;
-  }
-
-  export namespace Result {
-    /**
-     * Source document references. Contains bucket and object information
-     */
-    export interface Source {
-      /**
-       * The bucket information containing this result
-       */
-      bucket?: Source.Bucket;
-
-      /**
-       * The object key within the bucket
-       */
-      object?: string;
-    }
-
-    export namespace Source {
-      /**
-       * The bucket information containing this result
-       */
-      export interface Bucket {
-        /**
-         * **EXAMPLE** "my-app"
-         */
-        applicationName?: string;
-
-        /**
-         * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-         */
-        applicationVersionId?: string;
-
-        /**
-         * **EXAMPLE** "my-smartbucket"
-         */
-        bucketName?: string;
-      }
-    }
   }
 }
 
@@ -651,12 +466,14 @@ Query.SemanticMemory = SemanticMemory;
 export declare namespace Query {
   export {
     type BucketLocator as BucketLocator,
+    type LiquidmetalV1alpha1BucketName as LiquidmetalV1alpha1BucketName,
+    type LiquidmetalV1alpha1SourceResult as LiquidmetalV1alpha1SourceResult,
+    type LiquidmetalV1alpha1TextResult as LiquidmetalV1alpha1TextResult,
     type QueryChunkSearchResponse as QueryChunkSearchResponse,
     type QueryDocumentQueryResponse as QueryDocumentQueryResponse,
-    type QueryGetPaginatedSearchResponse as QueryGetPaginatedSearchResponse,
     type QuerySearchResponse as QuerySearchResponse,
     type QuerySumarizePageResponse as QuerySumarizePageResponse,
-    type QueryGetPaginatedSearchResponsesPageNumber as QueryGetPaginatedSearchResponsesPageNumber,
+    type LiquidmetalV1alpha1TextResultsPageNumber as LiquidmetalV1alpha1TextResultsPageNumber,
     type QueryChunkSearchParams as QueryChunkSearchParams,
     type QueryDocumentQueryParams as QueryDocumentQueryParams,
     type QueryGetPaginatedSearchParams as QueryGetPaginatedSearchParams,
