@@ -14,7 +14,7 @@ describe('resource summarizeMemory', () => {
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource summarizeMemory', () => {
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       systemPrompt: 'Summarize the key decisions and action items',
     });

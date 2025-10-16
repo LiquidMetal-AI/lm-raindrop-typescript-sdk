@@ -13,7 +13,7 @@ describe('resource getProcedure', () => {
     const responsePromise = client.getProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource getProcedure', () => {
     const response = await client.getProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       proceduralMemoryId: 'demo-smartmemory',
     });

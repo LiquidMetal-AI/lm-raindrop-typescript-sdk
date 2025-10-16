@@ -12,7 +12,7 @@ describe('resource episodicMemory', () => {
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.episodicMemory.search({
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       terms: 'sessions about user interface preferences',
     });
@@ -29,7 +29,7 @@ describe('resource episodicMemory', () => {
   test.skip('search: required and optional params', async () => {
     const response = await client.query.episodicMemory.search({
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       terms: 'sessions about user interface preferences',
       endTime: '2019-12-27T18:11:19.117Z',

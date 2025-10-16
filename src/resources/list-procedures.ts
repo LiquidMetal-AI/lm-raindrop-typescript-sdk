@@ -14,7 +14,7 @@ export class ListProcedures extends APIResource {
    * ```ts
    * const listProcedure = await client.listProcedures.create({
    *   smartMemoryLocation: {
-   *     smart_memory: {
+   *     smartMemory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

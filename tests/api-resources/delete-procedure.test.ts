@@ -13,7 +13,7 @@ describe('resource deleteProcedure', () => {
     const responsePromise = client.deleteProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource deleteProcedure', () => {
     const response = await client.deleteProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       proceduralMemoryId: 'demo-smartmemory',
     });
