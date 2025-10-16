@@ -13,10 +13,10 @@ export class StartSession extends APIResource {
    * @example
    * ```ts
    * const startSession = await client.startSession.create({
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -32,34 +32,23 @@ export interface StartSessionCreateResponse {
   /**
    * Unique identifier for the new session
    */
-  session_id?: string;
+  sessionId?: string;
 }
 
 export interface StartSessionCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: StartSessionCreateParams.ModuleID | StartSessionCreateParams.SmartMemory;
-
-  organization_id?: string;
-
-  user_id?: string;
+  smartMemoryLocation: unknown | StartSessionCreateParams.SmartMemory;
 }
 
 export namespace StartSessionCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

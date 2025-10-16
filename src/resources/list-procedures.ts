@@ -13,10 +13,10 @@ export class ListProcedures extends APIResource {
    * @example
    * ```ts
    * const listProcedure = await client.listProcedures.create({
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -40,7 +40,7 @@ export namespace ListProcedureCreateResponse {
     /**
      * When this procedure was first created
      */
-    created_at?: string;
+    createdAt?: string;
 
     /**
      * Unique key for this procedure
@@ -50,7 +50,7 @@ export namespace ListProcedureCreateResponse {
     /**
      * When this procedure was last updated
      */
-    updated_at?: string;
+    updatedAt?: string;
 
     /**
      * The procedure content
@@ -63,32 +63,21 @@ export interface ListProcedureCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: ListProcedureCreateParams.ModuleID | ListProcedureCreateParams.SmartMemory;
-
-  organization_id?: string;
+  smartMemoryLocation: unknown | ListProcedureCreateParams.SmartMemory;
 
   /**
    * Optional procedural memory ID to use for actor isolation
    */
-  procedural_memory_id?: string | null;
-
-  user_id?: string;
+  proceduralMemoryId?: string | null;
 }
 
 export namespace ListProcedureCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

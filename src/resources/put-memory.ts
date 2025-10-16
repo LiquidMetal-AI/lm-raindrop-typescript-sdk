@@ -22,11 +22,11 @@ export class PutMemory extends APIResource {
    * ```ts
    * const putMemory = await client.putMemory.create({
    *   content: 'User prefers dark theme for the interface',
-   *   session_id: '01jxanr45haeswhay4n0q8340y',
-   *   smart_memory_location: {
+   *   sessionId: '01jxanr45haeswhay4n0q8340y',
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -42,7 +42,7 @@ export interface PutMemoryCreateResponse {
   /**
    * Unique identifier for the stored memory entry
    */
-  memory_id?: string;
+  memoryId?: string;
 }
 
 export interface PutMemoryCreateParams {
@@ -54,12 +54,12 @@ export interface PutMemoryCreateParams {
   /**
    * Unique session identifier for the working memory instance
    */
-  session_id: string;
+  sessionId: string;
 
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: PutMemoryCreateParams.ModuleID | PutMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | PutMemoryCreateParams.SmartMemory;
 
   /**
    * Agent identifier responsible for this memory
@@ -71,30 +71,19 @@ export interface PutMemoryCreateParams {
    */
   key?: string | null;
 
-  organization_id?: string;
-
   /**
    * Timeline identifier for organizing related memories
    */
   timeline?: string | null;
-
-  user_id?: string;
 }
 
 export namespace PutMemoryCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

@@ -11,9 +11,9 @@ describe('resource memory', () => {
   // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.memory.search({
-      session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: {
-        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       terms: 'user interface preferences',
     });
@@ -29,17 +29,15 @@ describe('resource memory', () => {
   // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.memory.search({
-      session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: {
-        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      sessionId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       terms: 'user interface preferences',
-      end_time: '2019-12-27T18:11:19.117Z',
-      n_most_recent: 10,
-      organization_id: 'organization_id',
-      start_time: '2019-12-27T18:11:19.117Z',
+      endTime: '2019-12-27T18:11:19.117Z',
+      nMostRecent: 10,
+      startTime: '2019-12-27T18:11:19.117Z',
       timeline: 'user-conversation-2024',
-      user_id: 'user_id',
     });
   });
 });

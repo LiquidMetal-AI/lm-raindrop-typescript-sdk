@@ -15,7 +15,6 @@ Types:
 - <code><a href="./src/resources/query/query.ts">LiquidmetalV1alpha1TextResult</a></code>
 - <code><a href="./src/resources/query/query.ts">QueryChunkSearchResponse</a></code>
 - <code><a href="./src/resources/query/query.ts">QueryDocumentQueryResponse</a></code>
-- <code><a href="./src/resources/query/query.ts">QueryGetPaginatedSearchResponse</a></code>
 - <code><a href="./src/resources/query/query.ts">QuerySearchResponse</a></code>
 - <code><a href="./src/resources/query/query.ts">QuerySumarizePageResponse</a></code>
 
@@ -23,7 +22,7 @@ Methods:
 
 - <code title="post /v1/chunk_search">client.query.<a href="./src/resources/query/query.ts">chunkSearch</a>({ ...params }) -> QueryChunkSearchResponse</code>
 - <code title="post /v1/document_query">client.query.<a href="./src/resources/query/query.ts">documentQuery</a>({ ...params }) -> QueryDocumentQueryResponse</code>
-- <code title="post /v1/search_get_page">client.query.<a href="./src/resources/query/query.ts">getPaginatedSearch</a>({ ...params }) -> QueryGetPaginatedSearchResponse</code>
+- <code title="post /v1/search_get_page">client.query.<a href="./src/resources/query/query.ts">getPaginatedSearch</a>({ ...params }) -> LiquidmetalV1alpha1TextResultsPageNumber</code>
 - <code title="post /v1/search">client.query.<a href="./src/resources/query/query.ts">search</a>({ ...params }) -> QuerySearchResponse</code>
 - <code title="post /v1/summarize_page">client.query.<a href="./src/resources/query/query.ts">sumarizePage</a>({ ...params }) -> QuerySumarizePageResponse</code>
 

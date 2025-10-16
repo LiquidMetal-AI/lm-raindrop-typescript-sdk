@@ -11,9 +11,9 @@ describe('resource deleteSemanticMemory', () => {
   // Prism tests are disabled
   test.skip('delete: only required params', async () => {
     const responsePromise = client.deleteSemanticMemory.delete({
-      object_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: {
-        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      objectId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,12 +28,10 @@ describe('resource deleteSemanticMemory', () => {
   // Prism tests are disabled
   test.skip('delete: required and optional params', async () => {
     const response = await client.deleteSemanticMemory.delete({
-      object_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: {
-        smart_memory: { application_name: 'demo', name: 'memory-name', version: '1234' },
+      objectId: '01jxanr45haeswhay4n0q8340y',
+      smartMemoryLocation: {
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
-      organization_id: 'organization_id',
-      user_id: 'user_id',
     });
   });
 });

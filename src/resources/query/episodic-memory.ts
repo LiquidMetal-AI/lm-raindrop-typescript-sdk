@@ -14,10 +14,10 @@ export class EpisodicMemory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.episodicMemory.search({
-   *   smart_memory_location: {
+   *   smartMemoryLocation: {
    *     smart_memory: {
-   *       application_name: 'demo',
    *       name: 'memory-name',
+   *       application_name: 'demo',
    *       version: '1234',
    *     },
    *   },
@@ -55,7 +55,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * When this episodic memory was created
      */
-    created_at?: string;
+    createdAt?: string;
 
     /**
      * Duration of the session in milliseconds
@@ -65,7 +65,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Number of individual memory entries in this session
      */
-    entry_count?: number;
+    entryCount?: number;
 
     /**
      * Relevance score for this search result
@@ -75,7 +75,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Session identifier for this episodic memory
      */
-    session_id?: string;
+    sessionId?: string;
 
     /**
      * AI-generated summary of the session
@@ -85,7 +85,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Number of different timelines in this session
      */
-    timeline_count?: number;
+    timelineCount?: number;
   }
 
   /**
@@ -95,7 +95,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Whether there are more results available
      */
-    has_more?: boolean;
+    hasMore?: boolean;
 
     /**
      * Current page number
@@ -105,7 +105,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Number of results per page
      */
-    page_size?: number;
+    pageSize?: number;
 
     /**
      * Total number of results available
@@ -115,7 +115,7 @@ export namespace EpisodicMemorySearchResponse {
     /**
      * Total number of pages available
      */
-    total_pages?: number;
+    totalPages?: number;
   }
 }
 
@@ -123,7 +123,7 @@ export interface EpisodicMemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: EpisodicMemorySearchParams.ModuleID | EpisodicMemorySearchParams.SmartMemory;
+  smartMemoryLocation: unknown | EpisodicMemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query to find relevant episodic memory sessions
@@ -133,37 +133,26 @@ export interface EpisodicMemorySearchParams {
   /**
    * End time for temporal filtering
    */
-  end_time?: string | null;
+  endTime?: string | null;
 
   /**
    * Maximum number of most recent results to return
    */
-  n_most_recent?: number | null;
-
-  organization_id?: string;
+  nMostRecent?: number | null;
 
   /**
    * Start time for temporal filtering
    */
-  start_time?: string | null;
-
-  user_id?: string;
+  startTime?: string | null;
 }
 
 export namespace EpisodicMemorySearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 

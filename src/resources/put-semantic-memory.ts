@@ -16,10 +16,10 @@ export class PutSemanticMemory extends APIResource {
    * const putSemanticMemory =
    *   await client.putSemanticMemory.create({
    *     document: 'document',
-   *     smart_memory_location: {
+   *     smartMemoryLocation: {
    *       smart_memory: {
-   *         application_name: 'demo',
    *         name: 'memory-name',
+   *         application_name: 'demo',
    *         version: '1234',
    *       },
    *     },
@@ -43,7 +43,7 @@ export interface PutSemanticMemoryCreateResponse {
   /**
    * Unique object identifier for the stored document
    */
-  object_id?: string | null;
+  objectId?: string | null;
 
   /**
    * Indicates whether the document was stored successfully
@@ -60,27 +60,16 @@ export interface PutSemanticMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smart_memory_location: PutSemanticMemoryCreateParams.ModuleID | PutSemanticMemoryCreateParams.SmartMemory;
-
-  organization_id?: string;
-
-  user_id?: string;
+  smartMemoryLocation: unknown | PutSemanticMemoryCreateParams.SmartMemory;
 }
 
 export namespace PutSemanticMemoryCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    module_id: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
-    smart_memory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
   }
 }
 
