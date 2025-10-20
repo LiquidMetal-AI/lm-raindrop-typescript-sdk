@@ -13,7 +13,7 @@ describe('resource rehydrateSession', () => {
     const responsePromise = client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource rehydrateSession', () => {
     const response = await client.rehydrateSession.rehydrate({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       summaryOnly: false,
     });

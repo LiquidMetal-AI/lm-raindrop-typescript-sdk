@@ -17,7 +17,7 @@ export class Procedures extends APIResource {
    * ```ts
    * const response = await client.query.procedures.search({
    *   smartMemoryLocation: {
-   *     smartMemory: {
+   *     smart_memory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

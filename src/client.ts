@@ -45,7 +45,18 @@ import {
   DeleteSemanticMemoryDeleteResponse,
 } from './resources/delete-semantic-memory';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
+import {
+  ExecuteQuery,
+  ExecuteQueryExecuteParams,
+  ExecuteQueryExecuteResponse,
+} from './resources/execute-query';
 import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
+import {
+  GetMetadata,
+  GetMetadataRetrieveParams,
+  GetMetadataRetrieveResponse,
+} from './resources/get-metadata';
+import { GetPiiData, GetPiiDataRetrieveParams, GetPiiDataRetrieveResponse } from './resources/get-pii-data';
 import {
   GetProcedure,
   GetProcedureCreateParams,
@@ -87,6 +98,11 @@ import {
   SummarizeMemoryCreateParams,
   SummarizeMemoryCreateResponse,
 } from './resources/summarize-memory';
+import {
+  UpdateMetadata,
+  UpdateMetadataUpdateParams,
+  UpdateMetadataUpdateResponse,
+} from './resources/update-metadata';
 import {
   BucketLocator,
   LiquidmetalV1alpha1BucketName,
@@ -836,6 +852,10 @@ export class Raindrop {
   putSemanticMemory: API.PutSemanticMemory = new API.PutSemanticMemory(this);
   getSemanticMemory: API.GetSemanticMemory = new API.GetSemanticMemory(this);
   deleteSemanticMemory: API.DeleteSemanticMemory = new API.DeleteSemanticMemory(this);
+  executeQuery: API.ExecuteQuery = new API.ExecuteQuery(this);
+  getMetadata: API.GetMetadata = new API.GetMetadata(this);
+  updateMetadata: API.UpdateMetadata = new API.UpdateMetadata(this);
+  getPiiData: API.GetPiiData = new API.GetPiiData(this);
 }
 
 Raindrop.Query = Query;
@@ -854,6 +874,10 @@ Raindrop.ListProcedures = ListProcedures;
 Raindrop.PutSemanticMemory = PutSemanticMemory;
 Raindrop.GetSemanticMemory = GetSemanticMemory;
 Raindrop.DeleteSemanticMemory = DeleteSemanticMemory;
+Raindrop.ExecuteQuery = ExecuteQuery;
+Raindrop.GetMetadata = GetMetadata;
+Raindrop.UpdateMetadata = UpdateMetadata;
+Raindrop.GetPiiData = GetPiiData;
 
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
@@ -973,6 +997,30 @@ export declare namespace Raindrop {
     DeleteSemanticMemory as DeleteSemanticMemory,
     type DeleteSemanticMemoryDeleteResponse as DeleteSemanticMemoryDeleteResponse,
     type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
+  };
+
+  export {
+    ExecuteQuery as ExecuteQuery,
+    type ExecuteQueryExecuteResponse as ExecuteQueryExecuteResponse,
+    type ExecuteQueryExecuteParams as ExecuteQueryExecuteParams,
+  };
+
+  export {
+    GetMetadata as GetMetadata,
+    type GetMetadataRetrieveResponse as GetMetadataRetrieveResponse,
+    type GetMetadataRetrieveParams as GetMetadataRetrieveParams,
+  };
+
+  export {
+    UpdateMetadata as UpdateMetadata,
+    type UpdateMetadataUpdateResponse as UpdateMetadataUpdateResponse,
+    type UpdateMetadataUpdateParams as UpdateMetadataUpdateParams,
+  };
+
+  export {
+    GetPiiData as GetPiiData,
+    type GetPiiDataRetrieveResponse as GetPiiDataRetrieveResponse,
+    type GetPiiDataRetrieveParams as GetPiiDataRetrieveParams,
   };
 
   export type LiquidmetalV1alpha1BucketResponse = API.LiquidmetalV1alpha1BucketResponse;

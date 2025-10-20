@@ -13,7 +13,7 @@ describe('resource putProcedure', () => {
     const responsePromise = client.putProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       value: 'You are a technical documentation assistant...',
     });
@@ -31,7 +31,7 @@ describe('resource putProcedure', () => {
     const response = await client.putProcedure.create({
       key: 'TechnicalReportSystemPrompt',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       value: 'You are a technical documentation assistant...',
       proceduralMemoryId: 'demo-smartmemory',

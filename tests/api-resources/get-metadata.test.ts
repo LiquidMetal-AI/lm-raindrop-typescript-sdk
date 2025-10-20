@@ -7,14 +7,11 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource deleteProcedure', () => {
+describe('resource getMetadata', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.deleteProcedure.create({
-      key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.getMetadata.retrieve({
+      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,13 +23,10 @@ describe('resource deleteProcedure', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.deleteProcedure.create({
-      key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
-      proceduralMemoryId: 'demo-smartmemory',
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.getMetadata.retrieve({
+      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      tableName: 'users',
     });
   });
 });

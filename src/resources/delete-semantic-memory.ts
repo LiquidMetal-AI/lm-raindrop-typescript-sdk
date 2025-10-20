@@ -16,7 +16,7 @@ export class DeleteSemanticMemory extends APIResource {
    *   await client.deleteSemanticMemory.delete({
    *     objectId: '01jxanr45haeswhay4n0q8340y',
    *     smartMemoryLocation: {
-   *       smartMemory: {
+   *       smart_memory: {
    *         name: 'memory-name',
    *         application_name: 'demo',
    *         version: '1234',

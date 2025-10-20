@@ -7,14 +7,11 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource deleteProcedure', () => {
+describe('resource executeQuery', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.deleteProcedure.create({
-      key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+  test.skip('execute: only required params', async () => {
+    const responsePromise = client.executeQuery.execute({
+      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,13 +23,12 @@ describe('resource deleteProcedure', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.deleteProcedure.create({
-      key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
-      proceduralMemoryId: 'demo-smartmemory',
+  test.skip('execute: required and optional params', async () => {
+    const response = await client.executeQuery.execute({
+      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      format: 'OUTPUT_FORMAT_UNSPECIFIED',
+      sqlQuery: 'SELECT * FROM users WHERE active = true',
+      textQuery: 'Show me all active users from the last month',
     });
   });
 });

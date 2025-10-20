@@ -23,7 +23,7 @@ export class Memory extends APIResource {
    * const response = await client.query.memory.search({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
    *   smartMemoryLocation: {
-   *     smartMemory: {
+   *     smart_memory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

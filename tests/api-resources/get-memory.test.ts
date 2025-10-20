@@ -13,7 +13,7 @@ describe('resource getMemory', () => {
     const responsePromise = client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource getMemory', () => {
     const response = await client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       endTime: '2019-12-27T18:11:19.117Z',
       key: 'user-preference-theme',

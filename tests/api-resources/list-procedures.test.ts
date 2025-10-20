@@ -12,7 +12,7 @@ describe('resource listProcedures', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.listProcedures.create({
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource listProcedures', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.listProcedures.create({
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       proceduralMemoryId: 'demo-smartmemory',
     });

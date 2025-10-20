@@ -13,7 +13,7 @@ describe('resource endSession', () => {
     const responsePromise = client.endSession.create({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource endSession', () => {
     const response = await client.endSession.create({
       sessionId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       flush: true,
       systemPrompt: 'Summarize the key decisions and action items from this session',
