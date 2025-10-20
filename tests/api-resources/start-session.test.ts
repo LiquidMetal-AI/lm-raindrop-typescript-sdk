@@ -12,7 +12,7 @@ describe('resource startSession', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.startSession.create({
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource startSession', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.startSession.create({
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
   });

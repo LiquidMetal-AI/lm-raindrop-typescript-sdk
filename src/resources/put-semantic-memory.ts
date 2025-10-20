@@ -17,7 +17,7 @@ export class PutSemanticMemory extends APIResource {
    *   await client.putSemanticMemory.create({
    *     document: 'document',
    *     smartMemoryLocation: {
-   *       smartMemory: {
+   *       smart_memory: {
    *         name: 'memory-name',
    *         application_name: 'demo',
    *         version: '1234',

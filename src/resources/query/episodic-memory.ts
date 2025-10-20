@@ -15,7 +15,7 @@ export class EpisodicMemory extends APIResource {
    * ```ts
    * const response = await client.query.episodicMemory.search({
    *   smartMemoryLocation: {
-   *     smartMemory: {
+   *     smart_memory: {
    *       name: 'memory-name',
    *       application_name: 'demo',
    *       version: '1234',

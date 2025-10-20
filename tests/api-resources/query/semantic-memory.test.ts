@@ -13,7 +13,7 @@ describe('resource semanticMemory', () => {
     const responsePromise = client.query.semanticMemory.search({
       needle: 'AI development best practices',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource semanticMemory', () => {
     const response = await client.query.semanticMemory.search({
       needle: 'AI development best practices',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
   });

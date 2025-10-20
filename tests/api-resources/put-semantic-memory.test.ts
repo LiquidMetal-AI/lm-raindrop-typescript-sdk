@@ -13,7 +13,7 @@ describe('resource putSemanticMemory', () => {
     const responsePromise = client.putSemanticMemory.create({
       document: 'document',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource putSemanticMemory', () => {
     const response = await client.putSemanticMemory.create({
       document: 'document',
       smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
   });
