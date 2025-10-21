@@ -13,7 +13,7 @@ describe('resource getSemanticMemory', () => {
     const responsePromise = client.getSemanticMemory.create({
       objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource getSemanticMemory', () => {
     const response = await client.getSemanticMemory.create({
       objectId: '01jxanr45haeswhay4n0q8340y',
       smartMemoryLocation: {
-        smart_memory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
     });
   });
