@@ -11,7 +11,9 @@ describe('resource updateMetadata', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.updateMetadata.update({
-      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
       tables: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +28,9 @@ describe('resource updateMetadata', () => {
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.updateMetadata.update({
-      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
       tables: [
         {
           columns: [
