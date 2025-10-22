@@ -20,8 +20,13 @@ export class GetMetadata extends APIResource {
    * @example
    * ```ts
    * const getMetadata = await client.getMetadata.retrieve({
-   *   smartSqlLocation:
-   *     '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+   *   smartSqlLocation: {
+   *     smartSql: {
+   *       name: 'analytics-sql',
+   *       version: 'v1.2.0',
+   *       application_name: 'data-analytics-app',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -113,14 +118,14 @@ export interface GetMetadataRetrieveParams {
 export namespace GetMetadataRetrieveParams {
   export interface SmartSql {
     /**
-     * Name-based smart SQL instance identifier
+     * Name-based smart SQL instance identifier (recommended)
      */
     smartSql: SmartSql.SmartSql;
   }
 
   export namespace SmartSql {
     /**
-     * Name-based smart SQL instance identifier
+     * Name-based smart SQL instance identifier (recommended)
      */
     export interface SmartSql {
       /**

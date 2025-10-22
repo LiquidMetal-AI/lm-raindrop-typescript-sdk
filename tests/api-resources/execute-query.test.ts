@@ -11,7 +11,9 @@ describe('resource executeQuery', () => {
   // Prism tests are disabled
   test.skip('execute: only required params', async () => {
     const responsePromise = client.executeQuery.execute({
-      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +27,9 @@ describe('resource executeQuery', () => {
   // Prism tests are disabled
   test.skip('execute: required and optional params', async () => {
     const response = await client.executeQuery.execute({
-      smartSqlLocation: '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
       format: 'OUTPUT_FORMAT_UNSPECIFIED',
       sqlQuery: 'SELECT * FROM users WHERE active = true',
       textQuery: 'Show me all active users from the last month',

@@ -20,8 +20,13 @@ export class GetPiiData extends APIResource {
    * @example
    * ```ts
    * const getPiiData = await client.getPiiData.retrieve({
-   *   smartSqlLocation:
-   *     '{ module_id: "01jtryx2f2f61ryk06vd8mr91p" }',
+   *   smartSqlLocation: {
+   *     smartSql: {
+   *       name: 'analytics-sql',
+   *       version: 'v1.2.0',
+   *       application_name: 'data-analytics-app',
+   *     },
+   *   },
    *   tableName: 'users',
    * });
    * ```
@@ -121,14 +126,14 @@ export interface GetPiiDataRetrieveParams {
 export namespace GetPiiDataRetrieveParams {
   export interface SmartSql {
     /**
-     * Name-based smart SQL instance identifier
+     * Name-based smart SQL instance identifier (recommended)
      */
     smartSql: SmartSql.SmartSql;
   }
 
   export namespace SmartSql {
     /**
-     * Name-based smart SQL instance identifier
+     * Name-based smart SQL instance identifier (recommended)
      */
     export interface SmartSql {
       /**
