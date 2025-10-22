@@ -32,9 +32,9 @@ describe('resource episodicMemory', () => {
         smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       terms: 'sessions about user interface preferences',
-      endTime: '2019-12-27T18:11:19.117Z',
+      endTime: '2023-01-15T01:30:15.01Z',
       nMostRecent: 10,
-      startTime: '2019-12-27T18:11:19.117Z',
+      startTime: '2023-01-15T01:30:15.01Z',
     });
   });
 });
