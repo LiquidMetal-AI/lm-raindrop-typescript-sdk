@@ -45,18 +45,10 @@ import {
   DeleteSemanticMemoryDeleteResponse,
 } from './resources/delete-semantic-memory';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
-import {
-  ExecuteQuery,
-  ExecuteQueryExecuteParams,
-  ExecuteQueryExecuteResponse,
-} from './resources/execute-query';
+import { ExecuteQuery } from './resources/execute-query';
 import { GetMemory, GetMemoryRetrieveParams, GetMemoryRetrieveResponse } from './resources/get-memory';
-import {
-  GetMetadata,
-  GetMetadataRetrieveParams,
-  GetMetadataRetrieveResponse,
-} from './resources/get-metadata';
-import { GetPiiData, GetPiiDataRetrieveParams, GetPiiDataRetrieveResponse } from './resources/get-pii-data';
+import { GetMetadata } from './resources/get-metadata';
+import { GetPiiData } from './resources/get-pii-data';
 import {
   GetProcedure,
   GetProcedureCreateParams,
@@ -98,11 +90,7 @@ import {
   SummarizeMemoryCreateParams,
   SummarizeMemoryCreateResponse,
 } from './resources/summarize-memory';
-import {
-  UpdateMetadata,
-  UpdateMetadataUpdateParams,
-  UpdateMetadataUpdateResponse,
-} from './resources/update-metadata';
+import { UpdateMetadata } from './resources/update-metadata';
 import {
   BucketLocator,
   LiquidmetalV1alpha1BucketName,
@@ -999,29 +987,13 @@ export declare namespace Raindrop {
     type DeleteSemanticMemoryDeleteParams as DeleteSemanticMemoryDeleteParams,
   };
 
-  export {
-    ExecuteQuery as ExecuteQuery,
-    type ExecuteQueryExecuteResponse as ExecuteQueryExecuteResponse,
-    type ExecuteQueryExecuteParams as ExecuteQueryExecuteParams,
-  };
+  export { ExecuteQuery as ExecuteQuery };
 
-  export {
-    GetMetadata as GetMetadata,
-    type GetMetadataRetrieveResponse as GetMetadataRetrieveResponse,
-    type GetMetadataRetrieveParams as GetMetadataRetrieveParams,
-  };
+  export { GetMetadata as GetMetadata };
 
-  export {
-    UpdateMetadata as UpdateMetadata,
-    type UpdateMetadataUpdateResponse as UpdateMetadataUpdateResponse,
-    type UpdateMetadataUpdateParams as UpdateMetadataUpdateParams,
-  };
+  export { UpdateMetadata as UpdateMetadata };
 
-  export {
-    GetPiiData as GetPiiData,
-    type GetPiiDataRetrieveResponse as GetPiiDataRetrieveResponse,
-    type GetPiiDataRetrieveParams as GetPiiDataRetrieveParams,
-  };
+  export { GetPiiData as GetPiiData };
 
   export type LiquidmetalV1alpha1BucketResponse = API.LiquidmetalV1alpha1BucketResponse;
   export type LiquidmetalV1alpha1SmartMemoryName = API.LiquidmetalV1alpha1SmartMemoryName;

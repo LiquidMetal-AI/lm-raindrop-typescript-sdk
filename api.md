@@ -224,40 +224,8 @@ Methods:
 
 # ExecuteQuery
 
-Types:
-
-- <code><a href="./src/resources/execute-query.ts">ExecuteQueryExecuteResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/execute_query">client.executeQuery.<a href="./src/resources/execute-query.ts">execute</a>({ ...params }) -> ExecuteQueryExecuteResponse</code>
-
 # GetMetadata
-
-Types:
-
-- <code><a href="./src/resources/get-metadata.ts">GetMetadataRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/get_metadata">client.getMetadata.<a href="./src/resources/get-metadata.ts">retrieve</a>({ ...params }) -> GetMetadataRetrieveResponse</code>
 
 # UpdateMetadata
 
-Types:
-
-- <code><a href="./src/resources/update-metadata.ts">UpdateMetadataUpdateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/update_metadata">client.updateMetadata.<a href="./src/resources/update-metadata.ts">update</a>({ ...params }) -> UpdateMetadataUpdateResponse</code>
-
 # GetPiiData
-
-Types:
-
-- <code><a href="./src/resources/get-pii-data.ts">GetPiiDataRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/get_pii_data">client.getPiiData.<a href="./src/resources/get-pii-data.ts">retrieve</a>({ ...params }) -> GetPiiDataRetrieveResponse</code>
