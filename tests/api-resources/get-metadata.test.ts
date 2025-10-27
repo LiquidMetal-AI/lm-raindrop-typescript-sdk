@@ -30,10 +30,6 @@ describe('resource getMetadata', () => {
       smartSqlLocation: {
         smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
-      smart_sql_location: {
-        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
-      },
-      table_name: 'users',
       tableName: 'users',
     });
   });

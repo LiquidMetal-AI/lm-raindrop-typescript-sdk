@@ -31,12 +31,7 @@ describe('resource executeQuery', () => {
         smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
       format: 'OUTPUT_FORMAT_UNSPECIFIED',
-      smart_sql_location: {
-        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
-      },
-      sql_query: 'SELECT * FROM users WHERE active = true',
       sqlQuery: 'SELECT * FROM users WHERE active = true',
-      text_query: 'Show me all active users from the last month',
       textQuery: 'Show me all active users from the last month',
     });
   });

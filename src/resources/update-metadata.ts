@@ -70,12 +70,6 @@ export interface UpdateMetadataUpdateParams {
     | 'UPDATE_MODE_MERGE'
     | 'UPDATE_MODE_APPEND'
     | null;
-
-  /**
-   * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
-   * both 'smartSqlLocation' and 'smart_sql_location')
-   */
-  smart_sql_location?: unknown | UpdateMetadataUpdateParams.SmartSql;
 }
 
 export namespace UpdateMetadataUpdateParams {
@@ -95,12 +89,6 @@ export namespace UpdateMetadataUpdateParams {
        * The name of the smart SQL instance
        */
       name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
 
       /**
        * Optional application name that owns this smart SQL instance
@@ -162,41 +150,6 @@ export namespace UpdateMetadataUpdateParams {
        * Sample data for AI context (nullable)
        */
       sampleData?: string | null;
-    }
-  }
-
-  export interface SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    smartSql: SmartSql.SmartSql;
-  }
-
-  export namespace SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    export interface SmartSql {
-      /**
-       * The name of the smart SQL instance
-       */
-      name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
-
-      /**
-       * Optional application name that owns this smart SQL instance
-       */
-      applicationName?: string | null;
-
-      /**
-       * Optional version identifier for the smart SQL instance
-       */
-      version?: string | null;
     }
   }
 }
