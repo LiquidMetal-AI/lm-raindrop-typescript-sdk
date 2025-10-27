@@ -48,9 +48,6 @@ describe('resource updateMetadata', () => {
         },
       ],
       mode: 'UPDATE_MODE_MERGE',
-      smart_sql_location: {
-        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
-      },
     });
   });
 });

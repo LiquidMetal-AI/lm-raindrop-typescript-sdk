@@ -102,27 +102,9 @@ export interface ExecuteQueryExecuteParams {
   format?: 'OUTPUT_FORMAT_UNSPECIFIED' | 'OUTPUT_FORMAT_JSON' | 'OUTPUT_FORMAT_CSV' | null;
 
   /**
-   * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
-   * both 'smartSqlLocation' and 'smart_sql_location')
-   */
-  smart_sql_location?: unknown | ExecuteQueryExecuteParams.SmartSql;
-
-  /**
-   * Direct SQL query to execute (mutually exclusive with text_query) (Alias: accepts
-   * both 'sqlQuery' and 'sql_query')
-   */
-  sql_query?: string | null;
-
-  /**
    * Direct SQL query to execute (mutually exclusive with text_query)
    */
   sqlQuery?: string | null;
-
-  /**
-   * Natural language query to convert to SQL (mutually exclusive with sql_query)
-   * (Alias: accepts both 'textQuery' and 'text_query')
-   */
-  text_query?: string | null;
 
   /**
    * Natural language query to convert to SQL (mutually exclusive with sql_query)
@@ -147,47 +129,6 @@ export namespace ExecuteQueryExecuteParams {
        * The name of the smart SQL instance
        */
       name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
-
-      /**
-       * Optional application name that owns this smart SQL instance
-       */
-      applicationName?: string | null;
-
-      /**
-       * Optional version identifier for the smart SQL instance
-       */
-      version?: string | null;
-    }
-  }
-
-  export interface SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    smartSql: SmartSql.SmartSql;
-  }
-
-  export namespace SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    export interface SmartSql {
-      /**
-       * The name of the smart SQL instance
-       */
-      name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
 
       /**
        * Optional application name that owns this smart SQL instance

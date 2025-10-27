@@ -32,12 +32,7 @@ describe('resource getPiiData', () => {
         smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
       tableName: 'users',
-      record_id: 'user_123',
       recordId: 'user_123',
-      smart_sql_location: {
-        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
-      },
-      table_name: 'users',
     });
   });
 });
