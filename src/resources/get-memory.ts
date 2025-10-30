@@ -105,6 +105,11 @@ export interface GetMemoryRetrieveParams {
   smartMemoryLocation: unknown | GetMemoryRetrieveParams.SmartMemory;
 
   /**
+   * End time for temporal filtering (Alias: accepts both 'endTime' and 'end_time')
+   */
+  end_time?: string | null;
+
+  /**
    * End time for temporal filtering
    */
   endTime?: string | null;
@@ -115,9 +120,33 @@ export interface GetMemoryRetrieveParams {
   key?: string | null;
 
   /**
+   * Maximum number of most recent memories to return (Alias: accepts both
+   * 'nMostRecent' and 'n_most_recent')
+   */
+  n_most_recent?: number | null;
+
+  /**
    * Maximum number of most recent memories to return
    */
   nMostRecent?: number | null;
+
+  /**
+   * Unique session identifier for the working memory instance (Alias: accepts both
+   * 'sessionId' and 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | GetMemoryRetrieveParams.SmartMemory;
+
+  /**
+   * Start time for temporal filtering (Alias: accepts both 'startTime' and
+   * 'start_time')
+   */
+  start_time?: string | null;
 
   /**
    * Start time for temporal filtering
@@ -131,6 +160,14 @@ export interface GetMemoryRetrieveParams {
 }
 
 export namespace GetMemoryRetrieveParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

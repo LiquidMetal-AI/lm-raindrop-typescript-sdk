@@ -36,6 +36,10 @@ describe('resource putMemory', () => {
       },
       agent: 'assistant-v1',
       key: 'user-preference-theme',
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       timeline: 'user-conversation-2024',
     });
   });

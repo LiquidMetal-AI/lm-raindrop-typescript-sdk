@@ -61,9 +61,23 @@ export interface PutSemanticMemoryCreateParams {
    * Smart memory locator for targeting the correct smart memory instance
    */
   smartMemoryLocation: unknown | PutSemanticMemoryCreateParams.SmartMemory;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | PutSemanticMemoryCreateParams.SmartMemory;
 }
 
 export namespace PutSemanticMemoryCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

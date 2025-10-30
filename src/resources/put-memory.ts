@@ -72,12 +72,32 @@ export interface PutMemoryCreateParams {
   key?: string | null;
 
   /**
+   * Unique session identifier for the working memory instance (Alias: accepts both
+   * 'sessionId' and 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | PutMemoryCreateParams.SmartMemory;
+
+  /**
    * Timeline identifier for organizing related memories
    */
   timeline?: string | null;
 }
 
 export namespace PutMemoryCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

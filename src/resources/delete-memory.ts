@@ -52,9 +52,35 @@ export interface DeleteMemoryCreateParams {
    * Smart memory locator for targeting the correct smart memory instance
    */
   smartMemoryLocation: unknown | DeleteMemoryCreateParams.SmartMemory;
+
+  /**
+   * Unique identifier of the memory entry to delete (Alias: accepts both 'memoryId'
+   * and 'memory_id')
+   */
+  memory_id?: string;
+
+  /**
+   * Unique session identifier for the working memory instance (Alias: accepts both
+   * 'sessionId' and 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | DeleteMemoryCreateParams.SmartMemory;
 }
 
 export namespace DeleteMemoryCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

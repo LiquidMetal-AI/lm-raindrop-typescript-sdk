@@ -66,12 +66,32 @@ export interface ListProcedureCreateParams {
   smartMemoryLocation: unknown | ListProcedureCreateParams.SmartMemory;
 
   /**
+   * Optional procedural memory ID to use for actor isolation (Alias: accepts both
+   * 'proceduralMemoryId' and 'procedural_memory_id')
+   */
+  procedural_memory_id?: string | null;
+
+  /**
    * Optional procedural memory ID to use for actor isolation
    */
   proceduralMemoryId?: string | null;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | ListProcedureCreateParams.SmartMemory;
 }
 
 export namespace ListProcedureCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

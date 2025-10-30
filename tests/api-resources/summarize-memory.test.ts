@@ -34,6 +34,12 @@ describe('resource summarizeMemory', () => {
       smartMemoryLocation: {
         smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      memory_ids: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
+      session_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
+      system_prompt: 'Summarize the key decisions and action items',
       systemPrompt: 'Summarize the key decisions and action items',
     });
   });
