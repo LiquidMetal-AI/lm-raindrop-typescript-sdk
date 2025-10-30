@@ -11,9 +11,7 @@ describe('resource episodicMemory', () => {
   // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       terms: 'sessions about user interface preferences',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,17 +26,13 @@ describe('resource episodicMemory', () => {
   // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       terms: 'sessions about user interface preferences',
       end_time: '2023-01-15T01:30:15.01Z',
       endTime: '2023-01-15T01:30:15.01Z',
       n_most_recent: 10,
       nMostRecent: 10,
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { moduleId: 'moduleId' },
       start_time: '2023-01-15T01:30:15.01Z',
       startTime: '2023-01-15T01:30:15.01Z',
     });

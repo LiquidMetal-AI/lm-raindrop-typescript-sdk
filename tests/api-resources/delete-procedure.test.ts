@@ -12,9 +12,7 @@ describe('resource deleteProcedure', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.deleteProcedure.create({
       key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,14 +27,10 @@ describe('resource deleteProcedure', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.deleteProcedure.create({
       key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       procedural_memory_id: 'demo-smartmemory',
       proceduralMemoryId: 'demo-smartmemory',
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

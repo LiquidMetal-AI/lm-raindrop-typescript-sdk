@@ -10,11 +10,7 @@ const client = new Raindrop({
 describe('resource listProcedures', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.listProcedures.create({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
-    });
+    const responsePromise = client.listProcedures.create({ smartMemoryLocation: { moduleId: 'moduleId' } });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,14 +23,10 @@ describe('resource listProcedures', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.listProcedures.create({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       procedural_memory_id: 'demo-smartmemory',
       proceduralMemoryId: 'demo-smartmemory',
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

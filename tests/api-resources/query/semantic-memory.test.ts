@@ -12,9 +12,7 @@ describe('resource semanticMemory', () => {
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.semanticMemory.search({
       needle: 'AI development best practices',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,12 +27,8 @@ describe('resource semanticMemory', () => {
   test.skip('search: required and optional params', async () => {
     const response = await client.query.semanticMemory.search({
       needle: 'AI development best practices',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
+      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

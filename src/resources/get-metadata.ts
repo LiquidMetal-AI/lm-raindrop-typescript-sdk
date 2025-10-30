@@ -20,13 +20,7 @@ export class GetMetadata extends APIResource {
    * @example
    * ```ts
    * const getMetadata = await client.getMetadata.retrieve({
-   *   smartSqlLocation: {
-   *     smartSql: {
-   *       name: 'analytics-sql',
-   *       version: 'v1.2.0',
-   *       application_name: 'data-analytics-app',
-   *     },
-   *   },
+   *   smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
    * });
    * ```
    */
@@ -107,13 +101,13 @@ export interface GetMetadataRetrieveParams {
   /**
    * Smart SQL locator for targeting the correct smart SQL instance
    */
-  smartSqlLocation: unknown | GetMetadataRetrieveParams.SmartSql;
+  smartSqlLocation: GetMetadataRetrieveParams.ModuleID | GetMetadataRetrieveParams.SmartSql;
 
   /**
    * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
    * both 'smartSqlLocation' and 'smart_sql_location')
    */
-  smart_sql_location?: unknown | GetMetadataRetrieveParams.SmartSql;
+  smart_sql_location?: GetMetadataRetrieveParams.ModuleID | GetMetadataRetrieveParams.SmartSql;
 
   /**
    * Optional table name to filter metadata (Alias: accepts both 'tableName' and
@@ -128,6 +122,13 @@ export interface GetMetadataRetrieveParams {
 }
 
 export namespace GetMetadataRetrieveParams {
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
+  }
+
   export interface SmartSql {
     /**
      * Name-based smart SQL instance identifier (recommended)
@@ -161,6 +162,13 @@ export namespace GetMetadataRetrieveParams {
        */
       version?: string | null;
     }
+  }
+
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
   }
 
   export interface SmartSql {

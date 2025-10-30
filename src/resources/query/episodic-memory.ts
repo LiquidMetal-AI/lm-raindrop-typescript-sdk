@@ -14,13 +14,7 @@ export class EpisodicMemory extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.episodicMemory.search({
-   *   smartMemoryLocation: {
-   *     smartMemory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
-   *   },
+   *   smartMemoryLocation: { moduleId: 'moduleId' },
    *   terms: 'sessions about user interface preferences',
    * });
    * ```
@@ -123,7 +117,7 @@ export interface EpisodicMemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | EpisodicMemorySearchParams.SmartMemory;
+  smartMemoryLocation: EpisodicMemorySearchParams.ModuleID | EpisodicMemorySearchParams.SmartMemory;
 
   /**
    * Natural language search query to find relevant episodic memory sessions
@@ -155,7 +149,7 @@ export interface EpisodicMemorySearchParams {
    * Smart memory locator for targeting the correct smart memory instance (Alias:
    * accepts both 'smartMemoryLocation' and 'smart_memory_location')
    */
-  smart_memory_location?: unknown | EpisodicMemorySearchParams.SmartMemory;
+  smart_memory_location?: EpisodicMemorySearchParams.ModuleID | EpisodicMemorySearchParams.SmartMemory;
 
   /**
    * Start time for temporal filtering (Alias: accepts both 'startTime' and
@@ -170,12 +164,26 @@ export interface EpisodicMemorySearchParams {
 }
 
 export namespace EpisodicMemorySearchParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
   }
 
   export interface SmartMemory {

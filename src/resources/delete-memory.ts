@@ -15,13 +15,7 @@ export class DeleteMemory extends APIResource {
    * const deleteMemory = await client.deleteMemory.create({
    *   memoryId: '01jxanr45haeswhay4n0q8340y',
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smartMemory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
-   *   },
+   *   smartMemoryLocation: { moduleId: 'moduleId' },
    * });
    * ```
    */
@@ -51,7 +45,7 @@ export interface DeleteMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | DeleteMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: DeleteMemoryCreateParams.ModuleID | DeleteMemoryCreateParams.SmartMemory;
 
   /**
    * Unique identifier of the memory entry to delete (Alias: accepts both 'memoryId'
@@ -69,16 +63,30 @@ export interface DeleteMemoryCreateParams {
    * Smart memory locator for targeting the correct smart memory instance (Alias:
    * accepts both 'smartMemoryLocation' and 'smart_memory_location')
    */
-  smart_memory_location?: unknown | DeleteMemoryCreateParams.SmartMemory;
+  smart_memory_location?: DeleteMemoryCreateParams.ModuleID | DeleteMemoryCreateParams.SmartMemory;
 }
 
 export namespace DeleteMemoryCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
   }
 
   export interface SmartMemory {

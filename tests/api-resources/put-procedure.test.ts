@@ -12,9 +12,7 @@ describe('resource putProcedure', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.putProcedure.create({
       key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       value: 'You are a technical documentation assistant...',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,15 +28,11 @@ describe('resource putProcedure', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.putProcedure.create({
       key: 'TechnicalReportSystemPrompt',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       value: 'You are a technical documentation assistant...',
       procedural_memory_id: 'demo-smartmemory',
       proceduralMemoryId: 'demo-smartmemory',
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

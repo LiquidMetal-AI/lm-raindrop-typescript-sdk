@@ -15,13 +15,7 @@ export class EndSession extends APIResource {
    * ```ts
    * const endSession = await client.endSession.create({
    *   sessionId: '01jxanr45haeswhay4n0q8340y',
-   *   smartMemoryLocation: {
-   *     smartMemory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
-   *   },
+   *   smartMemoryLocation: { moduleId: 'moduleId' },
    * });
    * ```
    */
@@ -46,7 +40,7 @@ export interface EndSessionCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | EndSessionCreateParams.SmartMemory;
+  smartMemoryLocation: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
 
   /**
    * Whether to flush working memory to long-term storage
@@ -63,7 +57,7 @@ export interface EndSessionCreateParams {
    * Smart memory locator for targeting the correct smart memory instance (Alias:
    * accepts both 'smartMemoryLocation' and 'smart_memory_location')
    */
-  smart_memory_location?: unknown | EndSessionCreateParams.SmartMemory;
+  smart_memory_location?: EndSessionCreateParams.ModuleID | EndSessionCreateParams.SmartMemory;
 
   /**
    * Optional custom system prompt for memory summarization during flush (Alias:
@@ -78,12 +72,26 @@ export interface EndSessionCreateParams {
 }
 
 export namespace EndSessionCreateParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
   }
 
   export interface SmartMemory {
