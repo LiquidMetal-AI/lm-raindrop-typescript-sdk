@@ -16,13 +16,7 @@ export class Procedures extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.procedures.search({
-   *   smartMemoryLocation: {
-   *     smartMemory: {
-   *       name: 'memory-name',
-   *       application_name: 'demo',
-   *       version: '1234',
-   *     },
-   *   },
+   *   smartMemoryLocation: { moduleId: 'moduleId' },
    *   terms: 'system prompt',
    * });
    * ```
@@ -67,7 +61,7 @@ export interface ProcedureSearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: unknown | ProcedureSearchParams.SmartMemory;
+  smartMemoryLocation: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
 
   /**
    * Search terms to match against procedure keys and values
@@ -122,16 +116,30 @@ export interface ProcedureSearchParams {
    * Smart memory locator for targeting the correct smart memory instance (Alias:
    * accepts both 'smartMemoryLocation' and 'smart_memory_location')
    */
-  smart_memory_location?: unknown | ProcedureSearchParams.SmartMemory;
+  smart_memory_location?: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
 }
 
 export namespace ProcedureSearchParams {
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
      * **REQUIRED** FALSE
      */
     smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
+  export interface ModuleID {
+    /**
+     * **REQUIRED** FALSE
+     */
+    moduleId: string;
   }
 
   export interface SmartMemory {

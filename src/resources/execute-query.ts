@@ -22,13 +22,7 @@ export class ExecuteQuery extends APIResource {
    * @example
    * ```ts
    * const response = await client.executeQuery.execute({
-   *   smartSqlLocation: {
-   *     smartSql: {
-   *       name: 'analytics-sql',
-   *       version: 'v1.2.0',
-   *       application_name: 'data-analytics-app',
-   *     },
-   *   },
+   *   smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
    * });
    * ```
    */
@@ -94,7 +88,7 @@ export interface ExecuteQueryExecuteParams {
   /**
    * Smart SQL locator for targeting the correct smart SQL instance
    */
-  smartSqlLocation: unknown | ExecuteQueryExecuteParams.SmartSql;
+  smartSqlLocation: ExecuteQueryExecuteParams.ModuleID | ExecuteQueryExecuteParams.SmartSql;
 
   /**
    * Desired output format for query results
@@ -105,7 +99,7 @@ export interface ExecuteQueryExecuteParams {
    * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
    * both 'smartSqlLocation' and 'smart_sql_location')
    */
-  smart_sql_location?: unknown | ExecuteQueryExecuteParams.SmartSql;
+  smart_sql_location?: ExecuteQueryExecuteParams.ModuleID | ExecuteQueryExecuteParams.SmartSql;
 
   /**
    * Direct SQL query to execute (mutually exclusive with text_query) (Alias: accepts
@@ -131,6 +125,13 @@ export interface ExecuteQueryExecuteParams {
 }
 
 export namespace ExecuteQueryExecuteParams {
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
+  }
+
   export interface SmartSql {
     /**
      * Name-based smart SQL instance identifier (recommended)
@@ -164,6 +165,13 @@ export namespace ExecuteQueryExecuteParams {
        */
       version?: string | null;
     }
+  }
+
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
   }
 
   export interface SmartSql {

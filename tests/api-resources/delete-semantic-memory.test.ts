@@ -12,9 +12,7 @@ describe('resource deleteSemanticMemory', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = client.deleteSemanticMemory.delete({
       objectId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,13 +27,9 @@ describe('resource deleteSemanticMemory', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await client.deleteSemanticMemory.delete({
       objectId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smartMemoryLocation: { moduleId: 'moduleId' },
       object_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
-      },
+      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

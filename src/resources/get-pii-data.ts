@@ -20,13 +20,7 @@ export class GetPiiData extends APIResource {
    * @example
    * ```ts
    * const getPiiData = await client.getPiiData.retrieve({
-   *   smartSqlLocation: {
-   *     smartSql: {
-   *       name: 'analytics-sql',
-   *       version: 'v1.2.0',
-   *       application_name: 'data-analytics-app',
-   *     },
-   *   },
+   *   smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
    *   tableName: 'users',
    * });
    * ```
@@ -110,7 +104,7 @@ export interface GetPiiDataRetrieveParams {
   /**
    * Smart SQL locator for targeting the correct smart SQL instance
    */
-  smartSqlLocation: unknown | GetPiiDataRetrieveParams.SmartSql;
+  smartSqlLocation: GetPiiDataRetrieveParams.ModuleID | GetPiiDataRetrieveParams.SmartSql;
 
   /**
    * Table name to retrieve PII data from
@@ -132,7 +126,7 @@ export interface GetPiiDataRetrieveParams {
    * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
    * both 'smartSqlLocation' and 'smart_sql_location')
    */
-  smart_sql_location?: unknown | GetPiiDataRetrieveParams.SmartSql;
+  smart_sql_location?: GetPiiDataRetrieveParams.ModuleID | GetPiiDataRetrieveParams.SmartSql;
 
   /**
    * Table name to retrieve PII data from (Alias: accepts both 'tableName' and
@@ -142,6 +136,13 @@ export interface GetPiiDataRetrieveParams {
 }
 
 export namespace GetPiiDataRetrieveParams {
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
+  }
+
   export interface SmartSql {
     /**
      * Name-based smart SQL instance identifier (recommended)
@@ -175,6 +176,13 @@ export namespace GetPiiDataRetrieveParams {
        */
       version?: string | null;
     }
+  }
+
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
   }
 
   export interface SmartSql {

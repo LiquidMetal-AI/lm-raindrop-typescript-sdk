@@ -18,13 +18,7 @@ export class UpdateMetadata extends APIResource {
    * @example
    * ```ts
    * const updateMetadata = await client.updateMetadata.update({
-   *   smartSqlLocation: {
-   *     smartSql: {
-   *       name: 'analytics-sql',
-   *       version: 'v1.2.0',
-   *       application_name: 'data-analytics-app',
-   *     },
-   *   },
+   *   smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
    *   tables: [{}],
    * });
    * ```
@@ -53,7 +47,7 @@ export interface UpdateMetadataUpdateParams {
   /**
    * Smart SQL locator for targeting the correct smart SQL instance
    */
-  smartSqlLocation: unknown | UpdateMetadataUpdateParams.SmartSql;
+  smartSqlLocation: UpdateMetadataUpdateParams.ModuleID | UpdateMetadataUpdateParams.SmartSql;
 
   /**
    * Table metadata to update or create
@@ -75,10 +69,17 @@ export interface UpdateMetadataUpdateParams {
    * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
    * both 'smartSqlLocation' and 'smart_sql_location')
    */
-  smart_sql_location?: unknown | UpdateMetadataUpdateParams.SmartSql;
+  smart_sql_location?: UpdateMetadataUpdateParams.ModuleID | UpdateMetadataUpdateParams.SmartSql;
 }
 
 export namespace UpdateMetadataUpdateParams {
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
+  }
+
   export interface SmartSql {
     /**
      * Name-based smart SQL instance identifier (recommended)
@@ -163,6 +164,13 @@ export namespace UpdateMetadataUpdateParams {
        */
       sampleData?: string | null;
     }
+  }
+
+  export interface ModuleID {
+    /**
+     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
+     */
+    moduleId: string;
   }
 
   export interface SmartSql {
