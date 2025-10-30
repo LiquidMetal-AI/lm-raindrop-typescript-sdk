@@ -16,7 +16,13 @@ export class Procedures extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.procedures.search({
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smartMemory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    *   terms: 'system prompt',
    * });
    * ```
@@ -61,7 +67,7 @@ export interface ProcedureSearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
+  smartMemoryLocation: unknown | ProcedureSearchParams.SmartMemory;
 
   /**
    * Search terms to match against procedure keys and values
@@ -69,38 +75,14 @@ export interface ProcedureSearchParams {
   terms: string;
 
   /**
-   * Maximum number of results to return (Alias: accepts both 'nMostRecent' and
-   * 'n_most_recent')
-   */
-  n_most_recent?: number | null;
-
-  /**
    * Maximum number of results to return
    */
   nMostRecent?: number | null;
 
   /**
-   * Optional procedural memory ID to use for actor isolation (Alias: accepts both
-   * 'proceduralMemoryId' and 'procedural_memory_id')
-   */
-  procedural_memory_id?: string | null;
-
-  /**
    * Optional procedural memory ID to use for actor isolation
    */
   proceduralMemoryId?: string | null;
-
-  /**
-   * Whether to search in procedure keys (Alias: accepts both 'searchKeys' and
-   * 'search_keys')
-   */
-  search_keys?: boolean | null;
-
-  /**
-   * Whether to search in procedure values (Alias: accepts both 'searchValues' and
-   * 'search_values')
-   */
-  search_values?: boolean | null;
 
   /**
    * Whether to search in procedure keys
@@ -111,37 +93,9 @@ export interface ProcedureSearchParams {
    * Whether to search in procedure values
    */
   searchValues?: boolean | null;
-
-  /**
-   * Smart memory locator for targeting the correct smart memory instance (Alias:
-   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
-   */
-  smart_memory_location?: ProcedureSearchParams.ModuleID | ProcedureSearchParams.SmartMemory;
 }
 
 export namespace ProcedureSearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
-  export interface SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

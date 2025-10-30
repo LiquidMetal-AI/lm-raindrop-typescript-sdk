@@ -185,7 +185,7 @@ export class Query extends APIResource {
 
 export type LiquidmetalV1alpha1TextResultsPageNumber = PageNumber<LiquidmetalV1alpha1TextResult>;
 
-export type BucketLocator = BucketLocator.Bucket | BucketLocator.ModuleID;
+export type BucketLocator = BucketLocator.Bucket | unknown;
 
 export namespace BucketLocator {
   export interface Bucket {
@@ -193,13 +193,6 @@ export namespace BucketLocator {
      * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
      */
     bucket: QueryAPI.LiquidmetalV1alpha1BucketName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED** FALSE
-     */
-    moduleId: string;
   }
 }
 

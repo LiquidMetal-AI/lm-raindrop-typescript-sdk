@@ -12,7 +12,9 @@ describe('resource endSession', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.endSession.create({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,11 +29,10 @@ describe('resource endSession', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.endSession.create({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       flush: true,
-      session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: { moduleId: 'moduleId' },
-      system_prompt: 'Summarize the key decisions and action items from this session',
       systemPrompt: 'Summarize the key decisions and action items from this session',
     });
   });

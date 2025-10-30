@@ -12,7 +12,9 @@ describe('resource getMemory', () => {
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,15 +29,12 @@ describe('resource getMemory', () => {
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.getMemory.retrieve({
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
-      end_time: '2023-01-15T01:30:15.01Z',
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       endTime: '2023-01-15T01:30:15.01Z',
       key: 'user-preference-theme',
-      n_most_recent: 10,
       nMostRecent: 10,
-      session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: { moduleId: 'moduleId' },
-      start_time: '2023-01-15T01:30:15.01Z',
       startTime: '2023-01-15T01:30:15.01Z',
       timeline: 'user-conversation-2024',
     });

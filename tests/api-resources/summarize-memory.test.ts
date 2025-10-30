@@ -13,7 +13,9 @@ describe('resource summarizeMemory', () => {
     const responsePromise = client.summarizeMemory.create({
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,11 +31,9 @@ describe('resource summarizeMemory', () => {
     const response = await client.summarizeMemory.create({
       memoryIds: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
       sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: { moduleId: 'moduleId' },
-      memory_ids: ['01jxanr45haeswhay4n0q8340y', '01jxanr45haeswhay4n0q8341z'],
-      session_id: '01jxanr45haeswhay4n0q8340y',
-      smart_memory_location: { moduleId: 'moduleId' },
-      system_prompt: 'Summarize the key decisions and action items',
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       systemPrompt: 'Summarize the key decisions and action items',
     });
   });

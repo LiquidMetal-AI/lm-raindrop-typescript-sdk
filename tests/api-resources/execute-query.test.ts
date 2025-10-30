@@ -11,7 +11,9 @@ describe('resource executeQuery', () => {
   // Prism tests are disabled
   test.skip('execute: only required params', async () => {
     const responsePromise = client.executeQuery.execute({
-      smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,25 +28,10 @@ describe('resource executeQuery', () => {
   test.skip('execute: required and optional params', async () => {
     const response = await client.executeQuery.execute({
       smartSqlLocation: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
       format: 'OUTPUT_FORMAT_UNSPECIFIED',
-      smart_sql_location: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
-      },
-      sql_query: 'SELECT * FROM users WHERE active = true',
       sqlQuery: 'SELECT * FROM users WHERE active = true',
-      text_query: 'Show me all active users from the last month',
       textQuery: 'Show me all active users from the last month',
     });
   });
