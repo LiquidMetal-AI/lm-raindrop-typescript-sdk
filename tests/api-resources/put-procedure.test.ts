@@ -34,7 +34,11 @@ describe('resource putProcedure', () => {
         smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
       value: 'You are a technical documentation assistant...',
+      procedural_memory_id: 'demo-smartmemory',
       proceduralMemoryId: 'demo-smartmemory',
+      smart_memory_location: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
   });
 });

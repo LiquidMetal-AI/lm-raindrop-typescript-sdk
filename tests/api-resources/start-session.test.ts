@@ -30,6 +30,9 @@ describe('resource startSession', () => {
       smartMemoryLocation: {
         smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      smart_memory_location: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
   });
 });

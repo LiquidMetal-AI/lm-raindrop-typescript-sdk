@@ -63,12 +63,38 @@ export interface RehydrateSessionRehydrateParams {
   smartMemoryLocation: unknown | RehydrateSessionRehydrateParams.SmartMemory;
 
   /**
+   * Session identifier to restore from episodic memory (Alias: accepts both
+   * 'sessionId' and 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | RehydrateSessionRehydrateParams.SmartMemory;
+
+  /**
+   * If true, only restore a summary. If false, restore all memories (Alias: accepts
+   * both 'summaryOnly' and 'summary_only')
+   */
+  summary_only?: boolean | null;
+
+  /**
    * If true, only restore a summary. If false, restore all memories
    */
   summaryOnly?: boolean | null;
 }
 
 export namespace RehydrateSessionRehydrateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

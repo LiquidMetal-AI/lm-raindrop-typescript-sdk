@@ -54,12 +54,38 @@ export interface EndSessionCreateParams {
   flush?: boolean | null;
 
   /**
+   * Unique session identifier to end (Alias: accepts both 'sessionId' and
+   * 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | EndSessionCreateParams.SmartMemory;
+
+  /**
+   * Optional custom system prompt for memory summarization during flush (Alias:
+   * accepts both 'systemPrompt' and 'system_prompt')
+   */
+  system_prompt?: string | null;
+
+  /**
    * Optional custom system prompt for memory summarization during flush
    */
   systemPrompt?: string | null;
 }
 
 export namespace EndSessionCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

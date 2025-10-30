@@ -131,14 +131,37 @@ export interface EpisodicMemorySearchParams {
   terms: string;
 
   /**
+   * End time for temporal filtering (Alias: accepts both 'endTime' and 'end_time')
+   */
+  end_time?: string | null;
+
+  /**
    * End time for temporal filtering
    */
   endTime?: string | null;
 
   /**
+   * Maximum number of most recent results to return (Alias: accepts both
+   * 'nMostRecent' and 'n_most_recent')
+   */
+  n_most_recent?: number | null;
+
+  /**
    * Maximum number of most recent results to return
    */
   nMostRecent?: number | null;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | EpisodicMemorySearchParams.SmartMemory;
+
+  /**
+   * Start time for temporal filtering (Alias: accepts both 'startTime' and
+   * 'start_time')
+   */
+  start_time?: string | null;
 
   /**
    * Start time for temporal filtering
@@ -147,6 +170,14 @@ export interface EpisodicMemorySearchParams {
 }
 
 export namespace EpisodicMemorySearchParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

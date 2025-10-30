@@ -110,6 +110,18 @@ export interface GetMetadataRetrieveParams {
   smartSqlLocation: unknown | GetMetadataRetrieveParams.SmartSql;
 
   /**
+   * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
+   * both 'smartSqlLocation' and 'smart_sql_location')
+   */
+  smart_sql_location?: unknown | GetMetadataRetrieveParams.SmartSql;
+
+  /**
+   * Optional table name to filter metadata (Alias: accepts both 'tableName' and
+   * 'table_name')
+   */
+  table_name?: string | null;
+
+  /**
    * Optional table name to filter metadata
    */
   tableName?: string | null;
@@ -132,6 +144,47 @@ export namespace GetMetadataRetrieveParams {
        * The name of the smart SQL instance
        */
       name: string;
+
+      /**
+       * Optional application name that owns this smart SQL instance (Alias: accepts both
+       * 'applicationName' and 'application_name')
+       */
+      application_name?: string | null;
+
+      /**
+       * Optional application name that owns this smart SQL instance
+       */
+      applicationName?: string | null;
+
+      /**
+       * Optional version identifier for the smart SQL instance
+       */
+      version?: string | null;
+    }
+  }
+
+  export interface SmartSql {
+    /**
+     * Name-based smart SQL instance identifier (recommended)
+     */
+    smartSql: SmartSql.SmartSql;
+  }
+
+  export namespace SmartSql {
+    /**
+     * Name-based smart SQL instance identifier (recommended)
+     */
+    export interface SmartSql {
+      /**
+       * The name of the smart SQL instance
+       */
+      name: string;
+
+      /**
+       * Optional application name that owns this smart SQL instance (Alias: accepts both
+       * 'applicationName' and 'application_name')
+       */
+      application_name?: string | null;
 
       /**
        * Optional application name that owns this smart SQL instance

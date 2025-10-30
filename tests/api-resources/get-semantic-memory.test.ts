@@ -32,6 +32,10 @@ describe('resource getSemanticMemory', () => {
       smartMemoryLocation: {
         smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
       },
+      object_id: '01jxanr45haeswhay4n0q8340y',
+      smart_memory_location: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
   });
 });

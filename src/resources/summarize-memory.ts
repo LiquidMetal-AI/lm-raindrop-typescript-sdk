@@ -74,12 +74,44 @@ export interface SummarizeMemoryCreateParams {
   smartMemoryLocation: unknown | SummarizeMemoryCreateParams.SmartMemory;
 
   /**
+   * List of memory IDs to summarize (Alias: accepts both 'memoryIds' and
+   * 'memory_ids')
+   */
+  memory_ids?: Array<string>;
+
+  /**
+   * Unique session identifier for the working memory instance (Alias: accepts both
+   * 'sessionId' and 'session_id')
+   */
+  session_id?: string;
+
+  /**
+   * Smart memory locator for targeting the correct smart memory instance (Alias:
+   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
+   */
+  smart_memory_location?: unknown | SummarizeMemoryCreateParams.SmartMemory;
+
+  /**
+   * Optional custom system prompt for summarization (Alias: accepts both
+   * 'systemPrompt' and 'system_prompt')
+   */
+  system_prompt?: string | null;
+
+  /**
    * Optional custom system prompt for summarization
    */
   systemPrompt?: string | null;
 }
 
 export namespace SummarizeMemoryCreateParams {
+  export interface SmartMemory {
+    /**
+     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
+     * **REQUIRED** FALSE
+     */
+    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
+  }
+
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
