@@ -11,7 +11,9 @@ describe('resource updateMetadata', () => {
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.updateMetadata.update({
-      smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
       tables: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,12 +29,7 @@ describe('resource updateMetadata', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.updateMetadata.update({
       smartSqlLocation: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
       tables: [
         {
@@ -51,14 +48,6 @@ describe('resource updateMetadata', () => {
         },
       ],
       mode: 'UPDATE_MODE_MERGE',
-      smart_sql_location: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
-      },
     });
   });
 });

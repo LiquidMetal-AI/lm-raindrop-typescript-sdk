@@ -36,10 +36,4 @@ export interface LiquidmetalV1alpha1SmartMemoryName {
    * **REQUIRED** TRUE
    */
   version: string | null;
-
-  /**
-   * Optional Application **EXAMPLE** "my-app" **REQUIRED** TRUE (Alias: accepts both
-   * 'applicationName' and 'application_name')
-   */
-  application_name?: string | null;
 }

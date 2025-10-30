@@ -26,7 +26,13 @@ export class SummarizeMemory extends APIResource {
    *       '01jxanr45haeswhay4n0q8341z',
    *     ],
    *     sessionId: '01jxanr45haeswhay4n0q8340y',
-   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *     smartMemoryLocation: {
+   *       smartMemory: {
+   *         name: 'memory-name',
+   *         application_name: 'demo',
+   *         version: '1234',
+   *       },
+   *     },
    *   },
    * );
    * ```
@@ -65,31 +71,7 @@ export interface SummarizeMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: SummarizeMemoryCreateParams.ModuleID | SummarizeMemoryCreateParams.SmartMemory;
-
-  /**
-   * List of memory IDs to summarize (Alias: accepts both 'memoryIds' and
-   * 'memory_ids')
-   */
-  memory_ids?: Array<string>;
-
-  /**
-   * Unique session identifier for the working memory instance (Alias: accepts both
-   * 'sessionId' and 'session_id')
-   */
-  session_id?: string;
-
-  /**
-   * Smart memory locator for targeting the correct smart memory instance (Alias:
-   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
-   */
-  smart_memory_location?: SummarizeMemoryCreateParams.ModuleID | SummarizeMemoryCreateParams.SmartMemory;
-
-  /**
-   * Optional custom system prompt for summarization (Alias: accepts both
-   * 'systemPrompt' and 'system_prompt')
-   */
-  system_prompt?: string | null;
+  smartMemoryLocation: unknown | SummarizeMemoryCreateParams.SmartMemory;
 
   /**
    * Optional custom system prompt for summarization
@@ -98,28 +80,6 @@ export interface SummarizeMemoryCreateParams {
 }
 
 export namespace SummarizeMemoryCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
-  export interface SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

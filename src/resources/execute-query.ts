@@ -22,7 +22,13 @@ export class ExecuteQuery extends APIResource {
    * @example
    * ```ts
    * const response = await client.executeQuery.execute({
-   *   smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
+   *   smartSqlLocation: {
+   *     smartSql: {
+   *       name: 'analytics-sql',
+   *       version: 'v1.2.0',
+   *       application_name: 'data-analytics-app',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -88,24 +94,12 @@ export interface ExecuteQueryExecuteParams {
   /**
    * Smart SQL locator for targeting the correct smart SQL instance
    */
-  smartSqlLocation: ExecuteQueryExecuteParams.ModuleID | ExecuteQueryExecuteParams.SmartSql;
+  smartSqlLocation: unknown | ExecuteQueryExecuteParams.SmartSql;
 
   /**
    * Desired output format for query results
    */
   format?: 'OUTPUT_FORMAT_UNSPECIFIED' | 'OUTPUT_FORMAT_JSON' | 'OUTPUT_FORMAT_CSV' | null;
-
-  /**
-   * Smart SQL locator for targeting the correct smart SQL instance (Alias: accepts
-   * both 'smartSqlLocation' and 'smart_sql_location')
-   */
-  smart_sql_location?: ExecuteQueryExecuteParams.ModuleID | ExecuteQueryExecuteParams.SmartSql;
-
-  /**
-   * Direct SQL query to execute (mutually exclusive with text_query) (Alias: accepts
-   * both 'sqlQuery' and 'sql_query')
-   */
-  sql_query?: string | null;
 
   /**
    * Direct SQL query to execute (mutually exclusive with text_query)
@@ -114,24 +108,11 @@ export interface ExecuteQueryExecuteParams {
 
   /**
    * Natural language query to convert to SQL (mutually exclusive with sql_query)
-   * (Alias: accepts both 'textQuery' and 'text_query')
-   */
-  text_query?: string | null;
-
-  /**
-   * Natural language query to convert to SQL (mutually exclusive with sql_query)
    */
   textQuery?: string | null;
 }
 
 export namespace ExecuteQueryExecuteParams {
-  export interface ModuleID {
-    /**
-     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
-     */
-    moduleId: string;
-  }
-
   export interface SmartSql {
     /**
      * Name-based smart SQL instance identifier (recommended)
@@ -148,54 +129,6 @@ export namespace ExecuteQueryExecuteParams {
        * The name of the smart SQL instance
        */
       name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
-
-      /**
-       * Optional application name that owns this smart SQL instance
-       */
-      applicationName?: string | null;
-
-      /**
-       * Optional version identifier for the smart SQL instance
-       */
-      version?: string | null;
-    }
-  }
-
-  export interface ModuleID {
-    /**
-     * Direct module ID for smart SQL instance (fallback, prefer name-based resolution)
-     */
-    moduleId: string;
-  }
-
-  export interface SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    smartSql: SmartSql.SmartSql;
-  }
-
-  export namespace SmartSql {
-    /**
-     * Name-based smart SQL instance identifier (recommended)
-     */
-    export interface SmartSql {
-      /**
-       * The name of the smart SQL instance
-       */
-      name: string;
-
-      /**
-       * Optional application name that owns this smart SQL instance (Alias: accepts both
-       * 'applicationName' and 'application_name')
-       */
-      application_name?: string | null;
 
       /**
        * Optional application name that owns this smart SQL instance

@@ -12,7 +12,9 @@ describe('resource putSemanticMemory', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.putSemanticMemory.create({
       document: 'document',
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,8 +29,9 @@ describe('resource putSemanticMemory', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.putSemanticMemory.create({
       document: 'document',
-      smartMemoryLocation: { moduleId: 'moduleId' },
-      smart_memory_location: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
     });
   });
 });

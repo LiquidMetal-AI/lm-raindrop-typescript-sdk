@@ -15,7 +15,13 @@ export class SemanticMemory extends APIResource {
    * ```ts
    * const response = await client.query.semanticMemory.search({
    *   needle: 'AI development best practices',
-   *   smartMemoryLocation: { moduleId: 'moduleId' },
+   *   smartMemoryLocation: {
+   *     smartMemory: {
+   *       name: 'memory-name',
+   *       application_name: 'demo',
+   *       version: '1234',
+   *     },
+   *   },
    * });
    * ```
    */
@@ -104,38 +110,10 @@ export interface SemanticMemorySearchParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: SemanticMemorySearchParams.ModuleID | SemanticMemorySearchParams.SmartMemory;
-
-  /**
-   * Smart memory locator for targeting the correct smart memory instance (Alias:
-   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
-   */
-  smart_memory_location?: SemanticMemorySearchParams.ModuleID | SemanticMemorySearchParams.SmartMemory;
+  smartMemoryLocation: unknown | SemanticMemorySearchParams.SmartMemory;
 }
 
 export namespace SemanticMemorySearchParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
-  export interface SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}

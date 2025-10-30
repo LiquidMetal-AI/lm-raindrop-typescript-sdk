@@ -11,7 +11,9 @@ describe('resource getMetadata', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.getMetadata.retrieve({
-      smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,22 +28,8 @@ describe('resource getMetadata', () => {
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.getMetadata.retrieve({
       smartSqlLocation: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
-      smart_sql_location: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
-      },
-      table_name: 'users',
       tableName: 'users',
     });
   });

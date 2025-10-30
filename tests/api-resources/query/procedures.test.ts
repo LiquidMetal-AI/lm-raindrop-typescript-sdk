@@ -11,7 +11,9 @@ describe('resource procedures', () => {
   // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.procedures.search({
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'system prompt',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,17 +28,14 @@ describe('resource procedures', () => {
   // Prism tests are disabled
   test.skip('search: required and optional params', async () => {
     const response = await client.query.procedures.search({
-      smartMemoryLocation: { moduleId: 'moduleId' },
+      smartMemoryLocation: {
+        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+      },
       terms: 'system prompt',
-      n_most_recent: 10,
       nMostRecent: 10,
-      procedural_memory_id: 'demo-smartmemory',
       proceduralMemoryId: 'demo-smartmemory',
-      search_keys: true,
-      search_values: true,
       searchKeys: true,
       searchValues: true,
-      smart_memory_location: { moduleId: 'moduleId' },
     });
   });
 });

@@ -11,7 +11,9 @@ describe('resource getPiiData', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
     const responsePromise = client.getPiiData.retrieve({
-      smartSqlLocation: { smartSql: { name: 'analytics-sql' } },
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
+      },
       tableName: 'users',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,25 +29,10 @@ describe('resource getPiiData', () => {
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.getPiiData.retrieve({
       smartSqlLocation: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
       tableName: 'users',
-      record_id: 'user_123',
       recordId: 'user_123',
-      smart_sql_location: {
-        smartSql: {
-          name: 'analytics-sql',
-          application_name: 'data-analytics-app',
-          applicationName: 'data-analytics-app',
-          version: 'v1.2.0',
-        },
-      },
-      table_name: 'users',
     });
   });
 });

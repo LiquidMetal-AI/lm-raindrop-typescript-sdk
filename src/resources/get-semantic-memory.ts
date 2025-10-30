@@ -15,7 +15,13 @@ export class GetSemanticMemory extends APIResource {
    * const getSemanticMemory =
    *   await client.getSemanticMemory.create({
    *     objectId: '01jxanr45haeswhay4n0q8340y',
-   *     smartMemoryLocation: { moduleId: 'moduleId' },
+   *     smartMemoryLocation: {
+   *       smartMemory: {
+   *         name: 'memory-name',
+   *         application_name: 'demo',
+   *         version: '1234',
+   *       },
+   *     },
    *   });
    * ```
    */
@@ -53,44 +59,10 @@ export interface GetSemanticMemoryCreateParams {
   /**
    * Smart memory locator for targeting the correct smart memory instance
    */
-  smartMemoryLocation: GetSemanticMemoryCreateParams.ModuleID | GetSemanticMemoryCreateParams.SmartMemory;
-
-  /**
-   * Unique object identifier of the document to retrieve (Alias: accepts both
-   * 'objectId' and 'object_id')
-   */
-  object_id?: string;
-
-  /**
-   * Smart memory locator for targeting the correct smart memory instance (Alias:
-   * accepts both 'smartMemoryLocation' and 'smart_memory_location')
-   */
-  smart_memory_location?: GetSemanticMemoryCreateParams.ModuleID | GetSemanticMemoryCreateParams.SmartMemory;
+  smartMemoryLocation: unknown | GetSemanticMemoryCreateParams.SmartMemory;
 }
 
 export namespace GetSemanticMemoryCreateParams {
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
-  export interface SmartMemory {
-    /**
-     * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
-     * **REQUIRED** FALSE
-     */
-    smartMemory: Shared.LiquidmetalV1alpha1SmartMemoryName;
-  }
-
-  export interface ModuleID {
-    /**
-     * **REQUIRED** FALSE
-     */
-    moduleId: string;
-  }
-
   export interface SmartMemory {
     /**
      * **EXAMPLE** {"name":"memory-name","application_name":"demo","version":"1234"}
