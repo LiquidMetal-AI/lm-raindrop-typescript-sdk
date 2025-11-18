@@ -25,7 +25,9 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 const response = await client.query.documentQuery({
-  bucketLocation: { bucket: { name: 'my-smartbucket' } },
+  bucketLocation: {
+    bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+  },
   input: 'What are the key points in this document?',
   objectId: 'document.pdf',
   requestId: '<YOUR-REQUEST-ID>',
@@ -45,7 +47,9 @@ import Raindrop from '@liquidmetal-ai/lm-raindrop';
 const client = new Raindrop();
 
 const params: Raindrop.QueryDocumentQueryParams = {
-  bucketLocation: { bucket: { name: 'my-smartbucket' } },
+  bucketLocation: {
+    bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+  },
   input: 'What are the key points in this document?',
   objectId: 'document.pdf',
   requestId: '<YOUR-REQUEST-ID>',
@@ -65,7 +69,9 @@ a subclass of `APIError` will be thrown:
 ```ts
 const response = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-smartbucket' } },
+    bucketLocation: {
+      bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+    },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
     requestId: '<YOUR-REQUEST-ID>',
@@ -110,7 +116,7 @@ const client = new Raindrop({
 });
 
 // Or, configure per-request:
-await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
   maxRetries: 5,
 });
 ```
@@ -127,7 +133,7 @@ const client = new Raindrop({
 });
 
 // Override per-request:
-await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
+await client.query.documentQuery({ bucketLocation: { bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' } }, input: 'What are the key points in this document?', objectId: 'document.pdf', requestId: '<YOUR-REQUEST-ID>' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -187,7 +193,9 @@ const client = new Raindrop();
 
 const response = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-smartbucket' } },
+    bucketLocation: {
+      bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+    },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
     requestId: '<YOUR-REQUEST-ID>',
@@ -198,7 +206,9 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.query
   .documentQuery({
-    bucketLocation: { bucket: { name: 'my-smartbucket' } },
+    bucketLocation: {
+      bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+    },
     input: 'What are the key points in this document?',
     objectId: 'document.pdf',
     requestId: '<YOUR-REQUEST-ID>',

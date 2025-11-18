@@ -19,17 +19,6 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  Bucket,
-  BucketDeleteParams,
-  BucketDeleteResponse,
-  BucketGetParams,
-  BucketGetResponse,
-  BucketListParams,
-  BucketListResponse,
-  BucketPutParams,
-  BucketPutResponse,
-} from './resources/bucket';
-import {
   DeleteMemory,
   DeleteMemoryCreateParams,
   DeleteMemoryCreateResponse,
@@ -44,6 +33,16 @@ import {
   DeleteSemanticMemoryDeleteParams,
   DeleteSemanticMemoryDeleteResponse,
 } from './resources/delete-semantic-memory';
+import {
+  DocumentStatus,
+  DocumentStatusGetStatusParams,
+  DocumentStatusGetStatusResponse,
+} from './resources/document-status';
+import {
+  DocumentStatusBulk,
+  DocumentStatusBulkGetStatusBulkParams,
+  DocumentStatusBulkGetStatusBulkResponse,
+} from './resources/document-status-bulk';
 import { EndSession, EndSessionCreateParams, EndSessionCreateResponse } from './resources/end-session';
 import {
   ExecuteQuery,
@@ -103,6 +102,17 @@ import {
   UpdateMetadataUpdateParams,
   UpdateMetadataUpdateResponse,
 } from './resources/update-metadata';
+import {
+  Bucket,
+  BucketDeleteParams,
+  BucketDeleteResponse,
+  BucketGetParams,
+  BucketGetResponse,
+  BucketListParams,
+  BucketListResponse,
+  BucketPutParams,
+  BucketPutResponse,
+} from './resources/bucket/bucket';
 import {
   BucketLocator,
   LiquidmetalV1alpha1BucketName,
@@ -856,6 +866,8 @@ export class Raindrop {
   getMetadata: API.GetMetadata = new API.GetMetadata(this);
   updateMetadata: API.UpdateMetadata = new API.UpdateMetadata(this);
   getPiiData: API.GetPiiData = new API.GetPiiData(this);
+  documentStatus: API.DocumentStatus = new API.DocumentStatus(this);
+  documentStatusBulk: API.DocumentStatusBulk = new API.DocumentStatusBulk(this);
 }
 
 Raindrop.Query = Query;
@@ -878,6 +890,8 @@ Raindrop.ExecuteQuery = ExecuteQuery;
 Raindrop.GetMetadata = GetMetadata;
 Raindrop.UpdateMetadata = UpdateMetadata;
 Raindrop.GetPiiData = GetPiiData;
+Raindrop.DocumentStatus = DocumentStatus;
+Raindrop.DocumentStatusBulk = DocumentStatusBulk;
 
 export declare namespace Raindrop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1021,6 +1035,18 @@ export declare namespace Raindrop {
     GetPiiData as GetPiiData,
     type GetPiiDataRetrieveResponse as GetPiiDataRetrieveResponse,
     type GetPiiDataRetrieveParams as GetPiiDataRetrieveParams,
+  };
+
+  export {
+    DocumentStatus as DocumentStatus,
+    type DocumentStatusGetStatusResponse as DocumentStatusGetStatusResponse,
+    type DocumentStatusGetStatusParams as DocumentStatusGetStatusParams,
+  };
+
+  export {
+    DocumentStatusBulk as DocumentStatusBulk,
+    type DocumentStatusBulkGetStatusBulkResponse as DocumentStatusBulkGetStatusBulkResponse,
+    type DocumentStatusBulkGetStatusBulkParams as DocumentStatusBulkGetStatusBulkParams,
   };
 
   export type LiquidmetalV1alpha1BucketResponse = API.LiquidmetalV1alpha1BucketResponse;

@@ -33,7 +33,15 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.chunkSearch({
-   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+   *   bucketLocations: [
+   *     {
+   *       bucket: {
+   *         name: 'my-smartbucket',
+   *         version: '01jxanr45haeswhay4n0q8340y',
+   *         application_name: 'my-app',
+   *       },
+   *     },
+   *   ],
    *   input: 'Find documents about revenue in Q4 2023',
    *   requestId: '<YOUR-REQUEST-ID>',
    * });
@@ -67,7 +75,13 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.documentQuery({
-   *   bucketLocation: { bucket: { name: 'my-smartbucket' } },
+   *   bucketLocation: {
+   *     bucket: {
+   *       name: 'my-smartbucket',
+   *       version: '01jxanr45haeswhay4n0q8340y',
+   *       application_name: 'my-app',
+   *     },
+   *   },
    *   input: 'What are the key points in this document?',
    *   objectId: 'document.pdf',
    *   requestId: '<YOUR-REQUEST-ID>',
@@ -135,7 +149,15 @@ export class Query extends APIResource {
    * @example
    * ```ts
    * const response = await client.query.search({
-   *   bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+   *   bucketLocations: [
+   *     {
+   *       bucket: {
+   *         name: 'my-smartbucket',
+   *         version: '01jxanr45haeswhay4n0q8340y',
+   *         application_name: 'my-app',
+   *       },
+   *     },
+   *   ],
    *   input: 'All my files',
    *   requestId: '<YOUR-REQUEST-ID>',
    * });
@@ -190,31 +212,32 @@ export type BucketLocator = BucketLocator.Bucket | unknown;
 export namespace BucketLocator {
   export interface Bucket {
     /**
-     * **EXAMPLE** { name: 'my-smartbucket' } **REQUIRED** FALSE
+     * **EXAMPLE** { name: 'my-smartbucket', version: '01jtryx2f2f61ryk06vd8mr91p',
+     * application_name: 'my-app' } **REQUIRED** FALSE
      */
     bucket: QueryAPI.LiquidmetalV1alpha1BucketName;
   }
 }
 
 /**
- * BucketName represents a bucket name with an optional version
+ * BucketName represents a bucket name with version and application name
  */
 export interface LiquidmetalV1alpha1BucketName {
+  /**
+   * The application name **EXAMPLE** "my-app" **REQUIRED** TRUE
+   */
+  applicationName: string;
+
   /**
    * The name of the bucket **EXAMPLE** "my-bucket" **REQUIRED** TRUE
    */
   name: string;
 
   /**
-   * Optional Application **EXAMPLE** "my-app" **REQUIRED** FALSE
+   * The version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p" **REQUIRED**
+   * TRUE
    */
-  applicationName?: string | null;
-
-  /**
-   * Optional version of the bucket **EXAMPLE** "01jtryx2f2f61ryk06vd8mr91p"
-   * **REQUIRED** FALSE
-   */
-  version?: string | null;
+  version: string;
 }
 
 export interface LiquidmetalV1alpha1SourceResult {
