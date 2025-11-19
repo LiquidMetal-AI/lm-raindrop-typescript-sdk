@@ -7,13 +7,12 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource getMemory', () => {
+describe('resource getMetadata', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+    const responsePromise = client.getMetadata.retrieve({
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,16 +26,11 @@ describe('resource getMemory', () => {
 
   // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.getMemory.retrieve({
-      sessionId: '01jxanr45haeswhay4n0q8340y',
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+    const response = await client.getMetadata.retrieve({
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
-      endTime: '2023-01-15T01:30:15.01Z',
-      key: 'user-preference-theme',
-      nMostRecent: 10,
-      startTime: '2023-01-15T01:30:15.01Z',
-      timeline: 'user-conversation-2024',
+      tableName: 'users',
     });
   });
 });

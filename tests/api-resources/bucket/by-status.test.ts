@@ -7,14 +7,14 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource episodicMemory', () => {
+describe('resource byStatus', () => {
   // Prism tests are disabled
-  test.skip('search: only required params', async () => {
-    const responsePromise = client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+  test.skip('listObjects: only required params', async () => {
+    const responsePromise = client.bucket.byStatus.listObjects({
+      bucketLocation: {
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
-      terms: 'sessions about user interface preferences',
+      statuses: ['failed', 'processing'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,15 +26,15 @@ describe('resource episodicMemory', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search: required and optional params', async () => {
-    const response = await client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+  test.skip('listObjects: required and optional params', async () => {
+    const response = await client.bucket.byStatus.listObjects({
+      bucketLocation: {
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
-      terms: 'sessions about user interface preferences',
-      endTime: '2023-01-15T01:30:15.01Z',
-      nMostRecent: 10,
-      startTime: '2023-01-15T01:30:15.01Z',
+      statuses: ['failed', 'processing'],
+      exclude: true,
+      partition: 'default',
+      prefix: 'documents/',
     });
   });
 });

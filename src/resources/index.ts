@@ -11,7 +11,7 @@ export {
   type BucketDeleteParams,
   type BucketGetParams,
   type BucketPutParams,
-} from './bucket';
+} from './bucket/bucket';
 export {
   DeleteMemory,
   type DeleteMemoryCreateResponse,
@@ -27,8 +27,29 @@ export {
   type DeleteSemanticMemoryDeleteResponse,
   type DeleteSemanticMemoryDeleteParams,
 } from './delete-semantic-memory';
+export {
+  DocumentStatus,
+  type DocumentStatusGetStatusResponse,
+  type DocumentStatusGetStatusParams,
+} from './document-status';
+export {
+  DocumentStatusBulk,
+  type DocumentStatusBulkGetStatusBulkResponse,
+  type DocumentStatusBulkGetStatusBulkParams,
+} from './document-status-bulk';
 export { EndSession, type EndSessionCreateResponse, type EndSessionCreateParams } from './end-session';
+export {
+  ExecuteQuery,
+  type ExecuteQueryExecuteResponse,
+  type ExecuteQueryExecuteParams,
+} from './execute-query';
 export { GetMemory, type GetMemoryRetrieveResponse, type GetMemoryRetrieveParams } from './get-memory';
+export {
+  GetMetadata,
+  type GetMetadataRetrieveResponse,
+  type GetMetadataRetrieveParams,
+} from './get-metadata';
+export { GetPiiData, type GetPiiDataRetrieveResponse, type GetPiiDataRetrieveParams } from './get-pii-data';
 export {
   GetProcedure,
   type GetProcedureCreateResponse,
@@ -87,3 +108,8 @@ export {
   type SummarizeMemoryCreateResponse,
   type SummarizeMemoryCreateParams,
 } from './summarize-memory';
+export {
+  UpdateMetadata,
+  type UpdateMetadataUpdateResponse,
+  type UpdateMetadataUpdateParams,
+} from './update-metadata';

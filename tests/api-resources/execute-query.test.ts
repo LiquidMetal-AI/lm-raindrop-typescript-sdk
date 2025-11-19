@@ -7,14 +7,13 @@ const client = new Raindrop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource episodicMemory', () => {
+describe('resource executeQuery', () => {
   // Prism tests are disabled
-  test.skip('search: only required params', async () => {
-    const responsePromise = client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+  test.skip('execute: only required params', async () => {
+    const responsePromise = client.executeQuery.execute({
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
-      terms: 'sessions about user interface preferences',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,15 +25,14 @@ describe('resource episodicMemory', () => {
   });
 
   // Prism tests are disabled
-  test.skip('search: required and optional params', async () => {
-    const response = await client.query.episodicMemory.search({
-      smartMemoryLocation: {
-        smartMemory: { name: 'memory-name', application_name: 'demo', version: '1234' },
+  test.skip('execute: required and optional params', async () => {
+    const response = await client.executeQuery.execute({
+      smartSqlLocation: {
+        smartSql: { name: 'analytics-sql', version: 'v1.2.0', application_name: 'data-analytics-app' },
       },
-      terms: 'sessions about user interface preferences',
-      endTime: '2023-01-15T01:30:15.01Z',
-      nMostRecent: 10,
-      startTime: '2023-01-15T01:30:15.01Z',
+      format: 'OUTPUT_FORMAT_UNSPECIFIED',
+      sqlQuery: 'SELECT * FROM users WHERE active = true',
+      textQuery: 'Show me all active users from the last month',
     });
   });
 });

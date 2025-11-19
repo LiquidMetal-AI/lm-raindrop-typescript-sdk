@@ -11,7 +11,15 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('chunkSearch: only required params', async () => {
     const responsePromise = client.query.chunkSearch({
-      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+      bucketLocations: [
+        {
+          bucket: {
+            name: 'my-smartbucket',
+            version: '01jxanr45haeswhay4n0q8340y',
+            application_name: 'my-app',
+          },
+        },
+      ],
       input: 'Find documents about revenue in Q4 2023',
       requestId: '<YOUR-REQUEST-ID>',
     });
@@ -31,8 +39,8 @@ describe('resource query', () => {
         {
           bucket: {
             name: 'my-smartbucket',
-            applicationName: 'my-app',
             version: '01jxanr45haeswhay4n0q8340y',
+            application_name: 'my-app',
           },
         },
       ],
@@ -45,7 +53,9 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.query.documentQuery({
-      bucketLocation: { bucket: { name: 'my-smartbucket' } },
+      bucketLocation: {
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+      },
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
       requestId: '<YOUR-REQUEST-ID>',
@@ -63,7 +73,7 @@ describe('resource query', () => {
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.query.documentQuery({
       bucketLocation: {
-        bucket: { name: 'my-smartbucket', applicationName: 'my-app', version: '01jxanr45haeswhay4n0q8340y' },
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
       input: 'What are the key points in this document?',
       objectId: 'document.pdf',
@@ -101,7 +111,15 @@ describe('resource query', () => {
   // Prism tests are disabled
   test.skip('search: only required params', async () => {
     const responsePromise = client.query.search({
-      bucketLocations: [{ bucket: { name: 'my-smartbucket' } }],
+      bucketLocations: [
+        {
+          bucket: {
+            name: 'my-smartbucket',
+            version: '01jxanr45haeswhay4n0q8340y',
+            application_name: 'my-app',
+          },
+        },
+      ],
       input: 'All my files',
       requestId: '<YOUR-REQUEST-ID>',
     });
@@ -121,8 +139,8 @@ describe('resource query', () => {
         {
           bucket: {
             name: 'my-smartbucket',
-            applicationName: 'my-app',
             version: '01jxanr45haeswhay4n0q8340y',
+            application_name: 'my-app',
           },
         },
       ],

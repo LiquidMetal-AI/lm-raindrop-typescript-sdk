@@ -70,17 +70,27 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/bucket.ts">BucketListResponse</a></code>
-- <code><a href="./src/resources/bucket.ts">BucketDeleteResponse</a></code>
-- <code><a href="./src/resources/bucket.ts">BucketGetResponse</a></code>
-- <code><a href="./src/resources/bucket.ts">BucketPutResponse</a></code>
+- <code><a href="./src/resources/bucket/bucket.ts">BucketListResponse</a></code>
+- <code><a href="./src/resources/bucket/bucket.ts">BucketDeleteResponse</a></code>
+- <code><a href="./src/resources/bucket/bucket.ts">BucketGetResponse</a></code>
+- <code><a href="./src/resources/bucket/bucket.ts">BucketPutResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/list_objects">client.bucket.<a href="./src/resources/bucket.ts">list</a>({ ...params }) -> BucketListResponse</code>
-- <code title="post /v1/delete_object">client.bucket.<a href="./src/resources/bucket.ts">delete</a>({ ...params }) -> unknown</code>
-- <code title="post /v1/get_object">client.bucket.<a href="./src/resources/bucket.ts">get</a>({ ...params }) -> BucketGetResponse</code>
-- <code title="post /v1/put_object">client.bucket.<a href="./src/resources/bucket.ts">put</a>({ ...params }) -> BucketPutResponse</code>
+- <code title="post /v1/list_objects">client.bucket.<a href="./src/resources/bucket/bucket.ts">list</a>({ ...params }) -> BucketListResponse</code>
+- <code title="post /v1/delete_object">client.bucket.<a href="./src/resources/bucket/bucket.ts">delete</a>({ ...params }) -> unknown</code>
+- <code title="post /v1/get_object">client.bucket.<a href="./src/resources/bucket/bucket.ts">get</a>({ ...params }) -> BucketGetResponse</code>
+- <code title="post /v1/put_object">client.bucket.<a href="./src/resources/bucket/bucket.ts">put</a>({ ...params }) -> BucketPutResponse</code>
+
+## ByStatus
+
+Types:
+
+- <code><a href="./src/resources/bucket/by-status.ts">ByStatusListObjectsResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/list_objects_by_status">client.bucket.byStatus.<a href="./src/resources/bucket/by-status.ts">listObjects</a>({ ...params }) -> ByStatusListObjectsResponse</code>
 
 # PutMemory
 
@@ -221,3 +231,63 @@ Types:
 Methods:
 
 - <code title="post /v1/delete_semantic_memory">client.deleteSemanticMemory.<a href="./src/resources/delete-semantic-memory.ts">delete</a>({ ...params }) -> DeleteSemanticMemoryDeleteResponse</code>
+
+# ExecuteQuery
+
+Types:
+
+- <code><a href="./src/resources/execute-query.ts">ExecuteQueryExecuteResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/execute_query">client.executeQuery.<a href="./src/resources/execute-query.ts">execute</a>({ ...params }) -> ExecuteQueryExecuteResponse</code>
+
+# GetMetadata
+
+Types:
+
+- <code><a href="./src/resources/get-metadata.ts">GetMetadataRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/get_metadata">client.getMetadata.<a href="./src/resources/get-metadata.ts">retrieve</a>({ ...params }) -> GetMetadataRetrieveResponse</code>
+
+# UpdateMetadata
+
+Types:
+
+- <code><a href="./src/resources/update-metadata.ts">UpdateMetadataUpdateResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/update_metadata">client.updateMetadata.<a href="./src/resources/update-metadata.ts">update</a>({ ...params }) -> UpdateMetadataUpdateResponse</code>
+
+# GetPiiData
+
+Types:
+
+- <code><a href="./src/resources/get-pii-data.ts">GetPiiDataRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/get_pii_data">client.getPiiData.<a href="./src/resources/get-pii-data.ts">retrieve</a>({ ...params }) -> GetPiiDataRetrieveResponse</code>
+
+# DocumentStatus
+
+Types:
+
+- <code><a href="./src/resources/document-status.ts">DocumentStatusGetStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/document_status">client.documentStatus.<a href="./src/resources/document-status.ts">getStatus</a>({ ...params }) -> DocumentStatusGetStatusResponse</code>
+
+# DocumentStatusBulk
+
+Types:
+
+- <code><a href="./src/resources/document-status-bulk.ts">DocumentStatusBulkGetStatusBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/document_status_bulk">client.documentStatusBulk.<a href="./src/resources/document-status-bulk.ts">getStatusBulk</a>({ ...params }) -> DocumentStatusBulkGetStatusBulkResponse</code>
