@@ -40,54 +40,31 @@ export class ExecuteQuery extends APIResource {
   }
 }
 
-export type ExecuteQueryExecuteResponse =
-  | ExecuteQueryExecuteResponse.CsvResults
-  | ExecuteQueryExecuteResponse.JsonResults;
+export interface ExecuteQueryExecuteResponse {
+  /**
+   * AI reasoning for natural language queries (if applicable)
+   */
+  aiReasoning?: string | null;
 
-export namespace ExecuteQueryExecuteResponse {
-  export interface CsvResults {
-    /**
-     * CSV formatted results as a string
-     */
-    csvResults: string;
+  /**
+   * Format of the results field
+   */
+  format?: string;
 
-    /**
-     * AI reasoning for natural language queries (if applicable)
-     */
-    aiReasoning?: string | null;
+  /**
+   * The actual SQL query that was executed
+   */
+  queryExecuted?: string;
 
-    /**
-     * The actual SQL query that was executed
-     */
-    queryExecuted?: string;
+  /**
+   * Query results as a string in the requested format (JSON or CSV)
+   */
+  results?: string;
 
-    /**
-     * HTTP status code for the operation
-     */
-    status?: number;
-  }
-
-  export interface JsonResults {
-    /**
-     * JSON formatted results as a string
-     */
-    jsonResults: string;
-
-    /**
-     * AI reasoning for natural language queries (if applicable)
-     */
-    aiReasoning?: string | null;
-
-    /**
-     * The actual SQL query that was executed
-     */
-    queryExecuted?: string;
-
-    /**
-     * HTTP status code for the operation
-     */
-    status?: number;
-  }
+  /**
+   * HTTP status code for the operation
+   */
+  status?: number;
 }
 
 export interface ExecuteQueryExecuteParams {
