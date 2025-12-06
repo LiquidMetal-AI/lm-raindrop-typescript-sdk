@@ -11,8 +11,9 @@ describe('resource documentStatus', () => {
   // Prism tests are disabled
   test.skip('getStatus: only required params', async () => {
     const responsePromise = client.documentStatus.getStatus({
-      bucketLocation:
-        '{{"bucket": {{"name": "my-smartbucket", "version": "01jxanr45haeswhay4n0q8340y", "application_name": "my-app"}}}}',
+      bucketLocation: {
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+      },
       objectId: 'document.pdf',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,8 +28,9 @@ describe('resource documentStatus', () => {
   // Prism tests are disabled
   test.skip('getStatus: required and optional params', async () => {
     const response = await client.documentStatus.getStatus({
-      bucketLocation:
-        '{{"bucket": {{"name": "my-smartbucket", "version": "01jxanr45haeswhay4n0q8340y", "application_name": "my-app"}}}}',
+      bucketLocation: {
+        bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
+      },
       objectId: 'document.pdf',
       partition: 'tenant-123',
     });
