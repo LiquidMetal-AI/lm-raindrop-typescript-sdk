@@ -384,6 +384,14 @@ export interface QueryChunkSearchParams {
    * 'default' if not specified
    */
   partition?: string | null;
+
+  /**
+   * Optional source filter to restrict vector search results by object key. Supports
+   * literal paths (e.g., "docs/file.pdf"), glob patterns (e.g., "docs/_.pdf"), or
+   * regex patterns (e.g., "/^docs\\/._\\.pdf$/"). Uses post-filtering with 5x
+   * oversampling to ensure good result diversity
+   */
+  sourceFilter?: string | null;
 }
 
 export interface QueryDocumentQueryParams {
@@ -456,6 +464,14 @@ export interface QuerySearchParams {
    * 'default' if not specified
    */
   partition?: string | null;
+
+  /**
+   * Optional source filter to restrict vector search results by object key. Supports
+   * literal paths (e.g., "docs/file.pdf"), glob patterns (e.g., "docs/_.pdf"), or
+   * regex patterns (e.g., "/^docs\\/._\\.pdf$/"). Uses post-filtering with 5x
+   * oversampling to ensure good result diversity
+   */
+  sourceFilter?: string | null;
 }
 
 export interface QuerySumarizePageParams {

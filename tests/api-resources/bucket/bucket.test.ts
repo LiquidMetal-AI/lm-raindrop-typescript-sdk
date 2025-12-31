@@ -30,7 +30,6 @@ describe('resource bucket', () => {
       bucketLocation: {
         bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
-      partition: 'tenant-123',
       prefix: 'documents/',
     });
   });
@@ -59,7 +58,6 @@ describe('resource bucket', () => {
         bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
       key: 'my-key',
-      partition: 'tenant-123',
     });
   });
 
@@ -87,7 +85,6 @@ describe('resource bucket', () => {
         bucket: { name: 'my-smartbucket', version: '01jxanr45haeswhay4n0q8340y', application_name: 'my-app' },
       },
       key: 'my-key',
-      partition: 'tenant-123',
     });
   });
 
@@ -119,7 +116,6 @@ describe('resource bucket', () => {
       content: 'U3RhaW5sZXNzIHJvY2tz',
       contentType: 'application/pdf',
       key: 'my-key',
-      partition: 'tenant-123',
     });
   });
 });
