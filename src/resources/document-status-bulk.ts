@@ -15,8 +15,13 @@ export class DocumentStatusBulk extends APIResource {
    * ```ts
    * const response =
    *   await client.documentStatusBulk.getStatusBulk({
-   *     bucketLocation:
-   *       '{{"bucket": {{"name": "my-smartbucket", "version": "01jxanr45haeswhay4n0q8340y", "application_name": "my-app"}}}}',
+   *     bucketLocation: {
+   *       bucket: {
+   *         name: 'my-smartbucket',
+   *         version: '01jxanr45haeswhay4n0q8340y',
+   *         application_name: 'my-app',
+   *       },
+   *     },
    *     objectIds: [
    *       'document1.pdf',
    *       'document2.pdf',
