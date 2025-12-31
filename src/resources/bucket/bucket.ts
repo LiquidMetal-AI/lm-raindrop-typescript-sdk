@@ -170,11 +170,6 @@ export interface BucketListParams {
   bucketLocation: QueryAPI.BucketLocator;
 
   /**
-   * Optional partition identifier for multi-tenant data isolation
-   */
-  partition?: string | null;
-
-  /**
    * Optional prefix to filter object keys (e.g., "documents/" to only list objects
    * in documents folder)
    */
@@ -192,11 +187,6 @@ export interface BucketDeleteParams {
    * Object key/path to delete
    */
   key: string;
-
-  /**
-   * Optional partition identifier for multi-tenant data isolation
-   */
-  partition?: string | null;
 }
 
 export interface BucketGetParams {
@@ -210,11 +200,6 @@ export interface BucketGetParams {
    * Object key/path to download
    */
   key: string;
-
-  /**
-   * Optional partition identifier for multi-tenant data isolation
-   */
-  partition?: string | null;
 }
 
 export interface BucketPutParams {
@@ -238,11 +223,6 @@ export interface BucketPutParams {
    * Object key/path in the bucket
    */
   key: string;
-
-  /**
-   * Optional partition identifier for multi-tenant data isolation
-   */
-  partition?: string | null;
 }
 
 Bucket.ByStatus = ByStatus;
