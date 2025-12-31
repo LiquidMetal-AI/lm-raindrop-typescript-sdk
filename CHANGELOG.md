@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.8.0 (2025-12-31)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** updating API spec with latest changes ([d3eaa5d](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/d3eaa5d4b0aceb58a950405e07a77f7f82f8515e))
+* **api:** updating API spec with latest changes ([3081304](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/3081304495b7316cda9b2a76bf0a583d4e8e7679))
+* **api:** updating API spec with latest changes ([4a6d03c](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/4a6d03c19fa61a1f71b3c89d57861d315496a883))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([8565067](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/85650670899cf7325c4c86c3fb994c5a6d552806))
+* **mcp:** return correct lines on typescript errors ([0720538](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/07205384239919243f73f4460ab7a7d81881f71c))
+
+
+### Chores
+
+* **client:** fix logger property type ([bc6a865](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/bc6a865eb366b2616dc6bfe65a65ef63dbbcc096))
+* **internal:** codegen related update ([78ebb95](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/78ebb9539db29b59eb91591e3abb3046ddedb43f))
+* **internal:** codegen related update ([c23b61f](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/c23b61f8cf3fdebac43a877262d7b21dbf6683d7))
+* **internal:** upgrade eslint ([0eb6699](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/commit/0eb669904251a1acb3bb30082e9d555b7e0093bc))
+
 ## 0.7.0 (2025-11-18)
 
 Full Changelog: [v0.6.43...v0.7.0](https://github.com/LiquidMetal-AI/lm-raindrop-typescript-sdk/compare/v0.6.43...v0.7.0)
